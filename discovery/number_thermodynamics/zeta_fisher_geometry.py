@@ -10,17 +10,39 @@ Writing K(beta)=log zeta(beta), standard exponential-family differentiation give
 and generally the r-th energy cumulant is (-1)^r K^(r)(beta).
 Thus g(beta)=K''(beta) is simultaneously the energy susceptibility and the
 one-parameter Fisher information metric. The script verifies the first three
-identities by direct high-precision summation against derivatives of log zeta.
+identities by high-precision moment evaluation against derivatives of log zeta.
+
+A plain ``mp.nsum`` is not reliable here when beta is close to 1: the
+log-weighted Dirichlet series converges too slowly.  We therefore sum an
+initial segment directly and evaluate the infinite tail as a derivative of
+the Hurwitz zeta function,
+
+  sum_{n=N}^infinity (log n)^r n^{-beta}
+      = (-1)^r d^r/d beta^r zeta(beta, N).
+
+This is an exact decomposition, not a truncation approximation.
 """
 import mpmath as mp
 mp.mp.dps = 60
 
 
+def log_moment_sum(beta, order, cutoff=64):
+    """Return sum (log n)^order / n^beta using an exact analytic tail."""
+    head = mp.fsum(
+        mp.log(n) ** order * mp.power(n, -beta)
+        for n in range(1, cutoff)
+    )
+    tail = (-1) ** order * mp.diff(
+        lambda s: mp.zeta(s, cutoff), beta, order
+    )
+    return head + tail
+
+
 def moments(beta):
     Z = mp.zeta(beta)
-    m1 = mp.nsum(lambda k: mp.log(k)*k**(-beta), [1, mp.inf])/Z
-    m2 = mp.nsum(lambda k: mp.log(k)**2*k**(-beta), [1, mp.inf])/Z
-    m3 = mp.nsum(lambda k: mp.log(k)**3*k**(-beta), [1, mp.inf])/Z
+    m1 = log_moment_sum(beta, 1) / Z
+    m2 = log_moment_sum(beta, 2) / Z
+    m3 = log_moment_sum(beta, 3) / Z
     var = m2-m1*m1
     mu3 = m3-3*m1*m2+2*m1**3
     return m1,var,mu3
