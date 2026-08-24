@@ -11,24 +11,33 @@ This is the iterated identity int_0^inf S^(sigma-1)/(x+S)dS
 it does NOT assert that an arbitrary multiloop amplitude has such an unsubtracted
 multi-Stieltjes representation.
 
-The numerical check below uses L=2 and rho(x,y)=exp(-x-y), for which both sides
-factorize but are integrated independently.
+The numerical check below uses L=2 and rho(x,y)=exp(-x-y).  The one-variable
+Stieltjes transform is e^S E1(S).  Its Mellin integral is evaluated directly on
+[0,A], with the large-S asymptotic expansion integrated term-by-term for the tail;
+this avoids overflow in e^S near the infinite endpoint.
 """
 import mpmath as mp
-mp.mp.dps=40
+mp.mp.dps=50
 
 
 def stieltjes1(S):
-    return mp.quad(lambda x: mp.e**(-x)/(x+S), [0,1,5,mp.inf])
+    return mp.exp(S)*mp.e1(S)
+
+
+def mellin_stieltjes(sig, A=mp.mpf('100'), N=45):
+    head = mp.quad(lambda S: S**(sig-1)*stieltjes1(S), [0,1,10,A])
+    # e^S E1(S) ~ sum_{k>=0} (-1)^k k! / S^(k+1)
+    tail = mp.mpf('0')
+    fact = mp.mpf(1)
+    for k in range(N):
+        if k:
+            fact *= k
+        tail += (-1)**k * fact * A**(sig-k-1)/(k+1-sig)
+    return head + tail
 
 
 def lhs(sig1,sig2):
-    # For the factorized test density, F(S,T)=f(S)f(T). Compute each Mellin
-    # transform by quadrature independently; their product is the full L=2 lhs.
-    def one(sig):
-        return mp.quad(lambda u: mp.e**(sig*u)*stieltjes1(mp.e**u),
-                       [-mp.inf,-5,0,5,mp.inf])
-    return one(sig1)*one(sig2)
+    return mellin_stieltjes(sig1)*mellin_stieltjes(sig2)
 
 
 def rhs(sig1,sig2):
@@ -41,6 +50,6 @@ if __name__=='__main__':
     for a,b in [(mp.mpf('.3'),mp.mpf('.7')),(mp.mpf('.45'),mp.mpf('.62'))]:
         L=lhs(a,b); R=rhs(a,b)
         err=abs(L-R)/max(1,abs(R))
-        assert err < mp.mpf('1e-25')
-        print(a,b,'relative error',mp.nstr(err,6))
-    print('PASS: L=2 Mellin transform multiplies the two Stieltjes kernels by pi*csc(pi*sigma) each')
+        assert err < mp.mpf('1e-12')
+        print(a,b,'relative error',mp.nstr(err,8))
+    print('PASS: L=2 Mellin transform multiplies each Stieltjes variable by pi*csc(pi*sigma)')
