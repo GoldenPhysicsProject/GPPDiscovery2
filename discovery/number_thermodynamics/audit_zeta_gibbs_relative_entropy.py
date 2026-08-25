@@ -18,15 +18,18 @@ def kl_closed(beta, gamma):
     return mp.log(mp.zeta(gamma)) - mp.log(mp.zeta(beta)) + (gamma-beta)*U(beta)
 
 
+def kl_term(n, beta, gamma):
+    pb = mp.power(n, -beta) / mp.zeta(beta)
+    pg = mp.power(n, -gamma) / mp.zeta(gamma)
+    return pb * mp.log(pb/pg)
+
+
 def kl_sum(beta, gamma, N):
-    zb = mp.zeta(beta)
-    zg = mp.zeta(gamma)
-    s = mp.mpf('0')
-    for n in range(1, N+1):
-        pb = mp.power(n, -beta) / zb
-        pg = mp.power(n, -gamma) / zg
-        s += pb * mp.log(pb/pg)
-    return s
+    return mp.fsum(kl_term(n, beta, gamma) for n in range(1, N+1))
+
+
+def kl_nsum(beta, gamma):
+    return mp.nsum(lambda n: kl_term(n, beta, gamma), [1, mp.inf])
 
 
 def jeffreys_closed(beta, gamma):
@@ -39,7 +42,9 @@ if __name__ == '__main__':
         kc = kl_closed(beta,gamma)
         for N in [100,1000,10000]:
             ks = kl_sum(beta,gamma,N)
-            print(' N',N,'KL error',mp.nstr(abs(ks-kc),12))
+            print(' N',N,'raw cutoff error',mp.nstr(abs(ks-kc),12))
+        kn = kl_nsum(beta,gamma)
+        print(' nsum KL error =', mp.nstr(abs(kn-kc),12))
         J = kl_closed(beta,gamma)+kl_closed(gamma,beta)
         print(' Jeffreys identity error =', mp.nstr(abs(J-jeffreys_closed(beta,gamma)),12))
         gint = mp.quad(fisher,[beta,gamma])
