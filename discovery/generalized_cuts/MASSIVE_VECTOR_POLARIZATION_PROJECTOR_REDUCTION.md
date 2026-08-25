@@ -19,7 +19,7 @@ Write the null five-dimensional cut momentum as
 K^A=(p^\mu,\kappa),\qquad K^2=0,\qquad p^2=\kappa^2=\mu^2.
 \]
 
-For a five-dimensional gauge current \(J^A=(J^\mu,J^5)\), the correct Ward identity is
+For a five-dimensional gauge current \(J^A=(J^\mu,J^5)\), when all other exposed vector legs are in physical states, the correct Ward identity is
 
 \[
 K_AJ^A=0
@@ -34,7 +34,7 @@ in mostly-minus signature.  Thus the longitudinal part of the four-dimensional m
 =J_L^5J_R^5
 \]
 
-when the same signed fifth momentum is used in the sewn orientation. Therefore
+when the same signed fifth momentum is used in the sewn orientation. Therefore for a single exposed physical vector leg,
 
 \[
 \boxed{
@@ -47,7 +47,7 @@ when the same signed fifth momentum is used in the sewn orientation. Therefore
 }
 \]
 
-This is the correct exact reduction.  It is better than the discarded four-dimensional-current shortcut because it reconstructs the ordinary five-dimensional metric contraction directly from the three physical massive-vector states.
+No high-energy or small-`mu` approximation is involved.
 
 ## Exact projector identity
 
@@ -71,13 +71,42 @@ Hence for two exposed four-dimensional currents,
 +\frac{(p\!\cdot J_{L,4})(p\!\cdot J_{R,4})}{\mu^2}.
 \]
 
-Using the five-dimensional Ward identities converts this exactly to
+For one exposed vector leg with every other vector leg physical, the five-dimensional Ward identity converts this exactly to
 
 \[
 \boxed{\mathcal S_V=-J_{L,5D}\cdot J_{R,5D}.}
 \]
 
-No high-energy or small-`mu` approximation is involved.
+## Second correction: do not double-metric-contract the raw rank-two tensor
+
+The two-particle cut exposes two massive-vector legs simultaneously.  A tempting further shortcut is to form an unprojected rank-two tree tensor \(J^{AB}\), assert
+
+\[
+K_{1A}J^{AB}=0,
+\qquad
+K_{2B}J^{AB}=0,
+\]
+
+for arbitrary values of the other exposed index, and replace both physical projectors by bare five-dimensional metrics.  The new executable audit
+`double_massive_vector_projector_audit.py` shows that this stronger tensor statement is false in general: when the second exposed leg is filled by an arbitrary basis vector rather than a physical transverse polarization, the first Ward contraction is generically nonzero, and vice versa.
+
+This does **not** violate gauge invariance.  The ordinary on-shell Ward identity assumes the other external vector states are physical.  It means only that the Ward reconstruction may not be applied twice naively to the completely unprojected rank-two tensor.
+
+The safe exact two-vector object is therefore the physical double projector
+
+\[
+\boxed{
+J_L^{\mu\nu}
+P^{(1)}_{\mu\rho}
+P^{(2)}_{\nu\sigma}
+J_R^{\rho\sigma},
+\qquad
+P^{(i)}_{\mu\nu}
+=-\eta_{\mu\nu}+\frac{p_{i\mu}p_{i\nu}}{\mu_i^2}.
+}
+\]
+
+The new audit independently evaluates the explicit \(3\times3\) polarization sum and this double-projector contraction and finds equality to floating-point precision over deterministic kinematic trials.  Thus the massive projector is not merely formal bookkeeping: it is the honest compact representation of the nine physical vector states.
 
 ## Consequence for the `D_s=4`, nonzero-`mu` baseline
 
@@ -87,30 +116,37 @@ The previously established reconstruction remains
 C^{(4)}(\mu)=C^{(V_m)}(\mu)-C^{(S)}(\mu).
 \]
 
-The vector term `C^(V_m)` should therefore be calculated as the five-dimensional massless-vector sewing, with the fifth component retained. There is no need to construct an explicit three-polarization basis, but neither may the longitudinal projector contribution be dropped.
-
-For a two-particle cut with two internal massive vectors, apply the same identity independently to each cut leg. The two four-dimensional massive projectors reconstruct two five-dimensional metric contractions once the complete five-dimensional tree tensor satisfies its Ward identities.
+For `C^(V_m)` with two internal vector lines, retain both massive projectors explicitly (or perform the equivalent explicit physical-polarization sum).  The fifth-current reconstruction remains useful for a single leg after the other vector states are physical, but a raw double five-dimensional metric contraction is not justified solely from the unprojected rank-two tensor.
 
 ## What remains for the MHV cut
 
 The decisive calculation is now:
 
-1. construct the complete color-ordered five-dimensional four-gluon tree tensor with the two KK momenta corresponding to the massive cut legs;
-2. verify the full five-dimensional Ward identities in each cut leg;
-3. sew the two trees with the five-dimensional metric contractions;
-4. interpret the result as the three-polarization four-dimensional massive-vector state sum;
-5. subtract `C^(S)` to obtain the honest nonzero-`mu` `D_s=4` baseline;
-6. restore general `D_s` through
+1. construct the complete color-ordered five-dimensional/KK four-gluon tree with the two massive cut momenta;
+2. retain the two honest four-dimensional massive projectors while sewing the two trees, or equivalently sum the three physical states on each line;
+3. simplify that projected tensor expression using Ward identities only after the companion exposed vector state is physical/projected;
+4. subtract `C^(S)` to obtain the honest nonzero-`mu` `D_s=4` baseline;
+5. restore general `D_s` through
    \[
    C^{(D_s)}=C^{(V_m)}+(D_s-5)C^{(S)}.
    \]
 
+Only after this one-loop numerator is honest should the same projector-level state-sum discipline be exported to gravity and higher/generalized cuts.
+
 ## Verified discovery evidence
 
-`massive_vector_5d_ward_reconstruction.py` builds the complete color-ordered five-dimensional four-gluon tree from the cubic and quartic Yang-Mills vertices. On deterministic generic transverse states it verifies all four five-dimensional Ward replacements to floating-point residuals while explicitly finding nonzero `p.J_4D`. It also verifies
+`massive_vector_5d_ward_reconstruction.py` builds the complete color-ordered five-dimensional four-gluon tree from the cubic and quartic Yang-Mills vertices. On deterministic generic transverse states it verifies the five-dimensional Ward replacements while explicitly finding nonzero `p.J_4D`, and it verifies
 
 \[
-p\cdot J_{4D}-\kappa J^5=0
+p\cdot J_{4D}-\kappa J^5=0.
 \]
 
-numerically.  This is discovery evidence for the tensor implementation and an exact algebraic guide; the final MHV cut numerator is not yet promoted to Lean.
+`double_massive_vector_projector_audit.py` then exposes both vector legs.  It records the negative result that the raw rank-two tensor is not separately transverse against an arbitrary unphysical basis choice on the companion leg, and verifies the positive result
+
+\[
+\text{double massive-projector contraction}
+=
+\text{explicit nine-state physical-polarization sum}.
+\]
+
+These are reproducible discovery results and exact algebraic guides.  The final MHV cut numerator is not yet promoted to Lean.
