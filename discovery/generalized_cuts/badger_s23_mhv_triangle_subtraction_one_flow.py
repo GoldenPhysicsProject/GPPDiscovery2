@@ -19,7 +19,16 @@ Key exact steps:
 * The sum over the two y roots is performed branch-free via Vieta identities.
 * Badger's T1,T2,T3 moments (eqs. 50--52) are inserted for K3=p1.
 
-After the -1/2 prefactor in Badger eq. (43), one scalar-flow orientation gives
+The complete moment-mapped subtraction before the Badger -1/2 prefactor reduces
+exactly to
+
+    Tmapped = i (10 mu2 u^2 + 6 mu2 - u^2) / (3(1+u^2)).
+
+Hence its mu2 coefficient is
+
+    [mu2] Tmapped = 2 i (5u^2+3)/(3(1+u^2)),
+
+and after the -1/2 prefactor in Badger eq. (43), one scalar-flow orientation gives
 
     C_tri,one-flow^[2]
       = - i (5 u^2 + 3) / (3(1+u^2)).
@@ -130,6 +139,12 @@ def main() -> None:
     ))
 
     inf_t = sp.expand(inf_polynomial(sum_triple, t))
+    target_inf_t = sp.expand(
+        -I*mu2*t*u + I*mu2*t/u - I*mu2
+        + I*t**3*u**3 + 2*I*t**3*u + I*t**3/u
+        - 2*I*t**2*u**2 - 2*I*t**2 + I*t*u
+    )
+    assert sp.simplify(inf_t - target_inf_t) == 0
 
     # K3=p1 data: S1=1, S3=0, gamma_bar=1,
     # K1.K3=-1/2, Delta=1/4, <chi|K3|K1flat]=-u/(1+u^2).
@@ -143,7 +158,15 @@ def main() -> None:
         + poly_t.coeff_monomial(t**2) * T2
         + poly_t.coeff_monomial(t**3) * T3
     )
+    mapped_target = sp.factor(
+        I * (10*mu2*u**2 + 6*mu2 - u**2) / (3*(1+u**2))
+    )
+    assert sp.simplify(mapped - mapped_target) == 0
+
     mu2_coeff_before_prefactor = sp.factor(sp.diff(mapped, mu2))
+    mu2_coeff_target = sp.factor(2*I*(5*u**2 + 3)/(3*(1+u**2)))
+    assert sp.simplify(mu2_coeff_before_prefactor - mu2_coeff_target) == 0
+
     one_flow = sp.factor(-sp.Rational(1, 2) * mu2_coeff_before_prefactor)
     expected_one_flow = sp.factor(-I * (5*u**2 + 3)/(3*(1+u**2)))
     assert sp.simplify(one_flow - expected_one_flow) == 0
@@ -157,6 +180,7 @@ def main() -> None:
     print("A3*A3 = i D_R A_R: PASS")
     print("sum-root Inf_t =", sp.factor(inf_t))
     print("mapped T moments =", mapped)
+    print("mu2 coefficient before -1/2 =", mu2_coeff_before_prefactor)
     print("one-flow C_tri^[2] =", one_flow)
     print("published C2^[2] in frame =", published)
     print("ratio published / one-flow =", sp.simplify(published/one_flow))
