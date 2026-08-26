@@ -10,8 +10,10 @@ exact symbolic identity rather than a floating-point sample.
 The result is qualitatively different from the same-helicity (--|++) channel:
 
 * the extra-dimensional adjoint-scalar tree vanishes for (-+) and (+-);
-* the massive-vector tree matrices are nontrivial functions of ``t``;
-* sewing the conjugate mixed-helicity matrices gives the angle-independent constant 16.
+* the massive-vector tree matrix is rank one and factorizes as ``2 w w^T``;
+* its polarization vector obeys ``w^T w = 0`` and ``w^† w = 2``;
+* sewing the conjugate mixed-helicity matrices therefore gives the angle-independent
+  constant 16.
 
 This isolates the state-algebra content relevant to the mixed-helicity two-particle cut
 that can feed the s23 bubble.  It still does not fix coupling/color/cut-orientation/loop-
@@ -53,6 +55,10 @@ def frobenius_sew(A: sp.Matrix, B: sp.Matrix):
     return sp.factor(sum(A[a, b] * B[a, b] for a in range(3) for b in range(3)))
 
 
+def simplify_matrix(M: sp.Matrix) -> sp.Matrix:
+    return M.applyfunc(lambda z: sp.factor(sp.simplify(z)))
+
+
 def main() -> None:
     Mmp = vector_tree_matrix(-1, +1)
     Mpm = vector_tree_matrix(+1, -1)
@@ -65,6 +71,17 @@ def main() -> None:
     # The two mixed-helicity matrices are related by complex conjugation for real t.
     assert Mpm == Mmp.conjugate()
 
+    # Exact coherent-state/rank-one factorization of the (-,+) tree matrix.
+    den = 1 + base.t**2
+    w = sp.Matrix([
+        -2 * sp.I * base.t / den,
+        -sp.I * (base.t**2 - 1) / den,
+        1,
+    ])
+    assert simplify_matrix(Mmp - 2 * w * w.T) == sp.zeros(3)
+    assert sp.simplify((w.T * w)[0]) == 0
+    assert sp.simplify((w.conjugate().T * w)[0] - 2) == 0
+
     Cv = frobenius_sew(Mmp, Mpm)
     Cs = sp.factor(Smp * Spm)
     assert sp.simplify(Cv - 16) == 0
@@ -75,7 +92,15 @@ def main() -> None:
                         for a in range(3) for b in range(3)))
     assert sp.simplify(CvT - 16) == 0
 
+    # The factorization explains the constant without expanding the matrix entries:
+    # Tr[(2ww^T)(2w*w†)] = 4 (w†w)^2 = 16.
+    Cv_factorized = sp.simplify(4 * (w.conjugate().T * w)[0] ** 2)
+    assert Cv_factorized == 16
+
     print("mixed-helicity scalar trees (-+),(+-) =", Smp, Spm)
+    print("rank-one factorization M_-+ = 2 w w^T: PASS")
+    print("w^T w =", sp.simplify((w.T * w)[0]))
+    print("w^dagger w =", sp.simplify((w.conjugate().T * w)[0]))
     print("mixed-helicity vector sewing C^(V_m) =", Cv)
     print("mixed-helicity scalar sewing C^(S)   =", Cs)
     print("mixed-helicity transposed sewing     =", CvT)
