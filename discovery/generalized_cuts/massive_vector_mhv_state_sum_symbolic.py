@@ -1,35 +1,33 @@
 #!/usr/bin/env python3
-"""Exact symbolic audit of the adjacent-MHV massive-vector state sum.
+"""Exact symbolic adjacent-MHV massive-vector state sum at threshold.
 
 Codex/GPT Golden Physics discovery track, 2026-08-26.
 
-This is the exact counterpart of ``massive_vector_mhv_state_sum_audit.py``.
-Instead of floating-point angles, use the rational parametrization
+This script uses the rational angular parametrization
 
     cos(theta) = (1-t^2)/(1+t^2),
     sin(theta) = 2t/(1+t^2),
 
-and keep the centre-of-mass energy E symbolic.  For the complete color-ordered
-four-gluon tree (two cubic channels plus quartic contact term), SymPy reduces
-both same-helicity massive-vector tree matrices exactly to
+and keeps the centre-of-mass energy E symbolic.  It exactly evaluates the complete
+color-ordered four-gluon tree (two cubic channels plus quartic contact term) when the
+5D-null internal legs have four-dimensional projections at rest.  On this threshold
+slice the same-helicity tree matrices reduce to
 
     A_h^{ab} = -delta^{ab},   h=+/- , a,b=1,2,3,
 
-while the extra-dimensional real-adjoint-scalar tree is exactly
+while the extra-dimensional scalar tree is
 
     A_h^(S) = +1.
 
-Hence the adjacent (--|++) sewing has the exact state-count identity
+Consequently, at threshold only,
 
     C^(V_m) = 3 C^(S),
+    C^(V_m) - C^(S) = 2 C^(S).
 
-and the standard dimensional-reconstruction subtraction gives
-
-    C^(4) = C^(V_m) - C^(S) = 2 C^(S).
-
-The script certifies the tree/state algebra in the stated vertex convention.
-It does not fix coupling, color, spinor-helicity, cut-orientation, or loop
-measure normalizations.
+Important correction: ``massive_vector_generic_state_sum_symbolic.py`` keeps an
+independent rational mass/velocity parameter and proves that the 3:1 relation is not a
+generic cut identity.  This file is retained as an exact threshold regression test, not
+as a derivation of a generic Yang--Mills cut coefficient.
 """
 
 from __future__ import annotations
@@ -137,6 +135,8 @@ def amplitude(ks: list[sp.Matrix], eps: list[sp.Matrix]):
 
 
 def kinematics(d: int = 5) -> list[sp.Matrix]:
+    # The four-dimensional projections of legs 1 and 2 are both (-E,0,0,0):
+    # this is the threshold/rest slice.  Their opposite fifth components supply mass E.
     base = [
         sp.Matrix([-E, 0, 0, 0, -E]),
         sp.Matrix([-E, 0, 0, 0, +E]),
@@ -199,6 +199,7 @@ def main() -> None:
     cs = sp.expand(scalars[-1] * scalars[+1])
     assert sp.simplify(cv - 3 * cs) == 0
 
+    print("THRESHOLD ONLY: four-dimensional massive legs are at rest")
     print("A_- =")
     sp.pprint(matrices[-1])
     print("A_+ =")
@@ -206,8 +207,8 @@ def main() -> None:
     print(f"A_-^(S) = {scalars[-1]}")
     print(f"A_+^(S) = {scalars[+1]}")
     print(f"C^(V_m) = {cv}, C^(S) = {cs}")
-    print("PASS: exact symbolic identity C^(V_m) = 3 C^(S).")
-    print("PASS: dimensional subtraction gives C^(4) = 2 C^(S).")
+    print("PASS: exact threshold identity C^(V_m) = 3 C^(S).")
+    print("Generic cut identity is tested separately and is not 3:1.")
 
 
 if __name__ == "__main__":
