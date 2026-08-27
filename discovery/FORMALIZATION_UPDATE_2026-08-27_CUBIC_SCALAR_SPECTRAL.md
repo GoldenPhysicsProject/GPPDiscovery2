@@ -1,12 +1,14 @@
 # Codex formalization update — 2026-08-27
 
-Codex/GPT track only. No Claude material inspected.
+Codex/GPT track only. No separate Claude work is used in this update.
 
 ## Kernel/CI baseline
 
-- `GPPVerify2` `codex/lean-workbench` full Build #853 is green at `ec8e3f722b384d22be234a43da4aa1fd6317a72e`.
-- This certifies the current scalar-box physical convergence layer, completed-zeta principal-series response layer, and the repaired von-Mangoldt cosine bridge in the aggregate build.
-- The dedicated Gibbs differential gate #30 failed before the entropy theorem because `VonMangoldtCubicPositivity.lean` was still an intentionally non-aggregate candidate module.
+- `GPPVerify2` `codex/lean-workbench` full Build #857 is green at `f7ef8dbb7e450dae1cb4da8be80dfc33b1526c57`.
+- Dedicated Gibbs differential #34 failed on one Lean-only no-op simplification in `VonMangoldtCubicPositivity.lean`; the arithmetic, summability, cosine bridge, Fisher, and strict-thermodynamic dependencies had already built.
+- That exact no-op `simp` was removed at Verify2 commit `c853079cdd5e09e83fc69c3f4e0ef5611404bb0b` with no theorem statement or hypothesis change.
+- Build #859 and dedicated Gibbs #36 are running on the repaired cubic head.
+- A separate spectral advance was then pushed at Verify2 commit `86402cbb5cd9aec86fca0a0234288da6e6d54671`, and the build workflow now gates that module explicitly at `c75c0a5800b2dad2f65363e95abd3a3efe1072d9`.
 
 ## Cubic von-Mangoldt response
 
@@ -22,17 +24,13 @@ The candidate module proves termwise nonnegativity, the strict `n=2` witness, su
 \sum_n c_3(\beta,n)>0.
 \]
 
-CI #30 exposed two Lean-only defects: unresolved `Complex.log` real/imaginary projections in the twice-logarithm term and a syntactic mismatch in `Complex.reCLM.map_tsum`. Commit `10fa6b6060a15cd420b74ff031a4052e507ff595` repaired the projections and `map_tsum` shape without changing any theorem statement. CI #32 then narrowed the only reported failure to rewrite order: `Complex.log n` was being rewritten before the nested `logMul` coefficients were unfolded. That exact issue is repaired at
-
-`f7ef8dbb7e450dae1cb4da8be80dfc33b1526c57`.
-
-Dedicated Gibbs #34 and full Build #857 are queued on the new head. Do not promote strict cubic positivity until the dedicated module passes.
+CI #30 exposed unresolved complex-log projections and a `map_tsum` shape mismatch. CI #32 then exposed rewrite ordering around nested `logMul`. CI #34 narrowed the remaining reported defect to a redundant simplifier after the natural-cast logarithm had already been rewritten. All three were Lean proof-engineering defects; no mathematical statement was weakened. Strict cubic positivity is still not promoted until the current dedicated gate passes.
 
 ## Scalar box and amplitude boundary
 
-The full-build-green scalar layer now includes the moving physical regulator composition into the one-sided `m -> 0+` convergence machinery. The valid domination remains the structured mixed-log majorant; the earlier independent-square surrogate remains retracted.
+The full-build-green scalar layer includes the moving physical regulator composition into the one-sided `m -> 0+` convergence machinery. The valid domination remains the structured mixed-log majorant; the earlier independent-square surrogate remains retracted.
 
-The next amplitude theorem is not another scalar estimate. The existing `MassiveVectorWardReconstruction` shows that replacing the massive-vector projector by a bare four-dimensional metric contraction drops the fifth-current term, and at rank two drops two single-longitudinal cross terms plus the double-longitudinal term. Therefore the next honest Yang–Mills/gravity step must insert explicit sewn tree currents/numerators with the full Ward reconstruction before dimension-shift/rational extraction.
+The next amplitude theorem is not another scalar estimate. The existing `MassiveVectorWardReconstruction` shows that replacing the massive-vector projector by a bare four-dimensional metric contraction loses longitudinal/fifth-current contributions. Therefore the next honest Yang–Mills/gravity step must insert explicit sewn tree currents/numerators with the full Ward reconstruction before dimension-shift/rational extraction.
 
 ## Principal-series/completed-zeta response
 
@@ -42,19 +40,19 @@ On the celestial principal line `Re Delta = 1`, the completed-zeta response
 \mathcal R(\Delta)=\frac{\Lambda'(\Delta/2)}{\Lambda(\Delta/2)}
 \]
 
-is already formalized with
+is formalized with
 
 \[
 \operatorname{Re}\mathcal R(\Delta)=0
 \]
 
-where the logarithmic derivative is defined, and globally with the shadow-odd relation
+where defined, and globally with
 
 \[
 \mathcal R(\Delta)=-\mathcal R(2-\Delta).
 \]
 
-This is a representation/functional-equation statement only, not a zero-location theorem.
+This remains a representation/functional-equation statement only, not a zero-location theorem.
 
 ## Spectral/chamber convolution
 
@@ -66,7 +64,15 @@ This is a representation/functional-equation statement only, not a zero-location
 \frac{\tanh(\pi x)+\tanh(\pi(\lambda-x))}{\sinh(\pi\lambda)}.
 \]
 
-The remaining theorem is the whole-line improper integral
+The new `SechConvolutionPrimitive.lean` candidate proves the exact differential interface
+
+\[
+\frac{d}{dx}\left[\log\cosh(\pi x)-\log\cosh(\pi(\lambda-x))\right]
+=
+\frac{\pi\sinh(\pi\lambda)}{\cosh(\pi x)\cosh(\pi(\lambda-x))}.
+\]
+
+No improper-integral or endpoint theorem is claimed in that module. It is now explicitly gated in the main build workflow. Once kernel-green, the remaining endpoint jump gives the intended whole-line identity
 
 \[
 \int_{\mathbb R}\frac{dx}{\cosh(\pi x)\cosh(\pi(\lambda-x))}
@@ -74,12 +80,12 @@ The remaining theorem is the whole-line improper integral
 \frac{2\lambda}{\sinh(\pi\lambda)},
 \]
 
-with the removable `lambda=0` limit treated separately. The proven `SechSquaredIntegral` module gives the preferred Mathlib pattern: explicit antiderivative plus endpoint limits, avoiding series interchange.
+with `lambda=0` handled separately by removable limit/direct sech-squared evaluation.
 
 ## Next frontier
 
-1. Read CI #34/#857; repair the first exact cubic/entropy compiler signal.
+1. Read Build #859 / Gibbs #36 and the fresh workflow run triggered by `c75c0a58`; repair the first exact cubic, entropy, or primitive compiler signal.
 2. Once cubic positivity clears, drive the genuine entropy derivative and Legendre differential modules through the dedicated gate.
-3. Promote the sech-convolution primitive/endpoints to a whole-line theorem.
+3. Once the primitive clears, formalize its two endpoint limits and the whole-line sech convolution.
 4. Begin the explicit YM cut numerator layer using full massive Ward projectors, not scalar/state-count surrogates.
-5. Keep the completed-zeta/shadow/Weil route separate from any RH zero-location claim until a genuine global positivity-equivalence theorem is established.
+5. Keep the completed-zeta/shadow/Weil route separate from any RH zero-location claim until a genuine global explicit-formula positivity bridge is kernel-checked.
