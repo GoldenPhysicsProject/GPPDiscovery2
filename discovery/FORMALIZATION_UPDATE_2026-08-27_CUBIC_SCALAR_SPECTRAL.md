@@ -22,11 +22,11 @@ The candidate module proves termwise nonnegativity, the strict `n=2` witness, su
 \sum_n c_3(\beta,n)>0.
 \]
 
-CI #30 exposed two Lean-only defects: unresolved `Complex.log` real/imaginary projections in the twice-logarithm term and a syntactic mismatch in `Complex.reCLM.map_tsum`. Both were repaired without changing any theorem statement at Verify2 commit
+CI #30 exposed two Lean-only defects: unresolved `Complex.log` real/imaginary projections in the twice-logarithm term and a syntactic mismatch in `Complex.reCLM.map_tsum`. Commit `10fa6b6060a15cd420b74ff031a4052e507ff595` repaired the projections and `map_tsum` shape without changing any theorem statement. CI #32 then narrowed the only reported failure to rewrite order: `Complex.log n` was being rewritten before the nested `logMul` coefficients were unfolded. That exact issue is repaired at
 
-`10fa6b6060a15cd420b74ff031a4052e507ff595`.
+`f7ef8dbb7e450dae1cb4da8be80dfc33b1526c57`.
 
-Dedicated Gibbs #32 and full Build #855 are running on that head. Do not promote strict cubic positivity until the dedicated module passes.
+Dedicated Gibbs #34 and full Build #857 are queued on the new head. Do not promote strict cubic positivity until the dedicated module passes.
 
 ## Scalar box and amplitude boundary
 
@@ -78,7 +78,7 @@ with the removable `lambda=0` limit treated separately. The proven `SechSquaredI
 
 ## Next frontier
 
-1. Read CI #32/#855; repair the first exact cubic/entropy compiler signal.
+1. Read CI #34/#857; repair the first exact cubic/entropy compiler signal.
 2. Once cubic positivity clears, drive the genuine entropy derivative and Legendre differential modules through the dedicated gate.
 3. Promote the sech-convolution primitive/endpoints to a whole-line theorem.
 4. Begin the explicit YM cut numerator layer using full massive Ward projectors, not scalar/state-count surrogates.
