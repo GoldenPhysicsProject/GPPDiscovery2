@@ -25,6 +25,8 @@ R^2\le\frac{1+R}{2},
 
 multiplication by `δ ≥ 0` followed by division by `1+R > 0` gives the result. The previous Lean proof incorrectly invoked a division lemma with denominator `1+R` directly against a goal whose displayed denominator was `2`. The corrected proof was pushed to GPPVerify2 as commit `38d430ec1b8de0e3d3c06d6e4604796ab97c6234`.
 
+The latest CI discrimination now shows every scalar-box gate through `ScalarBoxLogScaleBounds` green; the first scalar failure is solely `ScalarBoxPoleLogScaleBounds`. The archived Actions job-log blob was transiently unavailable during the latest repair run, so no exact compiler line is being claimed from that run. Source inspection identifies the final `η=m/S` whole-goal normalization as unnecessarily brittle, but no scalar theorem statement has been altered and no speculative scalar patch has been promoted without a compiler signal.
+
 ## Zeta Gibbs differential thermodynamics
 
 The intended real-axis identities remain
@@ -41,12 +43,18 @@ F(\beta)=-\frac{A(\beta)}{\beta},\qquad
 F'(\beta)=\frac{S(\beta)}{\beta^2},
 \]
 
-for `β > 1` only. The underlying already-certified derivative inputs are `A'=-U` and `U'=-Var`. The two new files had failed their first CI compilation, so their proofs were simplified to isolate the coefficient algebra explicitly rather than rely on broad `convert/simp/ring` chains. The entropy cleanup is commit `56e80bdd7fe047c4cb717d6cf501a08c7c67f5c4`; the Legendre cleanup is commit `898089dd395ea9a21bb49fc6b04900dac329386c`.
+for `β > 1` only. The underlying already-certified derivative inputs are `A'=-U` and `U'=-Var`.
 
-At the time of this note, CI for the cleaned head was pending. Therefore these two new differential identities are mathematically derived but not yet claimed compiler-certified.
+The latest proof repair removes fragile coefficient simplification from both derivative theorems. In each case the coefficient identity is first proved explicitly, then rewritten into the `HasDerivAt` goal, leaving Lean only the definitional function equality to check. No theorem statement or domain assumption changed.
+
+- Entropy stabilization: GPPVerify2 commit `ee235a780185749105f6a1b571541ff0ab2524f4`.
+- Legendre stabilization: GPPVerify2 commit `5616a30f4873e698cd9dc32dde3234fee6344b80`.
+
+Fresh CI for head `5616a30f4873e698cd9dc32dde3234fee6344b80` has started. Until it finishes, these identities remain mathematically derived but are not promoted to compiler-certified.
 
 ## Boundaries retained
 
 - The scalar core must use the mixed-log structured majorant; the former independent-square majorant is retracted.
 - The thermodynamic interpretation is asserted only on the honest Gibbs half-line `β > 1`, not by analytic continuation.
 - No half-density or critical-line unitarity theorem is being promoted to an RH zero-location theorem.
+- Scalar-box analytic closure is not being promoted to a Yang–Mills or gravity amplitude; honest gauge/gravity cut numerators remain a later layer.
