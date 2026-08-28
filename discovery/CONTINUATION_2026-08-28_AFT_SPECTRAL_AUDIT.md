@@ -15,13 +15,11 @@ Importantly, the full `SpectralRhoMehlerFockBridge.lean` theorem family compiled
 - `rhoGamma_eq_mehlerFock_chamber`,
 - `rhoGamma_eq_mehlerFock_chamber_all`.
 
-The remaining failure was a Lean coercion normalization: after taking `Complex.re`, simplification rewrote an explicitly real-cast quotient through `Complex.sinh`, while the target used `Real.sinh`. This is a proof-engineering mismatch, not a mathematical counterexample.
+The remaining failure was a Lean coercion normalization, not a mathematical counterexample.  A first repair (`240f00c7d14ca99454d775c76a4c8bac9e1b3b37`) still carried an unnecessary `Complex.sinh`/`Real.sinh` cast rewrite.  CI at cumulative head `15199f2bb4dbf4e4302f6345a8bc09b9360e4034` exposed the residual goal explicitly as
 
-Verify2 commit `240f00c7d14ca99454d775c76a4c8bac9e1b3b37` repairs the bridge by rewriting directly with the already-proved theorem
+`((2*x / Real.sinh (Real.pi*x) : R) : C).re = 2*x / Real.sinh (Real.pi*x)`.
 
-`rhoGamma 0 x = ((2*x / Real.sinh (Real.pi*x) : R) : C)`
-
-and simplifying the real part only after that rewrite. Fresh CI is running; do not call the downstream Wiener–Hopf/Gamma chamber hierarchy certified until it finishes.
+Thus no hyperbolic-function conversion remained to prove; it was only `Complex.ofReal_re`. Verify2 commit `353f51402dcf02a817b49c87df7aafc46f40e2b9` removes the spurious cast rewrite and closes the real-part normalization by simplification after `rhoGamma_zero_eq_mehlerFock`. Fresh spectral CI is running.  Until that run reaches the downstream hierarchy, the Wiener–Hopf/Gamma full chamber bridge remains source-level rather than CI-certified.
 
 ## AFT / field-theory inventory recovered from Verify2
 
@@ -48,7 +46,7 @@ away from the Bose denominator pole. Hence `E_p = log p` and prime-power repetit
 
 ## Focused-paper AFT field realization recovered
 
-The focused arithmetic principal-series paper contains a much stronger field-theory candidate than the prime-gas analogy alone.  It defines four independent Gaussian/Brownian-bridge components and the radial observable
+The focused arithmetic principal-series paper contains a much stronger field-theory candidate than the prime-gas analogy alone. It defines four independent Gaussian/Brownian-bridge components and the radial observable
 
 `Q = (1/(2*pi)) * sum_{n>=1} sum_{a=1}^4 G_{n,a}^2 / n^2`
 
@@ -64,13 +62,13 @@ and `X = (1/2) log Q`, the paper obtains
 
 `E_{1/2}[exp(z X)] = xi(1/2+z)/xi(1/2)`.
 
-This is therefore an explicit Euclidean Gaussian-field realization of the completed xi response as a nonlinear radial observable, not merely a thermodynamic metaphor.  Equally important, the same paper records the exact obstruction: ordinary free-field/Lee–Yang positivity does not prove RH because the source couples to `log Q`, while the centered measure contains the fractional global weight `Q^(1/4)`; the direct OS route lacks the required positive Hankel gluing.  This is a sharper target than generic "prove reflection positivity": construct or refute the missing positive gluing kernel for the critical tilt and identify it with the completed Weil form.
+This is therefore an explicit Euclidean Gaussian-field realization of the completed xi response as a nonlinear radial observable, not merely a thermodynamic metaphor. Equally important, the same paper records the exact obstruction: ordinary free-field/Lee–Yang positivity does not prove RH because the source couples to `log Q`, while the centered measure contains the fractional global weight `Q^(1/4)`; the direct OS route lacks the required positive Hankel gluing. This is a sharper target than generic "prove reflection positivity": construct or refute the missing positive gluing kernel for the critical tilt and identify it with the completed Weil form.
 
 ## Important audit correction
 
 `GppVerify/QuantumGravity/WightmanAxioms.lean` is currently mostly scaffolding: W1–W6, OS reconstruction, CPT, spin-statistics, and the claimed RH/Wightman unification are represented by `True` theorems. The dimension checks are genuine, but this file must not be cited as a formal derivation of QFT axioms.
 
-Likewise, `HaarPositivityWeil.lean` still contains legacy `True` wrappers for the GNS construction, adelic Haar-square positivity, Weil criterion, OS reconstruction, shadow reflection positivity, and universal positivity construction, even though some lower-level ingredients (for example the real convolution-square positive-type theorem in its later dedicated module) have since been genuinely formalized.  The AFT program should retire these wrappers by replacing them with explicit interfaces/dependencies rather than treating their names as results.
+Likewise, `HaarPositivityWeil.lean` still contains legacy `True` wrappers for the GNS construction, adelic Haar-square positivity, Weil criterion, OS reconstruction, shadow reflection positivity, and universal positivity construction, even though some lower-level ingredients (for example the real convolution-square positive-type theorem in its later dedicated module) have since been genuinely formalized. The AFT program should retire these wrappers by replacing them with explicit interfaces/dependencies rather than treating their names as results.
 
 This makes the next AFT target precise: replace labels/placeholders by actual field-theoretic interfaces (Hilbert space, reflection operator, positive OS form, semigroup/spectral measure, and correlator/test-function map) and then identify that completed OS form with the genuine Weil quadratic form. The local prime-positive pieces alone are insufficient because the finite-prime term enters the standard explicit formula with the opposite overall sign.
 
@@ -80,7 +78,8 @@ This makes the next AFT target precise: replace labels/placeholders by actual fi
 2. Verify2 `6b5903c4cac6040e3152c8c62bbb159f5549c7d2`: raised-box reduced outer integral now explicitly equals `B(1-delta,3-delta) B(1-delta,2)` after the inner slice has been inserted. This does not fake the still-missing nested Fubini/endpoint passage.
 3. Verify2 `e7d49114cabc1cc84910094348e1990eb10677b4`: `ZetaGibbsCriticalRegularization.lean`, defining `H(beta)=(beta-1)Z(beta)` and proving exactly on `beta>1`
    `log Z(beta)=log H(beta)-log(beta-1)`
-   together with the corresponding Helmholtz free-energy split.  No `beta->1+` regularity or limit of `H` is asserted. Workflow gate added at `15199f2bb4dbf4e4302f6345a8bc09b9360e4034`.
+   together with the corresponding Helmholtz free-energy split. No `beta->1+` regularity or limit of `H` is asserted. Workflow gate added at `15199f2bb4dbf4e4302f6345a8bc09b9360e4034`.
+4. Verify2 `353f51402dcf02a817b49c87df7aafc46f40e2b9`: final source repair of the downstream Wiener–Hopf/Gamma real-part coercion. The previously certified Mehler–Fock family is unchanged.
 
 ## Connected active frontiers
 
