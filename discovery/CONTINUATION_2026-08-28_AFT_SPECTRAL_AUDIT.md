@@ -19,11 +19,15 @@ The remaining failure was a Lean coercion normalization, not a mathematical coun
 
 `((2*x / Real.sinh (Real.pi*x) : R) : C).re = 2*x / Real.sinh (Real.pi*x)`.
 
-The subsequent `353f51402dcf02a817b49c87df7aafc46f40e2b9` attempt still failed because rewriting the complex equality before projecting its real part caused Lean to normalize through the complex quotient. The corrected proof at Verify2 `e288b001e9434de635f8d0005ec98bd987b493bf` instead applies `congrArg Complex.re` to the already-proved equality
+The subsequent `353f51402dcf02a817b49c87df7aafc46f40e2b9` attempt still failed because rewriting the complex equality before projecting its real part caused Lean to normalize through the complex quotient. The `e288b001e9434de635f8d0005ec98bd987b493bf` attempt also failed: `simpa using congrArg Complex.re (...)` still unfolded the real hyperbolic sine through its complex definition during simplification.
 
-`rhoGamma 0 x = ((2*x / Real.sinh (Real.pi*x) : R) : C)`
+The exact upstream theorem is already stronger than the desired real-part statement:
 
-and only then simplifies the real cast. This removes the real/complex `sinh` coercion path entirely. Fresh CI must certify it before the downstream Wiener–Hopf/Gamma hierarchy is called green.
+`rhoGamma 0 x = ((2*x / Real.sinh (Real.pi*x) : R) : C)` for `x != 0`.
+
+Therefore Verify2 `f4fc65909160d427ef1da0a0bf3711e9ec2e66d4` removes simplification entirely and rewrites by this equality followed by reflexivity. Fresh spectral CI is required before the downstream Wiener–Hopf/Gamma hierarchy is called green.
+
+At `e288b001...`, aggregate Build, arithmetic OS, causal-diamond Fisher, and Gibbs differential thermodynamics were all CI-green. Thus the Gibbs namespace repair is certified. The only red workflow at that checkpoint was the downstream Wiener–Hopf/Gamma bridge described above.
 
 ## Gibbs CI diagnosis
 
@@ -39,7 +43,7 @@ and
 
 `F(beta)=-log H(beta)/beta + log(beta-1)/beta`.
 
-No `beta -> 1+` regularity is asserted. Fresh CI is required before these are promoted from source-level to CI-certified.
+These are now CI-certified at `e288b001...`. No `beta -> 1+` regularity is asserted; derivative/limit control of the regularized factor remains open.
 
 ## AFT / field-theory inventory recovered from Verify2
 
@@ -92,12 +96,27 @@ Likewise, `HaarPositivityWeil.lean` still contains legacy `True` wrappers for th
 
 This makes the next AFT target precise: replace labels/placeholders by actual field-theoretic interfaces (Hilbert space, reflection operator, positive OS form, semigroup/spectral measure, and correlator/test-function map) and then identify that completed OS form with the genuine Weil quadratic form. The local prime-positive pieces alone are insufficient because the finite-prime term enters the standard explicit formula with the opposite overall sign.
 
+## Abstract AFT factorization criterion added
+
+A useful simplification is now formalized explicitly. Mathlib already proves that every finite Hilbert-space Gram matrix is positive semidefinite. Verify2 `fec7583b83abb71213a4165aff5ce77cfaf84816` adds `ArithmeticOSFactorization.lean` with the exact implication
+
+`K = Matrix.gram C A  ==>  K.PosSemidef`.
+
+This is mathematically elementary but strategically important: once an arithmetic reflected kernel is factored as
+
+`K(i,j)=<A_i,A_j>`, 
+
+OS positivity is automatic and no arithmetic estimate remains in that step. Therefore the real AFT theorem is precisely the construction of the reflection-preserving factor map `A` (or `mathfrak L`) and the equality of the completed prime–Archimedean kernel with its Gram kernel. The theorem is gated in the arithmetic-OS workflow at cumulative Verify2 `885ccaf6d5dca5059e80fa5c297fa2e273022300`; CI pending.
+
+This aligns the AFT program with the loop transfer-factorization template `T=A^*A`: the target is not to prove positivity after the fact, but to derive the factorization from zero-independent arithmetic data.
+
 ## New theorem candidates pushed this run
 
 1. Verify2 `2233ec76d34d016f63044be417e2500fdabfc972`: `ConformalShadowPrincipalSeries.lean`, proving for arbitrary real boundary dimension `d` that `Delta -> d-Delta` is involutive and equals complex conjugation iff `Re Delta=d/2`, with exact `d=1` arithmetic and `d=2`, `Delta=2s` celestial specializations. Workflow gate added at `1ca1646661669bb1ac1bee0a6bdbf821142b8e8e`.
 2. Verify2 `6b5903c4cac6040e3152c8c62bbb159f5549c7d2`: raised-box reduced outer integral now explicitly equals `B(1-delta,3-delta) B(1-delta,2)` after the inner slice has been inserted. This does not fake the still-missing nested Fubini/endpoint passage.
-3. Verify2 `e7d49114cabc1cc84910094348e1990eb10677b4`: `ZetaGibbsCriticalRegularization.lean`, defining `H(beta)=(beta-1)Z(beta)` and proving exactly on `beta>1` `log Z(beta)=log H(beta)-log(beta-1)` together with the corresponding Helmholtz free-energy split. No `beta->1+` regularity or limit of `H` is asserted. Workflow gate added at `15199f2bb4dbf4e4302f6345a8bc09b9360e4034`; namespace repair at `03882a7e2c61671cc600842058410bc8fdf7c55c`.
-4. Verify2 `e288b001e9434de635f8d0005ec98bd987b493bf`: second downstream Wiener–Hopf/Gamma real-part repair, now by projecting the exact complex Mehler–Fock equality with `congrArg Complex.re` before simplification.
+3. Verify2 `e7d49114cabc1cc84910094348e1990eb10677b4`: `ZetaGibbsCriticalRegularization.lean`, defining `H(beta)=(beta-1)Z(beta)` and proving exactly on `beta>1` `log Z(beta)=log H(beta)-log(beta-1)` together with the corresponding Helmholtz free-energy split. Namespace repair `03882a7e...` is now CI-certified at `e288b001...`.
+4. Verify2 `f4fc65909160d427ef1da0a0bf3711e9ec2e66d4`: third downstream Wiener–Hopf/Gamma coercion repair, now avoiding simplification completely after rewriting by the exact complex Mehler–Fock identity.
+5. Verify2 `fec7583b83abb71213a4165aff5ce77cfaf84816` and workflow gate `885ccaf6d5dca5059e80fa5c297fa2e273022300`: abstract Hilbert-space Gram-factorization criterion for finite AFT/OS kernels.
 
 ## Focused-paper YM search this run
 
@@ -105,8 +124,8 @@ A focused-file search for the missing `D_s=4`, `mu != 0` two-massive-vector/two-
 
 ## Connected active frontiers
 
-1. **AFT / RH:** direct 1d shadow is `s <-> 1-s` with principal line `Re s = 1/2`; under celestial normalization `Delta=2s` this is `Delta <-> 2-Delta`, `Re Delta=1`. The focused Gaussian/BPY construction supplies a concrete Euclidean field candidate, but its critical `Q^(1/4)` tilt lacks the needed OS/Hankel gluing. The decisive missing theorem is completed AFT OS positivity plus exact transport to the genuine Weil form on an adequate test class. No RH claim.
+1. **AFT / RH:** direct 1d shadow is `s <-> 1-s` with principal line `Re s = 1/2`; under celestial normalization `Delta=2s` this is `Delta <-> 2-Delta`, `Re Delta=1`. The focused Gaussian/BPY construction supplies a concrete Euclidean field candidate, but its critical `Q^(1/4)` tilt lacks the needed OS/Hankel gluing. The abstract Gram implication is now theorem-level; the decisive missing theorem is the zero-independent completed factor map and its exact transport to the genuine Weil form on an adequate test class. No RH claim.
 2. **Scalar box:** exact inner affine simplex Beta slice and reduced outer Beta product are source-level. Remaining raised-box step is the actual nested interval/Fubini endpoint handling, then dominated convergence. The structured physical scalar regulator limit is a separate already-developed layer.
 3. **YM/gravity:** projector bookkeeping is exact; the focused search still did not recover the explicit `D_s=4`, `mu != 0` two-massive-vector/two-positive-helicity-gluon tree current. Higher-loop generalized cuts remain downstream. No guessed numerator.
-4. **Prime thermodynamics:** exact cumulant/entropy/free-energy/fluctuation differential geometry on `beta>1` remains previously certified. The critical-pole split had a namespace CI regression now repaired; derivative/limit control of the regularized factor remains the analytic next step.
-5. **Spectral:** the Mehler–Fock family compiled through all-real chamber formulas. The downstream Wiener–Hopf/Gamma real-part bridge has a new coercion-safe proof awaiting CI. Full iterated/convolution interpretation remains open even after normalization is certified.
+4. **Prime thermodynamics:** exact cumulant/entropy/free-energy/fluctuation differential geometry on `beta>1` remains previously certified. The critical-pole split is now CI-certified; derivative/limit control of the regularized factor remains the analytic next step.
+5. **Spectral:** the Mehler–Fock family is CI-confirmed through all-real chamber formulas. The downstream Wiener–Hopf/Gamma real-part bridge has a new simplifier-free proof awaiting CI. Full iterated/convolution interpretation remains open even after normalization is certified.
