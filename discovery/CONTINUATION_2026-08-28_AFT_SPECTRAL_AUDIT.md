@@ -2,82 +2,62 @@
 
 Codex/GPT track only. No Claude work inspected.
 
-## Current CI checkpoint and repairs
+## CI checkpoint
 
-At cumulative Verify2 head `885ccaf6d5dca5059e80fa5c297fa2e273022300`, aggregate Build, Gibbs differential thermodynamics, and causal-diamond Fisher cancellation are green. Two dedicated workflows exposed implementation failures rather than mathematical counterexamples.
+At Verify2 `571553fe567d497b054bbba68d292b979184a6d0`, the dedicated spectral, arithmetic-OS, Gibbs, and Fisher workflows are green; aggregate Build was still running when polled. Therefore the repaired full Wiener–Hopf/Gamma chamber hierarchy and the abstract pinned-Mathlib `Aᴴ A` arithmetic OS factorization criterion are now CI-certified.
 
-### Spectral
+The certified spectral chain includes the global base normalization
 
-The important advance is that `WienerHopfGammaBridge.lean` is now CI-green. Thus the exact global base normalization
+`extendedWienerHopfWeight x = (pi/2) * Re(rhoGamma 0 x)`,
 
-`extendedWienerHopfWeight x = (pi/2) * Re(rhoGamma 0 x)`
-
-and inverse
-
-`Re(rhoGamma 0 x) = (2/pi) * extendedWienerHopfWeight x`
-
-are certified, including the removable origin. The same run also reconfirmed the sech endpoint/closed-form/Wiener–Hopf layers and the complete `SpectralRhoMehlerFockBridge` family through the all-real chamber formulas.
-
-The next failure moved one step downstream into `WienerHopfGammaChamberHierarchy.lean`. It was an induction rewrite mismatch: the successor goal is already written as `rhoGamma (k+1)`, while the proof first attempted `rw [Nat.succ_eq_add_one]`, which searches for a `Nat.succ` pattern that is no longer present. Verify2 `571553fe567d497b054bbba68d292b979184a6d0` removes that spurious rewrite and proceeds directly with `rhoGamma_succ`, the induction hypothesis, and `Finset.prod_range_succ`, followed by unfolding `rhoStepFactor` and ring normalization. Fresh CI is required before the full chamber hierarchy is called certified.
-
-The intended exact hierarchy is
+its inverse, the Mehler–Fock all-real chamber family, and the multiplicative hierarchy
 
 `rhoGamma k x = (prod_{j<k} rhoStepFactor j x) * rhoGamma 0 x`,
 
-hence
+with positive chamber multipliers. Thus the Gamma/Mehler–Fock/Wiener–Hopf spectral weight is no longer only a base-chamber coincidence: every formal chamber is a positive polynomial/rational multiplier of the same Wiener–Hopf base weight.
 
-`Re rhoGamma(k,x) = (prod_{j<k} rhoStepFactor(j,x)) * (2/pi) W_ext(x)`,
+## AFT / arithmetic OS advance
 
-with every multiplier strictly positive.
+The abstract theorem `K=Aᴴ A -> K.PosSemidef` is now CI-green. More importantly, Verify2 `63d7eca93cc499cf793c234c9bd3b620cfb89732` adds `ArithmeticPrimeFactorMap.lean`, an explicit finite prime-local factor rather than another positivity inequality. For cutoff `M`, positive-time samples `t_i`, and prime scale `p`, define
 
-### AFT / arithmetic OS
+`A(m,i)=sqrt(modeWeight p (m+1)) * modeValue p (m+1) (t_i)`.
 
-The first `ArithmeticOSFactorization.lean` used `Mathlib.Analysis.InnerProductSpace.GramMatrix`, but the repository is pinned to Mathlib v4.19.0 (`c44e0c8e...`), predating that file. Therefore the arithmetic-OS workflow failed at import resolution, not at positivity.
+The associated local kernel is definitionally
 
-Verify2 `a84ce5524be883e214ed4fa76dc0ade2563c22f3` replaces the post-v4.19 Hilbert-Gram dependency by the finite matrix factorization available in the pinned Mathlib. The criterion is now formulated in the exact `A^*A` form:
+`K_p = Aᴴ A`,
 
-`K = Aᴴ * A  ==>  K.PosSemidef`.
+hence positive semidefinite by the certified factorization criterion. On `p>=1`, the square of each real factor amplitude is exactly
 
-The proof uses positivity of the identity matrix and the pinned `PosSemidef.conjTranspose_mul_mul_same` theorem. This is also structurally better aligned with the loop transfer factorization `T=A^*A` than the previous abstract Gram API. Fresh arithmetic-OS CI is required.
+`modeWeight(p,m) * modeValue(p,m,t)^2`.
 
-Strategically, this isolates the real AFT theorem exactly: construct a zero-independent prime–Archimedean factor `A` (or reflection-preserving `mathfrak L`) such that the arithmetic Hankel/reflected kernel equals `Aᴴ A`; positivity then follows automatically. No RH claim is made.
+This realizes the original AFT `A^*A` architecture explicitly for every finite positive prime-local sector. Workflow gate added at Verify2 `532fb5a03184d749b186810b10781ad91416e86e`; fresh CI is required for this new file.
+
+This is a genuine narrowing of the RH obstruction. Prime-local factorization is constructible. The remaining problem is the completed global gluing: the standard explicit formula carries the prime contribution with the opposite overall sign, so one cannot simply direct-sum these positive local factors. A successful AFT must couple the prime factors to the Archimedean/vacuum sector through a global no-ghost/defect-cancellation mechanism and then identify the resulting OS form with the genuine Weil quadratic form. No RH claim.
 
 ## Gibbs / number thermodynamics
 
-The critical pole removal is CI-certified on `beta>1`:
+Critical pole removal and the exact cumulant/entropy/free-energy/fluctuation differential layer remain CI-green on `beta>1`:
 
 `H(beta)=(beta-1)Z(beta)>0`,
 
 `log Z(beta)=log H(beta)-log(beta-1)`,
 
-and
-
 `F(beta)=-log H(beta)/beta + log(beta-1)/beta`.
 
-The exact cumulant/entropy/free-energy/fluctuation differential layer remains green. The honest next analytic input is regularity/derivative control of `H` as `beta -> 1+`; no such limit is currently asserted.
-
-## Principal series / completed arithmetic response
-
-The exact conformal-shadow theorem remains source-level and previously workflow-tested: for real boundary dimension `d`, `Delta -> d-Delta` is involutive and equals conjugation iff `Re Delta=d/2`. At `d=1` this is the arithmetic shadow `s -> 1-s` with principal line `Re s=1/2`; under `Delta=2s`, it is the celestial `d=2` shadow with `Re Delta=1`.
-
-The AFT field candidate remains the focused Gaussian/Brownian-bridge radial observable
-
-`Q = (1/(2*pi)) sum_{n>=1} sum_{a=1}^4 G_{n,a}^2/n^2`,
-
-with `E[Q^(s/2)] = 2 xi(s)` and critical tilt `Q^(1/4)`. The unresolved theorem is not ordinary unitarity but a positive reflection-preserving gluing/factorization of the completed prime–Archimedean kernel, followed by exact identification with the genuine Weil quadratic form on an adequate test class.
+The next honest analytic input remains regularity/derivative control of `H` as `beta -> 1+`.
 
 ## Scalar box
 
-The exact inner affine simplex Beta slice and reduced outer Beta product are in source. The remaining analytic closure is still the real nested interval/Fubini endpoint passage from the original simplex integral to that reduced Beta integral, followed by dominated convergence for the regulator. No new theorem was claimed here this run.
+No new scalar theorem this run. Inner affine simplex Beta reduction and outer Beta product remain established; the exact blocker is the nested interval/Fubini endpoint passage and then DCT for the regulator limit.
 
 ## Yang–Mills / gravity / higher cuts
 
-No explicit trustworthy `D_s=4`, `mu != 0` two-massive-vector/two-positive-helicity-gluon tree current has yet been recovered from the focused material. Existing Ward/projector reconstruction is exact, but an honest sewn numerator still requires that tree current. Higher-loop/generalized-cut claims remain downstream; no numerator has been guessed.
+No honest new numerator this run. Existing Ward/projector reconstruction remains exact, but the missing object is still the explicit `D_s=4`, `mu != 0` two-massive-vector/two-positive-helicity-gluon tree current. Higher-loop/generalized cuts remain downstream.
 
-## Active next frontiers
+## Next frontier
 
-1. Certify Verify2 `a84ce552...` AFT `AᴴA` positivity on the pinned Mathlib and `571553fe...` full Wiener–Hopf/Gamma chamber induction.
-2. Construct the actual arithmetic factor map for the completed reflected kernel, not merely more local positivity identities.
-3. Close the raised-box nested Fubini/endpoint/DCT layer.
-4. Obtain the honest massive-vector `++` tree current before YM/gravity sewing.
-5. Add zeta-specific regularity of the pole-removed Gibbs factor only when it can be proved without assumptions.
+1. CI-certify the explicit prime factor map at `532fb5a...` and repair immediately if needed.
+2. Build a finite completed prime–Archimedean toy factorization that exposes exactly where the negative explicit-formula prime sign must be cancelled rather than hidden.
+3. Push the raised-box Fubini/DCT layer.
+4. Continue searching/deriving the massive-vector `++` current before YM sewing.
+5. Connect the now-certified all-chamber Wiener–Hopf factor to the arithmetic Archimedean factor candidate, testing whether the same positive spectral weight can supply the missing completion/gluing sector.
