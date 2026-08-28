@@ -1,33 +1,25 @@
 #!/usr/bin/env python3
 """Exact/numerical audit for the raised-box simplex DCT majorant.
 
-For the standard 3-simplex
-    x_i >= 0, x1+x2+x3+x4 = 1,
-the one-channel majorant reduces to (A*x1*x3)^(-delta).
-The Dirichlet integral is
+For the standard 3-simplex x_i >= 0, sum x_i = 1,
 
-    int_{Delta_3} x1^(-delta) x3^(-delta) d sigma
-      = Gamma(1-delta)^2 / Gamma(4-2 delta),   0 < delta < 1.
+  int_{Delta_3} x1^(-delta) x3^(-delta) d sigma
+    = Gamma(1-delta)^2 / Gamma(4-2 delta),   0 < delta < 1.
 
-The exact reduction is symbolic.  For the independent numerical check we integrate
-x3 and x2 analytically first:
-
-  int_0^(1-x1-x2) x3^(-d) dx3
-      = (1-x1-x2)^(1-d)/(1-d),
-
-  int_0^(1-x1) (...) dx2
-      = (1-x1)^(2-d)/((1-d)(2-d)),
-
-leaving only the stable one-dimensional Beta integral
+After integrating x3 and x2 analytically, the remaining check is
 
   1/((1-d)(2-d)) * int_0^1 x^(-d) (1-x)^(2-d) dx.
+
+SciPy's algebraically weighted quadrature handles both endpoint powers directly,
+so this remains stable even close to delta=1.
 """
 
 from __future__ import annotations
 
 import argparse
-import mpmath as mp
+import math
 import sympy as sp
+from scipy.integrate import quad
 
 
 def symbolic_formula():
@@ -39,46 +31,50 @@ def symbolic_formula():
     return sp.simplify(target)
 
 
-def numeric_simplex_integral(delta: mp.mpf) -> mp.mpf:
-    if not (0 < delta < 1):
+def numeric_simplex_integral(delta: float) -> float:
+    if not (0.0 < delta < 1.0):
         raise ValueError("delta must satisfy 0 < delta < 1")
-
-    prefactor = 1 / ((1 - delta) * (2 - delta))
-    beta_integral = mp.quad(
-        lambda x: x ** (-delta) * (1 - x) ** (2 - delta), [0, 1]
+    prefactor = 1.0 / ((1.0 - delta) * (2.0 - delta))
+    beta_integral, error = quad(
+        lambda x: 1.0,
+        0.0,
+        1.0,
+        weight="alg",
+        wvar=(-delta, 2.0 - delta),
+        epsabs=1e-13,
+        epsrel=1e-13,
+        limit=200,
     )
+    if error > 1e-10:
+        raise SystemExit(f"weighted quadrature error estimate too large: {error}")
     return prefactor * beta_integral
 
 
-def closed_form(delta: mp.mpf) -> mp.mpf:
-    return mp.gamma(1 - delta) ** 2 / mp.gamma(4 - 2 * delta)
+def closed_form(delta: float) -> float:
+    return math.gamma(1.0 - delta) ** 2 / math.gamma(4.0 - 2.0 * delta)
 
 
 def main() -> None:
     parser = argparse.ArgumentParser()
-    parser.add_argument("--dps", type=int, default=35)
     parser.add_argument(
-        "--delta", type=str, nargs="*", default=["0.1", "0.25", "0.5", "0.75", "0.9"]
+        "--delta", type=float, nargs="*", default=[0.1, 0.25, 0.5, 0.75, 0.9, 0.99]
     )
     args = parser.parse_args()
-    mp.mp.dps = args.dps
 
     formula = symbolic_formula()
     print("symbolic:", formula)
-    print("simplex volume delta=0:", mp.mpf(1) / 6)
+    print("simplex volume delta=0:", 1.0 / 6.0)
 
-    for raw in args.delta:
-        delta = mp.mpf(raw)
+    for delta in args.delta:
         exact = closed_form(delta)
         numeric = numeric_simplex_integral(delta)
-        err = abs(numeric - exact)
-        rel = err / abs(exact)
+        rel = abs(numeric - exact) / abs(exact)
         print(
-            f"delta={raw:>5}  numeric={mp.nstr(numeric, 18)}  "
-            f"closed={mp.nstr(exact, 18)}  relerr={mp.nstr(rel, 5)}"
+            f"delta={delta:>5g}  numeric={numeric:.16g}  "
+            f"closed={exact:.16g}  relerr={rel:.3e}"
         )
-        if rel > mp.mpf("1e-18"):
-            raise SystemExit(f"quadrature mismatch at delta={raw}: relerr={rel}")
+        if rel > 1e-11:
+            raise SystemExit(f"quadrature mismatch at delta={delta}: relerr={rel}")
 
     d = sp.symbols("d", real=True)
     lim = sp.limit(sp.gamma(1 - d) ** 2 / sp.gamma(4 - 2 * d), d, 0, dir="+")
