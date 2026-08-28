@@ -15,11 +15,31 @@ Importantly, the full `SpectralRhoMehlerFockBridge.lean` theorem family compiled
 - `rhoGamma_eq_mehlerFock_chamber`,
 - `rhoGamma_eq_mehlerFock_chamber_all`.
 
-The remaining failure was a Lean coercion normalization, not a mathematical counterexample.  A first repair (`240f00c7d14ca99454d775c76a4c8bac9e1b3b37`) still carried an unnecessary `Complex.sinh`/`Real.sinh` cast rewrite.  CI at cumulative head `15199f2bb4dbf4e4302f6345a8bc09b9360e4034` exposed the residual goal explicitly as
+The remaining failure was a Lean coercion normalization, not a mathematical counterexample. A first repair (`240f00c7d14ca99454d775c76a4c8bac9e1b3b37`) still carried an unnecessary `Complex.sinh`/`Real.sinh` cast rewrite. CI at cumulative head `15199f2bb4dbf4e4302f6345a8bc09b9360e4034` exposed the residual goal explicitly as
 
 `((2*x / Real.sinh (Real.pi*x) : R) : C).re = 2*x / Real.sinh (Real.pi*x)`.
 
-Thus no hyperbolic-function conversion remained to prove; it was only `Complex.ofReal_re`. Verify2 commit `353f51402dcf02a817b49c87df7aafc46f40e2b9` removes the spurious cast rewrite and closes the real-part normalization by simplification after `rhoGamma_zero_eq_mehlerFock`. Fresh spectral CI is running.  Until that run reaches the downstream hierarchy, the Wiener–Hopf/Gamma full chamber bridge remains source-level rather than CI-certified.
+The subsequent `353f51402dcf02a817b49c87df7aafc46f40e2b9` attempt still failed because rewriting the complex equality before projecting its real part caused Lean to normalize through the complex quotient. The corrected proof at Verify2 `e288b001e9434de635f8d0005ec98bd987b493bf` instead applies `congrArg Complex.re` to the already-proved equality
+
+`rhoGamma 0 x = ((2*x / Real.sinh (Real.pi*x) : R) : C)`
+
+and only then simplifies the real cast. This removes the real/complex `sinh` coercion path entirely. Fresh CI must certify it before the downstream Wiener–Hopf/Gamma hierarchy is called green.
+
+## Gibbs CI diagnosis
+
+The newly gated `ZetaGibbsCriticalRegularization.lean` failed independently at `353f514...`. This was not a thermodynamic obstruction. The file used `Z` unqualified while only opening `GppZetaGibbsSummability` and `GppZetaGibbsFreeEnergy`; `Z` is actually declared in `GppZetaGibbsFisher`. The apparent downstream `sorryAx` entries in the CI diagnostic were elaboration recovery after the unknown identifier, not source-level admitted proofs.
+
+Verify2 `03882a7e2c61671cc600842058410bc8fdf7c55c` explicitly opens `GppZetaGibbsFisher`. The intended exact statements remain unchanged:
+
+`H(beta)=(beta-1)Z(beta) > 0` for `beta>1`,
+
+`log Z(beta)=log H(beta)-log(beta-1)`,
+
+and
+
+`F(beta)=-log H(beta)/beta + log(beta-1)/beta`.
+
+No `beta -> 1+` regularity is asserted. Fresh CI is required before these are promoted from source-level to CI-certified.
 
 ## AFT / field-theory inventory recovered from Verify2
 
@@ -76,15 +96,17 @@ This makes the next AFT target precise: replace labels/placeholders by actual fi
 
 1. Verify2 `2233ec76d34d016f63044be417e2500fdabfc972`: `ConformalShadowPrincipalSeries.lean`, proving for arbitrary real boundary dimension `d` that `Delta -> d-Delta` is involutive and equals complex conjugation iff `Re Delta=d/2`, with exact `d=1` arithmetic and `d=2`, `Delta=2s` celestial specializations. Workflow gate added at `1ca1646661669bb1ac1bee0a6bdbf821142b8e8e`.
 2. Verify2 `6b5903c4cac6040e3152c8c62bbb159f5549c7d2`: raised-box reduced outer integral now explicitly equals `B(1-delta,3-delta) B(1-delta,2)` after the inner slice has been inserted. This does not fake the still-missing nested Fubini/endpoint passage.
-3. Verify2 `e7d49114cabc1cc84910094348e1990eb10677b4`: `ZetaGibbsCriticalRegularization.lean`, defining `H(beta)=(beta-1)Z(beta)` and proving exactly on `beta>1`
-   `log Z(beta)=log H(beta)-log(beta-1)`
-   together with the corresponding Helmholtz free-energy split. No `beta->1+` regularity or limit of `H` is asserted. Workflow gate added at `15199f2bb4dbf4e4302f6345a8bc09b9360e4034`.
-4. Verify2 `353f51402dcf02a817b49c87df7aafc46f40e2b9`: final source repair of the downstream Wiener–Hopf/Gamma real-part coercion. The previously certified Mehler–Fock family is unchanged.
+3. Verify2 `e7d49114cabc1cc84910094348e1990eb10677b4`: `ZetaGibbsCriticalRegularization.lean`, defining `H(beta)=(beta-1)Z(beta)` and proving exactly on `beta>1` `log Z(beta)=log H(beta)-log(beta-1)` together with the corresponding Helmholtz free-energy split. No `beta->1+` regularity or limit of `H` is asserted. Workflow gate added at `15199f2bb4dbf4e4302f6345a8bc09b9360e4034`; namespace repair at `03882a7e2c61671cc600842058410bc8fdf7c55c`.
+4. Verify2 `e288b001e9434de635f8d0005ec98bd987b493bf`: second downstream Wiener–Hopf/Gamma real-part repair, now by projecting the exact complex Mehler–Fock equality with `congrArg Complex.re` before simplification.
+
+## Focused-paper YM search this run
+
+A focused-file search for the missing `D_s=4`, `mu != 0` two-massive-vector/two-positive-helicity-gluon tree current did not locate an explicit formula in the currently retrieved focused material. `Loops_from_Cuts_in_Celestial_Holography` confirms that the existing worked case is the scalar box and explicitly leaves arbitrary topologies/multiplicities and the higher-loop `(4+2L)` pattern open. Therefore no Yang–Mills numerator was guessed or formalized this run.
 
 ## Connected active frontiers
 
 1. **AFT / RH:** direct 1d shadow is `s <-> 1-s` with principal line `Re s = 1/2`; under celestial normalization `Delta=2s` this is `Delta <-> 2-Delta`, `Re Delta=1`. The focused Gaussian/BPY construction supplies a concrete Euclidean field candidate, but its critical `Q^(1/4)` tilt lacks the needed OS/Hankel gluing. The decisive missing theorem is completed AFT OS positivity plus exact transport to the genuine Weil form on an adequate test class. No RH claim.
-2. **Scalar box:** exact inner affine simplex Beta slice and reduced outer Beta product are now source-level. Remaining raised-box step is the actual nested interval/Fubini endpoint handling, then dominated convergence. The structured physical scalar regulator limit is a separate already-developed layer.
-3. **YM/gravity:** projector bookkeeping is already exact; missing object is the explicit `D_s=4`, `mu != 0` two-massive-vector/two-positive-helicity-gluon tree current and its sewn numerator. Higher-loop generalized cuts remain downstream.
-4. **Prime thermodynamics:** exact cumulant/entropy/free-energy/fluctuation differential geometry on `beta>1` remains previously certified. The universal critical pole has now been split exactly at source level; next is derivative/limit control of the regularized factor without assuming zeta-specific regularity.
-5. **Spectral:** all-order chamber weights are algebraically established; full iterated/convolution interpretation remains open even if the repaired Wiener–Hopf/Gamma normalization becomes CI-green.
+2. **Scalar box:** exact inner affine simplex Beta slice and reduced outer Beta product are source-level. Remaining raised-box step is the actual nested interval/Fubini endpoint handling, then dominated convergence. The structured physical scalar regulator limit is a separate already-developed layer.
+3. **YM/gravity:** projector bookkeeping is exact; the focused search still did not recover the explicit `D_s=4`, `mu != 0` two-massive-vector/two-positive-helicity-gluon tree current. Higher-loop generalized cuts remain downstream. No guessed numerator.
+4. **Prime thermodynamics:** exact cumulant/entropy/free-energy/fluctuation differential geometry on `beta>1` remains previously certified. The critical-pole split had a namespace CI regression now repaired; derivative/limit control of the regularized factor remains the analytic next step.
+5. **Spectral:** the Mehler–Fock family compiled through all-real chamber formulas. The downstream Wiener–Hopf/Gamma real-part bridge has a new coercion-safe proof awaiting CI. Full iterated/convolution interpretation remains open even after normalization is certified.
