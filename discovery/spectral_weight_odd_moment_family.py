@@ -2,7 +2,7 @@
 
 For
     P(lambda) = pi*lambda/sinh(pi*lambda),
-use 1/sinh x = 2*sum_{k>=0} exp(-(2k+1)x) to obtain, for r > -2,
+use 1/sinh x = 2*sum_{k>=0} exp(-(2k+1)x) to obtain, for r > -1,
 
     int_0^infty lambda^r P(lambda) d lambda
       = 2*Gamma(r+2)/pi^(r+1) * (1-2^(-(r+2))) * zeta(r+2).
