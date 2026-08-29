@@ -12,6 +12,9 @@ import massive_vector_generic_state_sum_symbolic as g
 
 
 def main() -> None:
+    # Exact massive-cut rational parametrization: beta=|p|/E, rho=mu/E.
+    assert sp.simplify(g.beta**2 + g.rho**2 - 1) == 0
+
     Mmm = g.vector_tree_matrix(-1, -1)
     Mpp = g.vector_tree_matrix(+1, +1)
     Smm = g.scalar_tree(-1, -1)
@@ -33,8 +36,9 @@ def main() -> None:
     assert sp.simplify(C4_mixed - (Cv_mixed - Cs_mixed)) == 0
     assert sp.simplify((Cv_same - 3 * Cs_same).subs(g.r, 1)) == 0
     assert sp.simplify(Cv_mixed.subs(g.r, 1) - 16) == 0
-    assert sp.simpl(Cs_mixed.subs(g.r, 1)) == 0
+    assert sp.simplify(Cs_mixed.subs(g.r, 1)) == 0
 
+    print("beta^2+rho^2 =", sp.simplify(g.beta**2 + g.rho**2))
     print("Cv_same =", sp.factor(Cv_same))
     print("Cs_same =", sp.factor(Cs_same))
     print("C4_same = Cv_same-Cs_same =", C4_same)
