@@ -187,3 +187,129 @@ positive Poisson kernels.
    intended U(1)/SU(2)/SU(3) meaning before using the old `SU(1)` language.
 6. Keep charge conjugation separate from celestial helicity shadow unless a new theorem supplies
    the missing internal representation action.
+
+## 6. Drive chronology audit added 2026-08-29
+
+### June googly manuscript -> July mass-orientation correction
+
+The June googly submission asserted the strong identity `celestial shadow = physical time reversal`
+and then used it to identify the missing helicity sector with a T-conjugate spacetime. The July
+`mass_orientation_coupling_v3` manuscript is more careful and should supersede that identification
+for present work. Its exact celestial statement is only
+
+\[
+(h,\bar h)\mapsto(1-h,1-\bar h),\qquad
+\Delta\mapsto2-\Delta,\qquad J\mapsto-J,
+\]
+
+with internal charge labels untouched. Therefore the following distinctions are mandatory:
+
+- shadow/helicity reversal: presently defensible;
+- antiunitary or complex-conjugation realization: representation-dependent and to be proved;
+- physical time reversal T: not to be identified with shadow without an additional theorem;
+- charge conjugation C: separate internal operation, not supplied by the celestial shadow map.
+
+This correction removes a conceptual overreach without damaging the exact Gr(2,4) Z/4 or Dirac
+clock-locking mathematics.
+
+### July mass-orientation: exact scale statement
+
+The same manuscript gives a useful scale ledger. The free massless Dirac theory is dilatation
+invariant; a nonzero mass term introduces the Compton/proper-time scale. Uniform common rescaling
+of all dimensional masses while holding dimensionless couplings fixed cannot by itself define an
+observable. This supports treating `scale-carrying` versus `scale-invariant` as homogeneity data.
+
+### August scalar-box v19: shadow locus corrected
+
+The v19 loop-from-cuts derivation explicitly supersedes v14-v18. It proves that the two-particle
+cut Mellin factor has the form
+
+\[
+\Phi(\Delta_5,\Delta_6;M)
+=\frac1{8\pi}\left(\frac M2\right)^{\Delta_5+\Delta_6-2}
+\frac{\Gamma(\Delta_5)\Gamma(\Delta_6)}{\Gamma(\Delta_5+\Delta_6)}.
+\]
+
+Thus `Delta_5 + Delta_6 = 2` is exactly the scale-invariant locus of the cut. It is **not** a
+residue-producing shadow pole. On the principal series,
+
+\[
+\Gamma(1+i\lambda)\Gamma(1-i\lambda)
+=\frac{\pi\lambda}{\sinh(\pi\lambda)},
+\]
+
+so the older spectral weight survives as a derived phase-space factor, not as a replacement for
+the Feynman loop measure. This is the cleanest current bridge among celestial cuts, Mellin
+reflection, principal-series weight and scale invariance.
+
+### August arithmetic-principal-series v34: several RH routes explicitly killed
+
+The latest mined arithmetic manuscript contains important negative results that should constrain
+all active formal fronts:
+
+1. The earlier Gamma-polarized one-prime vanishing problem is false as stated.
+2. Adding finitely many prime dilations does not repair it: irrational-rotation small divisors give
+   dense nonclosed Koszul range, so there is no bounded Green operator / finite-prime contracting
+   homotopy.
+3. Bilateral Gaussian heat cannot preserve the causal Tate Hardy domain at positive time except
+   on the zero vector; therefore no graph norm can turn that bilateral heat flow into the desired
+   global Tate homotopy.
+4. The causal replacement, the Dirichlet heat semigroup on `L^2(R_+)`, has an exact boundary
+   commutator anomaly. For a unilateral translation by `a`,
+
+   \[
+   \operatorname{Tr}(E_tV_a-V_aE_t)
+   =\frac{a}{\sqrt{4\pi t}}e^{-a^2/(4t)}.
+   \]
+
+   Summing the logarithmic prime resolvents recovers exactly the prime-power portion of the
+   completed arithmetic heat kernel,
+
+   \[
+   \sum_p\operatorname{Tr}[E_t,R_p]
+   =\frac1{\sqrt{4\pi t}}
+     \sum_{n\ge2}\frac{\Lambda(n)}{\sqrt n}
+     e^{-(\log n)^2/(4t)}.
+   \]
+
+This last formula is a materially stronger candidate for the `arithmetic wave-particle` bridge than
+mere analogy: discrete prime-power atoms become a continuous causal heat-boundary anomaly with the
+correct von Mangoldt weight. The unresolved issue is the genuinely global relative
+prime-Archimedean trace cancellation and positivity; the individual prime commutators are not
+absolutely summable in trace norm.
+
+### Old E8/GPM gauge reconstruction: do not promote
+
+The 2025 E8/GPM files contain the useful empirical vocabulary `SU(3) x SU(2) x U(1)` and shell
+counts, but their purported derivation should not be imported into Verify2. Independently checking
+the displayed coherence functional
+
+\[
+S(G)=\frac{\det G}{(\operatorname{tr}G)^3}
+\]
+
+shows by AM-GM that `S <= 1/27`, with equality for **every** positive matrix whose three
+eigenvalues are equal. Scale invariance also makes the unrestricted frame space noncompact. Hence
+that functional alone cannot imply a unique golden frame up to the E8 Weyl group. The old argument
+from a unique maximizing eigenvalue spectrum to a unique frame is invalid. Treat all downstream
+shell-to-gauge and cofactor-coupling claims as historical/conjectural unless separately reconstructed.
+
+The safe group-theoretic point remains: `SU(1)` is trivial. The physically meaningful abelian
+factor is `U(1)`, and any remembered `SU(1), SU(2), SU(3)` ladder must be translated into an exact
+rank/stabilizer statement before use.
+
+## 7. Formalization consequences from this mining pass
+
+- Preserve the exact Z/4 Grassmannian orientation theorem and Dirac factor-two clock relation.
+- Strengthen scale formalization using homogeneity, with the scalar-box shadow locus as a concrete
+  theorem-level test case.
+- Keep celestial shadow, physical T and charge conjugation as separate maps until a commuting
+  representation diagram is proved.
+- Add the causal Dirichlet-heat prime anomaly to the RH formalization roadmap. It is a high-value
+  theorem target because it reproduces the exact prime-power heat contribution without zero data.
+- Mark one-prime/finitely-many-prime Koszul contraction and bilateral Gaussian Tate-homotopy routes
+  as closed negative fronts; do not spend new proof effort on them unless assumptions change.
+- Do not use the old E8 stationary-coherence uniqueness proof to retire Standard Model stubs.
+- Current Verify2 `main` has a successful full `lake build` CI at commit
+  `4025286936321e43d11f8fa7f9454b69cbe38f68`; its separate Blueprint workflow failure is not a
+  Lean compilation failure. Continue to quote sorry/axiom/stub counts separately.
