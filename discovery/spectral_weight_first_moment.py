@@ -14,7 +14,7 @@ integral_0^infty x^2 exp(-a x) dx = 2/a^3, hence
       = 4(1-2^-3) zeta(3)
       = 7 zeta(3)/2.
 
-This is the direct spectral-weight moment.  It is deliberately kept separate
+This is the direct spectral-weight moment. It is deliberately kept separate
 from factorized Wiener-Hopf chamber products and from repeated convolution.
 """
 
@@ -35,10 +35,17 @@ def main():
     target = 7 * mp.zeta(3) / (2 * mp.pi**2)
     err = abs(numeric - target)
 
-    k = sp.symbols("k", integer=True, nonnegative=True)
-    odd_sum = sp.summation(1 / (2 * k + 1) ** 3, (k, 0, sp.oo))
-    symbolic = sp.simplify(4 * odd_sum / sp.pi**2)
+    # Exact odd/even decomposition.  We do not ask SymPy to discover the
+    # eta/zeta special-value relation implicitly, because its generic
+    # summation form may retain dirichlet_eta(3) unevaluated.
+    s = sp.Integer(3)
+    odd_sum_closed = sp.simplify((1 - 2 ** (-s)) * sp.zeta(s))
+    symbolic = sp.simplify(4 * odd_sum_closed / sp.pi**2)
     expected = 7 * sp.zeta(3) / (2 * sp.pi**2)
+
+    # Independent finite partial sums approach the same odd-cube constant.
+    partial = sp.N(sum(sp.Rational(1, (2 * j + 1) ** 3) for j in range(20000)), 50)
+    partial_target = sp.N(odd_sum_closed, 50)
 
     print("spectral weight: P(lambda) = pi*lambda/sinh(pi*lambda)")
     print("numeric integral =", mp.nstr(numeric, 70))
@@ -46,9 +53,11 @@ def main():
     print("abs error        =", mp.nstr(err, 8))
     print("symbolic result  =", symbolic)
     print("symbolic check   =", sp.simplify(symbolic - expected))
+    print("odd partial err  =", abs(partial - partial_target))
 
     assert err < mp.mpf("1e-65")
     assert sp.simplify(symbolic - expected) == 0
+    assert abs(partial - partial_target) < sp.Float("4e-10")
 
 
 if __name__ == "__main__":
