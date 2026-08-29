@@ -5,6 +5,17 @@ Uses the convention-locked generic massive-vector tree engine.  The reconstructi
 identity is C^(4)=C^(V_m)-C^(S), with vector and scalar sewings evaluated at the
 same generic rational kinematics.  This script prints exact factorizations and
 checks the threshold r=1 regression without making any box-only claim.
+
+The same-helicity channel admits the exact decomposition
+
+    C^(4)_same = 2 C^(S)_same + D,
+
+where
+
+    D = 4 (r^2-1)^2 (1+t^2)^2 / (r^2+t^2)^2.
+
+Thus the threshold state-count relation is the D=0 slice of a generic rational
+identity, rather than a generic 3:1 vector/scalar rule.
 """
 from __future__ import annotations
 import sympy as sp
@@ -31,17 +42,32 @@ def main() -> None:
     Cs_mixed = sp.factor(Spm * Smp)
     C4_mixed = sp.factor(sp.cancel(Cv_mixed - Cs_mixed))
 
-    # Exact reconstruction and known threshold regression.
+    same_defect = sp.factor(
+        4 * (g.r**2 - 1)**2 * (g.t**2 + 1)**2 / (g.r**2 + g.t**2)**2
+    )
+
+    # Exact reconstruction and generic same-helicity decomposition.
     assert sp.simplify(C4_same - (Cv_same - Cs_same)) == 0
     assert sp.simplify(C4_mixed - (Cv_mixed - Cs_mixed)) == 0
+    assert sp.simplify((Cv_same - 3 * Cs_same) - same_defect) == 0
+    assert sp.simplify(C4_same - (2 * Cs_same + same_defect)) == 0
+
+    # Known threshold regression.  The defect and mixed scalar vanish there.
     assert sp.simplify((Cv_same - 3 * Cs_same).subs(g.r, 1)) == 0
+    assert sp.simplify(same_defect.subs(g.r, 1)) == 0
     assert sp.simplify(Cv_mixed.subs(g.r, 1) - 16) == 0
     assert sp.simplify(Cs_mixed.subs(g.r, 1)) == 0
+    assert sp.simplify(C4_mixed.subs(g.r, 1) - 16) == 0
+    assert sp.simplify(
+        C4_same.subs(g.r, 1) - 2 * Cs_same.subs(g.r, 1)
+    ) == 0
 
     print("beta^2+rho^2 =", sp.simplify(g.beta**2 + g.rho**2))
     print("Cv_same =", sp.factor(Cv_same))
     print("Cs_same =", sp.factor(Cs_same))
+    print("same defect Cv_same-3 Cs_same =", same_defect)
     print("C4_same = Cv_same-Cs_same =", C4_same)
+    print("C4_same-(2 Cs_same) =", sp.factor(C4_same - 2 * Cs_same))
     print("Cv_mixed =", sp.factor(Cv_mixed))
     print("Cs_mixed =", sp.factor(Cs_mixed))
     print("C4_mixed = Cv_mixed-Cs_mixed =", C4_mixed)
