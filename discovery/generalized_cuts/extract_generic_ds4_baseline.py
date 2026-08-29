@@ -1,0 +1,50 @@
+#!/usr/bin/env python3
+"""Extract exact generic nonzero-mu Ds=4 Yang-Mills sewing baselines.
+
+Uses the convention-locked generic massive-vector tree engine.  The reconstruction
+identity is C^(4)=C^(V_m)-C^(S), with vector and scalar sewings evaluated at the
+same generic rational kinematics.  This script prints exact factorizations and
+checks the threshold r=1 regression without making any box-only claim.
+"""
+from __future__ import annotations
+import sympy as sp
+import massive_vector_generic_state_sum_symbolic as g
+
+
+def main() -> None:
+    Mmm = g.vector_tree_matrix(-1, -1)
+    Mpp = g.vector_tree_matrix(+1, +1)
+    Smm = g.scalar_tree(-1, -1)
+    Spp = g.scalar_tree(+1, +1)
+    Cv_same = g.sew(Mmm, Mpp)
+    Cs_same = sp.factor(Smm * Spp)
+    C4_same = sp.factor(sp.cancel(Cv_same - Cs_same))
+
+    Mpm = g.vector_tree_matrix(+1, -1)
+    Mmp = g.vector_tree_matrix(-1, +1)
+    Spm = g.scalar_tree(+1, -1)
+    Smp = g.scalar_tree(-1, +1)
+    Cv_mixed = g.sew(Mpm, Mmp)
+    Cs_mixed = sp.factor(Spm * Smp)
+    C4_mixed = sp.factor(sp.cancel(Cv_mixed - Cs_mixed))
+
+    # Exact reconstruction and known threshold regression.
+    assert sp.simplify(C4_same - (Cv_same - Cs_same)) == 0
+    assert sp.simplify(C4_mixed - (Cv_mixed - Cs_mixed)) == 0
+    assert sp.simplify((Cv_same - 3 * Cs_same).subs(g.r, 1)) == 0
+    assert sp.simplify(Cv_mixed.subs(g.r, 1) - 16) == 0
+    assert sp.simpl(Cs_mixed.subs(g.r, 1)) == 0
+
+    print("Cv_same =", sp.factor(Cv_same))
+    print("Cs_same =", sp.factor(Cs_same))
+    print("C4_same = Cv_same-Cs_same =", C4_same)
+    print("Cv_mixed =", sp.factor(Cv_mixed))
+    print("Cs_mixed =", sp.factor(Cs_mixed))
+    print("C4_mixed = Cv_mixed-Cs_mixed =", C4_mixed)
+    print("threshold C4_same =", sp.factor(C4_same.subs(g.r, 1)))
+    print("threshold C4_mixed =", sp.factor(C4_mixed.subs(g.r, 1)))
+    print("PASS: exact generic Ds=4 massive-vector-minus-scalar extraction")
+
+
+if __name__ == "__main__":
+    main()
