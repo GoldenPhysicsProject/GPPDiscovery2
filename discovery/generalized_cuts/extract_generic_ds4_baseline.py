@@ -14,8 +14,15 @@ where
 
     D = 4 (r^2-1)^2 (1+t^2)^2 / (r^2+t^2)^2.
 
-Thus the threshold state-count relation is the D=0 slice of a generic rational
-identity, rather than a generic 3:1 vector/scalar rule.
+In physical variables beta=|p|/E, rho=mu/E and c=cos(theta), the same identities
+collapse further to
+
+    C^(S)_same = rho^4/(1-beta*c)^2,
+    D          = 16 beta^2/(1-beta*c)^2,
+    C^(4)_same = (2 rho^4 + 16 beta^2)/(1-beta*c)^2.
+
+Thus the threshold state-count relation is the beta=0 slice of a generic physical
+identity, while the massless limit retains a nontrivial polarization term.
 """
 from __future__ import annotations
 import sympy as sp
@@ -45,12 +52,28 @@ def main() -> None:
     same_defect = sp.factor(
         4 * (g.r**2 - 1)**2 * (g.t**2 + 1)**2 / (g.r**2 + g.t**2)**2
     )
+    ctheta = (1 - g.t**2) / (1 + g.t**2)
+    physical_scalar = sp.factor(g.rho**4 / (1 - g.beta * ctheta)**2)
+    physical_defect = sp.factor(16 * g.beta**2 / (1 - g.beta * ctheta)**2)
+    physical_c4 = sp.factor(
+        (2 * g.rho**4 + 16 * g.beta**2) / (1 - g.beta * ctheta)**2
+    )
+    beta_only_c4 = sp.factor(
+        2 * (g.beta**4 + 6 * g.beta**2 + 1) /
+        (1 - g.beta * ctheta)**2
+    )
 
     # Exact reconstruction and generic same-helicity decomposition.
     assert sp.simplify(C4_same - (Cv_same - Cs_same)) == 0
     assert sp.simplify(C4_mixed - (Cv_mixed - Cs_mixed)) == 0
     assert sp.simplify((Cv_same - 3 * Cs_same) - same_defect) == 0
     assert sp.simplify(C4_same - (2 * Cs_same + same_defect)) == 0
+
+    # Exact conversion from rational chart to physical velocity/mass variables.
+    assert sp.simplify(Cs_same - physical_scalar) == 0
+    assert sp.simplify(same_defect - physical_defect) == 0
+    assert sp.simplify(C4_same - physical_c4) == 0
+    assert sp.simplify(C4_same - beta_only_c4) == 0
 
     # Known threshold regression.  The defect and mixed scalar vanish there.
     assert sp.simplify((Cv_same - 3 * Cs_same).subs(g.r, 1)) == 0
@@ -67,7 +90,10 @@ def main() -> None:
     print("Cs_same =", sp.factor(Cs_same))
     print("same defect Cv_same-3 Cs_same =", same_defect)
     print("C4_same = Cv_same-Cs_same =", C4_same)
-    print("C4_same-(2 Cs_same) =", sp.factor(C4_same - 2 * Cs_same))
+    print("physical Cs_same =", physical_scalar)
+    print("physical defect =", physical_defect)
+    print("physical C4_same =", physical_c4)
+    print("beta-only C4_same =", beta_only_c4)
     print("Cv_mixed =", sp.factor(Cv_mixed))
     print("Cs_mixed =", sp.factor(Cs_mixed))
     print("C4_mixed = Cv_mixed-Cs_mixed =", C4_mixed)
