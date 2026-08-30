@@ -11,36 +11,48 @@ Create a persistent high-capability administrative bridge for the authorized GPP
 ### Completed
 
 - Confirmed GitHub write/admin access to `GoldenPhysicsProject/GPPDiscovery2` through the connected GitHub app.
-- Confirmed Supabase connector discovery exposed Edge Function deployment and SQL execution actions.
-- Confirmed the Supabase connector became unavailable when SQL execution was invoked; no SQL change was applied.
-- Recorded the control-plane architecture in `README.md`.
-- Recorded bootstrap, recovery, IAM/secret-store strategy and the known Supabase RLS repair in `BOOTSTRAP.md`.
-- Added the first Supabase Edge Function implementation in `bridge/index.ts`.
-- The bridge implements authenticated health, Google OAuth bootstrap verification, Secret Manager presence verification without returning payload data, a general authenticated Google API request adapter restricted to `*.googleapis.com`, and a general Supabase Management API adapter restricted to `api.supabase.com`.
-- Added `bridge/deno.json`.
+- Confirmed Supabase connector discovery exposed Edge Function deployment and SQL execution actions, but the connector became unavailable when invoked; no direct Supabase SQL change was applied through that connector.
+- Recorded the control-plane architecture in `README.md`, bootstrap/recovery strategy in `BOOTSTRAP.md`, and initial Supabase Edge Function implementation in `bridge/index.ts` with `bridge/deno.json`.
+- Installed and authenticated the Vercel connector and created the production project `gpp-automaton` (`prj_uHhzmEUPZiEyvWLLvIA9wXDQeSE6`).
+- Deployed a working production Vercel serverless runtime and verified HTTP 200 health responses.
+- Verified Vercel OIDC claims for the team issuer `https://oidc.vercel.com/daniel-toupins-projects` and production project subject form.
+- Used the existing GPP Automaton service-account key locally only to sign a short-lived Google OAuth assertion; the private key was not committed to GitHub or installed as a Vercel runtime secret.
+- Used the short-lived assertion from a fixed-purpose bootstrap function to create Google Workload Identity Federation pool `gpp-vercel` and OIDC provider `vercel` in project number `794183325166`.
+- Provider conditions restrict accepted Vercel tokens to owner `daniel-toupins-projects`, project `gpp-automaton`, environment `production`.
+- Granted the `gpp-vercel` workload principal set `roles/iam.workloadIdentityUser` and `roles/iam.serviceAccountTokenCreator` on `gpp-automaton@gpp-automaton.iam.gserviceaccount.com`.
+- Verified permanent keyless authentication end to end: Vercel OIDC -> Google STS/WIF -> service-account impersonation -> Google Resource Manager.
+- Verified Secret Manager access through the permanent keyless bridge without exposing payload data.
+- Verified `CodexSupabase` exists as version 1 and contains a payload with CRC metadata.
+- Diagnosed the stored `CodexSupabase` payload without exposing it: version 1 is a four-character JSON number, not a Supabase PAT.
+- Confirmed Secret Manager currently contains only one secret, `CodexSupabase`.
+- Attempted Supabase Management API authentication using the stored payload; Supabase returned HTTP 401 `JWT could not be decoded`, consistent with the malformed/wrong secret payload.
+- Confirmed the official Supabase Management API SQL endpoint needed for the pending repair is `POST /v1/projects/{ref}/database/query` and requires database write permission.
 
-### Existing credential/runtime evidence
+### Current control-plane state
 
-A previous local bootstrap test successfully parsed the GPP Automaton service-account JSON and created a signed RS256 Google OAuth JWT without exposing the private key. The subsequent token exchange failed before reaching Google because the local execution container could not resolve `oauth2.googleapis.com`.
+The production `gpp-automaton` Vercel runtime is live and can authenticate to Google Cloud keylessly through Vercel OIDC and Google Workload Identity Federation. Static Google credentials are no longer required in the permanent runtime path. Secret Manager can be read in-memory by the bridge.
 
-### Not yet completed
+The remaining blocker to Supabase administration is credential content, not network/runtime/IAM. `CodexSupabase` version 1 does not contain a valid Supabase Management API PAT.
 
-- The bridge has not yet been deployed to Supabase Edge Functions because the Supabase connector disappeared at invocation time.
-- The Google service-account JSON has not been copied into Git or Drive by this bootstrap work.
-- The `CodexSupabase` secret payload has not been read or verified by the bridge.
-- The known `codex.corrections_ledger` RLS remediation has not yet been applied.
-- No credential rotation has been performed.
-- No claim of a working production control plane is made until deployment and end-to-end tests succeed.
+### Still pending
+
+- Replace/add a Secret Manager version for `CodexSupabase` containing the intended Supabase Management API PAT.
+- Verify Supabase Management API project access for `dunrgpupddbmzffntwph`.
+- Apply and verify:
+  ```sql
+  alter table codex.corrections_ledger enable row level security;
+  revoke all on table codex.corrections_ledger from anon, authenticated;
+  grant select, insert, update, delete on table codex.corrections_ledger to service_role;
+  ```
+- Run Supabase security checks after the migration.
+- Add broader provider adapters and authenticated administrative operations.
+- Retire transient bootstrap deployments after their short-lived assertions expire; never rely on them for ongoing authentication.
+- Rotate any credentials that were previously pasted into chat after durable secret storage is confirmed.
 
 ### Next executable sequence
 
-1. Restore any networked deployment surface, preferably Supabase Edge Functions or Cloud Run.
-2. Configure bridge secrets/environment without committing payloads.
-3. Deploy `bridge/index.ts`.
-4. Call `/health`.
-5. Call `/bootstrap/google-token-test`.
-6. Call `/bootstrap/secret-test` and verify only secret metadata/presence.
-7. Exercise the Supabase Management API adapter.
-8. Apply and verify the `codex.corrections_ledger` RLS repair.
-9. Add provider adapters and browser-automation execution as required.
-10. Move toward attached identity/workload federation and rotate transient bootstrap credentials.
+1. Correct `CodexSupabase` with a valid PAT in Secret Manager.
+2. Verify `GET https://api.supabase.com/v1/projects/dunrgpupddbmzffntwph` through the bridge.
+3. Apply the fixed RLS migration through `/v1/projects/dunrgpupddbmzffntwph/database/query`.
+4. Verify RLS/grants and run security-advisor checks.
+5. Extend the control plane to additional Google Cloud, GitHub, DNS, Play/Search Console, deployment and browser-automation surfaces.
