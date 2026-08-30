@@ -1,100 +1,89 @@
-"""Numerical audit of the raised-box positive-regulator DCT frontier.
+"""Fast numerical audit of the raised-box positive-regulator DCT frontier.
 
-This is discovery support, not a proof.  It evaluates the concrete affine-simplex
-moment
+Discovery support only, not a proof.  We evaluate
 
     J_eps(S,T) = int_{Delta_3} (S x1 x3 + T x2 x4)^(-eps) dx1 dx2 dx3
 
-in unit-cube coordinates and compares it with J_0 = 1/6.  It also checks the
-closed integral of the one-channel majorant used by the Lean development:
+and compare with J_0 = 1/6.  We also check the certified one-channel majorant
 
     int_{Delta_3} [1 + (S x1 x3)^(-delta)]
       = 1/6 + S^(-delta) Gamma(1-delta)^2 / Gamma(4-2 delta).
 
-The coordinate map is
+The affine simplex is parameterized by the unit cube:
     x1 = u,
     x2 = (1-u) v,
     x3 = (1-u)(1-v) w,
     x4 = (1-u)(1-v)(1-w),
 with Jacobian (1-u)^2 (1-v).
+
+Gauss-Legendre nodes avoid the singular boundary itself and make the audit quick
+and deterministic.  Increasing N gives a direct convergence check for the
+integrable endpoint singularities.
 """
 
 from __future__ import annotations
 
-import mpmath as mp
-
-mp.mp.dps = 35
-
-
-def barycentric(u, v, w):
-    x1 = u
-    x2 = (1 - u) * v
-    x3 = (1 - u) * (1 - v) * w
-    x4 = (1 - u) * (1 - v) * (1 - w)
-    jac = (1 - u) ** 2 * (1 - v)
-    return x1, x2, x3, x4, jac
+import math
+import numpy as np
 
 
-def simplex_moment(eps, S=mp.mpf(2), T=mp.mpf(3)):
-    eps, S, T = map(mp.mpf, (eps, S, T))
-
-    def fu(u):
-        def fv(v):
-            def fw(w):
-                x1, x2, x3, x4, jac = barycentric(u, v, w)
-                Q = S * x1 * x3 + T * x2 * x4
-                if eps == 0:
-                    return jac
-                return jac * Q ** (-eps)
-
-            return mp.quad(fw, [0, 1])
-
-        return mp.quad(fv, [0, 1])
-
-    return mp.quad(fu, [0, 1])
+def nodes_weights(N: int):
+    z, w = np.polynomial.legendre.leggauss(N)
+    return (z + 1.0) / 2.0, w / 2.0
 
 
-def majorant_closed(delta, S=mp.mpf(2)):
-    delta, S = map(mp.mpf, (delta, S))
-    singular = S ** (-delta) * mp.gamma(1 - delta) ** 2 / mp.gamma(4 - 2 * delta)
-    return mp.mpf(1) / 6 + singular
+def simplex_moment(eps: float, S: float = 2.0, T: float = 3.0, N: int = 64) -> float:
+    q, wt = nodes_weights(N)
+    total = 0.0
+    for i, u in enumerate(q):
+        one_u = 1.0 - u
+        for j, v in enumerate(q):
+            one_v = 1.0 - v
+            x1 = u
+            x2 = one_u * v
+            x3 = one_u * one_v * q
+            x4 = one_u * one_v * (1.0 - q)
+            jac = one_u**2 * one_v
+            Q = S * x1 * x3 + T * x2 * x4
+            values = np.full_like(q, jac) if eps == 0.0 else jac * Q ** (-eps)
+            total += wt[i] * wt[j] * float(np.dot(wt, values))
+    return total
 
 
-def majorant_numeric(delta, S=mp.mpf(2)):
-    delta, S = map(mp.mpf, (delta, S))
-
-    def fu(u):
-        def fv(v):
-            def fw(w):
-                x1, _, x3, _, jac = barycentric(u, v, w)
-                return jac * (1 + (S * x1 * x3) ** (-delta))
-
-            return mp.quad(fw, [0, 1])
-
-        return mp.quad(fv, [0, 1])
-
-    return mp.quad(fu, [0, 1])
+def majorant_closed(delta: float, S: float = 2.0) -> float:
+    singular = S ** (-delta) * math.gamma(1.0 - delta) ** 2 / math.gamma(4.0 - 2.0 * delta)
+    return 1.0 / 6.0 + singular
 
 
-def main():
-    S, T = mp.mpf(2), mp.mpf(3)
-    target = mp.mpf(1) / 6
-    print(f"S={S}, T={T}, target J_0={mp.nstr(target, 18)}")
-    for eps in ("0.20", "0.10", "0.05", "0.02"):
+def majorant_numeric(delta: float, S: float = 2.0, N: int = 96) -> float:
+    q, wt = nodes_weights(N)
+    total = 0.0
+    for i, u in enumerate(q):
+        one_u = 1.0 - u
+        for j, v in enumerate(q):
+            one_v = 1.0 - v
+            x1 = u
+            x3 = one_u * one_v * q
+            jac = one_u**2 * one_v
+            values = jac * (1.0 + (S * x1 * x3) ** (-delta))
+            total += wt[i] * wt[j] * float(np.dot(wt, values))
+    return total
+
+
+def main() -> None:
+    S, T = 2.0, 3.0
+    target = 1.0 / 6.0
+    print(f"S={S:g}, T={T:g}, target J_0={target:.16g}")
+    for eps in (0.20, 0.10, 0.05, 0.02):
         val = simplex_moment(eps, S, T)
-        print(
-            "eps=", eps,
-            " J=", mp.nstr(val, 18),
-            " J-1/6=", mp.nstr(val - target, 10),
-        )
+        print(f"eps={eps:0.2f}  J={val:.16g}  J-1/6={val-target:+.8e}")
 
-    delta = mp.mpf("0.35")
-    num = majorant_numeric(delta, S)
+    delta = 0.35
     closed = majorant_closed(delta, S)
-    print("majorant delta=", delta)
-    print(" numeric =", mp.nstr(num, 18))
-    print(" closed  =", mp.nstr(closed, 18))
-    print(" abs err =", mp.nstr(abs(num - closed), 8))
+    print(f"majorant delta={delta:g}, exact closed form={closed:.16g}")
+    for N in (32, 64, 96):
+        num = majorant_numeric(delta, S, N=N)
+        print(f"  N={N:3d} numeric={num:.16g} abs_err={abs(num-closed):.4e}")
 
 
 if __name__ == "__main__":
