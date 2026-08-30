@@ -1,0 +1,6 @@
+{
+  "name": "gpp-automaton",
+  "private": true,
+  "type": "module",
+  "engines": { "node": "22.x" }
+}
