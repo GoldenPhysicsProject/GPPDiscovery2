@@ -11,17 +11,25 @@ the Gamma product identity rewrites the density as
     rho_k(x) = 2^(2k+1)/(pi*Gamma(2k+2))
                * Gamma(k+1+i*x) Gamma(k+1-i*x).
 
-The standard Fourier transform of |Gamma(a+i*x)|^2 then predicts
+Barnes' vertical-line Gamma integral (DLMF 5.13.1, with a=b=k+1,
+c=0, z=exp(-t)) gives exactly
 
     integral_R rho_k(x) dx = 1,
     integral_R exp(i*t*x) rho_k(x) dx = sech(t/2)^(2k+2),
     E[X] = 0,
     Var(X) = (k+1)/2.
 
-This is NOT the discarded claim that the rho_k themselves are repeated sech
-convolutions.  Rather, their characteristic functions are powers of sech.
-This script independently checks normalization, the transform, and variance at
-high precision for several chambers.
+Hence the chamber family has the exact convolution semigroup law
+
+    rho_k * rho_l = rho_(k+l+1),
+    rho_k = rho_0 ^ *(k+1).
+
+This corrects the discarded repeated-sech extrapolation: rho_k is NOT obtained
+by convolving a sech density in x-space.  Rather, rho_0(x)=2x/sinh(pi*x) is the
+convolution generator, and its characteristic function is sech(t/2)^2.
+
+The script independently checks normalization, the transform, variance, and
+representative convolution identities at high precision.
 """
 
 from __future__ import annotations
@@ -68,9 +76,15 @@ def variance_exact(k: int) -> mp.mpf:
     return mp.mpf(k + 1) / 2
 
 
+def convolution(k: int, ell: int, x: mp.mpf) -> mp.mpf:
+    f = lambda y: rho(k, y) * rho(ell, x - y)
+    return mp.quad(f, [-mp.inf, -8, -3, 0, 3, 8, mp.inf])
+
+
 def main() -> None:
     tol = mp.mpf("1e-45")
-    print("Gamma/Mehler–Fock chamber probability audit")
+    conv_tol = mp.mpf("1e-38")
+    print("Gamma/Mehler–Fock chamber probability/convolution audit")
     print(f"mp.dps={mp.mp.dps}")
 
     for k in range(5):
@@ -97,7 +111,23 @@ def main() -> None:
             if err > tol:
                 raise AssertionError((k, t, lhs, rhs, err))
 
-    print("PASS: normalization, sech-power transform, and variance all agree.")
+    for k, ell in ((0, 0), (0, 1), (1, 1), (1, 2)):
+        target = k + ell + 1
+        for x in map(mp.mpf, ("0", "0.5", "1.3")):
+            lhs = convolution(k, ell, x)
+            rhs = rho(target, x)
+            err = abs(lhs - rhs)
+            print(
+                f"conv ({k},{ell}) x={x}: lhs={mp.nstr(lhs, 40)} "
+                f"rho_{target}={mp.nstr(rhs, 40)} err={mp.nstr(err, 5)}"
+            )
+            if err > conv_tol:
+                raise AssertionError((k, ell, x, lhs, rhs, err))
+
+    print(
+        "PASS: normalization, sech-power transform, variance, and chamber "
+        "convolution semigroup all agree."
+    )
 
 
 if __name__ == "__main__":
