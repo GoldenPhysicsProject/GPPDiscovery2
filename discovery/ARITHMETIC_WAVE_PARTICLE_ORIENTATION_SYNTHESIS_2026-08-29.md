@@ -313,3 +313,101 @@ rank/stabilizer statement before use.
 - Current Verify2 `main` has a successful full `lake build` CI at commit
   `4025286936321e43d11f8fa7f9454b69cbe38f68`; its separate Blueprint workflow failure is not a
   Lean compilation failure. Continue to quote sorry/axiom/stub counts separately.
+
+## 8. Drive chronology audit added 2026-08-31
+
+### July orientation–representation quotient sharpens the mass–time–charge bookkeeping
+
+The July 24 `orientation_representation_quotient_v1` manuscript gives the cleanest surviving
+mathematical core of the charge/time-orientation idea. For a closed oriented gauge line,
+
+\[
+W_{R^*}(\gamma)=W_R(\bar\gamma),
+\]
+
+because dual transport is inverse-transpose transport and path reversal is inverse transport. In
+the Abelian reduction, if `c=±1` labels a conjugate charge pair and `t=±1` the orientation of the
+worldline relative to a chosen arrow, then
+
+\[
+W_{c,t}=\exp\!\left(i\,ct\,q_0\int_{\gamma_+}A\right).
+\]
+
+The diagonal involution `(c,t) -> (-c,-t)` therefore has the unique nontrivial quotient character
+
+\[
+m=ct.
+\]
+
+This is a theorem about oriented gauge data. It does **not** identify celestial shadow with Wigner
+`T`, and it does **not** turn every self-dual representation into a matter/antimatter binary. It
+supplies the precise mathematical content behind the old four-sign bookkeeping while preserving
+the later distinction between internal dualization and spacetime/orientation operations.
+
+### Arithmetic v28 -> v34: the Suzuki/semilocal Weil bridge is a later addition
+
+Comparing the August 13 v28 and v34 arithmetic manuscripts shows that the core heat-trace,
+reflection-positivity, Hausdorff-moment, principal-series smoothing, Hardy-defect, and causal
+Dirichlet-heat anomaly results are already present in v28. The later v34 layer adds a distinct sharp
+support-normalization bridge:
+
+\[
+\widetilde q_L(k)=q_L(k)-r_L k,
+\qquad
+r_L=\int_L^\infty w_\infty(a)e^{-a}\,da.
+\]
+
+Under RH, the derivative of the normalized phase is a Dirichlet-kernel sum over critical
+ordinates, and its Fejer mean is the diagonal of the semilocal Weil matrix. The associated box
+diagonal `Psi(L)` is identified with Suzuki's screw function. The manuscript records the known
+criterion
+
+\[
+\Psi(L)\ge 0\quad\text{for every }L
+\]
+
+as RH-equivalent. This does not prove positivity, but it materially links three active fronts that
+had been tracked separately: support-normalized prime/Archimedean phase, finite/semilocal Weil
+positivity, and the spectral/heat formulation.
+
+This is a better formalization target than inventing another positivity proxy: formalize the exact
+normalization term and the identity from the Fejer-averaged phase to the semilocal Weil diagonal,
+then connect that diagonal to the existing `SpectralWeil` infrastructure. The current Verify2 code
+search contains no Suzuki/screw/Fejer implementation, so this bridge is presently absent from the
+formal tree.
+
+### Stub reduction by supersession, not by fake proof
+
+The chronology audit exposed one placeholder that should not remain a proof target at all.
+`GppVerify/CelestialHolography/TwistorGoogly.lean` still contained
+`googly_resolution_T_image : True := trivial`, representing the superseded strong identification
+of the googly/shadow map with physical time reversal. Because later manuscripts explicitly separate
+shadow, Wigner `T`, and charge conjugation, the correct reduction is deletion rather than a proof of
+the old claim. That placeholder has now been removed from Verify2 `main`, while the exact proved
+shadow/helicity theorems remain unchanged.
+
+This is the model for axiom/stub reduction throughout the archive: a historical placeholder may be
+retired either by replacing it with a theorem, or by proving that its intended statement was
+superseded and deleting it. Stub count is not itself a reason to preserve an invalid target.
+
+### Current synthesis after this pass
+
+The strongest common picture is now a hierarchy, not an identity:
+
+1. **Gauge orientation quotient:** `(R,\gamma) ~ (R^*,\bar\gamma)`, with Abelian invariant `ct`.
+2. **Celestial shadow:** `(\Delta,J) -> (2-\Delta,-J)`, with principal-series conjugation on the
+   spectral coordinate.
+3. **Spinorial lift:** the Gr(2,4) orientation map has a genuine Z/4 lift and massive Dirac dynamics
+   supplies the factor-two zitterbewegung/Compton clock relation.
+4. **Scale grading:** `Delta_5+Delta_6=2` is a zero-homogeneity cut locus; mass introduces a proper
+   scale while projective/principal-series data organize scale-free sectors.
+5. **Arithmetic discrete/continuous transform:** prime-power atoms map exactly to Poisson/Fourier
+   modes and, through the causal Dirichlet heat anomaly, to a continuous heat-boundary response.
+6. **Global RH frontier:** the missing theorem is the completed prime–Archimedean positive relative
+   trace / Weil Gram factorization. The later Suzuki bridge gives a concrete semilocal diagonal
+   target inside that frontier.
+
+No step in this hierarchy justifies collapsing charge conjugation, shadow, time reversal, or
+zitterbewegung into a single operation. What survives is the repeated appearance of dualization,
+orientation reversal, reflection, half-density normalization, and positive/unitary fixed loci in
+mathematically different representations.
