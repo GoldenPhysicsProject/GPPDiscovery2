@@ -10,9 +10,9 @@ The first real error was syntactic cast normalization in the identity
 
 Lean's target contained `((n+1 : Nat) : Real)` while `Real.rpow_def_of_pos` expected the normalized real expression `((n : Real)+1)`. The second real error was the `r=0` summability interface: `summable_gibbsWeight` proves summability of the bare weight, while the generic comparison theorem expects the syntactically expanded `weight * logEnergy^0`. Later heartbeat failures were downstream elaboration noise.
 
-Verify2 commit `8042c5c14a271781c59e3942da9f3535aee72f0b` repairs these interfaces by normalizing `Nat.cast_add/Nat.cast_one` before the `rpow` rewrite and introducing explicit `hz0,...,hz4` summability witnesses (`hz0` and `hz1` closed by `simpa`). No mathematical statement was weakened and no source `sorry` was introduced. CI run `33537526804` was in progress at the time of this record.
+Verify2 commit `8042c5c14a271781c59e3942da9f3535aee72f0b` repairs these interfaces by normalizing `Nat.cast_add/Nat.cast_one` before the `rpow` rewrite and introducing explicit `hz0,...,hz4` summability witnesses (`hz0` and `hz1` closed by `simpa`). No mathematical statement was weakened and no source `sorry` was introduced. Changed-Lean smoke run `33537526804` completed successfully. This certifies the changed module against the pinned toolchain; it is not being conflated with the full promotion-grade Lake/sorry/axiom/scaffold audit required before advancing `main`.
 
-The intended theorem remains:
+The certified theorem is:
 
 - if `beta > 1` and `eta >= 0`, then the mass-aware infinite Fisher numerator of the two-observable number-Gibbs family is strictly positive;
 - the proof is domination by the ordinary zeta-Gibbs moments plus the already formalized fixed three-state Vandermonde witness.
@@ -45,8 +45,7 @@ This correction is also consistent with known one-loop pure Einstein amplitudes 
 
 ## Next boundaries
 
-1. Recheck `8042c5c...`; repair only any genuine remaining Lean interface failure.
-2. Formalize all-real-`beta`, `eta>0` Gaussian-in-log summability by an eventual `n^-2` comparison.
-3. On scalar amplitudes, attack the AE boundary + nested interval DCT theorem directly.
-4. After scalar regulator closure, compute the honest fixed-loop `D_s=4`, `mu != 0` Yang-Mills state sum before any gravity double-copy or no-triangle simplification.
-5. Preserve the exact Mehler-Fock/Wiener-Hopf/chamber results, while keeping their local positivity logically separate from global Weil positivity.
+1. Formalize all-real-`beta`, `eta>0` Gaussian-in-log summability by an eventual `n^-2` comparison.
+2. On scalar amplitudes, attack the AE boundary + nested interval DCT theorem directly.
+3. After scalar regulator closure, compute the honest fixed-loop `D_s=4`, `mu != 0` Yang-Mills state sum before any gravity double-copy or no-triangle simplification.
+4. Preserve the exact Mehler-Fock/Wiener-Hopf/chamber results, while keeping their local positivity logically separate from global Weil positivity.
