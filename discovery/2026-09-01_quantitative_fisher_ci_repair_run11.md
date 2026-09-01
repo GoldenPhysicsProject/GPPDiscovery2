@@ -32,11 +32,13 @@ The factorization statement is mathematically unchanged. It was repaired by coll
 
 Forcing a rebuild of the quantitative theorem then exposed a second stale dependency: `FiniteFisherVandermondeIdentity.lean`. Its old proof of `orderedVandermondeEnergy_eq_momentDiscriminant` relied on global expansion plus broad commutative simplification. With the repaired factorization rebuilt under Lean 4.19, that proof left a large ordered triple-sum identity and therefore reintroduced `sorryAx` into downstream Fisher theorems.
 
-That identity has now been rewritten around five explicit raw-moment factorization channels `(0,2,4)`, `(1,2,3)`, `(2,2,2)`, `(0,3,3)`, and `(1,1,4)`, matching the exact discriminant
+That identity was rewritten around five explicit raw-moment factorization channels `(0,2,4)`, `(1,2,3)`, `(2,2,2)`, `(0,3,3)`, and `(1,1,4)`, matching the exact discriminant
 
 `6 (m0 m2 m4 + 2 m1 m2 m3 - m2^3 - m0 m3^2 - m1^2 m4)`.
 
-The replacement uses the pointwise squared-Vandermonde polynomial expansion, ordered finite-sum distribution, the certified triple-moment factorization lemmas, and final scalar linear combination. CI for this second repair is running; until it passes and the quantitative theorem itself is rebuilt afterward, the new Fisher lower-bound theorem is mathematically derived and present on the branch but not yet called CI-certified.
+The first CI run of that rewrite, commit `33498bface77f6cebb86f75d8c9457ad172803de`, failed at line 50 with `simp made no progress`. Importantly, the prerequisite `FiniteMomentFactorization`, `FiniteVandermondeExpansionKernel`, `FiniteVandermondeEnergy`, and `FiniteFisherMomentBridge` modules all rebuilt successfully without `sorryAx`; the failure occurred only in the sum-distribution normalization inside `orderedVandermondeEnergy_eq_momentDiscriminant`.
+
+That brittle `simp only [Finset.sum_add_distrib, Finset.sum_sub_distrib]` step has now been replaced by recursive `simp_rw` distribution. The repair is commit `c49615e2cd1302e34079cb95b3cda976d4db7115`; its changed-Lean smoke is running. Until it passes, and `FiniteFisherQuantitativeWitness.lean` is force-rebuilt afterward, the quantitative lower witness remains mathematically derived and present on the branch but is not yet called CI-certified.
 
 ## Scalar-box audit
 
