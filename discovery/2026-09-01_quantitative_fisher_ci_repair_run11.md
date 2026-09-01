@@ -24,11 +24,19 @@ For the two-parameter number-Gibbs weights
 
 with `eta > 0`, the intended arithmetic witness is the fixed three-state set corresponding to `n = 1,2,3` (subject to the repository's exact indexing convention when the specialization theorem is written). Its weights are strictly positive and the support values `log 1`, `log 2`, `log 3` are distinct. The remaining analytic input is summability of the raw moments through order four and, for a normalized Fisher determinant theorem, normalization of the infinite zeroth moment.
 
-## CI failure and repair
+## CI failures and repairs
 
-The first smoke run for `FiniteFisherQuantitativeWitness.lean` failed before elaborating the new theorem. The actual failure was a stale dependency rebuild in `FiniteMomentFactorization.lean`: the proof of `triple_monomial_factorization` used commutative simp lemmas, and pinned Lean 4.19 canonicalized the two outer finite-sum binders differently, leaving an exponent-swapped triple-sum goal and introducing `sorryAx` downstream.
+The first smoke run for `FiniteFisherQuantitativeWitness.lean` failed before elaborating the new theorem. The actual failure was a stale dependency rebuild in `FiniteMomentFactorization.lean`: the proof of `triple_monomial_factorization` used commutative simp lemmas, and pinned Lean 4.19 canonicalized outer finite-sum binders differently, leaving exponent-permuted triple-sum goals and introducing `sorryAx` downstream.
 
-The factorization statement is mathematically unchanged. The proof was repaired by expanding finite products of sums with `Finset.sum_mul`, `Finset.mul_sum`, and associativity only, deliberately avoiding `mul_comm`/`mul_left_comm` in the simp set. CI must certify this repair before the quantitative Fisher theorem is treated as branch-certified.
+The factorization statement is mathematically unchanged. It was repaired by collapsing the three finite sums one binder at a time with ordered `Finset.mul_sum` / `Finset.sum_mul` rewrites. The repair commit `255a19810ca1ddfeed7fa561ce2cd3f314b01053` passed the changed-Lean smoke, and `triple_monomial_factorization` rebuilt without `sorryAx`.
+
+Forcing a rebuild of the quantitative theorem then exposed a second stale dependency: `FiniteFisherVandermondeIdentity.lean`. Its old proof of `orderedVandermondeEnergy_eq_momentDiscriminant` relied on global expansion plus broad commutative simplification. With the repaired factorization rebuilt under Lean 4.19, that proof left a large ordered triple-sum identity and therefore reintroduced `sorryAx` into downstream Fisher theorems.
+
+That identity has now been rewritten around five explicit raw-moment factorization channels `(0,2,4)`, `(1,2,3)`, `(2,2,2)`, `(0,3,3)`, and `(1,1,4)`, matching the exact discriminant
+
+`6 (m0 m2 m4 + 2 m1 m2 m3 - m2^3 - m0 m3^2 - m1^2 m4)`.
+
+The replacement uses the pointwise squared-Vandermonde polynomial expansion, ordered finite-sum distribution, the certified triple-moment factorization lemmas, and final scalar linear combination. CI for this second repair is running; until it passes and the quantitative theorem itself is rebuilt afterward, the new Fisher lower-bound theorem is mathematically derived and present on the branch but not yet called CI-certified.
 
 ## Scalar-box audit
 
@@ -40,6 +48,8 @@ under the established positivity/simplex hypotheses. The live formal obstruction
 
 ## Other active-front boundaries
 
-The Gamma/Mehler-Fock/Wiener-Hopf chamber results remain valid Archimedean structure. No global prime-plus-Archimedean Weil quadratic-form identification or unconditional Weil positivity was obtained in this run.
+The positive-real principal-series dictionary still formally separates ordinary inversion `s -> 1-s` / celestial shadow `Delta -> 2-Delta` from the anti-linear Weil reflection `s -> 1-conj(s)`. On the critical axis the Weil reflection fixes `s`, whereas inversion becomes conjugation. This distinction remains essential: no celestial-shadow positivity statement has been identified with the global Weil quadratic form.
+
+The Gamma/Mehler-Fock/Wiener-Hopf chamber results remain valid Archimedean structure. No new spectral theorem was added in this run, and no global prime-plus-Archimedean Weil quadratic-form identification or unconditional Weil positivity was obtained.
 
 Yang-Mills/gravity remains downstream of scalar regulator closure: the next honest amplitude object is the fixed-loop `D_s = 4`, nonzero-`mu` Yang-Mills tree-sewing numerator/state sum before higher generalized cuts or double-copy gravity are promoted.
