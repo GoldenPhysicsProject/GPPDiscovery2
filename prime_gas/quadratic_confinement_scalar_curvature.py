@@ -16,17 +16,44 @@ In two dimensions a Hessian metric has scalar curvature
 
 Because beta and eta enter with minus signs in the Gibbs exponent, the third
 potential derivatives are minus the joint third cumulants of the sufficient
-statistics (L,L^2).  This script evaluates that exact moment formula on finite
-truncations and independently checks it against a finite-difference
-Levi-Civita/Ricci computation.
+statistics (L,L^2).
 
-This is executable discovery evidence, not yet the countable differentiability
-proof.  The finite-truncation formula itself is exact algebra.
+There is a stronger exact reduction specific to the parabola of sufficient
+statistics (X,X^2).  If Z = X-E[X], m_k=E[Z^k],
+
+    D = det g = m2*m4 - m3^2 - m2^3,
+
+and H is the 4x4 centered Hankel moment matrix
+
+    [[1,  0, m2, m3],
+     [0, m2, m3, m4],
+     [m2,m3, m4, m5],
+     [m3,m4, m5, m6]],
+
+then exact polynomial elimination gives
+
+    det(curvature numerator matrix) = det(H) - D^2,
+
+hence
+
+    R = (D^2 - det(H)) / (2 D^2)
+      = 1/2 * (1 - det(H)/D^2).
+
+This identity is translation invariant: the mean of X cancels completely.
+Since H is a moment Gram matrix, det(H)>=0, so every nondegenerate finite
+truncation obeys the rigorous structural upper bound R<=1/2.  Negativity is the
+strictly stronger condition det(H)>D^2; it is not implied by positivity alone.
+
+This script evaluates the exact moment formula on finite truncations, checks the
+Hankel reduction independently, and separately audits the curvature against a
+finite-difference Levi-Civita/Ricci computation.
+
+This is executable discovery evidence, not yet the countable differentiation
+proof.  The finite-truncation algebraic identities are exact.
 """
 
 from __future__ import annotations
 
-import math
 from dataclasses import dataclass
 
 import numpy as np
@@ -35,9 +62,12 @@ import numpy as np
 @dataclass(frozen=True)
 class CurvatureAudit:
     det_metric: float
+    hankel_det: float
     scalar_curvature: float
+    scalar_curvature_hankel: float
     scalar_curvature_fd: float
-    relative_error: float
+    hankel_relative_error: float
+    fd_relative_error: float
 
 
 def raw_moments(beta: float, eta: float, N: int = 200_000, max_degree: int = 6) -> np.ndarray:
@@ -50,6 +80,18 @@ def raw_moments(beta: float, eta: float, N: int = 200_000, max_degree: int = 6) 
     w = np.exp(exponent)
     Z = np.sum(w)
     return np.array([np.sum(w * L**k) / Z for k in range(max_degree + 1)])
+
+
+def central_moments_from_raw(m: np.ndarray, max_degree: int = 6) -> np.ndarray:
+    mu = m[1]
+    out = np.zeros(max_degree + 1)
+    out[0] = 1.0
+    for k in range(1, max_degree + 1):
+        out[k] = sum(
+            np.math.comb(k, j) * (-mu) ** (k - j) * m[j]
+            for j in range(k + 1)
+        )
+    return out
 
 
 def metric_from_raw(m: np.ndarray) -> np.ndarray:
@@ -71,7 +113,26 @@ def third_cumulant(m: np.ndarray, a: int, b: int, c: int) -> float:
     )
 
 
-def scalar_curvature_moment_formula(beta: float, eta: float, N: int = 200_000) -> tuple[float, float]:
+def hankel_curvature_reduction(m: np.ndarray) -> tuple[float, float, float]:
+    cm = central_moments_from_raw(m)
+    m2, m3, m4, m5, m6 = cm[2], cm[3], cm[4], cm[5], cm[6]
+    D = m2 * m4 - m3 * m3 - m2**3
+    H = np.array(
+        [
+            [1.0, 0.0, m2, m3],
+            [0.0, m2, m3, m4],
+            [m2, m3, m4, m5],
+            [m3, m4, m5, m6],
+        ]
+    )
+    detH = float(np.linalg.det(H))
+    if D <= 0.0:
+        raise AssertionError("centered Fisher determinant is not positive")
+    R = 0.5 * (1.0 - detH / (D * D))
+    return D, detH, R
+
+
+def scalar_curvature_moment_formula(beta: float, eta: float, N: int = 200_000) -> tuple[float, float, np.ndarray]:
     m = raw_moments(beta, eta, N=N)
     g = metric_from_raw(m)
     det_g = float(np.linalg.det(g))
@@ -93,7 +154,7 @@ def scalar_curvature_moment_formula(beta: float, eta: float, N: int = 200_000) -
     )
     det3 = float(np.linalg.det(curvature_matrix))
     R = -det3 / (2.0 * det_g * det_g)
-    return det_g, R
+    return det_g, R, m
 
 
 def metric(beta: float, eta: float, N: int) -> np.ndarray:
@@ -151,11 +212,16 @@ def scalar_curvature_finite_difference(beta: float, eta: float, N: int = 200_000
 
 
 def audit(beta: float, eta: float, N: int = 200_000) -> CurvatureAudit:
-    det_g, R = scalar_curvature_moment_formula(beta, eta, N=N)
+    det_g, R, m = scalar_curvature_moment_formula(beta, eta, N=N)
+    D, detH, R_hankel = hankel_curvature_reduction(m)
+    if abs(D - det_g) > 1.0e-9 * max(1.0, abs(D), abs(det_g)):
+        raise AssertionError("centered determinant does not match Fisher determinant")
     R_fd = scalar_curvature_finite_difference(beta, eta, N=N)
-    scale = max(1.0, abs(R), abs(R_fd))
-    rel = abs(R - R_fd) / scale
-    return CurvatureAudit(det_g, R, R_fd, rel)
+    scale_h = max(1.0, abs(R), abs(R_hankel))
+    scale_fd = max(1.0, abs(R), abs(R_fd))
+    herr = abs(R - R_hankel) / scale_h
+    ferr = abs(R - R_fd) / scale_fd
+    return CurvatureAudit(det_g, detH, R, R_hankel, R_fd, herr, ferr)
 
 
 def main() -> None:
@@ -164,11 +230,16 @@ def main() -> None:
         a = audit(beta, eta)
         print(
             f"beta={beta: .3f} eta={eta: .3f} detg={a.det_metric:.12g} "
-            f"R={a.scalar_curvature:.12g} R_fd={a.scalar_curvature_fd:.12g} "
-            f"err={a.relative_error:.3e}"
+            f"detH={a.hankel_det:.12g} R={a.scalar_curvature:.12g} "
+            f"R_h={a.scalar_curvature_hankel:.12g} R_fd={a.scalar_curvature_fd:.12g} "
+            f"herr={a.hankel_relative_error:.3e} ferr={a.fd_relative_error:.3e}"
         )
-        if a.relative_error > 2.0e-4:
+        if a.hankel_relative_error > 2.0e-10:
+            raise AssertionError("Hankel reduction disagrees with curvature determinant")
+        if a.fd_relative_error > 2.0e-4:
             raise AssertionError("moment curvature formula disagrees with independent Ricci audit")
+        if a.scalar_curvature > 0.5 + 1.0e-10:
+            raise AssertionError("moment-Gram upper bound R <= 1/2 violated")
 
 
 if __name__ == "__main__":
