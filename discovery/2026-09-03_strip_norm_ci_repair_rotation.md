@@ -8,15 +8,15 @@ Scope: Codex/GPT track only. No Claude research inspected.
 
 The previous norm-integral theorem head `26c7d61645749c8c801aac50af2bb77a7b71a7b0` produced a split certification result: full Build #1974 passed, while direct changed-Lean smoke #829 failed. The direct smoke result is authoritative for the touched module.
 
-The defect is proof-engineering rather than mathematics. In the on-strip branch of `strip_section_norm_integral_eq_intervalIntegral`, the proof attempted to close
+A first repair at `59e80343487018df9d085c81de345483f73c12de` normalized the real norm explicitly, but direct smoke #830 still failed. The full smoke log isolated the actual defect at line 109: after `stripIntegrand_section_eq_Icc_indicator`, the first `rw [Set.indicator_of_mem hx3]` rewrote both identical indicator occurrences in the equality, so the second requested identical rewrite had no target and failed. The mathematical goal at that point was already simply
 
-`‖integrand ...‖ = integrand ...`
+`‖integrand ...‖ = integrand ...`.
 
-using a transitivity term built from `Real.norm_eq_abs`; that expression is fragile under the pinned elaborator. The proof has been rewritten to normalize the real norm to absolute value and then use nonnegativity explicitly:
+The proof is now corrected by using the indicator rewrite only once, followed by the explicit nonnegativity normalization
 
 `simpa [Real.norm_eq_abs, abs_of_nonneg hnonneg]`.
 
-The repair is pushed to Verify2 as `59e80343487018df9d085c81de345483f73c12de`. Changed-Lean smoke #830 and full Build #1975 are running on that exact SHA. No certification is claimed until both are terminal green.
+The narrow repair is pushed to Verify2 as `f077562f8446740fb0d2eb11131a2f56ff82b0cb`. Changed-Lean smoke #831 has been triggered on that exact SHA. No certification is claimed until direct smoke and the corresponding full build are terminal green.
 
 If the norm-integral identity certifies, the remaining fixed-`x1` product-integrability target is exact: prove integrability in `x2` of
 
