@@ -1,4 +1,4 @@
-# Codex/GPT rotation: beta partition derivative and outer-DCT frontier
+# Codex/GPT rotation: partition derivatives and outer-DCT frontier
 
 Date: 2026-09-03
 
@@ -6,28 +6,32 @@ Scope: Codex/GPT workbench only. No Claude research inspected.
 
 ## Prime-gas thermodynamics
 
-The previous raw countable differentiation theorem is now certified on GPPVerify2 head `d0eb8f938ea51a80fa7730b82c28486bba6fdf27` (changed-Lean #857 and Build #2003 green):
+The raw countable beta-differentiation theorem is certified on GPPVerify2 head `d0eb8f938ea51a80fa7730b82c28486bba6fdf27` (changed-Lean #857 and Build #2003 green):
 
 \[
 \partial_\beta Z(\beta,\eta)
  = \sum_{n\ge 0} -L_n\,e^{-\beta L_n-\eta L_n^2},\qquad \eta>0.
 \]
 
-A normalization theorem has now been pushed on Verify2 as commit `e5e3c166b945ee84b91a920beb37f82d4097418c`, targeting the exact thermodynamic form
+Commit `e5e3c166b945ee84b91a920beb37f82d4097418c` normalized this to the exact thermodynamic identity
 
 \[
 \partial_\beta Z(\beta,\eta)=-M_1(\beta,\eta).
 \]
 
-Certification of that normalization is pending changed-Lean #858 / Build #2004.
+Changed-Lean #858 passed that exact module. Full Build #2004 is still running on that exact head.
 
-Once the eta analogue is certified,
+A second Verify2 commit, `df3a2a368f04ee91b116fedc3380633f495a0183`, now adds the eta-direction countable-interchange theorem. The neighborhood `eta/2 < e < 3 eta/2` keeps quadratic confinement uniformly positive and supplies the exponent-2 second-moment majorant. The candidate exact identities are
 
 \[
-\partial_\eta Z=-M_2,
+\partial_\eta Z(\beta,\eta)
+ = \sum_{n\ge0} -L_n^2 e^{-\beta L_n-\eta L_n^2}
+ = -M_2(\beta,\eta).
 \]
 
-strict positivity of `Z` gives the Massieu gradient
+Changed-Lean #859 is pending on this candidate.
+
+After eta certification, strict positivity of `Z` gives the Massieu gradient
 
 \[
 \partial_\beta \log Z=-\langle L\rangle,
@@ -39,18 +43,13 @@ Together with the already formalized second summand derivatives, the target Hess
 
 ## Raised scalar box
 
-The certified stack now contains:
+The certified stack now contains full fixed-`x1` two-dimensional integrability, Fubini and the physical nested-coordinate bridge, inner and middle dominated convergence, a.e. measurability of the nested inner fiber on `0 < x1 < 1`, the explicit outer norm bound
 
-- full fixed-`x1` two-dimensional integrability;
-- Fubini and the physical nested-coordinate bridge;
-- inner and middle dominated convergence;
-- a.e. measurability of the nested inner fiber on `0 < x1 < 1`;
-- the explicit outer norm bound
-  \[
-  \|F_\varepsilon(x_1)\|\le 1+\frac{(Sx_1)^{-\delta}}{1-\delta};
-  \]
-- interval integrability of that outer majorant for `0<delta<1`;
-- exact zero-regulator normalization `J_0=1/6`.
+\[
+\|F_\varepsilon(x_1)\|\le 1+\frac{(Sx_1)^{-\delta}}{1-\delta},
+\]
+
+interval integrability of that outer majorant for `0<delta<1`, and exact zero-regulator normalization `J_0=1/6`.
 
 Thus the remaining analytic theorem is the outer `x1` dominated-convergence assembly. The endpoint `x1=1` is degenerate and null; no new singular estimate is required.
 
