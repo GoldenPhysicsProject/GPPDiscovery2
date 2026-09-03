@@ -2,16 +2,17 @@
 
 ## Scalar raised box
 
-The previously added outer-measurability module is mathematically aimed at the correct final DCT interface, but direct compilation exposed two successive Lean inference defects that the aggregate build masked.
+The previously added outer-measurability module is mathematically aimed at the correct final DCT interface, but direct compilation exposed three successive Lean source-shape defects that the aggregate build masked.
 
 1. Build #1960 passed on `e50ada72a94c89b7064c71b1403f8843c061e5db`, while changed-Lean smoke #815 failed in `measurableSet_fullSimplexSet`. The nested `measurable_fst`/`measurable_snd` projection chain left a product type metavariable and hence an unresolved `SecondCountableTopology` instance. This was repaired by explicitly typing the coordinate maps on `ℝ × (ℝ × ℝ)`.
 2. Smoke #816 advanced beyond that point and exposed a narrower issue: `0` and `1` in the `measurableSet_le` calls were still polymorphic. Constant measurable functions were therefore pinned explicitly to `ℝ`.
+3. Smoke #817 advanced beyond the type inference issues and showed the remaining mismatch was purely set syntax: `MeasurableSet.inter` produced a nested intersection of four half-spaces, while `fullSimplexSet` had been defined with a conjunction predicate. Lean did not identify the differently associated set expressions definitionally. The simplex is now defined directly as the corresponding nested intersection, so the measurable-set proof and definition have exactly the same expression.
 
 Current Verify2 head is
 
-`d66efec17c48b0c7a6845c915e37349c560d1729`.
+`27dadb04846fbce1016cb3a54dd7d811c390b27c`.
 
-Build #1962 and changed-Lean smoke #817 are running on that exact SHA at the time of this record. Do not certify the outer-measurability theorem until both are terminal green. The middle DCT stack remains certified from Build #1959 / smoke #814.
+Changed-Lean smoke #818 is running on that exact SHA at the time of this record; full certification is still pending. Do not certify the outer-measurability theorem until the direct smoke and full build are terminal green. The middle DCT stack remains certified from Build #1959 / smoke #814.
 
 Once outer measurability certifies, the exact scalar frontier is no longer domination. It is the identity between the measurable full-simplex fiber representation and the original nested interval object
 
