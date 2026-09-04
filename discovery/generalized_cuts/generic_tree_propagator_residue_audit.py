@@ -52,10 +52,12 @@ def main() -> None:
 
     # Physical real slice: for real nonzero r,t, the rational x is positive, hence the
     # p12 pole is reached only after analytic continuation / boundary degeneration.
+    # Use algebraic zero tests rather than SymPy expression-tree equality: equivalent
+    # factorizations can print identically while having different internal trees.
     numerator = sp.factor(sp.together(expected).as_numer_denom()[0])
     denominator = sp.factor(sp.together(expected).as_numer_denom()[1])
-    assert numerator == 2 * (r**2 + t**2)
-    assert denominator == (r**2 + 1) * (t**2 + 1)
+    assert sp.simplify(numerator - 2 * (r**2 + t**2)) == 0
+    assert sp.simplify(denominator - (r**2 + 1) * (t**2 + 1)) == 0
 
     print("p12^2 =", p12_sq)
     print("p23^2 =", p23_sq)
