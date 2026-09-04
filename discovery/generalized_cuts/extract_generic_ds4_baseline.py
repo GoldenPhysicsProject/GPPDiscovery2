@@ -1,10 +1,14 @@
 #!/usr/bin/env python3
 """Extract exact generic nonzero-mu Ds=4 Yang-Mills sewing baselines.
 
-Uses the convention-locked generic massive-vector tree engine.  The reconstruction
-identity is C^(4)=C^(V_m)-C^(S), with vector and scalar sewings evaluated at the
-same generic rational kinematics.  This script prints exact factorizations and
-checks the threshold r=1 regression without making any box-only claim.
+Uses the generic stripped massive-vector tree engine. The reconstruction identity
+is C^(4)=C^(V_m)-C^(S), with vector and scalar sewings evaluated at the same
+generic rational kinematics. This locks the algebraic Ds=4 reconstruction only:
+overall coupling/color normalization, cut orientation, loop-measure normalization,
+and higher-topology subtraction remain external physical inputs to be fixed before
+identifying these stripped expressions with a complete unitarity cut. The script
+prints exact factorizations and checks the threshold r=1 regression without making
+any box-only claim.
 
 In physical variables beta=|p|/E, rho=mu/E and c=cos(theta), the same-helicity
 channel collapses to
