@@ -63,7 +63,7 @@ def direct_simple(expr, root):
     return sp.factor(sp.residue(expr, t, root))
 
 
-def audit_channel(h2: int, h3: int, root):
+def audit_channel(h2: int, h3: int, root, prop_res):
     # The opposite sewn factor uses the opposite external helicities, matching the
     # state-sum convention in massive_vector_generic_state_sum_symbolic.py.
     k2, k3 = -h2, -h3
@@ -73,10 +73,10 @@ def audit_channel(h2: int, h3: int, root):
     SL = gen.scalar_tree(h2, h3)
     SR = gen.scalar_tree(k2, k3)
 
-    RML = vra.vector_residue_matrix(h2, h3, root)
-    RMR = vra.vector_residue_matrix(k2, k3, root)
-    RSL = vra.scalar_residue(h2, h3, root)
-    RSR = vra.scalar_residue(k2, k3, root)
+    RML = vra.residue_matrix(h2, h3, root, prop_res)
+    RMR = vra.residue_matrix(k2, k3, root, prop_res)
+    RSL = vra.scalar_residue(h2, h3, root, prop_res)
+    RSR = vra.scalar_residue(k2, k3, root, prop_res)
 
     FML = matrix_finite_part(ML, RML, root)
     FMR = matrix_finite_part(MR, RMR, root)
@@ -115,7 +115,10 @@ def audit_channel(h2: int, h3: int, root):
 
 
 def main() -> None:
-    roots = [("+", I * r), ("-", -I * r)]
+    roots = [
+        ("+", I * r, vra.prop_res_plus),
+        ("-", -I * r, vra.prop_res_minus),
+    ]
     channels = [
         ("same--", -1, -1),
         ("mixed+-", +1, -1),
@@ -123,9 +126,9 @@ def main() -> None:
 
     results = {}
     for cname, h2, h3 in channels:
-        for sname, root in roots:
+        for sname, root, prop_res in roots:
             key = (cname, sname)
-            results[key] = audit_channel(h2, h3, root)
+            results[key] = audit_channel(h2, h3, root, prop_res)
             print(cname, "root", sname + "ir")
             for label, value in results[key].items():
                 print(" ", label, "=", value)
