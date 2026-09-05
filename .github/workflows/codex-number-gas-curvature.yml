@@ -1,0 +1,25 @@
+name: Codex number-gas curvature exact audit
+on:
+  push:
+    branches: ['codex/discovery-workbench']
+    paths:
+      - 'discovery/number_thermodynamics/quadratic_confinement_curvature_symbolic_identity.py'
+      - 'discovery/number_thermodynamics/quadratic_confinement_curvature_sign_scan.py'
+      - 'prime_gas/quadratic_confinement_scalar_curvature.py'
+      - '.github/workflows/codex-number-gas-curvature.yml'
+  workflow_dispatch:
+
+jobs:
+  curvature-audit:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - run: pip install sympy mpmath
+      - name: Exact symbolic curvature reduction
+        run: python discovery/number_thermodynamics/quadratic_confinement_curvature_symbolic_identity.py
+      - name: High-precision curvature sign audit
+        run: python discovery/number_thermodynamics/quadratic_confinement_curvature_sign_scan.py
