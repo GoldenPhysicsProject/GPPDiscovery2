@@ -11,6 +11,12 @@ propagator on the generic nonzero-mu cut.  The triple-cut constraint is then a
 one-complex-parameter conic, with a rational parametrization.  This is the correct
 kinematic precursor to a Badger-style root/moment projection; no master coefficient
 is claimed here.
+
+IMPORTANT: the Minkowski convention here is (+,-,-,-,-), exactly matching
+``massive_vector_mhv_state_sum_symbolic.metric`` and the tree-amplitude engine.  An
+earlier version accidentally used the opposite signature; that left the zero locus
+unchanged but flipped propagator and polarization norms and therefore could not be
+fed consistently into the amplitude code.
 """
 
 from __future__ import annotations
@@ -31,13 +37,14 @@ n = sp.Matrix([
 ])
 
 # Stereographic coordinates are conformal.  Multiplying the coordinate tangent
-# vectors by (1+s)/2 gives an exact orthonormal tangent frame on the sphere.
+# vectors by (1+s)/2 gives an exact Euclidean-orthonormal tangent frame on S^2.
 eu = sp.simplify((1 + s) * n.diff(u) / 2)
 ev = sp.simplify((1 + s) * n.diff(v) / 2)
 
 
 def mdot5(a: sp.Matrix, b: sp.Matrix):
-    return sp.expand(-a[0] * b[0] + sum(a[j] * b[j] for j in range(1, 5)))
+    """Mostly-minus 5D Minkowski product, matching the amplitude engine."""
+    return sp.expand(a[0] * b[0] - sum(a[j] * b[j] for j in range(1, 5)))
 
 
 def main() -> None:
@@ -60,17 +67,18 @@ def main() -> None:
         assert sp.simplify(mdot5(k, k)) == 0
     assert sp.simplify(q1 + q4 + g2 + g3) == sp.zeros(5, 1)
 
-    # Full-sphere helicity frame for g2.  With the mostly-plus Minkowski convention
-    # used by mdot5, physical spacelike polarizations have norm +1.
+    # Full-sphere helicity frame for g2.  With the mostly-minus convention used by
+    # the amplitude engine, physical spacelike polarizations have norm -1.
     eps_plus = sp.Matrix([0, *(list((eu + I * ev) / sp.sqrt(2))), 0])
     eps_minus = sp.Matrix([0, *(list((eu - I * ev) / sp.sqrt(2))), 0])
     assert sp.simplify(mdot5(g2, eps_plus)) == 0
     assert sp.simplify(mdot5(g2, eps_minus)) == 0
-    assert sp.simplify(mdot5(eps_plus, eps_minus) - 1) == 0
+    assert sp.simplify(mdot5(eps_plus, eps_minus) + 1) == 0
 
-    # The extra adjacent tree propagator is exact on the full chart.
+    # The extra adjacent tree propagator is exact on the full chart.  The sign is
+    # fixed by the same mostly-minus metric used in the actual tree amplitude.
     D12 = sp.factor(mdot5(q1 + g2, q1 + g2))
-    target = sp.factor(4 * E**2 * (r**2 + u**2 + v**2) /
+    target = sp.factor(-4 * E**2 * (r**2 + u**2 + v**2) /
                        ((1 + r**2) * (1 + u**2 + v**2)))
     assert sp.simplify(D12 - target) == 0
 
@@ -84,17 +92,29 @@ def main() -> None:
 
     # The old meridian is recovered by v=0; then the conic collapses to u=± i r.
     meridian = sp.factor(D12.subs(v, 0))
-    meridian_target = sp.factor(4 * E**2 * (r**2 + u**2) /
+    meridian_target = sp.factor(-4 * E**2 * (r**2 + u**2) /
                                 ((1 + r**2) * (1 + u**2)))
     assert sp.simplify(meridian - meridian_target) == 0
     assert sp.simplify(meridian.subs(u, I * r)) == 0
     assert sp.simplify(meridian.subs(u, -I * r)) == 0
 
+    # The conic parameter compactifies the two meridian roots as z=0 and z=infinity.
+    # This is the correct relation between the earlier slice residues and a later
+    # large-z Badger-style analysis.
+    assert sp.simplify(uz.subs(z, 0) - I * r) == 0
+    assert sp.simplify(vz.subs(z, 0)) == 0
+    w = sp.symbols("w", nonzero=True)
+    u_at_inf = sp.simplify(uz.subs(z, 1 / w))
+    v_at_inf = sp.simplify(vz.subs(z, 1 / w))
+    assert sp.simplify(sp.limit(u_at_inf, w, 0) + I * r) == 0
+    assert sp.simplify(sp.limit(v_at_inf, w, 0)) == 0
+
     print("D12(u,v) =", D12)
     print("triple-cut conic: u^2 + v^2 + r^2 = 0")
     print("rational family: u(z)=", uz)
     print("                 v(z)=", vz)
-    print("PASS: full two-coordinate cut chart and one-parameter triple-cut family are exact")
+    print("z=0 -> (+ir,0), z=infinity -> (-ir,0)")
+    print("PASS: full chart uses the amplitude-engine signature and exact triple-cut family")
 
 
 if __name__ == "__main__":
