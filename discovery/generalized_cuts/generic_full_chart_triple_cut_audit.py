@@ -90,6 +90,17 @@ def main() -> None:
     assert sp.factor(uz**2 + vz**2 + r**2) == 0
     assert sp.simplify(D12.subs({u: uz, v: vz})) == 0
 
+    # Normal propagator residue with q := r^2+u^2+v^2.  Restricting q/D12 to the
+    # conic gives a chart-independent transverse coefficient.  This must reproduce
+    # the old one-dimensional meridian Jacobians if the full-chart convention is
+    # consistent with the pre-sewing residue audit.
+    q = r**2 + u**2 + v**2
+    transverse_residue = sp.factor(-(1 - r**4) / (4 * E**2))
+    q_over_D_on_conic = sp.factor(
+        -(1 + r**2) * (1 - r**2) / (4 * E**2)
+    )
+    assert sp.simplify(q_over_D_on_conic - transverse_residue) == 0
+
     # The old meridian is recovered by v=0; then the conic collapses to u=± i r.
     meridian = sp.factor(D12.subs(v, 0))
     meridian_target = sp.factor(-4 * E**2 * (r**2 + u**2) /
@@ -97,6 +108,22 @@ def main() -> None:
     assert sp.simplify(meridian - meridian_target) == 0
     assert sp.simplify(meridian.subs(u, I * r)) == 0
     assert sp.simplify(meridian.subs(u, -I * r)) == 0
+
+    # Coordinate residues follow from q=(u-ir)(u+ir) on the meridian.  They agree
+    # exactly with generic_presewing_triple_cut_locus_audit.py.
+    meridian_res_plus = sp.simplify(transverse_residue / (2 * I * r))
+    meridian_res_minus = sp.simplify(transverse_residue / (-2 * I * r))
+    expected_plus = I * (1 - r**4) / (8 * r * E**2)
+    expected_minus = -expected_plus
+    assert sp.simplify(meridian_res_plus - expected_plus) == 0
+    assert sp.simplify(meridian_res_minus - expected_minus) == 0
+
+    # Independently recover those coordinate residues from the derivative of the
+    # actual rational propagator, guarding against a hidden Jacobian/sign error.
+    direct_plus = sp.simplify(1 / sp.diff(meridian, u).subs(u, I * r))
+    direct_minus = sp.simplify(1 / sp.diff(meridian, u).subs(u, -I * r))
+    assert sp.simplify(direct_plus - expected_plus) == 0
+    assert sp.simplify(direct_minus - expected_minus) == 0
 
     # The conic parameter compactifies the two meridian roots as z=0 and z=infinity.
     # This is the correct relation between the earlier slice residues and a later
@@ -111,10 +138,12 @@ def main() -> None:
 
     print("D12(u,v) =", D12)
     print("triple-cut conic: u^2 + v^2 + r^2 = 0")
+    print("transverse q-residue =", transverse_residue)
+    print("meridian residues =", meridian_res_plus, meridian_res_minus)
     print("rational family: u(z)=", uz)
     print("                 v(z)=", vz)
     print("z=0 -> (+ir,0), z=infinity -> (-ir,0)")
-    print("PASS: full chart uses the amplitude-engine signature and exact triple-cut family")
+    print("PASS: full chart, transverse residue, and meridian Jacobians are convention-consistent")
 
 
 if __name__ == "__main__":
