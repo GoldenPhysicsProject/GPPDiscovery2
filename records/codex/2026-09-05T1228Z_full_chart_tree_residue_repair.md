@@ -29,7 +29,7 @@ Repaired at `87a860a9464c8e445557f95ddb446705bc0cf36c`: first form the transvers
 
 because on the meridian `q=(t-ir)(t+ir)`.
 
-Generic Ds=4 CI #24 is running on this repaired head at record time. Earlier topology, propagator ancestry, noninjectivity, meridian residue, Laurent-factorization, chart-dimension, and full two-coordinate triple-cut geometry layers remain independently green; no master coefficient is claimed yet.
+Generic Ds=4 CI #24 PASSED on this repaired head, including the new full-chart vector/scalar tree-residue lift and the existing external Ward audit. Earlier topology, propagator ancestry, noninjectivity, meridian residue, Laurent-factorization, chart-dimension, and full two-coordinate triple-cut geometry layers remain green; no master coefficient is claimed yet.
 
 ## Scalar box / principal series / spectral chamber boundaries
 
@@ -39,7 +39,6 @@ Generic Ds=4 CI #24 is running on this repaired head at record time. Earlier top
 
 ## Next executable frontier
 
-1. Terminal CI #24 and repair immediately if needed.
-2. Once residue-level full-chart lift is green, compute the full vector-minus-extra-scalar transverse residue/state sum as an exact rational function of the surviving conic parameter `z`, then extract the legitimate large-`z` data for the Badger projector.
-3. In Verify2, prove the `tsum` centered-moment expansion identifying the countable residual-square expectation with `residualSqMoment`; this should close `R <= 1/2` for the actual quadratic Gibbs model.
-4. Spectral formalization remains logistic measure transport/Fourier uniqueness; RH remains at the global completed Weil-positivity boundary.
+1. Compute the full vector-minus-extra-scalar transverse residue/state sum as an exact rational function of the surviving conic parameter `z`, then extract the legitimate large-`z` data for the Badger projector.
+2. In Verify2, prove the `tsum` centered-moment expansion identifying the countable residual-square expectation with `residualSqMoment`; this should close `R <= 1/2` for the actual quadratic Gibbs model.
+3. Spectral formalization remains logistic measure transport/Fourier uniqueness; RH remains at the global completed Weil-positivity boundary.
