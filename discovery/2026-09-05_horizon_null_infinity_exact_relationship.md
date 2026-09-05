@@ -124,6 +124,17 @@ This is also conceptually expected: an event horizon is teleological/global, whi
 
 If the horizon has a twistor characterization in this construction, it must emerge only after imposing the Lorentzian real structure, global extension, and causal definition.  Determining the preimage/real-locus characterization of `r=2M` inside the completed twistor correspondence is a separate open problem.
 
+### Split-signature exclusion
+
+The same paper states explicitly that the resulting Schwarzschild metric can be given Euclidean or Lorentzian reality conditions, but that **split (ultrahyperbolic) signature is not allowed by their construction**: it would require one of the three spatial Kerr-Schild coordinates to be purely imaginary.
+
+This matters for the GPP programme because split `(2,2)` is our working real slice.  Therefore the 2026 Schwarzschild construction is an external nonlinear consistency check after a change of reality conditions; it cannot be imported as the missing split-signature Fourier/Penrose theorem.
+
+This also cleanly separates two statements:
+
+1. the complex/local holomorphic mechanism can generate a non-self-dual metric conformal to Schwarzschild;
+2. the GPP split-signature representation theorem must be established independently before Lorentzian descent.
+
 ## 7. Consequence for the GPP quotient idea
 
 The horizon does **not** currently provide evidence that two twistor chiral lifts literally meet at a local holomorphic fixed locus.
