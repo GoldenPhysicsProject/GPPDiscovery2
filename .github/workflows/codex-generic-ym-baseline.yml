@@ -14,6 +14,7 @@ on:
       - 'discovery/generalized_cuts/generic_full_chart_triple_cut_audit.py'
       - 'discovery/generalized_cuts/generic_full_chart_vector_scalar_tree_audit.py'
       - 'discovery/generalized_cuts/generic_full_chart_helicity_phase_audit.py'
+      - 'discovery/generalized_cuts/generic_full_chart_vector_covariance_audit.py'
       - 'discovery/generalized_cuts/massive_vector_generic_state_sum_symbolic.py'
       - 'discovery/generalized_cuts/massive_vector_mhv_state_sum_symbolic.py'
       - 'discovery/generalized_cuts/massive_vector_generic_ward_audit.py'
@@ -63,6 +64,9 @@ jobs:
       - name: Audit full triple-cut helicity phase covariance
         working-directory: discovery/generalized_cuts
         run: python generic_full_chart_helicity_phase_audit.py
+      - name: Audit full triple-cut vector residue covariance
+        working-directory: discovery/generalized_cuts
+        run: python generic_full_chart_vector_covariance_audit.py
       - name: Audit generic external Ward identities
         working-directory: discovery/generalized_cuts
         run: python massive_vector_generic_ward_audit.py
