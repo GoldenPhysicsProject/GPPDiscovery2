@@ -10,6 +10,7 @@ on:
       - 'discovery/generalized_cuts/generic_presewing_triple_cut_locus_audit.py'
       - 'discovery/generalized_cuts/generic_presewing_vector_scalar_residue_audit.py'
       - 'discovery/generalized_cuts/generic_presewing_laurent_factorization_audit.py'
+      - 'discovery/generalized_cuts/generic_badger_chart_dimension_audit.py'
       - 'discovery/generalized_cuts/massive_vector_generic_state_sum_symbolic.py'
       - 'discovery/generalized_cuts/massive_vector_mhv_state_sum_symbolic.py'
       - 'discovery/generalized_cuts/massive_vector_generic_ward_audit.py'
@@ -47,6 +48,9 @@ jobs:
       - name: Audit pre-sewing Laurent factorization
         working-directory: discovery/generalized_cuts
         run: python generic_presewing_laurent_factorization_audit.py
+      - name: Audit generic-to-Badger chart dimension
+        working-directory: discovery/generalized_cuts
+        run: python generic_badger_chart_dimension_audit.py
       - name: Audit generic external Ward identities
         working-directory: discovery/generalized_cuts
         run: python massive_vector_generic_ward_audit.py
