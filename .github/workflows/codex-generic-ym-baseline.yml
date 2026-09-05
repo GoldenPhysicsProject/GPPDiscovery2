@@ -6,6 +6,7 @@ on:
       - 'discovery/generalized_cuts/extract_generic_ds4_baseline.py'
       - 'discovery/generalized_cuts/generic_ds4_topology_projection_audit.py'
       - 'discovery/generalized_cuts/generic_tree_propagator_residue_audit.py'
+      - 'discovery/generalized_cuts/presewing_residue_noninjectivity_audit.py'
       - 'discovery/generalized_cuts/massive_vector_generic_state_sum_symbolic.py'
       - 'discovery/generalized_cuts/massive_vector_mhv_state_sum_symbolic.py'
       - 'discovery/generalized_cuts/massive_vector_generic_ward_audit.py'
@@ -31,6 +32,9 @@ jobs:
       - name: Audit propagator pole ancestry
         working-directory: discovery/generalized_cuts
         run: python generic_tree_propagator_residue_audit.py
+      - name: Audit pre-sewing residue non-injectivity
+        working-directory: discovery/generalized_cuts
+        run: python presewing_residue_noninjectivity_audit.py
       - name: Audit generic external Ward identities
         working-directory: discovery/generalized_cuts
         run: python massive_vector_generic_ward_audit.py
