@@ -9,6 +9,7 @@ on:
       - 'discovery/generalized_cuts/presewing_residue_noninjectivity_audit.py'
       - 'discovery/generalized_cuts/generic_presewing_triple_cut_locus_audit.py'
       - 'discovery/generalized_cuts/generic_presewing_vector_scalar_residue_audit.py'
+      - 'discovery/generalized_cuts/generic_presewing_laurent_factorization_audit.py'
       - 'discovery/generalized_cuts/massive_vector_generic_state_sum_symbolic.py'
       - 'discovery/generalized_cuts/massive_vector_mhv_state_sum_symbolic.py'
       - 'discovery/generalized_cuts/massive_vector_generic_ward_audit.py'
@@ -43,6 +44,9 @@ jobs:
       - name: Audit generic vector-scalar triple-cut residues
         working-directory: discovery/generalized_cuts
         run: python generic_presewing_vector_scalar_residue_audit.py
+      - name: Audit pre-sewing Laurent factorization
+        working-directory: discovery/generalized_cuts
+        run: python generic_presewing_laurent_factorization_audit.py
       - name: Audit generic external Ward identities
         working-directory: discovery/generalized_cuts
         run: python massive_vector_generic_ward_audit.py
