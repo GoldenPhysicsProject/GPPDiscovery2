@@ -3,13 +3,13 @@
 
 The existing generic state-sum engine uses the v=0 stereographic meridian.  This audit
 constructs the full stereographic chart and helicity frame in the *same* mostly-minus
-metric convention, then proves exact restriction back to the existing engine.  It also
-restricts the full tree data to the genuine triple-cut conic
+metric convention, proves exact restriction back to the existing engine, and then
+restricts the *residue-level* tree data to the genuine triple-cut conic
 
-    u^2 + v^2 = -r^2
+    u^2 + v^2 = -r^2.
 
-through its rational z-parameterization.  This is the executable bridge needed before
-performing a genuine large-z Badger projection; no master coefficient is claimed here.
+The raw tree has the expected third-propagator pole there, so the correct object is
+q A with q := r^2+u^2+v^2, followed by q=0.  No master coefficient is claimed here.
 """
 from __future__ import annotations
 
@@ -49,8 +49,7 @@ def full_kinematics(d: int = 5):
 
 
 def full_gluon_pol(leg: int, h: int, d: int = 5):
-    # This orientation is fixed by exact reduction to the existing v=0 engine:
-    # leg 2 uses +eu, leg 3 uses -eu, while ev is shared.
+    # Orientation fixed by exact reduction to the existing v=0 engine.
     if leg == 2:
         spatial = eu + I * h * ev
     elif leg == 3:
@@ -121,26 +120,28 @@ def main() -> None:
     uz = I * r * (1 - z**2) / (1 + z**2)
     vz = 2 * I * r * z / (1 + z**2)
     conic_sub = {u: uz, v: vz}
+    q = r**2 + u**2 + v**2
     assert sp.factor(uz**2 + vz**2 + r**2) == 0
 
-    # Tree-level objects are now explicitly defined on the full chart.  Evaluate the
-    # extra-scalar mixed-helicity tree on the conic: this is the cheapest nontrivial
-    # full-tree check and ensures the amplitude engine, not just kinematics, survives
-    # the lift.  The expression is kept exact and rational in (r,z).
+    # The raw tree diverges on q=0.  Extract its transverse residue first.
     S_pm = scalar_tree(+1, -1)
-    S_pm_z = sp.factor(sp.cancel(S_pm.subs(conic_sub)))
-    assert z not in sp.denom(S_pm_z).free_symbols or sp.denom(S_pm_z) != 0
+    transverse_scalar = sp.factor(sp.cancel(q * S_pm))
+    Sres_z = sp.factor(sp.cancel(transverse_scalar.subs(conic_sub)))
+    assert not Sres_z.has(sp.zoo, sp.nan, sp.oo, -sp.oo)
 
-    # At z=0 the full conic lands on the old +ir meridian root.  The full scalar tree
-    # therefore must reproduce the previously certified meridian tree value there.
-    full_at_zero = sp.simplify(S_pm_z.subs(z, 0))
-    old_at_plus = sp.simplify(mer.scalar_tree(+1, -1).subs(t, I * r))
-    assert sp.simplify(full_at_zero - old_at_plus) == 0
+    # z=0 is (u,v)=(ir,0).  On the meridian q=(t-ir)(t+ir), hence
+    # [q A]_{q=0,z=0} = 2 i r Res_{t=ir} A.  This checks the full residue against
+    # the already-certified one-coordinate engine without evaluating the raw pole.
+    old_tree = mer.scalar_tree(+1, -1)
+    old_res_plus = sp.factor(sp.limit((t - I * r) * old_tree, t, I * r))
+    full_at_zero = sp.factor(sp.simplify(Sres_z.subs(z, 0)))
+    assert sp.simplify(full_at_zero - 2 * I * r * old_res_plus) == 0
 
-    print("full mixed-helicity scalar tree on triple-cut conic =", S_pm_z)
-    print("z=0 scalar-tree value =", full_at_zero)
-    print("PASS: full stereographic tree engine exactly extends the certified meridian engine")
-    print("NEXT: evaluate the full vector-minus-scalar state sum as a rational function of z and extract its large-z polynomial part")
+    print("full mixed-helicity scalar transverse residue on triple-cut conic =", Sres_z)
+    print("z=0 transverse residue =", full_at_zero)
+    print("meridian coordinate residue at t=ir =", old_res_plus)
+    print("PASS: full stereographic residue-level tree engine exactly extends the certified meridian engine")
+    print("NEXT: evaluate the full vector-minus-scalar transverse residue/state sum as a rational function of z and extract its large-z polynomial part")
 
 
 if __name__ == "__main__":
