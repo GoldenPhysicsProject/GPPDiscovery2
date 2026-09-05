@@ -60,13 +60,13 @@ def main() -> None:
         assert sp.simplify(mdot5(k, k)) == 0
     assert sp.simplify(q1 + q4 + g2 + g3) == sp.zeros(5, 1)
 
-    # Full-sphere helicity frame for g2.  The corresponding spatial vectors are
-    # rational in u,v and remain orthonormal/transverse on every finite chart point.
+    # Full-sphere helicity frame for g2.  With the mostly-plus Minkowski convention
+    # used by mdot5, physical spacelike polarizations have norm +1.
     eps_plus = sp.Matrix([0, *(list((eu + I * ev) / sp.sqrt(2))), 0])
     eps_minus = sp.Matrix([0, *(list((eu - I * ev) / sp.sqrt(2))), 0])
     assert sp.simplify(mdot5(g2, eps_plus)) == 0
     assert sp.simplify(mdot5(g2, eps_minus)) == 0
-    assert sp.simplify(mdot5(eps_plus, eps_minus) + 1) == 0
+    assert sp.simplify(mdot5(eps_plus, eps_minus) - 1) == 0
 
     # The extra adjacent tree propagator is exact on the full chart.
     D12 = sp.factor(mdot5(q1 + g2, q1 + g2))
