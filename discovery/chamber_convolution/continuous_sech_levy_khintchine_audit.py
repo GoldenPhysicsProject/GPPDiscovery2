@@ -60,7 +60,8 @@ def main():
         (mp.mpf("2.35"), mp.mpf("8.5")),
     ]
 
-    tol = mp.mpf("1e-55")
+    # mp.quad on the removable singularity is stable here to roughly 30 digits.
+    tol = mp.mpf("1e-30")
     print("continuous sech Levy-Khintchine audit")
     print("mp.dps =", mp.mp.dps)
 
