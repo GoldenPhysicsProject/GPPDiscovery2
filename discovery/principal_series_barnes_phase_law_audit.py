@@ -100,7 +100,7 @@ def main() -> None:
     m6 = q_even_moment_exact(3)
     assert m2 == 1
     assert sp.simplify(m4 - sp.pi**2 / 6) == 0
-    assert sp.simplify(m6 - 23 * sp.pi**4 / 540) == 0
+    assert sp.simplify(m6 - 23 * sp.pi**4 / 720) == 0
 
     r, h = sp.symbols("r h", positive=True, real=True)
     Krh = (r**2 - h**2) / (2 * r * (2 * r + 1))
