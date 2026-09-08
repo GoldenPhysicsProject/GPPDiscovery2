@@ -78,6 +78,8 @@ R(\beta,\eta)<\frac12,\qquad \eta>0.
 
 ## Completed-zeta / Weil boundary
 
-No arithmetic promotion occurred.  The positive-real half-density, `Delta=2s`, critical-line unitarity, Gamma/Mehler–Fock, Wiener–Hopf, and continuous chamber identities remain local/Archimedean structure.  The missing global theorem is still positivity/factorization of the completed prime-plus-Archimedean Weil quadratic form (equivalently the unresolved full arithmetic coupling), so no RH claim is promoted.
+No RH promotion occurred.  The focused arithmetic program sharpens the previous generic statement of the blocker.  The positive-real half-density, `Delta=2s`, boundary unitarity, Gamma/Mehler–Fock, Wiener–Hopf, and continuous chamber identities remain exact local/Archimedean structure.  In the newer prime decomposition, all repetition sectors `m>=3` are already inside a positive Hilbert/Fredholm object and each finite prime shadow factor is already a unitary colligation.  The unresolved prime divergence has repetition rank two: the primitive (`m=1`) and double-prime (`m=2`) boundary channels.
+
+The live global target is therefore the exact Archimedean Schur gluing of those two channels, equivalently the `J`-positivity / odd-relative-log-scale contraction statement in the two-copy BPY realization.  This is the sharper form of the missing completed prime--Archimedean positivity/factorization theorem.  Until that contraction/Gram factorization is proved, no RH claim is promoted.
 
 No Claude-owned branch, note, file, or record was inspected.
