@@ -2,7 +2,7 @@
 """Finite-product route to the odd-lattice/tanh partial fraction.
 
 Codex/GPT discovery artifact. This deliberately separates the algebraic finite-product
-identity from the analytic limit/derivative interchange still required in Lean.
+identity from the analytic convergence theorem still required in Lean.
 
 Let
 
@@ -32,8 +32,16 @@ Hence the odd-product ratio tends pointwise to
     [sinh(pi*x)/(pi*x)] / [sinh(pi*x/2)/(pi*x/2)]
       = cosh(pi*x/2).
 
-If one additionally justifies passage of the logarithmic derivative through this
-limit away from x=0, its derivative is
+The remaining analytic passage can be made compact-uniform rather than by assuming
+that derivatives commute with a pointwise product limit. On |x| <= T,
+
+    |2x/((2k+1)^2+x^2)| <= 2T/(2k+1)^2,
+
+and the odd-square majorant is summable. Thus the derivative partial sums converge
+uniformly on every compact interval by the Weierstrass M-test. Combining that with
+the certified pointwise limit (and equality at x=0) gives the standard theorem for
+limits of differentiable functions with uniformly convergent derivatives. Therefore
+the limiting logarithmic derivative is
 
     pi*coth(pi*x) - (pi/2)*coth(pi*x/2)
       = (pi/2)*tanh(pi*x/2).
@@ -43,7 +51,7 @@ After x=t/pi this is precisely
     2t sum_{k>=0} 1/(((2k+1)pi)^2+t^2) = (1/2)tanh(t/2).
 
 The script checks every finite identity symbolically, the hyperbolic limiting algebra,
-and the quantitative convergence of the finite log derivatives.
+and the quantitative compact-uniform convergence of the finite log derivatives.
 """
 
 from __future__ import annotations
@@ -106,6 +114,13 @@ def odd_log_derivative_closed(x: mp.mpf) -> mp.mpf:
     return (mp.pi / 2) * mp.tanh(mp.pi * x / 2)
 
 
+def compact_uniform_derivative_tail_bound(T: mp.mpf, n: int) -> mp.mpf:
+    """Uniform bound on |x| <= T for the omitted derivative series."""
+    return 2 * T * (
+        1 / mp.mpf(2 * n + 1) ** 2 + 1 / (2 * mp.mpf(2 * n + 1))
+    )
+
+
 def run() -> None:
     check_symbolic_finite_identities()
     check_hyperbolic_limit_algebra()
@@ -115,20 +130,24 @@ def run() -> None:
         target = odd_log_derivative_closed(x)
         for n in (10, 100, 1000, 10000):
             approx = odd_log_derivative_partial(x, n)
-            # Absolute tail: sum_{k>=N} 2|x|/(2k+1)^2
-            # <= 2|x| [1/(2N+1)^2 + 1/(2(2N+1))].
-            bound = 2 * abs(x) * (
-                1 / mp.mpf(2 * n + 1) ** 2 + 1 / (2 * mp.mpf(2 * n + 1))
-            )
+            bound = compact_uniform_derivative_tail_bound(abs(x), n)
             assert abs(target - approx) <= bound * (1 + mp.mpf("1e-60"))
+
+    for T in (mp.mpf("0.5"), mp.mpf("1"), mp.mpf("3")):
+        for n in (25, 250, 2500):
+            bound = compact_uniform_derivative_tail_bound(T, n)
+            for j in range(-20, 21):
+                x = T * mp.mpf(j) / 20
+                err = abs(odd_log_derivative_closed(x) - odd_log_derivative_partial(x, n))
+                assert err <= bound * (1 + mp.mpf("1e-60"))
 
     print("PASS: finite Weierstrass logarithmic derivative identity")
     print("PASS: exact even/odd finite-product decomposition")
     print("PASS: odd finite log derivative equals odd rational lattice sum")
     print("PASS: limiting odd product = cosh(pi x/2)")
     print("PASS: limiting hyperbolic algebra = (pi/2) tanh(pi x/2)")
-    print("PASS: quantitative convergence lies inside explicit odd-tail bound")
-    print("FORMAL BOUNDARY: justify logarithmic-derivative passage through the certified Weierstrass limit")
+    print("PASS: compact-uniform derivative convergence lies inside the odd-square M-test bound")
+    print("FORMAL BOUNDARY: apply a derivative-of-uniform-limit theorem to the certified product limit")
 
 
 if __name__ == "__main__":
