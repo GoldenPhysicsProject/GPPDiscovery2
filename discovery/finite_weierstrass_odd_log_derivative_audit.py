@@ -23,11 +23,18 @@ Mittag-Leffler input:
     d/dx log(F_{2N}(x)/F_N(x/2))
       = sum_{k=0}^{N-1} 2x/((2k+1)^2+x^2).
 
-The certified GPP sinh Weierstrass product supplies F_N(x) -> sinh(pi x)/(pi x).
-If one additionally justifies passage of the logarithmic derivative to the limit
-away from x=0, the limiting odd product is
+The certified GPP sinh Weierstrass product supplies
 
-    2 cosh(pi x/2) /?  More directly the log derivative becomes
+    F_N(x) -> sinh(pi*x)/(pi*x).
+
+Hence the odd-product ratio tends pointwise to
+
+    [sinh(pi*x)/(pi*x)] / [sinh(pi*x/2)/(pi*x/2)]
+      = cosh(pi*x/2).
+
+If one additionally justifies passage of the logarithmic derivative through this
+limit away from x=0, its derivative is
+
     pi*coth(pi*x) - (pi/2)*coth(pi*x/2)
       = (pi/2)*tanh(pi*x/2).
 
@@ -53,6 +60,7 @@ def finite_product(x: sp.Symbol, n: int) -> sp.Expr:
 
 def check_symbolic_finite_identities(max_n: int = 8) -> None:
     x = sp.symbols("x", real=True)
+    y = sp.symbols("y", real=True)
     for n in range(1, max_n + 1):
         f_n = finite_product(x, n)
         log_derivative = sp.cancel(sp.diff(f_n, x) / f_n)
@@ -68,11 +76,10 @@ def check_symbolic_finite_identities(max_n: int = 8) -> None:
         )
         assert sp.cancel(f_2n / f_scaled - odd_product) == 0
 
+        f_n_y = finite_product(y, n)
         odd_log_derivative = sp.cancel(
             sp.diff(f_2n, x) / f_2n
-            - sp.Rational(1, 2)
-            * (sp.diff(finite_product(sp.Symbol("y"), n), sp.Symbol("y")) /
-               finite_product(sp.Symbol("y"), n)).subs(sp.Symbol("y"), x / 2)
+            - sp.Rational(1, 2) * (sp.diff(f_n_y, y) / f_n_y).subs(y, x / 2)
         )
         odd_sum = sp.cancel(
             sum(2 * x / (sp.Integer(2 * k + 1) ** 2 + x**2) for k in range(n))
@@ -118,6 +125,7 @@ def run() -> None:
     print("PASS: finite Weierstrass logarithmic derivative identity")
     print("PASS: exact even/odd finite-product decomposition")
     print("PASS: odd finite log derivative equals odd rational lattice sum")
+    print("PASS: limiting odd product = cosh(pi x/2)")
     print("PASS: limiting hyperbolic algebra = (pi/2) tanh(pi x/2)")
     print("PASS: quantitative convergence lies inside explicit odd-tail bound")
     print("FORMAL BOUNDARY: justify logarithmic-derivative passage through the certified Weierstrass limit")
