@@ -39,7 +39,7 @@ Therefore the only remaining A4 mixed integral is exactly
   A = 2 int_0^1 y atanh(y)
         D(atanh(y)/pi)^2 dy.
 
-The characteristic function is also explicit.  If
+The characteristic function is also explicit. If
 
   mu(t) = (pi/2) sech^2(pi*t),
   phi(s) = int exp(i s t) mu(t) dt = s/(2 sinh(s/2)),
@@ -95,40 +95,40 @@ def odd_harmonic(n: int) -> mp.mpf:
 
 def main() -> None:
     mp.mp.dps = 70
+    # Avoid evaluating atanh(1) at a quadrature endpoint. The omitted tail is
+    # O(eps log(1/eps)^3) for the A-integrand and is negligible at this precision.
+    eps = mp.mpf("1e-50")
+    ymax = 1 - eps
 
-    # Normalization of nu = p q^2 dt.
     nu_mass_t = 2 * mp.quad(lambda t: p(t) * q(t) ** 2,
                             [0, mp.mpf("0.5"), 1, 2, 4, mp.inf])
     nu_mass_y = 2 * mp.quad(lambda y: y * mp.atanh(y),
-                            [0, mp.mpf("0.5"), mp.mpf("0.9"), mp.mpf("0.99"), 1])
+                            [0, mp.mpf("0.5"), mp.mpf("0.9"), mp.mpf("0.99"), ymax])
     assert abs(nu_mass_t - 1) < mp.mpf("1e-55")
-    assert abs(nu_mass_y - 1) < mp.mpf("1e-55")
+    assert abs(nu_mass_y - 1) < mp.mpf("1e-45")
 
-    # Direct and compact-pushforward evaluations of A.
     A_t = 2 * mp.quad(lambda t: p(t) * q(t) ** 2 * D(t) ** 2,
                       [0, mp.mpf("0.5"), 1, 2, 4, mp.inf])
     A_y = 2 * mp.quad(
         lambda y: y * mp.atanh(y) * D(mp.atanh(y) / mp.pi) ** 2,
         [0, mp.mpf("0.5"), mp.mpf("0.9"), mp.mpf("0.99"),
-         mp.mpf("0.9999"), 1],
+         mp.mpf("0.9999"), ymax],
     )
     A_target = mp.mpf("0.5") - 2 * mp.log(2) + 4 * mp.log(2) ** 2
-    assert abs(A_t - A_y) < mp.mpf("1e-50")
+    assert abs(A_t - A_y) < mp.mpf("1e-44")
     assert abs(A_t - A_target) < mp.mpf("1e-50")
 
-    # Characteristic function chi_nu = phi + s phi'.
     for s in [mp.mpf("0.3"), mp.mpf("1.1"), mp.mpf("2.7")]:
         direct = 2 * mp.quad(lambda t: p(t) * q(t) ** 2 * mp.cos(s * t),
                              [0, mp.mpf("0.5"), 1, 2, 4, mp.inf])
         closed = phi(s) + s * phi_prime(s)
         assert abs(direct - closed) < mp.mpf("1e-50")
 
-    # Compact-support moment hierarchy.
     for n in range(7):
         numeric = 2 * mp.quad(lambda y: y ** (2 * n + 1) * mp.atanh(y),
-                              [0, mp.mpf("0.5"), mp.mpf("0.9"), mp.mpf("0.99"), 1])
+                              [0, mp.mpf("0.5"), mp.mpf("0.9"), mp.mpf("0.99"), ymax])
         closed = odd_harmonic(n) / (n + 1)
-        assert abs(numeric - closed) < mp.mpf("1e-50")
+        assert abs(numeric - closed) < mp.mpf("1e-45")
 
     print("PASS: nu(dt)=p(t)q(t)^2 dt is normalized")
     print("pushforward density on (-1,1): |y| atanh(|y|)")
