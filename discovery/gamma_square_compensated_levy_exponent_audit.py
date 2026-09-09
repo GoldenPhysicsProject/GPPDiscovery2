@@ -6,12 +6,15 @@ For a>0 define the positive-half-line Levy kernel
 The symmetric Levy-Khintchine exponent is
     E_a(t) = 2 a integral_0^inf (1-cos(t y))/(y*sinh(pi y)) dy.
 
-The odd-mode decomposition gives lambda_n=(2n+1)pi and the exact mode integral
-    2 a integral_0^inf (1-cos(t y)) exp(-lambda_n y)/y dy
-      = a log(1+t^2/lambda_n^2).
+Since
+    1/sinh(pi y) = 2 sum_{n>=0} exp(-lambda_n y),
+    lambda_n=(2n+1)pi,
+the exact contribution of one odd mode to the FULL symmetric exponent is
+    4 a integral_0^inf (1-cos(t y)) exp(-lambda_n y)/y dy
+      = 2 a log(1+t^2/lambda_n^2).
 Hence
-    E_a(t) = a sum_{n>=0} log(1+t^2/lambda_n^2)
-           = 2a log cosh(t/2).
+    E_a(t) = 2 a sum_{n>=0} log(1+t^2/lambda_n^2)
+           = 2 a log cosh(t/2).
 
 This file audits:
   * the compensated local limit at y->0;
@@ -19,7 +22,7 @@ This file audits:
   * the exact single-mode Frullani integral;
   * finite odd-mode partial sums;
   * the rigorous tail upper bound
-        0 <= tail_N <= a t^2/(4 pi^2) * trigamma(N+1/2),
+        0 <= tail_N <= a t^2/(2 pi^2) * trigamma(N+1/2),
     from log(1+u)<=u;
   * convergence of the bound on compact frequency windows.
 
@@ -52,13 +55,13 @@ def levy_exponent_exact(a, t):
 
 def mode_integral(a, t, n):
     lam = (2 * n + 1) * mp.pi
-    f = lambda y: 2 * a * (1 - mp.cos(t * y)) * mp.e ** (-lam * y) / y if y else mp.mpf('0')
+    f = lambda y: 4 * a * (1 - mp.cos(t * y)) * mp.e ** (-lam * y) / y if y else mp.mpf('0')
     return mp.quad(f, [0, 1, mp.inf])
 
 
 def mode_exact(a, t, n):
     lam = (2 * n + 1) * mp.pi
-    return a * mp.log(1 + (t / lam) ** 2)
+    return 2 * a * mp.log(1 + (t / lam) ** 2)
 
 
 def partial_exponent(a, t, N):
@@ -71,7 +74,7 @@ def tail_exact(a, t, N):
 
 def tail_bound(a, t, N):
     # sum_{n=N}^inf 1/(2n+1)^2 = (1/4) psi_1(N+1/2)
-    return a * t * t * mp.polygamma(1, N + mp.mpf('0.5')) / (4 * mp.pi ** 2)
+    return a * t * t * mp.polygamma(1, N + mp.mpf('0.5')) / (2 * mp.pi ** 2)
 
 
 def check_close(label, x, y, tol=mp.mpf('1e-45')):
@@ -92,7 +95,7 @@ def main():
     for a, t in [(mp.mpf('1'), mp.mpf('1.3')), (mp.mpf('2.3'), mp.mpf('4.1')), (mp.mpf('0.5'), mp.mpf('0.7'))]:
         check_close("Levy exponent quadrature", levy_exponent_integral(a, t), levy_exponent_exact(a, t), mp.mpf('1e-25'))
 
-    # Single odd-mode Frullani identity.
+    # Single odd-mode Frullani identity in the full symmetric exponent.
     for n in [0, 1, 4, 12]:
         check_close(f"mode n={n}", mode_integral(mp.mpf('1.7'), mp.mpf('2.2'), n), mode_exact(mp.mpf('1.7'), mp.mpf('2.2'), n), mp.mpf('1e-45'))
 
