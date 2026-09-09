@@ -3,16 +3,16 @@
 
 For a >= 0 and lambda_n=(2n+1)pi,
 
-  E_a(t) = sum_n a log(1+t^2/lambda_n^2) = 2a log cosh(t/2),
+  E_a(t) = 2a sum_n log(1+t^2/lambda_n^2) = 2a log cosh(t/2),
 
 hence
 
-  E_a'(t) = sum_n 2 a t/(lambda_n^2+t^2) = a tanh(t/2).
+  E_a'(t) = sum_n 4 a t/(lambda_n^2+t^2) = a tanh(t/2).
 
 For the N-mode partial derivative D_{a,N}(t), the tail has the rigorous bound
 
   |E_a'(t)-D_{a,N}(t)|
-    <= a |t|/(2 pi^2) * psi_1(N+1/2),
+    <= a |t|/pi^2 * psi_1(N+1/2),
 
 because lambda_n^2+t^2 >= lambda_n^2 and
 sum_{n=N}^infty (2n+1)^(-2) = psi_1(N+1/2)/4.
@@ -30,7 +30,7 @@ def lam(n):
 
 
 def d_partial(a, t, N):
-    return mp.fsum(2*a*t / (lam(n)**2 + t**2) for n in range(N))
+    return mp.fsum(4*a*t / (lam(n)**2 + t**2) for n in range(N))
 
 
 def d_exact(a, t):
@@ -38,7 +38,7 @@ def d_exact(a, t):
 
 
 def d_tail_bound(a, t, N):
-    return a * abs(t) / (2*mp.pi**2) * mp.polygamma(1, N + mp.mpf('0.5'))
+    return a * abs(t) / (mp.pi**2) * mp.polygamma(1, N + mp.mpf('0.5'))
 
 
 def audit_point(a, t, N):
@@ -64,14 +64,14 @@ def main():
 
     # Direct high-precision infinite-series check.
     for a, t in [(mp.mpf('1'), mp.mpf('1.7')), (mp.mpf('2.3'), mp.mpf('-4.2'))]:
-        s = mp.nsum(lambda k: 2*a*t / (((2*k+1)*mp.pi)**2 + t**2), [0, mp.inf])
+        s = mp.nsum(lambda k: 4*a*t / (((2*k+1)*mp.pi)**2 + t**2), [0, mp.inf])
         target = d_exact(a, t)
         assert mp.almosteq(s, target)
         print('series identity residual =', mp.nstr(abs(s-target), 20))
 
     # Compact-uniform consequence: on |t|<=T, replace |t| by T.
     a, T, N = mp.mpf('1.7'), mp.mpf('6'), 20
-    uniform = a*T/(2*mp.pi**2) * mp.polygamma(1, N + mp.mpf('0.5'))
+    uniform = a*T/(mp.pi**2) * mp.polygamma(1, N + mp.mpf('0.5'))
     gridmax = max(abs(d_exact(a, t) - d_partial(a, t, N))
                   for t in [(-T + 2*T*j/200) for j in range(201)])
     assert gridmax <= uniform
