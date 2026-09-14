@@ -299,6 +299,8 @@ The following facts are elementary and worth certifying next:
 
 These statements would connect `AbelCesaroRegularization.lean`, `CesaroMeanDivergence.lean`, and `TwoPointCriterion.lean` into one formal diagnostic chain.
 
+The first, third-domain, and rational-limit parts are now encoded in the focused Verify candidate module `AbelCesaroPoleBarrier.lean`; CI status must still be checked before calling that new module certified.
+
 ---
 
 ## 9. Research judgment
@@ -313,3 +315,109 @@ The old Haar/Abel proof should **not** be thrown away. Its strongest corrected c
 The modern problem is therefore not to replace the whole argument. It is to replace one illegal analytic continuation by a zero-independent positive prime–Archimedean boundary completion.
 
 That repair is precisely what the current Ward/Löwner/Hardy/Hodge program is trying to construct.
+
+---
+
+## 10. New causal–shadow factorization of the Abel kernel
+
+The regularized character kernel has the exact factorization
+
+\[
+\boxed{
+\frac{\varepsilon^2}{\varepsilon^2-\alpha^2}
+=
+\frac{\varepsilon}{\varepsilon-\alpha}
+\frac{\varepsilon}{\varepsilon+\alpha}.}
+\]
+
+This is more than an algebraic curiosity. The two factors are precisely the normalized one-sided Laplace transforms of the forward and reflected half-lines:
+
+\[
+C_\varepsilon^+(\alpha)
+:=\varepsilon\int_0^\infty e^{-\varepsilon u}e^{\alpha u}\,du
+=\frac{\varepsilon}{\varepsilon-\alpha},
+\qquad \Re\alpha<\varepsilon,
+\]
+
+and
+
+\[
+C_\varepsilon^-(\alpha)
+:=\varepsilon\int_0^\infty e^{-\varepsilon u}e^{-\alpha u}\,du
+=\frac{\varepsilon}{\varepsilon+\alpha},
+\qquad -\Re\alpha<\varepsilon.
+\]
+
+Thus the full two-sided Abel strip
+
+\[
+|\Re\alpha|<\varepsilon
+\]
+
+is exactly the domain in which **both causal orientations are simultaneously stable**.
+
+On the unitary/principal-series axis `Re alpha=0`, write `alpha=i gamma`. Then
+
+\[
+C_\varepsilon^-(i\gamma)
+=\overline{C_\varepsilon^+(i\gamma)},
+\]
+
+and therefore
+
+\[
+\boxed{
+\omega_\varepsilon(t^{i\gamma})
+=
+C_\varepsilon^+(i\gamma)
+\overline{C_\varepsilon^+(i\gamma)}
+=
+\left|\frac{\varepsilon}{\varepsilon-i\gamma}\right|^2.}
+\]
+
+So **the Abel/Haar kernel is already a norm square on the critical line**. More generally, for real `epsilon>0`,
+
+\[
+C_\varepsilon^-(\alpha)
+=\overline{C_\varepsilon^+(\alpha)}
+\quad\Longleftrightarrow\quad
+\alpha+\bar\alpha=0
+\quad\Longleftrightarrow\quad
+\Re\alpha=0,
+\]
+
+away from trivial denominator singularities.
+
+This is exactly the Rosati/adjoint pattern that appeared independently in the later Cayley-polarization attack: **shadow/reflection equals Hilbert adjoint precisely on the unitary axis**.
+
+There is an equally sharp all-scale statement. A fixed exponent belongs to the two-sided positive Abel domain for every `epsilon>0` iff
+
+\[
+|\Re\alpha|<\varepsilon\quad\text{for every }\varepsilon>0,
+\]
+
+which is equivalent to
+
+\[
+\boxed{\Re\alpha=0.}
+\]
+
+For the zero self-pairing exponent
+
+\[
+\alpha=\bar\rho+\rho-1=2\left(\Re\rho-\frac12\right),
+\]
+
+this says:
+
+\[
+\boxed{
+\text{forward and shadow Abel channels are jointly stable at every scale}
+\iff \Re\rho=\frac12.}
+\]
+
+Again this is an exact RH-equivalent criterion once `rho` is restricted to nontrivial zeros; it is not itself the missing arithmetic proof. But it substantially clarifies the concept behind the original route. The old “Haar self-duality forces the critical line” intuition can be rewritten rigorously as:
+
+> the half-density line is the unique locus on which the causal transfer and its shadow are genuine Hilbert adjoints at every regularization scale.
+
+The remaining arithmetic theorem is to prove that the completed prime–Archimedean resonance realization is required to satisfy that all-scale causal–shadow adjointness. This is essentially the same content as the modern Hardy no-leak / positive Schur-completion theorem, now seen directly inside the old Abel kernel.
