@@ -421,3 +421,80 @@ Again this is an exact RH-equivalent criterion once `rho` is restricted to nontr
 > the half-density line is the unique locus on which the causal transfer and its shadow are genuine Hilbert adjoints at every regularization scale.
 
 The remaining arithmetic theorem is to prove that the completed prime–Archimedean resonance realization is required to satisfy that all-scale causal–shadow adjointness. This is essentially the same content as the modern Hardy no-leak / positive Schur-completion theorem, now seen directly inside the old Abel kernel.
+
+---
+
+## 11. Exact identification with the shifted Hardy leakage wall
+
+The relation to the later Hardy program is not merely qualitative. Let
+
+\[
+\rho=\frac12+\delta+i\gamma,
+\qquad \delta>0,
+\]
+
+and use the shifted completed quotient
+
+\[
+\Theta_\omega(z)
+=\frac{\xi(1/2+\omega+iz)}
+{\xi(1/2+\omega-iz)}.
+\]
+
+The zero `rho` produces an upper-half-plane pole of this quotient precisely when the shift line lies to its left:
+
+\[
+\boxed{\omega<\delta.}
+\]
+
+At the crossing `omega=delta`, the pole hits the Hardy boundary. On the Abel side, the self-pairing is in its honest positive strip precisely for
+
+\[
+\boxed{\varepsilon>2\delta,}
+\]
+
+and the regulator pole occurs at
+
+\[
+\varepsilon=2\delta.
+\]
+
+Therefore the exact parameter identification
+
+\[
+\boxed{\varepsilon=2\omega}
+\]
+
+maps the Abel convergence wall to the Hardy pole-crossing wall.
+
+For an isolated simple off-line block, the later Hardy analysis gives the exact rank-one leakage norm below the crossing,
+
+\[
+h_\omega=\frac{\omega}{\delta},
+\qquad 0<\omega<\delta.
+\]
+
+The meromorphic Abel diagonal coefficient at `epsilon=2 omega` is then
+
+\[
+\boxed{
+a_{2\omega}
+=\frac{\omega^2}{\omega^2-\delta^2}
+=\frac{h_\omega^2}{h_\omega^2-1}.}
+\]
+
+Thus the Abel blow-up at the convergence boundary is exactly the same event as the Hardy defect norm saturating to one as the pole reaches the boundary.
+
+This is the strongest evidence yet that the old Abel route and the newer Hardy route are not competing approaches. They are two coordinate descriptions of the same causal instability.
+
+### Current Yakaboylu revision
+
+The current external Yakaboylu manuscript, arXiv:2408.15135v17 (18 Aug 2026), no longer uses the old Abel-to-zero positivity passage as an RH proof. It constructs the biorthogonal reflection operator
+
+\[
+W=\sum_\rho |\Phi_{1-\bar\rho}\rangle\langle\Phi_\rho|
+\]
+
+and proves directly that `W>0` is **equivalent** to RH; its quadratic form is the same reflection-pair swap form. This is consistent with the present diagnosis. The spectral construction survived; the missing theorem was and remains the positivity of the reflected metric.
+
+For the GPP program, the old Abel machinery should therefore be reinterpreted as an attempted explicit positive realization of this `W`. Its pole barrier explains why the bare one-channel regulator cannot supply that realization off the critical line. The current prime–Archimedean Ward/Loewner/Schur program is a candidate replacement for exactly that failed metric construction.
