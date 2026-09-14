@@ -52,12 +52,11 @@ Hence `R_{sigma,L}` is rank one:
 with
 
 \[
-u_{\sigma,L}(k)=\sqrt{\frac2\pi}\frac{q_L(k)}{\sigma+k^2},
+u_{\sigma,L}(k):=u_{\sigma,L}(k)
+=\sqrt{\frac2\pi}\frac{q_L(k)}{\sigma+k^2},
 \qquad
 v_\sigma(k)=\sqrt{\frac2\pi}\frac{k}{\sigma+k^2}.
 \]
-
-(The first displayed symbol is `u_{sigma,L}`; the line break is purely typographical.)
 
 ### Proof
 
@@ -145,7 +144,7 @@ for some real scalar `c_L`.
 
 The completed arithmetic phase is not linear in `k`. Therefore ordinary sine-space self-adjointness cannot be the missing positivity mechanism.
 
-## Corollary 4: local multiplication metrics are also too restrictive
+## Corollary 4: local multiplication metrics are extremely restrictive
 
 Suppose one seeks a positive multiplication metric `G=M_w`, independent of `sigma`, satisfying
 
@@ -173,7 +172,7 @@ and therefore
 w(k)=C\frac{k}{q_L(k)}.
 \]
 
-A positive local metric can exist only if `q_L(k)/k` has one sign almost everywhere. The arithmetic phase is oscillatory, so any successful metric completion must generically be nonlocal. This matches the independent no-go results against finite local Archimedean compensation and local Euler gluing.
+Thus a positive local metric can exist only if `q_L(k)/k` has one sign almost everywhere (apart from null sets and zeros handled by the domain). This is a stringent extra condition, not established here. In particular, a generic sign-changing arithmetic phase cannot be repaired by a positive multiplication weight. Any successful completion is therefore expected to require the nonlocal metric/polarization already indicated by the independent prime–Archimedean no-go results.
 
 ## Interpretation
 
