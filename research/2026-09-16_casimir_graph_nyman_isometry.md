@@ -119,6 +119,61 @@ b_m = (log m)/m.
 
 Thus finite Nyman projection in the Casimir graph is an explicit positive matrix problem with no zero input.
 
+## Centered divisibility source
+
+For lambda=1/m define
+
+c_m(n)=1/m-1_{m|n}.
+
+Then the source has the exact form
+
+QF_{1/m}
+ = sum_{n>=1} n^{-1/2} c_m(n) delta_{log n}.
+
+The primitive relation is
+
+sum_{j=1}^n c_m(j) = (n mod m)/m.
+
+Thus the reciprocal Nyman family is the family of centered divisibility combs.
+
+Under Haar measure on the profinite integers,
+
+E[c_m]=0,
+
+E[c_m c_k]
+ = 1/lcm(m,k)-1/(mk)
+ = (gcd(m,k)-1)/(mk).
+
+In particular distinct prime divisibility observables are orthogonal in the profinite Haar metric. The coupling which destroys this simple primewise orthogonality is therefore the Archimedean logarithmic-scale Green kernel, not unique factorization itself.
+
+## Casimir Green kernel as Brownian covariance
+
+For atoms at log i and log j,
+
+(i j)^(-1/2) G_C(log i,log j)
+ = (i j)^(-1/2) exp(-|log i-log j|/2)
+ = 1/max(i,j).
+
+Therefore, with the canonical causal summation,
+
+G_{m,k}
+ = sum_{i,j>=1} c_m(i)c_k(j)/max(i,j).
+
+Since
+
+1/max(i,j)
+ = sum_{n>=max(i,j)} [1/n - 1/(n+1)],
+
+summation by parts recovers the absolutely convergent remainder formula above.
+
+Moreover
+
+1/max(i,j)=min(1/i,1/j),
+
+which is exactly the covariance kernel of standard Brownian motion sampled at times 1/i and 1/j. Thus the same exact Gram form has four simultaneous interpretations:
+
+Nyman fractional-part Gram = Casimir negative graph energy = centered divisibility Green form = Brownian covariance sampled on reciprocal integers.
+
 ## Status
 
-This does not prove RH. It does solve a structural problem left open in v34: the canonical Casimir negative graph topology preserves the Nyman complex and its ghost exactly. The remaining theorem is density/coercivity in this exact graph space, equivalently elimination of the Nyman-Burnol cokernel. The comb representation and causal cutoff anomaly provide a new source-level formulation for attacking that theorem.
+This does not prove RH. It does solve a structural problem left open in v34: the canonical Casimir negative graph topology preserves the Nyman complex and its ghost exactly. The remaining theorem is density/coercivity in this exact graph space, equivalently elimination of the Nyman-Burnol cokernel. The comb representation, causal cutoff anomaly, centered divisibility form, and Brownian Green factorization provide a new source-level formulation for attacking that theorem.
