@@ -1,6 +1,6 @@
 # Theta-deficit / Nyman / Casimir bridge — 2026-09-15
 
-Status: exact derivations plus one explicit topological obstruction. No RH proof claimed.
+Status: exact derivations plus explicit topological and positivity obstructions. No RH proof claimed.
 
 ## 1. Canonical Casimir variable
 
@@ -28,7 +28,7 @@ This is the canonical translation of the earlier safe fold:
 1-(\rho-\tfrac12)^2=t_\rho+\tfrac34.
 \]
 
-It does not add spectral information, but it aligns the fold with the functional equation, the \(sl_2\) Casimir, and the completion factor.
+It does not add spectral information, but it aligns the fold with the functional equation, the \(sl_2\) Casimir, and the completion factor. Unlike the earlier mass-one choice, \(u>0\) now corresponds exactly to the full Euler half-plane \(s>1\).
 
 For
 
@@ -42,7 +42,7 @@ the two elementary logarithmic-derivative terms collapse exactly:
 \frac1{2s-1}\left(\frac1s+\frac1{s-1}\right)=\frac1u.
 \]
 
-Hence in \(\phi_C(u)=u m_C(u)\) their contribution is the constant \(1\), whose Loewner divided-difference kernel is zero. This is a coordinate simplification only: the cancellation against the zeta pole is still global in the remaining prime term.
+Hence in \(\phi_C(u)=u m_C(u)\) their isolated contribution is the constant \(1\), whose Loewner divided-difference kernel is zero. This is a coordinate simplification only: near \(u=0\) the zeta pole still cancels the \(1/u\) singularity globally, and no RH conclusion follows from this bookkeeping identity alone.
 
 ## 2. Theta Ward identity in Casimir form
 
@@ -129,7 +129,7 @@ implies that the same formula extends evenly:
 g(-x)=g(x).
 \]
 
-Thus \(\Xi(z)/(z^2+1/4)\) is the Fourier transform, in the critical strip \(|\Im z|<1/2\), of an explicit strictly positive even kernel. Positivity alone is not claimed to force real zeros.
+Thus \(\Xi(z)/(z^2+1/4)\) is the cosine/Fourier transform, in the critical strip \(|\Im z|<1/2\), of an explicit strictly positive even kernel. Positivity alone is not claimed to force real zeros.
 
 ## 4. Continuum-minus-lattice and fractional-part representation
 
@@ -282,15 +282,238 @@ Expanding the lattice part in the first theta seed shows that the coefficients \
 
 Formally, together with \(-\sum_{m\ge2}\mu(m)/m=1\), this isolates the first theta seed from the translation-difference family. The scalar identity \(\sum\mu(m)/m=0\) is PNT-level and unconditional, but convergence in the **Nyman/pullback graph norm** is exactly the hard global issue; ordinary smoothed convergence would not suffice.
 
-## 10. Current frontier
+## 10. First-order Gamma / Casimir factorization
 
-The most concrete new candidate for the missing global Poisson graph completion is therefore:
+Define the centered Archimedean outer factor
 
-- source: the exact Nyman/Tate Hilbert complex;
-- completion map: the explicit zero-free Gamma Gaussian transform \(T\);
-- target vector: the first positive theta seed;
-- generators: half-density translation differences of the positive theta-deficit kernel \(g\);
-- topology: the inverse-Gamma pullback graph norm, not ordinary \(L^2\);
-- remaining theorem: obtain a shadow/co-Poisson coercive or reflection-positive estimate in this graph norm that rules out nonzero odd cokernel.
+\[
+B(q)=\pi^{-(q+1/2)/2}\Gamma\!\left(\frac{q+1/2}{2}\right).
+\]
 
-No claim is made that this final estimate has been proved.
+The co-Poisson scattering phase is exactly its reflected quotient:
+
+\[
+\boxed{
+\chi_\infty\!\left(\frac12+q\right)=\frac{B(q)}{B(-q)}.
+}
+\]
+
+The Gaussian-completion multiplier factors as
+
+\[
+2\pi^{-q/2-1/4}\Gamma\!\left(\frac q2+\frac54\right)
+=(q+\tfrac12)B(q).
+\]
+
+On the logarithmic line put
+
+\[
+Q=D+\frac12,\qquad Q^*=-D+\frac12.
+\]
+
+Then
+
+\[
+\boxed{Q^*Q=-D^2+\frac14=:H_C.}
+\]
+
+For the first theta seed
+
+\[
+k_0(x)=2e^{x/2}e^{-\pi e^{2x}},
+\]
+
+one has the exact first-order identity
+
+\[
+\boxed{Q^*k_0(x)=4\pi e^{5x/2}e^{-\pi e^{2x}}=\kappa(x).}
+\]
+
+Thus the Nyman Gaussian completion is one first-order massive Casimir factor times the Archimedean outer Gamma factor. The same factorization appears in the co-Poisson phase through \(B(q)/B(-q)\). This is structural alignment, not a no-ghost theorem: any zero-free scalar multiplier alone leaves the Hardy bad-zero divisor unchanged.
+
+## 11. The new primitive cancels the old theta boundary delta exactly
+
+The manuscript's right-decaying Jacobi seed is
+
+\[
+\beta(x)=\sum_{n\ge1}e^{x/2-\pi n^2e^{2x}},
+\qquad \Phi=(D^2-\tfrac14)\beta.
+\]
+
+Its even reflection \(\beta_{\rm e}(x)=\beta(|x|)\) has a cusp and obeys distributionally
+
+\[
+(D^2-\tfrac14)\beta_{\rm e}=\Phi-\frac12\delta_0.
+\]
+
+But the new theta-deficit kernel satisfies exactly
+
+\[
+\boxed{g(x)=e^{-|x|/2}-2\beta_{\rm e}(x).}
+\]
+
+For \(H_C=-D^2+1/4\),
+
+\[
+H_Ce^{-|x|/2}=\delta_0,
+\qquad
+H_C\beta_{\rm e}=\frac12\delta_0-\Phi.
+\]
+
+Therefore the singular boundary charges cancel before any parity split:
+
+\[
+\boxed{H_Cg=2\Phi}
+\]
+
+as a full-line distribution, with no delta source.  Equivalently, wherever ordinary derivatives are valid,
+
+\[
+\Phi=\frac12H_Cg.
+\]
+
+This reopens integration-by-parts manipulations that were invalid for the cusped primitive \(\beta_{\rm e}\), but it does not by itself establish positivity of the endpoint kernel.
+
+## 12. The positive kernel is exactly the poleful completed zeta kernel
+
+Put \(s=1/2+iz\). Since
+
+\[
+\xi(s)=\frac12s(s-1)\Lambda(s),
+\qquad
+s(s-1)=-(z^2+1/4),
+\]
+
+and
+
+\[
+\Xi(z)=\frac{z^2+1/4}{2}\,\widehat g(z)
+\]
+
+for the full-line Fourier transform, one gets
+
+\[
+\boxed{
+\widehat g(z)=-\Lambda\!\left(\frac12+iz\right).
+}
+\]
+
+Thus \(g\) is not an auxiliary smoothing kernel. It is the exact positive even Fourier kernel of the completed zeta function before the boundary polynomial \(s(s-1)\) removes the poles at \(s=0,1\). The hierarchy is
+
+\[
+\Lambda\xrightarrow{\;s(s-1)\;}\xi
+\xrightarrow{\;\log\partial\;}\text{Weil/Nevanlinna data}.
+\]
+
+The two elementary pole terms in \(\xi'/\xi\) are exactly the logarithmic derivatives of this boundary polynomial.
+
+## 13. Endpoint Bezoutian product rule and rank-one parity correction
+
+Let
+
+\[
+p(z)=z^2+c^2,
+\qquad G(z)=p(z)R(z).
+\]
+
+For the real-axis Laguerre Bezoutian
+
+\[
+\mathcal D_F(z,w)=2\frac{F(z)F'(w)-F'(z)F(w)}{z-w},
+\]
+
+direct algebra gives
+
+\[
+\boxed{
+\mathcal D_G(z,w)
+=p(z)p(w)\mathcal D_R(z,w)
++4(zw-c^2)R(z)R(w).
+}
+\]
+
+For the Riemann case \(c=1/2\), \(G=\Xi\), and \(R=\widehat g/2\). If for an even real density \(f\) one writes the universal endpoint coordinate kernel
+
+\[
+K_f(a,b)=\frac12\int_{|(a+b)/2|}^\infty
+ y\,f\!\left(y+\frac{a-b}{2}\right)
+ f\!\left(y-\frac{a-b}{2}\right)\,dy,
+\]
+
+then the manuscript's Fourier normalization is \(\mathcal D_{\widehat f}=8\,\mathcal F_2K_f\). Consequently the product identity gives the exact coordinate formula
+
+\[
+\boxed{
+K_\Phi(a,b)
+=\frac14 H_{C,a}H_{C,b}K_g(a,b)
++\frac18\left(g'(a)g'(b)-\frac14g(a)g(b)\right),
+}
+\]
+
+where \(H_C=-D^2+1/4\) acts in the indicated variable.
+
+For \(a,b>0\) define the parity kernels
+
+\[
+K_f^\pm(a,b)=K_f(a,b)\pm K_f(a,-b).
+\]
+
+Since \(g\) is even and \(g'\) odd, the correction splits into two rank-one pieces:
+
+\[
+\boxed{
+K_\Phi^+(a,b)
+=\frac14H_{C,a}H_{C,b}K_g^+(a,b)
+-\frac1{16}g(a)g(b),
+}
+\]
+
+and
+
+\[
+\boxed{
+K_\Phi^-(a,b)
+=\frac14H_{C,a}H_{C,b}K_g^-(a,b)
++\frac14g'(a)g'(b).
+}
+\]
+
+Because the manuscript proves that positivity of either \(K_\Phi^+\) or \(K_\Phi^-\) is individually equivalent to RH, the even route becomes the sharp rank-one domination problem
+
+\[
+\boxed{
+H_{C,a}H_{C,b}K_g^+(a,b)\succeq\frac14g(a)g(b).
+}
+\]
+
+This is an exact reformulation, not yet a proof.  The odd route is the exact rank-one compensation problem
+
+\[
+H_{C,a}H_{C,b}K_g^-(a,b)+g'(a)g'(b)\succeq0.
+\]
+
+Numerical spot checks made during this derivation showed the raw \(K_g^+\) matrices positive in the tested samples while \(K_g^-\) had a dominant negative direction, but those observations are only exploratory.  In fact the frequency-side squared-variable factorization shows that positivity of the appropriate \(g\)-kernel can itself retain RH-strength zero information, so no sign theorem for \(K_g^\pm\) is assumed here.
+
+## 14. No-go checks made during this attack
+
+Two tempting strengthenings were tested and rejected:
+
+1. The positive continuum-minus-lattice error defining \(g\) is not completely monotone in its natural heat variable; higher alternating derivatives change sign. Therefore positivity of the quadrature error does not automatically produce a Stieltjes measure.
+2. The endpoint kernel built from \(g\) is not automatically PSD merely because \(g>0\). Numerical tests of the full raw kernel exhibited a negative eigenvalue. Thus the new primitive removes the singular boundary source but does not trivialize the Laguerre/Nevanlinna positivity problem.
+
+These failures are useful because they isolate what the new representation really buys: exact source cancellation, a zero-free chain map, and a rank-one endpoint reduction, not a generic positivity theorem.
+
+## 15. Current frontier
+
+The most concrete new candidates for the missing global closure are now:
+
+1. **Endpoint rank-one domination:** prove
+   \[
+   H_{C,a}H_{C,b}K_g^+\succeq\frac14g\otimes g
+   \]
+   directly from the theta/fractional-part structure. This is exactly RH-equivalent but has only one explicit rank-one deficit after Casimir congruence.
+2. **Nyman graph completion:** use the explicit zero-free Gaussian/Gamma map \(T\) to transport the exact Nyman/Tate complex into the theta representation, but retain the inverse-Gamma graph topology so the bad-zero cokernel cannot escape.
+3. **Shadow doubling:** exploit the exact outer-factor relation \(B(q)/B(-q)=\chi_\infty(1/2+q)\). A successful doubled norm must cancel the noncoercive outer amplitude without using a zero-dependent inner factor; scalar multiplication alone cannot do this.
+4. **Multiscale stabilization:** a single Gamma smoothing is injective but not bounded below. A scale family may form a Littlewood--Paley/Calderon frame, but componentwise smoothed density is insufficient unless one obtains a single arithmetic approximation synchronized across scales. That synchronization is another concrete form of the global no-escape theorem.
+
+No claim is made that any of these final coercive estimates has been proved.
