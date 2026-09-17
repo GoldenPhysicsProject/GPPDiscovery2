@@ -5,7 +5,7 @@ Status: exact identities plus literature-identified BSY criterion. No RH claim.
 
 ## 1. Arithmetic prime-gas thermodynamics
 
-For real beta > 1, use positive integers n as microstates with arithmetic energy E_n = log n and
+For real beta > 1, positive integers are microstates with arithmetic energy E_n = log n and
 
 P_beta(n) = n^{-beta}/zeta(beta).
 
@@ -13,206 +13,156 @@ Then
 
 Z(beta)=zeta(beta),
 U(beta)=-zeta'(beta)/zeta(beta)=sum_{n>=2} Lambda(n)n^{-beta},
-S_N(beta)=log zeta(beta)+beta U(beta).
+S_N(beta)=log zeta(beta)+beta U(beta),
 
-Hence
+and
 
-S_N'(beta)=beta U'(beta)
-          =-beta sum_{n>=2} Lambda(n) log(n)n^{-beta}.
+S_N'(beta)=-beta sum_{n>=2} Lambda(n) log(n)n^{-beta}.
 
-Thus the Nyman/Ramanujan target coefficients Lambda(n) and the prime-gas Fisher/heat-capacity density Lambda(n) log(n)n^{-beta} are the same arithmetic vector before and after scale differentiation plus Gibbs weighting.
+Thus the Nyman/Ramanujan target coefficients Lambda(n) and the prime-gas Fisher/heat-capacity density Lambda(n) log(n)n^{-beta} are the same arithmetic vector before and after scale differentiation and Gibbs weighting.
 
-## 2. The canonical Nyman transfer is a normalized partition function
+## 2. Canonical normalized Nyman transfer
 
-For 0<lambda<1 the Nyman generator has Mellin transform
+For 0<lambda<1,
 
-rhohat_lambda(s)=((lambda-lambda^s)/s) zeta(s).
-
-Factor
-
-rhohat_lambda(s)=Z_N(s) ((lambda-lambda^s)/(s-1)),
+rhohat_lambda(s)=((lambda-lambda^s)/s) zeta(s)
+                =Z_N(s) ((lambda-lambda^s)/(s-1)),
 
 where
 
 Z_N(s)=((s-1)/s) zeta(s).
 
-This Z_N is the common causal transfer function of the Nyman family. It is also a canonical pole-subtracted arithmetic partition function:
+This is the common causal transfer of the continuum Nyman family and a canonical pole-subtracted arithmetic partition function:
 
 Z_N(1)=1,
 Z_N(s)->1 as real s->+infinity,
-|Z_N(1/2+it)|=|zeta(1/2+it)|
+|Z_N(1/2+it)|=|zeta(1/2+it)|.
 
-because |(s-1)/s|=1 on Re(s)=1/2.
-
-Its logarithmic energy response is
+Its logarithmic response is
 
 U_N(s)=-d/ds log Z_N(s)
-      =-zeta'(s)/zeta(s)-1/(s-1)+1/s
-      =U(s)-1/(s-1)+1/s.
+      =-zeta'(s)/zeta(s)-1/(s-1)+1/s.
 
-Using zeta(1+epsilon)=epsilon^{-1}+gamma+O(epsilon),
+From zeta(1+epsilon)=epsilon^{-1}+gamma+O(epsilon),
 
 Z_N(1+epsilon)=1+(gamma-1)epsilon+O(epsilon^2),
-
-so
-
 U_N(1)=1-gamma.
 
-If one formally keeps the canonical entropy expression
-
-S_N^ren(s)=log Z_N(s)+s U_N(s),
-
-then
+If one keeps the canonical entropy expression S_N^ren=log Z_N+s U_N, then
 
 S_N^ren(1)=1-gamma.
 
-This is a genuine dimensionless Cayley-renormalized Hagedorn response constant. It should NOT be confused with a Boltzmann constant: a Boltzmann constant is a unit-conversion factor, whereas 1-gamma is a derived finite response value.
+This is a dimensionless finite Hagedorn response value, not a Boltzmann conversion constant.
 
-## 3. No independent arithmetic Boltzmann constant in the prime gas alone
+## 3. No independent arithmetic Boltzmann constant from the prime gas alone
 
-Restore an arithmetic energy unit epsilon_* and an entropy/temperature conversion k_N:
+If
 
 E_n=epsilon_* log n,
-P(n) proportional to exp[-E_n/(k_N T_N)].
+P(n) proportional to exp[-E_n/(k_N T_N)],
 
-Then
-
-P(n) proportional to n^{-beta},
-beta=epsilon_*/(k_N T_N).
-
-Only epsilon_*/(k_N T_N) is observable in the pure prime gas. The simultaneous rescaling
-
-epsilon_* -> c epsilon_*,
-k_N -> c k_N
-
-leaves the distribution and all dimensionless thermodynamics unchanged. Therefore the prime gas by itself cannot determine a nontrivial independent k_N. In canonical arithmetic units one sets k_N=1 and entropy is measured in nats. A dimensionful nontrivial k_N can acquire meaning only after another sector independently fixes both an arithmetic energy scale and a physical temperature scale.
+then beta=epsilon_*/(k_N T_N). Only this ratio is observable in the pure arithmetic ensemble. Simultaneously rescaling epsilon_* and k_N leaves the theory unchanged. Hence the prime gas alone does not determine a nontrivial dimensionful k_N. In canonical arithmetic units k_N=1 and entropy is measured in nats.
 
 ## 4. Nyman target equals the internal-energy coefficient vector
 
-In the Casimir/Ramanujan exact-conductor basis R_m, the target coupling derived previously is
+In the Casimir/Ramanujan exact-conductor basis R_m,
 
 <delta_0,R_m>_{-1,C}=-Lambda(m).
 
-But Lambda(m) is exactly the Dirichlet coefficient of the arithmetic internal energy U(s). Thus the Nyman target is the negative internal-energy coefficient vector in exact-conductor coordinates.
+But Lambda(m) is exactly the Dirichlet coefficient of U(s). Thus the Nyman target is the negative arithmetic internal-energy coefficient vector in exact-conductor coordinates.
 
-Differentiating in beta promotes Lambda(m) to Lambda(m) log(m)m^{-beta}, exactly the positive Fisher/heat-capacity measure already used in arithmetic field theory.
+## 5. Continuum bad-zero model space and ghost entropy
 
-## 5. Bad-zero model space and a canonical ghost entropy
-
-Let B be the Blaschke product of the zeros rho of zeta with Re(rho)>1/2, in the disk Cayley coordinate
-
-beta_C=(s-1)/s.
-
-The zero rho maps to
-
-a_rho=(rho-1)/rho,
-
-which lies in the disk precisely when Re(rho)>1/2.
-
-The Nyman-Burnol ghost is
+For the full continuum Nyman space, let B be the Blaschke product of zeros rho with Re(rho)>1/2 in the Cayley coordinate beta_C=(s-1)/s. Then
 
 K_B=H^2 \ominus B H^2.
 
-For the Hardy vacuum 1,
+For the Hardy vacuum,
 
 ||P_{K_B}1||^2=1-|B(0)|^2.
 
 Define
 
-S_ghost=-log |B(0)|^2 >= 0.
+S_ghost=-log|B(0)|^2 >= 0.
 
 Then
 
-||P_{K_B}1||^2=1-exp(-S_ghost).
+||P_{K_B}1||^2=1-exp(-S_ghost),
 
-Since |a_rho|=|rho-1|/|rho|,
+and
 
-S_ghost=sum_{Re(rho)>1/2} m_rho log(|rho|^2/|rho-1|^2),
+S_ghost=sum_{Re(rho)>1/2} m_rho log(|rho|^2/|rho-1|^2)
 
-with the usual Blaschke interpretation if the sum is infinite. Every term is nonnegative because
-
-|rho|^2-|rho-1|^2=2 Re(rho)-1>0.
-
-RH is equivalent to S_ghost=0.
+with the usual Blaschke interpretation. RH is equivalent to S_ghost=0.
 
 ## 6. BSY equals the Casimir ghost entropy
 
-The Balazard-Saias-Yor formula gives
+Balazard-Saias-Yor gives
 
-integral_{-infinity}^{infinity} log|zeta(1/2+it)|/(t^2+1/4) dt
- = 2 pi sum_{Re(rho)>1/2} m_rho log|rho/(1-rho)|.
+integral_R log|zeta(1/2+it)|/(t^2+1/4) dt
+ =2 pi sum_{Re(rho)>1/2} m_rho log|rho/(1-rho)|.
 
 Therefore
 
-S_ghost
- = (1/pi) integral_R log|zeta(1/2+it)|/(t^2+1/4) dt.
+S_ghost=(1/pi) integral_R log|zeta(1/2+it)|/(t^2+1/4) dt.
 
-Equivalently, with the normalized Cauchy/harmonic measure
-
-dmu_C(t)=dt/[2 pi (t^2+1/4)],
-
--log|B(0)| = E_{mu_C}[log|zeta(1/2+iT)|],
-S_ghost = 2 E_{mu_C}[log|zeta(1/2+iT)|].
-
-The weight 1/(t^2+1/4) is exactly the spectral multiplier of the Casimir Green operator
+The weight 1/(t^2+1/4) is exactly the spectral multiplier of
 
 H_C^{-1}=(-D^2+1/4)^{-1}.
 
-Thus the same Casimir metric that makes the logarithmic Nyman map an exact negative-graph isometry also measures the Jensen/BSY entropy of the bad-zero sector.
-
-This gives the exact framework identity
-
-Nyman ghost <-> K_B <-> Casimir H_C^{-1} <-> critical-line log-partition ghost entropy.
-
-The BSY criterion itself is classical; the point here is its exact identification with the Casimir graph and arithmetic thermodynamic structures already present in GPP.
+Thus the continuum Nyman bad-zero defect is measured by the same Casimir Green weight used by the logarithmic Nyman graph.
 
 ## 7. Inner-outer thermodynamic split
 
-The normalized transfer satisfies
-
-Z_N(1)=1.
-
-If its canonical factorization is
-
-Z_N = B O
-
-in the Nyman Hardy half-plane, then at the Cayley origin
+For a canonical factorization Z_N=B O in the continuum Nyman Hardy half-plane,
 
 0=log|Z_N(1)|=log|B(0)|+log|O(0)|,
 
-so
+hence
 
 -log|B(0)|=log|O(0)|.
 
-The bad-zero Jensen entropy is therefore exactly the outer gain needed to compensate the inner attenuation at the thermodynamic/Hagedorn base point.
+The bad-zero Jensen entropy is exactly the outer gain compensating inner attenuation at the base point. This is an identity, not a proof that B is constant.
 
-The logarithmic derivative also splits:
+## 8. Correction: the reciprocal/cell range is not known to equal B H^2 off RH
 
-U_N = -B'/B - O'/O
+The exact-conductor arithmetic inputs are triangularly complete in the orthonormal logarithmic cell space, and their outputs have the same closed span as the reciprocal Baez-Duarte family.
 
-(with derivatives taken in a common coordinate). At the base point the total is the finite constant 1-gamma. This gives a precise future target: determine whether the inner contribution can be bounded or eliminated using the zero-independent arithmetic/Fisher data of the outer channel. No such bound is proved here.
+However, Baez-Duarte's strong criterion proves that RH is equivalent to the target lying in the reciprocal closure. Bagchi/Noor strengthen this to: RH iff the corresponding discrete Hardy span is dense in H^2. These results do NOT identify the reciprocal closed span with the continuum Nyman space B H^2 when RH fails.
 
-## 8. Operator range statement
+Therefore the earlier statement
 
-The exact-conductor arithmetic inputs are triangularly complete in the orthonormal logarithmic cell space found previously. Their outputs under the common transfer Z_N have the same closed span as the reciprocal Nyman generators. By the Nyman-Burnol theorem and the Baez-Duarte reciprocal reduction,
+closure Ran(T_{Z_N}|cell) = B H^2
 
-closure Ran(T_{Z_N}) = B H^2.
+was unjustified and is retracted.
 
-Therefore
+The correct hierarchy is:
 
-P_range = M_B M_B^*,
-P_ghost = I-M_B M_B^*.
+N_discrete subset N_continuum,
+closure(N_continuum)=B H^2,
+RH iff closure(N_discrete)=H^2.
 
-Equivalently, after Z_N=B O,
+Thus, off RH, the discrete orthogonal defect may contain the continuum bad-zero defect plus an additional sampling/completeness defect. One must not identify the two without a theorem.
 
-the outer factor O is cyclic on the arithmetic cell input subspace, and the entire obstruction is the inner factor B.
+This correction makes the discrete boundary-regularity theory of Bagchi/Noor directly relevant: it can constrain the extra sampling defect instead of silently assuming it absent.
 
-This is the correct operator endpoint. Another boundary quadratic-form argument can see |O| but is blind to B. Closure requires an interior/causal theorem that forces B to be constant.
+## 9. Exact Euler boundary split
 
-## 9. Next targets
+For the contraction C=M_sqrt(1-{e^t}) and v_1(t)=e^{-t/2}, ||v_1||=1,
 
-1. Formalize the algebraic identity U_N(s)=U(s)-1/(s-1)+1/s and the Nyman factorization through Z_N.
-2. If Mathlib has the needed Laurent expansion infrastructure, formalize U_N(1)=1-gamma; otherwise keep this as an analytic discovery theorem pending infrastructure.
-3. Express the prime-gas Fisher hierarchy as the scale derivative of the Lambda target vector in the exact-conductor/Casimir basis.
-4. Study the inner/outer derivative split at the Cayley origin and compare the inner Green/Jensen energy with the BPY/Hardy anticausal leakage operator.
-5. Search for a zero-independent entropy-production or passivity inequality strong enough to give an upper bound S_ghost<=0. Since BSY gives S_ghost>=0, such an upper bound would force S_ghost=0 and RH. No such inequality is presently known or claimed.
+||C v_1||^2=gamma,
+||(I-C^2)^(1/2) v_1||^2=1-gamma.
+
+Equivalently,
+
+1-gamma=int_1^infinity {x}/x^2 dx.
+
+Thus the same finite Hagedorn response 1-gamma is the exact fractional-part defect weight of the Euler/Nyman contraction at the boundary state.
+
+## 10. Next targets
+
+1. Use the exact Casimir-to-weighted-Bergman identification to compare directly with Noor's unitary Hardy model of the reciprocal criterion.
+2. Keep the continuum K_B defect and the discrete reciprocal defect distinct.
+3. Translate Noor's local-Dirichlet no-ghost theorem into the Casimir tail variables.
+4. Determine whether the Casimir/shadow structure supplies the extra boundary regularity that would force the discrete ghost into the local Dirichlet domain.
+5. Formalize the elementary algebraic identities above where Mathlib infrastructure suffices.
