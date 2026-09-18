@@ -452,3 +452,136 @@ Therefore every nonzero ghost necessarily satisfies
 sum_n |h_n|=infinity.
 
 In particular, if q_n=n h_n belongs to l2, then by Cauchy-Schwarz h belongs to l1, so no nonzero ghost exists. This is a new measure-theoretic proof of the l2 no-ghost implication and clarifies why the obstruction must live in the critical non-Fock/infinite-variation sector.
+
+
+## 21. Cayley boundary generator: the finite-place center as a spectral shift
+
+Let
+
+C = (I+S)(I-S)^{-1}
+
+on the natural domain of the unbounded inverse of I-S. Then
+
+S=(C-I)(C+I)^{-1}.
+
+For any 0<a<1,
+
+I-aS
+=
+[(C+I)-a(C-I)](C+I)^{-1}
+=
+(1-a)(C+lambda I)(C+I)^{-1},
+
+where
+
+lambda=(1+a)/(1-a).
+
+For the finite-place Poisson radius a_q=q^{-1/2},
+
+lambda_q=(sqrt(q)+1)/(sqrt(q)-1)=K_{q,1}(1/2).
+
+Thus the principal-series-center value of the local finite-place shadow kernel is exactly the additive spectral shift of the universal Cayley/Nyman boundary generator C. This embeds the independently formalized finite-place kernel directly into the singular boundary operator whose pole is z=1.
+
+In terms of the Casimir rapidity kappa, a=tanh kappa and therefore lambda=e^{2kappa}=r^{-1}.
+
+## 22. Conservative two-channel completion uniquely selects q=5
+
+Consider the two rational transfer functions
+
+alpha_lambda(z)=c(1-z)/(lambda-z),
+beta_lambda(z)=c/(lambda-z),
+
+so that
+
+beta_lambda/alpha_lambda=1/(1-z),
+
+the universal Nyman boundary inverse.
+
+Demand the conservative boundary normalization
+
+|alpha_lambda(e^{i theta})|^2+|beta_lambda(e^{i theta})|^2=1
+
+for every theta. Since
+
+|1-e^{i theta}|^2+1=3-2cos theta,
+
+and
+
+|lambda-e^{i theta}|^2=lambda^2+1-2lambda cos theta,
+
+coefficient comparison gives
+
+c^2=lambda,
+3lambda=lambda^2+1,
+
+hence
+
+lambda^2-3lambda+1=0.
+
+The analytic/stable branch lambda>1 is uniquely
+
+lambda=phi^2,
+c=phi.
+
+Since lambda=K_{q,1}(1/2), this uniquely forces q=5.
+
+Equivalently lambda+lambda^{-1}=3, so the corresponding Casimir mass is
+
+mu^2=lambda+lambda^{-1}-2=1.
+
+Therefore the following three normalizations are exactly equivalent:
+- conservative two-channel normalization of the Nyman boundary inverse;
+- unit Casimir mass;
+- finite-place center q=5.
+
+## 23. Golden de Branges pair equals the unit-mass Casimir Green system
+
+At kappa=log phi,
+
+A_phi = phi I - phi^{-1}S,
+
+and
+
+A_phi* A_phi=L+I.
+
+Its inverse transfer function is
+
+A_phi^{-1}(z)
+=
+1/(phi-phi^{-1}z)
+=
+phi/(phi^2-z)
+=
+beta_{phi^2}(z).
+
+Also
+
+alpha_{phi^2}(z)
+=
+(1-z)A_phi^{-1}(z).
+
+Hence the conservative identity
+
+|alpha|^2+|beta|^2=1
+
+is exactly
+
+(|1-z|^2+1)/|A_phi(z)|^2=1,
+
+the boundary-symbol form of
+
+A_phi* A_phi=L+I.
+
+Thus the normalized golden two-channel Hardy/de Branges pair, the unit-mass discrete Casimir-Dirac factor, and the q=5 finite-place shadow center are not parallel analogies: they are the same transfer system written in three coordinate languages.
+
+The coefficient expansion is
+
+beta_{phi^2}(z)
+=
+sum_{n>=0} phi^{-(2n+1)} z^n,
+
+so this same transfer is the unit-mass Markov kernel previously derived.
+
+## 24. Domain warning
+
+C=(I+S)(I-S)^{-1} is unbounded because 1 lies on the spectrum of S. The identities above are exact as rational transfer-function identities and on the natural domain of (I-S)^{-1}. They do not by themselves prove that a dual RH ghost lies in the domain of C or in the associated local Dirichlet/de Branges space. Establishing precisely that boundary regularity remains equivalent to killing the threshold defect and must not be assumed.
