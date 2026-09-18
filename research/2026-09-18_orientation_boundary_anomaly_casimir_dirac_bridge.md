@@ -318,3 +318,137 @@ There are now two exact first-order structures:
 The map mu=2sinh(kappa), a=tanh(kappa), r=e^{-2kappa} is exact internally on the Hardy/local-kernel side, but no theorem yet identifies physical |q| with arithmetic mu. That remains an intertwiner target.
 
 The strongest current project-internal target is to prove that the orientation/deck symmetry of the doubled causal/adjoint system descends to the arithmetic Hardy realization in a way that annihilates the rank-one zero-mass boundary charge. Boundary self-adjointness alone is known to be insufficient.
+
+
+## 16. Finite shadow endpoint and the boundary-dipole anomaly
+
+The finite prime occupation shift makes the origin of the unilateral boundary anomaly exact.
+
+Let S_N act on e_0,...,e_N by S_N e_j=e_{j+1} for j<N and S_N e_N=0. Let R_N e_j=e_{N-j}. Then
+
+R_N S_N R_N = S_N*,
+
+S_N* S_N = I-P_N,
+S_N S_N* = I-P_0,
+
+hence
+
+S_N* S_N - S_N S_N* = P_0-P_N.
+
+For
+
+A_{r,N}=r^{-1/2}(I-rS_N),
+
+one gets
+
+A_{r,N}*A_{r,N}-A_{r,N}A_{r,N}*=r(P_0-P_N).
+
+Moreover R_N(P_0-P_N)R_N=-(P_0-P_N). Thus the finite ordering anomaly is an orientation-odd boundary dipole exchanged by exact occupation reversal.
+
+If x is R_N-even, then |x_0|=|x_N| and the expectation of the anomaly vanishes exactly.
+
+In the strong N->infinity limit on the ordinary unilateral l2 sector, P_N->0 while P_0 remains. The anomaly becomes rP_0. Therefore the half-line rank-one anomaly is precisely the finite shadow dipole after the far/shadow endpoint has escaped to infinity.
+
+This gives an exact operator interpretation of the project's UV/no-escape obstruction: a nonzero zero-mass ghost must carry boundary charge that is balanced only by a non-Hilbert shadow endpoint at infinity.
+
+## 17. Dilation-covariant orientation annihilation theorem
+
+Let P_vac denote the first-coordinate projection on the arithmetic half-line and U_m the decimation operator (U_m q)_k=q_{mk}. For the partner Hamiltonians
+
+H_+=A_r*A_r,
+H_-=A_rA_r*,
+
+the boundary anomaly gives
+
+< U_m q,(H_+-H_-)U_m q >
+= r <U_m q,P_vac U_m q>
+= r |q_m|^2.
+
+Therefore:
+
+If the causal/adjoint orientation quotient identifies the two partner quadratic forms on every arithmetic dilation U_m q, i.e.
+
+< U_m q,H_+U_m q >
+=
+< U_m q,H_-U_m q >
+
+for every m>=1, then q_m=0 for every m and q=0.
+
+For the dual Nyman ghost q_m=m h_m this annihilates the ghost coefficientwise and avoids all infinite Möbius inversion.
+
+This is a conditional closure theorem. The missing theorem is now extremely specific: derive dilation-covariant deck/orientation invariance from the actual arithmetic completion rather than postulating it.
+
+The structure mirrors the many-body no-go in Which Way Is Forward v13: one global Z2 equality kills only one relative boundary bit; a sufficiently local/covariant quotient is required to remove all relative bits. Here the multiplicative dilation semigroup supplies the family of arithmetic views.
+
+## 18. Total dilation-orbit anomaly
+
+Because each local anomaly is positive,
+
+sum_{m>=1} < U_m q,(H_+-H_-)U_m q >
+= r sum_{m>=1}|q_m|^2
+
+whenever either side is finite.
+
+Thus q in l2 is exactly finiteness of the total orientation-boundary anomaly over the full arithmetic dilation orbit. A zero-mass ghost must have infinite total orientation anomaly. This gives a physical/operator interpretation of the known threshold statement q notin l2.
+
+Any independent theorem showing finite total deck/orientation defect for an admissible physical state would therefore eliminate the ghost.
+
+## 19. Divisibility marginals of a hypothetical ghost
+
+Assume the dual ghost multiple sums converge and satisfy
+
+H(m):=sum_{k>=1}h_{mk}=h_1/m.
+
+For a prime p and a>=0, finite subtraction gives the exact p-adic valuation-shell total
+
+sum_{v_p(n)=a} h_n
+=H(p^a)-H(p^{a+1})
+=h_1(1-p^{-1})p^{-a}.
+
+More generally, for a finite prime set P and exponents a_p>=0, finite inclusion-exclusion gives
+
+Cylinder(P,a)
+=
+h_1 product_{p in P}(1-p^{-1})p^{-a_p}.
+
+Thus after normalization by h_1, every finite family of p-adic valuations has exactly the product geometric law of Haar measure on the profinite integers.
+
+Equivalently, the local square-root amplitude vector is
+
+Omega_p
+=
+sqrt(1-p^{-1}) sum_{a>=0}p^{-a/2}|a>,
+
+which is normalized and obeys S_p* Omega_p=p^{-1/2}Omega_p.
+
+Its phase spectral density is precisely the finite-place Poisson/shadow kernel
+
+| sqrt(1-p^{-1})/(1-p^{-1/2}e^{i theta}) |^2
+=
+K_{p,1}(1/2+i theta/log p).
+
+So any nonzero ghost is forced to carry, in its divisibility marginals, exactly the critical local prime coherent-state statistics.
+
+The all-prime vacuum fidelity is
+
+product_p (1-p^{-1})=0,
+
+and the critical coherent product lies outside the ordinary vacuum Fock sector. This recovers the previously observed critical coherent-state boundary from the dual ghost equations themselves.
+
+## 20. Finite-variation no-ghost corollary
+
+Suppose h_1!=0 and the atomic coefficients h_n define a finite-total-variation complex measure on N, equivalently sum_n |h_n|<infinity.
+
+Normalize by h_1. The cylinder formula above gives the Haar valuation masses. For any fixed integer n, take an increasing family of prime sets P and the exact-valuation cylinder containing n. Its mass equals a finite factor from primes dividing n times
+
+product_{p in P, p not dividing n}(1-p^{-1}),
+
+which tends to zero because the prime harmonic series diverges.
+
+The cylinders decrease to {n}, so continuity from above of a finite complex measure gives measure({n})=0 for every n. Countable additivity then gives total mass zero, contradicting H(1)/h_1=1.
+
+Therefore every nonzero ghost necessarily satisfies
+
+sum_n |h_n|=infinity.
+
+In particular, if q_n=n h_n belongs to l2, then by Cauchy-Schwarz h belongs to l1, so no nonzero ghost exists. This is a new measure-theoretic proof of the l2 no-ghost implication and clarifies why the obstruction must live in the critical non-Fock/infinite-variation sector.
