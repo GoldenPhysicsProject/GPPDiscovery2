@@ -320,6 +320,147 @@ r(P_0-P_N)\longrightarrow rP_0.
 
 This observation will later identify the Riemann obstruction as a boundary-at-infinity problem rather than a defect of the finite arithmetic bulk.
 
+
+\section{The sign that must not be squared away}
+
+The preceding constructions suggest a simple rule: the first-order sign carries the geometry; the square carries the positivity.  These roles should not be interchanged.
+
+Let
+\[
+z_p(s)=1-p^{-s}.
+\]
+There are two natural \(2\times2\) Dirac blocks associated with this scalar.
+
+The Hilbert block is
+\[
+D_p^{\mathrm{Hilb}}(s)
+=
+\begin{pmatrix}
+0&\overline{z_p(s)}\\
+z_p(s)&0
+\end{pmatrix}.
+\]
+It is self-adjoint for every \(s\), and
+\[
+\left(D_p^{\mathrm{Hilb}}(s)\right)^2
+=
+|z_p(s)|^2I.
+\]
+Its positivity is automatic, but for that reason it cannot distinguish the critical line.
+
+The functional-equation block retains shadow rather than replacing it by adjoint:
+\[
+\boxed{
+D_p^{\mathrm{sh}}(s)
+=
+\begin{pmatrix}
+0&z_p(1-s)\\
+z_p(s)&0
+\end{pmatrix}.
+}
+\]
+It satisfies
+\[
+\left(D_p^{\mathrm{sh}}(s)\right)^2
+=
+z_p(s)z_p(1-s)I.
+\]
+
+\begin{theorem}[Local shadow Dirac criterion]
+For every \(p>1\),
+\[
+\boxed{
+D_p^{\mathrm{sh}}(s)
+=
+D_p^{\mathrm{sh}}(s)^*
+\iff
+\Re s=\frac12.
+}
+\]
+On that locus,
+\[
+D_p^{\mathrm{sh}}(s)=D_p^{\mathrm{Hilb}}(s)
+\]
+and
+\[
+\left(D_p^{\mathrm{sh}}(s)\right)^2
+=
+|z_p(s)|^2I\ge0.
+\]
+\end{theorem}
+
+\begin{proof}
+Write \(s=\sigma+it\).  Then
+\[
+z_p(1-s)
+=
+1-p^{\sigma-1}e^{it\log p},
+\]
+whereas
+\[
+\overline{z_p(s)}
+=
+1-p^{-\sigma}e^{it\log p}.
+\]
+Equality is therefore equivalent to
+\[
+p^{\sigma-1}=p^{-\sigma},
+\]
+hence to \(\sigma=1/2\).
+\end{proof}
+
+The first-order defect is explicit:
+\[
+\delta_p(s)
+=
+z_p(1-s)-\overline{z_p(s)}
+=
+e^{it\log p}
+\left(p^{-\sigma}-p^{\sigma-1}\right).
+\]
+If \(x=\sigma-\frac12\), then
+\[
+\boxed{
+|\delta_p(s)|^2
+=
+4p^{-1}\sinh^2(x\log p).
+}
+\]
+Thus the shadow-adjoint defect vanishes prime by prime exactly on the half-density axis.
+
+The same sign architecture is already present in the modular sector:
+\[
+M=
+\begin{pmatrix}
+1&1\\
+1&0
+\end{pmatrix},
+\qquad
+\det M=-1,
+\]
+whereas
+\[
+A=M^2,\qquad \det A=+1.
+\]
+The eigenvalues of \(M\) are
+\[
+\varphi,\qquad -\varphi^{-1},
+\]
+while those of \(A\) are
+\[
+\varphi^2,\qquad\varphi^{-2}.
+\]
+Equivalently,
+\[
+1-\varphi=-\varphi^{-1},
+\qquad
+\varphi(1-\varphi)=-1,
+\qquad
+-\varphi(1-\varphi)=1.
+\]
+
+The lesson is not that a square is unimportant.  It is that one should square only after the two first-order sign reversals have been correctly identified.  Replacing shadow by adjoint at the outset produces a positive Hodge square but removes the very information that detects the critical line.
+
 \section{The finite-place kernel and hyperbolic coordinates}
 
 For a real local parameter \(q>1\), consider
