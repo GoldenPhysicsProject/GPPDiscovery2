@@ -529,76 +529,117 @@ Their ratio is the universal boundary inverse:
 =\frac1{1-z}.
 \]
 
-\begin{theorem}[Conservative completion]
-Suppose
+\begin{theorem}[Canonical conservative completion]
+Let \(\lambda>1\) and put
 \[
+\mu=\frac{\lambda-1}{\sqrt\lambda}.
+\]
+Define
+\[
+\alpha_\lambda(z)
+=
+\sqrt\lambda\,\frac{1-z}{\lambda-z},
+\qquad
+\beta_\lambda(z)
+=
+\frac{\lambda-1}{\lambda-z}.
+\]
+Then
+\[
+\boxed{
 |\alpha_\lambda(e^{i\theta})|^2
 +
 |\beta_\lambda(e^{i\theta})|^2
 =1
-\qquad(\theta\in\R).
+}
+\qquad(\theta\in\R),
 \]
-Then
+and
 \[
-c^2=\lambda,\qquad
+\boxed{
+\frac{\beta_\lambda(z)}{\alpha_\lambda(z)}
+=
+\frac{\mu}{1-z}.
+}
+\]
+Consequently the ratio is the unscaled Nyman boundary inverse \(1/(1-z)\) if and only if
+\[
+\mu=1
+\iff
 \lambda^2-3\lambda+1=0.
 \]
 The branch \(\lambda>1\) is
 \[
 \boxed{
-\lambda=\varphi^2,\qquad c=\varphi.
+\lambda=\varphi^2.
 }
 \]
-Consequently the finite-place parameter is uniquely \(q=5\).
+Since \(\lambda=K_{q,1}(1/2)\), the corresponding finite-place parameter is \(q=5\).
 \end{theorem}
 
 \begin{proof}
-Since
+On the unit circle,
+\begin{align*}
+\lambda|1-e^{i\theta}|^2+(\lambda-1)^2
+&=\lambda(2-2\cos\theta)+\lambda^2-2\lambda+1\\
+&=\lambda^2+1-2\lambda\cos\theta\\
+&=|\lambda-e^{i\theta}|^2.
+\end{align*}
+This proves the conservative identity.  The ratio is immediate.  The condition \(\mu=1\) is
 \[
-|1-e^{i\theta}|^2+1=3-2\cos\theta
+\lambda-1=\sqrt\lambda.
 \]
-and
+Squaring, or writing \(\lambda=e^{2\kappa}\), gives
 \[
-|\lambda-e^{i\theta}|^2
-=\lambda^2+1-2\lambda\cos\theta,
+\lambda^2-3\lambda+1=0,
 \]
-equality for all \(\theta\) forces equality of the constant and cosine coefficients:
-\[
-3c^2=\lambda^2+1,\qquad c^2=\lambda.
-\]
-Eliminating \(c\) gives the quadratic equation.
+whose unique root greater than one is \(\varphi^2\).
 \end{proof}
 
-At the golden point,
+The operator content is even simpler.  Since
 \[
-A_{\log\varphi}
+A_\kappa
 =
-\varphi I-\varphi^{-1}S
+\lambda^{-1/2}(\lambda I-S),
+\qquad
+\lambda=e^{2\kappa},
 \]
-and
+one has
+\[
+\boxed{
+\alpha_\lambda(S)=(I-S)A_\kappa^{-1},
+\qquad
+\beta_\lambda(S)=\mu A_\kappa^{-1}.
+}
+\]
+Thus
+\[
+\alpha_\lambda^*\alpha_\lambda
++
+\beta_\lambda^*\beta_\lambda
+=
+A_\kappa^{-*}(L+\mu^2I)A_\kappa^{-1}
+=I.
+\]
+The conservative pair is therefore nothing more than the normalized gradient and mass channels of the same first-order Casimir factor.
+
+At the golden point \(\mu=1\),
 \[
 A_{\log\varphi}^{-1}(z)
 =
 \frac{\varphi}{\varphi^2-z}
 =
-\beta_{\varphi^2}(z).
+\beta_{\varphi^2}(z),
 \]
-Moreover,
+and
 \[
 \alpha_{\varphi^2}(z)
 =
 (1-z)A_{\log\varphi}^{-1}(z).
 \]
-Hence the conservative identity
-\[
-|\alpha|^2+|\beta|^2=1
-\]
-is simply the boundary-symbol form of
-\[
-A_{\log\varphi}^*A_{\log\varphi}=L+I.
-\]
+Hence \(q=5\) is the unique member of the conservative family for which the mass channel itself is the causal Green function and the channel ratio is exactly \(1/(1-z)\).
 
-This is one of the central identifications of the paper: the normalized Hardy pair, the unit-mass Casimir factor, and the \(q=5\) finite-place shadow center are one transfer system written in three coordinate languages.
+This is one of the central identifications of the paper: the canonical Hardy pair, the unit-mass Casimir factor, and the \(q=5\) finite-place shadow center are one transfer system written in three coordinate languages.
 
 
 \begin{theorem}[Golden transfer equivalence]
@@ -619,13 +660,12 @@ Then the following conditions are equivalent:
 \item \(\lambda=\varphi^2\);
 \item \(\lambda+\lambda^{-1}=3\);
 \item the transfer matrix of \(L+\mu^2I\) has characteristic polynomial \(x^2-3x+1\);
-\item the pair
+\item the canonical conservative pair satisfies
 \[
-\alpha(z)=\sqrt{\lambda}\frac{1-z}{\lambda-z},
-\qquad
-\beta(z)=\frac{\sqrt{\lambda}}{\lambda-z}
+\frac{\beta_\lambda(z)}{\alpha_\lambda(z)}
+=
+\frac1{1-z}.
 \]
-is conservative on \(\T\).
 \end{enumerate}
 \end{theorem}
 
@@ -649,7 +689,13 @@ gives the golden values of \(r\) and \(\lambda\).  Unit mass gives
 \[
 \lambda+\lambda^{-1}=2+\mu^2=3,
 \]
-hence the trace-three polynomial.  Finally the conservative condition is equivalent, by the preceding theorem, to
+hence the trace-three polynomial.  Finally the canonical pair has
+\[
+\frac{\beta_\lambda}{\alpha_\lambda}
+=
+\frac{\mu}{1-z},
+\]
+so the unscaled Nyman ratio \(1/(1-z)\) is equivalent to \(\mu=1\), hence to
 \[
 \lambda^2-3\lambda+1=0.
 \]
