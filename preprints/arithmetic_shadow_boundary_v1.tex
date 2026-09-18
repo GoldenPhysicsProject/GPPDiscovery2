@@ -1697,6 +1697,153 @@ Thus an off-line zero drives a localized causal state from the quarter-turn valu
 
 This is the precise meeting point with the order-four geometry of the doubled Lorentzian construction.  An intertwiner that carried its geometric quarter-turn to \(J_\omega\) on the completed causal arithmetic boundary would force the leakage operator to vanish.  The mathematical task is to construct such an intertwiner from the arithmetic completion itself, not to assume its existence.
 
+
+\section{The canonical global defect colligation}
+
+The completed boundary quotient is unimodular on the real axis whether or not it is
+causal.  Thus multiplication by
+\[
+\Theta_\omega(t)=\frac{\xi(a+it)}{\xi(a-it)}
+\]
+is a unitary operator \(U_\omega\) on boundary \(L^2\).  Compress it to the causal Hardy
+space:
+\[
+T_\omega
+=
+\Pi_+U_\omega\big|_{H^2_+},
+\qquad
+\mathfrak H_\omega
+=
+\Pi_-U_\omega\big|_{H^2_+}.
+\]
+Then
+\[
+\boxed{
+T_\omega^*T_\omega
++
+\mathfrak H_\omega^*\mathfrak H_\omega
+=
+I.
+}
+\]
+
+Hence \(T_\omega\) is a contraction and its incoming defect is
+\[
+D_{\omega,\mathrm{in}}
+=
+(I-T_\omega^*T_\omega)^{1/2}.
+\]
+The exact identity above gives
+\[
+D_{\omega,\mathrm{in}}^2
+=
+\mathfrak H_\omega^*\mathfrak H_\omega.
+\]
+Therefore
+\[
+\boxed{
+\mathrm{RH}
+\iff
+D_{\omega,\mathrm{in}}=0
+\quad\text{for every }\omega>0.
+}
+\]
+
+The corresponding first-order skew operator
+\[
+\mathcal Q_\omega
+=
+\begin{pmatrix}
+0&-T_\omega^*\\
+T_\omega&0
+\end{pmatrix}
+\]
+satisfies
+\[
+\mathcal Q_\omega^*=-\mathcal Q_\omega,
+\qquad
+-\mathcal Q_\omega^2
+=
+\begin{pmatrix}
+T_\omega^*T_\omega&0\\
+0&T_\omega T_\omega^*
+\end{pmatrix}.
+\]
+On the incoming copy,
+\[
+\boxed{
+I+\mathcal Q_\omega^2
+=
+D_{\omega,\mathrm{in}}^2.
+}
+\]
+Thus the failure of the global first-order operator to be an exact complex structure is
+precisely the positive incoming leakage energy.
+
+Every contraction has a canonical Julia--Halmos unitary colligation
+\[
+\mathcal U(T)=
+\begin{pmatrix}
+T&D_{T^*}\\
+D_T&-T^*
+\end{pmatrix},
+\]
+where
+\[
+D_T=(I-T^*T)^{1/2},
+\qquad
+D_{T^*}=(I-TT^*)^{1/2}.
+\]
+Applied to \(T_\omega\), this is a zero-independent global multichannel unitary
+colligation constructed directly from the arithmetic boundary function \(\xi\).
+
+The local prime beam splitter
+\[
+S_p=
+\begin{pmatrix}
+a_p&\sqrt{1-a_p^2}\\
+\sqrt{1-a_p^2}&-a_p
+\end{pmatrix}
+\]
+is exactly the scalar Julia colligation of the contraction \(a_p=p^{-1/2}\).  The local
+Euler shadow channel and the global Hardy boundary channel are therefore the scalar and
+operator-valued instances of the same construction.
+
+There are, however, two different defects.  If the boundary function has a coprime inner
+quotient factorization
+\[
+\Theta_\omega=I_\omega\overline{B_\omega},
+\]
+then Toeplitz ordering gives
+\[
+T_\omega=T_{B_\omega}^*T_{I_\omega}
+\]
+and consequently
+\[
+\boxed{
+I-T_\omega^*T_\omega
+=
+T_{I_\omega}^*P_{K_{B_\omega}}T_{I_\omega}.
+}
+\]
+Thus the incoming defect is a positive pullback of the bad-zero model space
+\[
+K_{B_\omega}=H^2_+\ominus B_\omega H^2_+.
+\]
+It vanishes precisely when the bad denominator is absent.
+
+By contrast, the outgoing defect
+\[
+D_{\omega,\mathrm{out}}^2
+=
+I-T_\omega T_\omega^*
+\]
+may remain nonzero when \(T_\omega\) is an isometry.  Under RH this is the familiar
+model-space defect associated with the ordinary critical-line inner factor.  The physical
+requirement is therefore not two-sided unitarity of the causal transfer.  It is
+\emph{incoming isometry}.  The outgoing defect carries spectral information that should
+not be discarded.
+
 \section{The remaining boundary theorem}
 
 The finite arithmetic bulk is already acyclic in the Hodge--Koszul construction.  The co-Poisson transform supplies the exact prime--Archimedean shadow relation.  The obstruction appears only when the finite shadow endpoint is sent to infinity.
