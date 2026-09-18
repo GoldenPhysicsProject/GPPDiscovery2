@@ -127,7 +127,7 @@ and
 
 Hence RH is equivalent to F_0 belonging to the closure of the span of these cyclotomic logarithmic derivatives in the displayed weighted Bergman norm. Weighted Bergman formulations of Nyman-Beurling are known in the literature; the additional structure here is the Casimir origin of the norm, the Ramanujan exact-conductor diagonalization, and the sparse von-Mangoldt/cyclotomic target vector.
 
-## Discrete finite-energy ghost equation
+## Discrete finite-energy ghost equation — corrected summation form
 
 Let f(z)=sum b_n z^n lie in the Casimir/Bergman space and define
 
@@ -137,53 +137,114 @@ Then
 
 <f,F_m>=sum_{j>=1} r_m(j) h_j.
 
-If f is orthogonal to every Ramanujan generator, use
+The tail h_j is well-defined because Cauchy--Schwarz gives absolute convergence of its
+defining series.  Moreover
 
-r_m(j)=sum_{d|(m,j)} d mu(m/d)
+b_n=n(n+1)(h_n-h_{n+1})
 
-to obtain
-
-sum_{d|m} d mu(m/d) [sum_{k>=1} h_{dk}]=0,  m>=2.
-
-Möbius inversion gives the exact scale equation
-
-m sum_{k>=1} h_{mk}=h_1,   m>=1.
-
-Moreover
-
-b_n=n(n+1)(h_n-h_{n+1}),
-
-so
+and
 
 ||f||_C^2=sum_{n>=1} n(n+1)|h_n-h_{n+1}|^2.
 
-Thus an RH-obstructing ghost is precisely a sequence h_n -> 0 with finite weighted Dirichlet energy, h_1 != 0, and
+Hence
 
-sum_{k>=1} h_{mk}=h_1/m
+sum_{n>=1}|h_n-h_{n+1}|<infinity
 
-for every m.
+by Cauchy--Schwarz against sum 1/[n(n+1)].  Since h_n->0, summation by parts is legitimate.
 
-The elementary Hardy bound is sharp:
+For m>1 put
+
+R_m(N)=sum_{j<=N} r_m(j).
+
+Because r_m is periodic with mean zero, R_m is bounded and periodic.  Therefore the exact,
+unconditionally convergent ghost equation is
+
+0
+=
+sum_{j>=1} r_m(j) h_j
+=
+sum_{n>=1} R_m(n)(h_n-h_{n+1}),
+
+and the last series is absolutely convergent.
+
+Using the divisor formula for r_m,
+
+R_m(N)
+=
+sum_{d|m} d mu(m/d) floor(N/d)
+=
+-sum_{d|m} d mu(m/d) {N/d},
+
+where the N term cancels because sum_{d|m}mu(m/d)=0 for m>1.
+
+### Correction of the earlier progression-sum claim
+
+The previous version of this note replaced
+
+sum_j r_m(j)h_j
+
+by
+
+sum_{d|m} d mu(m/d) sum_k h_{dk}
+
+and then Möbius-inverted to obtain
+m sum_k h_{mk}=h_1.
+
+That splitting is NOT justified at the zero-mass boundary in general.  The finite
+linear combination can converge by cancellation of the mean-zero Ramanujan factor even
+when the individual arithmetic-progression sums diverge.  A threshold tail h_n~C/n is
+the basic example.
+
+The raw progression equation is therefore retained only under an additional hypothesis
+ensuring convergence of every progression sum, for example h in l1.  It is not an
+unconditional characterization of the Casimir/Bergman ghost.
+
+For Abel regularization the exact safe identity is
+
+lim_{r up 1}
+sum_{d|m} d mu(m/d)
+  sum_{k>=1} h_{dk} r^{dk}
+=0.
+
+For every fixed r<1 the inner sums converge absolutely; the divisor splitting is then
+legitimate.  The limit must be taken only after the divisor combination is formed.
+
+If, in addition, q_n:=n h_n has a limit C and the finite parts
+
+G_d
+:=
+lim_{r up 1}
+[
+ d sum_{k>=1} h_{dk} r^{dk}
+ + C log(1-r^d)
+]
+
+exist, then the Abel identity gives the renormalized Möbius law
+
+sum_{d|m} mu(m/d) G_d = C Lambda(m),   m>1.
+
+Equivalently,
+
+G_m=G_1+C log m.
+
+Thus a nonzero threshold coefficient does not produce the old constant scale law; it
+produces a logarithmic anomaly whose Möbius derivative is exactly the von Mangoldt
+function.
+
+This correction invalidates any downstream argument that used the raw progression sums
+without first proving the required summability or regularization.  In particular, the
+previous 'finite-variation/profinite cylinder' and 'massive no-ghost from progression
+Cauchy--Schwarz' arguments are conditional on that stronger topology and are not, by
+themselves, universal statements about the whole discrete Nyman defect space.
+
+The elementary Hardy bound remains valid:
 
 |h_1|^2 <= sum n(n+1)|Delta h_n|^2,
 
-with equality only for h_n=h_1/n. The arithmetic multiple-sum constraints are therefore the sole additional obstruction.
+with equality only for h_n=h_1/n.
 
-## Exact ultraviolet escape identity
-
-Let
-
-A_K=sum_{k<=K} mu(k)/k,
-
-a_K(r)=sum_{k|r,k<=K} mu(k).
-
-For a ghost with H_m=sum_j h_{mj}=h_1/m,
-
-sum_{k<=K} mu(k) H_{nk}
-=(h_1/n) A_K
-=h_n + sum_{r>K} a_K(r) h_{nr}.
-
-Since A_K -> 0 by the prime number theorem, any nonzero ghost must be carried entirely by the r>K tail. After centering a_K by its periodic mean A_K, the statement becomes an explicit no-ultraviolet-escape problem for the Casimir Dirichlet energy. This is the discrete version of the previously identified Nyman ghost / Gamma high-frequency escape mechanism.
+The unconditional arithmetic obstruction is therefore the bounded-periodic Ramanujan
+summation-by-parts family displayed above.
 
 ## Prime-power translation towers
 
