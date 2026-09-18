@@ -1357,6 +1357,156 @@ L+\mu^2
 \]
 The missing map is an intertwiner identifying the physical transverse norm with the arithmetic Casimir mass in a common representation.  Nothing in the foregoing algebra requires that identification, but it makes clear what such an identification would have to preserve.
 
+
+\section{Hardy leakage and the order-four lift}
+
+The shifted completed shadow quotient is
+\[
+\Theta_\omega(t)
+=
+\frac{\xi(a+it)}{\xi(a-it)},
+\qquad
+a=\frac12+\omega,
+\qquad
+\omega>0.
+\]
+Let
+\[
+U_\omega=M_{\Theta_\omega}
+\]
+on \(L^2(\R)\), and let
+\[
+(RF)(t)=F(-t).
+\]
+Reality of \(\xi\) gives
+\[
+\Theta_\omega(-t)
+=
+\overline{\Theta_\omega(t)},
+\]
+while \(|\Theta_\omega(t)|=1\) on the real boundary.  Hence
+\[
+R\,U_\omega\,R=U_\omega^*.
+\]
+
+Define
+\[
+K_\omega=R\,U_\omega.
+\]
+
+\begin{proposition}[Shadow involution]
+For every \(\omega>0\),
+\[
+\boxed{
+K_\omega^*=K_\omega,
+\qquad
+K_\omega^2=I.
+}
+\]
+\end{proposition}
+
+Let
+\[
+\Pi_+,\Pi_-
+\]
+be the upper and lower Hardy projections and put
+\[
+\Gamma=\Pi_+-\Pi_-.
+\]
+Reflection exchanges the two Hardy halves, so
+\[
+R\Gamma R=-\Gamma.
+\]
+The anticausal leakage operator is
+\[
+\mathfrak H_\omega
+=
+\Pi_-U_\omega\big|_{H^2_+}.
+\]
+Now form
+\[
+J_\omega=\Gamma K_\omega.
+\]
+
+\begin{theorem}[Leakage as failure of the quarter-turn law]
+For every \(f\in H^2_+\),
+\[
+\boxed{
+\langle f,(J_\omega^2+I)f\rangle
+=
+2\|\mathfrak H_\omega f\|^2.
+}
+\]
+Equivalently, as an operator on \(H^2_+\),
+\[
+\boxed{
+\Pi_+(J_\omega^2+I)\Pi_+
+=
+2\mathfrak H_\omega^*\mathfrak H_\omega.
+}
+\]
+\end{theorem}
+
+\begin{proof}
+Since \(\Gamma f=f\) and \(K_\omega\) is self-adjoint,
+\begin{align*}
+\langle f,J_\omega^2f\rangle
+&=
+\langle f,\Gamma K_\omega\Gamma K_\omega f\rangle\\
+&=
+\langle K_\omega f,\Gamma K_\omega f\rangle\\
+&=
+\|\Pi_+K_\omega f\|^2
+-
+\|\Pi_-K_\omega f\|^2.
+\end{align*}
+Because \(R\) exchanges the Hardy halves,
+\[
+\|\Pi_+K_\omega f\|
+=
+\|\Pi_-U_\omega f\|
+=
+\|\mathfrak H_\omega f\|.
+\]
+Since \(K_\omega\) is unitary,
+\[
+\|\Pi_+K_\omega f\|^2+\|\Pi_-K_\omega f\|^2=\|f\|^2,
+\]
+and the quadratic identity follows.  Polarization gives the compressed operator identity.
+\end{proof}
+
+The shifted Hardy criterion may therefore be written in purely order-four language:
+
+\begin{corollary}[Quarter-turn criterion]
+The Riemann hypothesis is equivalent to
+\[
+\boxed{
+J_\omega^2=-I
+\quad\text{on }H^2_+
+\quad\text{for every }\omega>0.
+}
+\]
+\end{corollary}
+
+The statement is one-sided.  Even when RH holds, one must not demand
+\[
+\{K_\omega,\Gamma\}=0
+\]
+on the full boundary space.  A nonconstant inner multiplier may have a model-space defect in the reverse Hardy direction; the critical zeros themselves live in that defect.  RH says exactly that the causal sector suffers no anticausal leakage.
+
+The localized anti-inner crossing theorem gives a complementary dichotomy.  If RH fails, there are shifts and unit causal vectors for which
+\[
+\|\mathfrak H_\omega f\|\longrightarrow1.
+\]
+For such vectors,
+\[
+\frac{\langle f,J_\omega^2f\rangle}{\|f\|^2}
+\longrightarrow+1.
+\]
+Thus an off-line zero drives a localized causal state from the quarter-turn value \(J^2=-I\) toward the involutive value \(J^2=+I\).
+
+This is the precise meeting point with the order-four geometry of the doubled Lorentzian construction.  An intertwiner that carried its geometric quarter-turn to \(J_\omega\) on the completed causal arithmetic boundary would force the leakage operator to vanish.  The mathematical task is to construct such an intertwiner from the arithmetic completion itself, not to assume its existence.
+
 \section{The remaining boundary theorem}
 
 The finite arithmetic bulk is already acyclic in the Hodge--Koszul construction.  The co-Poisson transform supplies the exact prime--Archimedean shadow relation.  The obstruction appears only when the finite shadow endpoint is sent to infinity.
