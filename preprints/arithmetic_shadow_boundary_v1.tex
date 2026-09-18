@@ -1,0 +1,1341 @@
+\documentclass[11pt]{article}
+
+\usepackage[a4paper,margin=1.05in]{geometry}
+\usepackage{fontspec}
+\usepackage{amsmath,amssymb,amsthm,mathtools}
+\usepackage{bm}
+\usepackage{microtype}
+\usepackage{booktabs}
+\usepackage{enumitem}
+\usepackage{tikz}
+\usepackage{tikz-cd}
+\usepackage[hidelinks]{hyperref}
+
+\setmainfont{TeX Gyre Pagella}
+\setsansfont{TeX Gyre Heros}
+\setmonofont{TeX Gyre Cursor}
+
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{problem}[theorem]{Problem}
+\newtheorem{conjecture}[theorem]{Conjecture}
+\theoremstyle{definition}
+\newtheorem{definition}[theorem]{Definition}
+\theoremstyle{remark}
+\newtheorem{remark}[theorem]{Remark}
+
+\DeclareMathOperator{\artanh}{artanh}
+\DeclareMathOperator{\arsinh}{arsinh}
+\DeclareMathOperator{\Var}{Var}
+\DeclareMathOperator{\Dom}{Dom}
+\DeclareMathOperator{\Ran}{Ran}
+\DeclareMathOperator{\Tr}{Tr}
+\DeclareMathOperator{\Fix}{Fix}
+\DeclareMathOperator{\diag}{diag}
+\DeclareMathOperator{\supp}{supp}
+\DeclareMathOperator{\ord}{ord}
+
+\newcommand{\N}{\mathbb N}
+\newcommand{\R}{\mathbb R}
+\newcommand{\C}{\mathbb C}
+\newcommand{\T}{\mathbb T}
+\newcommand{\HH}{\mathcal H}
+\newcommand{\K}{\mathcal K}
+\newcommand{\eps}{\varepsilon}
+\newcommand{\vp}{v_p}
+\newcommand{\one}{\mathbf 1}
+\newcommand{\ii}{\mathrm i}
+\newcommand{\dd}{\,\mathrm d}
+
+\title{\textbf{The Arithmetic Shadow Boundary}\\[3pt]
+\large Casimir--Dirac Factorization, Golden Transfer, and the Hagedorn Ghost}
+
+\author{Daniel Toupin\\
+Golden Physics Project}
+
+\date{Working preprint, September 2026}
+
+\begin{document}
+
+\maketitle
+
+\begin{abstract}
+A single unilateral shift already contains the geometry needed to distinguish a direction from its reverse.  If
+\[
+L=2I-S-S^*
+\]
+is the discrete half-line Laplacian and
+\[
+A_\kappa=e^\kappa I-e^{-\kappa}S,
+\]
+then
+\[
+A_\kappa^*A_\kappa=L+4\sinh^2\kappa\,I,
+\qquad
+A_\kappa A_\kappa^*
+=L+4\sinh^2\kappa\,I-e^{-2\kappa}P_0.
+\]
+The translation-invariant bulk therefore forgets the order of the first-order factors; the causal boundary remembers it through a rank-one index.
+
+We develop the arithmetic consequences of this elementary observation.  The finite-place shadow kernel is a Poisson kernel with radius \(q^{-1/2}\).  Its Cayley coordinate is \(e^{-2\kappa}\), with
+\[
+\tanh\kappa=q^{-1/2},
+\qquad
+\mu=2\sinh\kappa=\frac{2}{\sqrt{q-1}}.
+\]
+The place \(q=5\) is characterized by \(\mu=1\), hence
+\[
+\kappa=\log\varphi,\qquad e^{-2\kappa}=\varphi^{-2}.
+\]
+At this point the causal Green function, a normalized two-channel Hardy transfer, the finite-place center \(K_{5,1}(1/2)=\varphi^2\), and the stable eigenvalue of the minimal trace-three hyperbolic element of \(SL_2(\mathbb Z)\) become the same transfer system in different coordinates.
+
+The zeta Gibbs state admits the same parametrization prime by prime.  For \(\beta>1\),
+\[
+\mathbb P_\beta(n)=\frac{n^{-\beta}}{\zeta(\beta)},
+\qquad
+\mu_{p,\beta}^2=\frac{4}{p^\beta-1},
+\]
+so that
+\[
+\zeta(\beta)=\prod_p\left(1+\frac{\mu_{p,\beta}^2}{4}\right),
+\qquad
+-\frac{\zeta'(\beta)}{\zeta(\beta)}
+=\frac14\sum_p\mu_{p,\beta}^2\log p.
+\]
+The corresponding doubled purification has entanglement entropy equal to the number entropy.
+
+Finally, the dual Nyman--Casimir ghost equations force every finite family of \(p\)-adic valuations to have exactly the \(\beta\downarrow1\) Haar/Hagedorn law.  Thus a nonzero ghost can exist only as a singular boundary state: locally normal on every finite prime sector, but outside the ordinary arithmetic Fock space and outside finite total variation.  Positive Casimir mass excludes it.  At finite arithmetic cutoff the causal/adjoint anomaly is the boundary dipole \(P_0-P_N\); the unilateral anomaly is what remains when the shadow endpoint escapes to infinity.
+
+This reduces the Riemann problem in this representation to a precise no-escape question: whether the completed prime--Archimedean shadow condition can support that singular zero-mass boundary state.
+\end{abstract}
+
+\section{The half-line remembers an orientation}
+
+Let \(\ell^2(\N_0)\) carry its standard basis \(e_0,e_1,\ldots\), and let
+\[
+Se_n=e_{n+1}
+\]
+be the unilateral shift.  Then
+\[
+S^*S=I,\qquad SS^*=I-P_0,
+\]
+where \(P_0=|e_0\rangle\langle e_0|\).  The discrete half-line Laplacian is
+\[
+L=2I-S-S^*.
+\]
+It is the quadratic-form operator of the ordinary first difference.
+
+The most useful first-order factor is not \(I-S\) itself, but its massive deformation.
+
+\begin{definition}
+For \(\kappa>0\) set
+\[
+A_\kappa=e^\kappa I-e^{-\kappa}S,
+\qquad
+\mu=2\sinh\kappa,
+\qquad
+r=e^{-2\kappa}.
+\]
+\end{definition}
+
+\begin{theorem}[Causal Casimir factorization]
+One has
+\begin{align}
+A_\kappa^*A_\kappa&=L+\mu^2I,\\
+A_\kappa A_\kappa^*&=L+\mu^2I-rP_0,
+\end{align}
+and therefore
+\[
+\boxed{
+A_\kappa^*A_\kappa-A_\kappa A_\kappa^*=rP_0.
+}
+\]
+\end{theorem}
+
+\begin{proof}
+Expand:
+\[
+A_\kappa^*A_\kappa
+=e^{2\kappa}I+e^{-2\kappa}S^*S-S-S^*
+\]
+and use \(S^*S=I\).  Since
+\[
+e^{2\kappa}+e^{-2\kappa}=2+4\sinh^2\kappa,
+\]
+the first identity follows.  Reversing the factor order replaces \(S^*S\) by
+\(SS^*=I-P_0\), which produces the second identity.
+\end{proof}
+
+The formula is trivial algebraically and decisive geometrically.  On the bilateral line the shift is unitary and the two factor orders coincide.  On the half-line they differ by one boundary degree of freedom.  Direction is therefore not a bulk datum here.  It is an index carried by the boundary.
+
+The positive mass is exactly the parameter that restores coercivity.
+
+\begin{proposition}[Mass and invertibility]
+For \(\kappa>0\),
+\[
+A_\kappa^{-1}
+=e^{-\kappa}\sum_{n\ge0}e^{-2n\kappa}S^n,
+\]
+and
+\[
+\|A_\kappa^{-1}\|=\frac{1}{\mu}.
+\]
+Hence the inverse becomes unbounded precisely in the zero-mass limit.
+\end{proposition}
+
+\begin{proof}
+Since \(e^{-2\kappa}<1\),
+\[
+A_\kappa=e^\kappa(I-e^{-2\kappa}S)
+\]
+has the geometric inverse displayed above.  The norm of \((I-rS)^{-1}\) is
+\((1-r)^{-1}\), so
+\[
+\|A_\kappa^{-1}\|
+=\frac{e^{-\kappa}}{1-e^{-2\kappa}}
+=\frac1{e^\kappa-e^{-\kappa}}
+=\frac1{2\sinh\kappa}.
+\]
+\end{proof}
+
+Thus the zero-mass problem is not an ordinary eigenvalue problem.  It is a threshold problem at the point where a one-sided inverse ceases to be bounded.
+
+\section{The doubled first-order operator}
+
+Introduce the doubled carrier
+\[
+\HH\oplus\HH,\qquad \HH=\ell^2(\N_0),
+\]
+and define
+\[
+\mathbb D_\kappa=
+\begin{pmatrix}
+0&A_\kappa^*\\
+A_\kappa&0
+\end{pmatrix}.
+\]
+Then
+\[
+\mathbb D_\kappa^2=
+\begin{pmatrix}
+L+\mu^2I&0\\
+0&L+\mu^2I-rP_0
+\end{pmatrix}.
+\]
+
+There is a canonical quarter-turn on the doubled carrier,
+\[
+\mathbb J=
+\begin{pmatrix}
+0&-I\\
+I&0
+\end{pmatrix},
+\qquad
+\mathbb J^2=-I,\qquad
+\mathbb J^4=I.
+\]
+
+\begin{proposition}[Order-four exchange]
+The quarter-turn exchanges the causal and adjoint sectors:
+\[
+\mathbb J\mathbb D_\kappa\mathbb J^{-1}
+=
+-
+\begin{pmatrix}
+0&A_\kappa\\
+A_\kappa^*&0
+\end{pmatrix},
+\]
+and
+\[
+\mathbb J\mathbb D_\kappa^2\mathbb J^{-1}
+=
+\diag(H_-,H_+),
+\]
+where
+\[
+H_+=A_\kappa^*A_\kappa,\qquad
+H_-=A_\kappa A_\kappa^*.
+\]
+\end{proposition}
+
+The even operators are exchanged by an order-four lift, while their failure to coincide is the rank-one boundary term \(rP_0\).  This is the simplest form of the pattern that will recur: an order-two relation on observable quadratic data lifted by an order-four operation on the first-order carrier.
+
+\section{Finite shadow reversal and the boundary dipole}
+
+The unilateral anomaly becomes more transparent before the infinite limit is taken.  On
+\[
+\HH_N=\operatorname{span}\{e_0,\ldots,e_N\},
+\]
+let \(S_N\) be the truncated shift and define the exact reversal
+\[
+R_Ne_j=e_{N-j}.
+\]
+Then
+\[
+R_NS_NR_N=S_N^*.
+\]
+
+\begin{theorem}[Finite shadow dipole]
+One has
+\[
+S_N^*S_N-S_NS_N^*=P_0-P_N.
+\]
+Consequently, for
+\[
+A_{\kappa,N}=e^\kappa I-e^{-\kappa}S_N,
+\]
+\[
+\boxed{
+A_{\kappa,N}^*A_{\kappa,N}
+-A_{\kappa,N}A_{\kappa,N}^*
+=
+r(P_0-P_N).
+}
+\]
+Moreover,
+\[
+R_N(P_0-P_N)R_N=-(P_0-P_N).
+\]
+\end{theorem}
+
+The finite anomaly is not a single charge but a dipole.  Exact shadow reversal exchanges its two ends.  If \(x\) is \(R_N\)-even, then
+\[
+|\langle e_0,x\rangle|
+=
+|\langle e_N,x\rangle|
+\]
+and the expectation of the anomaly vanishes.
+
+In the strong limit on ordinary \(\ell^2\),
+\[
+P_N\longrightarrow0,\qquad P_0\longrightarrow P_0.
+\]
+Thus the unilateral rank-one anomaly is what remains after the far shadow endpoint has escaped to infinity:
+\[
+r(P_0-P_N)\longrightarrow rP_0.
+\]
+
+This observation will later identify the Riemann obstruction as a boundary-at-infinity problem rather than a defect of the finite arithmetic bulk.
+
+\section{The finite-place kernel and hyperbolic coordinates}
+
+For a real local parameter \(q>1\), consider
+\[
+K_{q,1}(s)
+=
+\frac{1-q^{-1}}
+{(1-q^{-s})(1-q^{-(1-s)})}.
+\]
+On the unitary line
+\[
+s=\frac12+it
+\]
+write
+\[
+a_q=q^{-1/2},
+\qquad
+\theta=t\log q.
+\]
+Then
+\[
+\boxed{
+K_{q,1}\!\left(\frac12+it\right)
+=
+\frac{1-a_q^2}
+{1+a_q^2-2a_q\cos\theta}.
+}
+\]
+It is the Poisson kernel of the disk with radius \(a_q\).
+
+Now introduce the rapidity
+\[
+\kappa_q=\artanh(a_q).
+\]
+The three natural coordinates are
+\[
+\boxed{
+a_q=\tanh\kappa_q,\qquad
+r_q=e^{-2\kappa_q}
+=\frac{1-a_q}{1+a_q},
+\qquad
+\mu_q=2\sinh\kappa_q
+=\frac{2}{\sqrt{q-1}}.
+}
+\]
+
+They encode the same local object in Poisson, Cayley, and Casimir coordinates.
+
+\begin{proposition}[Extremal values]
+The finite-place kernel may be written
+\[
+K_q(\theta)
+=
+\frac{1}
+{\cosh(2\kappa_q)-\sinh(2\kappa_q)\cos\theta}.
+\]
+Hence
+\[
+K_q(0)=e^{2\kappa_q}=r_q^{-1},
+\qquad
+K_q(\pi)=e^{-2\kappa_q}=r_q.
+\]
+\end{proposition}
+
+The place \(q=5\) is distinguished by
+\[
+\mu_q=1.
+\]
+Indeed,
+\[
+\mu_5=1,\qquad
+\tanh\kappa_5=\frac1{\sqrt5},
+\]
+and therefore
+\[
+\boxed{
+\kappa_5=\arsinh\frac12=\log\varphi,
+\qquad
+r_5=\varphi^{-2}.
+}
+\]
+The finite-place kernel then has extrema
+\[
+K_5(0)=\varphi^2,\qquad
+K_5(\pi)=\varphi^{-2}.
+\]
+
+\section{The modular transfer matrix}
+
+The unit-mass equation
+\[
+(I+L)u=0
+\]
+gives the second-order recurrence
+\[
+u_{n+1}=3u_n-u_{n-1}.
+\]
+Its transfer matrix is
+\[
+C=
+\begin{pmatrix}
+3&-1\\
+1&0
+\end{pmatrix}.
+\]
+The minimal trace hyperbolic element
+\[
+A=
+\begin{pmatrix}
+2&1\\
+1&1
+\end{pmatrix}
+\in SL_2(\mathbb Z)
+\]
+has characteristic polynomial
+\[
+x^2-3x+1
+\]
+and eigenvalues
+\[
+\varphi^{2},\qquad \varphi^{-2}.
+\]
+
+\begin{theorem}[Integral conjugacy]
+With
+\[
+P=
+\begin{pmatrix}
+1&-1\\
+0&1
+\end{pmatrix},
+\]
+one has
+\[
+\boxed{
+P^{-1}AP=C.
+}
+\]
+\end{theorem}
+
+Thus the minimal trace-three modular dynamics and the transfer dynamics of the unit-mass discrete Casimir equation are the same \(SL_2(\mathbb Z)\) conjugacy class.
+
+The spectral symbol gives the same fact in scalar form:
+\[
+3-z-z^{-1}
+=
+\varphi^2(1-\varphi^{-2}z)(1-\varphi^{-2}z^{-1}).
+\]
+The stable Wiener--Hopf root is \(\varphi^{-2}\), the unstable root is \(\varphi^2\), and the discriminant is \(5\).
+
+\begin{figure}[t]
+\centering
+\begin{tikzcd}[column sep=large,row sep=large]
+q=5 \arrow[r, "\;a=q^{-1/2}\;"] \arrow[d, "K_{q,1}(1/2)"'] &
+a=1/\sqrt5 \arrow[r, "\kappa=\artanh a"] &
+\kappa=\log\varphi \arrow[d, "\mu=2\sinh\kappa"] \\
+\varphi^2 \arrow[r, "\lambda+\lambda^{-1}=3"'] &
+\{\varphi^2,\varphi^{-2}\}
+&
+\mu=1 \arrow[l, "r=e^{-2\kappa}"']
+\end{tikzcd}
+\caption{The \(q=5\) finite-place, hyperbolic, modular, and Casimir coordinates.}
+\end{figure}
+
+\section{The Nyman boundary generator}
+
+The singular point \(z=1\) is best exposed by the Cayley operator
+\[
+\mathcal C=(I+S)(I-S)^{-1}
+\]
+on the natural domain of \((I-S)^{-1}\).  Solving for \(S\),
+\[
+S=(\mathcal C-I)(\mathcal C+I)^{-1}.
+\]
+
+\begin{theorem}[Finite-place center as a Cayley spectral shift]
+For \(0<a<1\),
+\[
+I-aS
+=
+(1-a)(\mathcal C+\lambda I)(\mathcal C+I)^{-1},
+\qquad
+\lambda=\frac{1+a}{1-a}.
+\]
+If \(a=q^{-1/2}\), then
+\[
+\boxed{
+\lambda=K_{q,1}(1/2)
+=\frac{\sqrt q+1}{\sqrt q-1}.
+}
+\]
+\end{theorem}
+
+The principal-series center of the finite-place shadow kernel is therefore the additive spectral shift of the universal singular boundary generator.
+
+There is a second characterization of the same value.  Consider
+\[
+\alpha_\lambda(z)
+=c\,\frac{1-z}{\lambda-z},
+\qquad
+\beta_\lambda(z)
+=c\,\frac1{\lambda-z}.
+\]
+Their ratio is the universal boundary inverse:
+\[
+\frac{\beta_\lambda(z)}{\alpha_\lambda(z)}
+=\frac1{1-z}.
+\]
+
+\begin{theorem}[Conservative completion]
+Suppose
+\[
+|\alpha_\lambda(e^{i\theta})|^2
++
+|\beta_\lambda(e^{i\theta})|^2
+=1
+\qquad(\theta\in\R).
+\]
+Then
+\[
+c^2=\lambda,\qquad
+\lambda^2-3\lambda+1=0.
+\]
+The branch \(\lambda>1\) is
+\[
+\boxed{
+\lambda=\varphi^2,\qquad c=\varphi.
+}
+\]
+Consequently the finite-place parameter is uniquely \(q=5\).
+\end{theorem}
+
+\begin{proof}
+Since
+\[
+|1-e^{i\theta}|^2+1=3-2\cos\theta
+\]
+and
+\[
+|\lambda-e^{i\theta}|^2
+=\lambda^2+1-2\lambda\cos\theta,
+\]
+equality for all \(\theta\) forces equality of the constant and cosine coefficients:
+\[
+3c^2=\lambda^2+1,\qquad c^2=\lambda.
+\]
+Eliminating \(c\) gives the quadratic equation.
+\end{proof}
+
+At the golden point,
+\[
+A_{\log\varphi}
+=
+\varphi I-\varphi^{-1}S
+\]
+and
+\[
+A_{\log\varphi}^{-1}(z)
+=
+\frac{\varphi}{\varphi^2-z}
+=
+\beta_{\varphi^2}(z).
+\]
+Moreover,
+\[
+\alpha_{\varphi^2}(z)
+=
+(1-z)A_{\log\varphi}^{-1}(z).
+\]
+Hence the conservative identity
+\[
+|\alpha|^2+|\beta|^2=1
+\]
+is simply the boundary-symbol form of
+\[
+A_{\log\varphi}^*A_{\log\varphi}=L+I.
+\]
+
+This is one of the central identifications of the paper: the normalized Hardy pair, the unit-mass Casimir factor, and the \(q=5\) finite-place shadow center are one transfer system written in three coordinate languages.
+
+\section{The prime Gibbs state}
+
+Let \(\beta>1\).  The zeta partition function defines the probability measure
+\[
+\boxed{
+\mathbb P_\beta(n)
+=
+\frac{n^{-\beta}}{\zeta(\beta)}.
+}
+\]
+For every \(m\ge1\),
+\[
+\mathbb P_\beta(m\mid n)=m^{-\beta}.
+\]
+Unique factorization then gives independent geometric valuation variables:
+\[
+\boxed{
+\mathbb P_\beta(v_p(n)=a)
+=
+(1-p^{-\beta})p^{-a\beta}.
+}
+\]
+
+The natural local amplitude radius is
+\[
+a_{p,\beta}=p^{-\beta/2}.
+\]
+Set
+\[
+\kappa_{p,\beta}=\artanh(a_{p,\beta}),
+\qquad
+\mu_{p,\beta}=2\sinh\kappa_{p,\beta}.
+\]
+
+\begin{theorem}[Prime occupation as transverse Casimir mass]
+One has
+\[
+\boxed{
+\mu_{p,\beta}^2
+=
+\frac{4}{p^\beta-1}
+=
+4\,\mathbb E_\beta[N_p].
+}
+\]
+Consequently
+\[
+\boxed{
+\zeta(\beta)
+=
+\prod_p
+\left(1+\frac{\mu_{p,\beta}^2}{4}\right)
+}
+\]
+and
+\[
+\boxed{
+-\frac{\zeta'(\beta)}{\zeta(\beta)}
+=
+\frac14\sum_p
+\mu_{p,\beta}^2\log p.
+}
+\]
+\end{theorem}
+
+\begin{proof}
+The geometric law has mean
+\[
+\mathbb E_\beta[N_p]
+=
+\frac{p^{-\beta}}{1-p^{-\beta}}
+=
+\frac1{p^\beta-1}.
+\]
+Since
+\[
+\sinh^2\kappa
+=
+\frac{\tanh^2\kappa}{1-\tanh^2\kappa},
+\]
+the first identity follows.  The other two are the Euler product and its logarithmic derivative rewritten in this coordinate.
+\end{proof}
+
+Thus the arithmetic internal energy is the log-prime-weighted total of the local Casimir mass squares.
+
+\section{The doubled arithmetic state}
+
+The Gibbs state admits a canonical purification:
+\[
+\boxed{
+|\Psi_\beta\rangle
+=
+\frac1{\sqrt{\zeta(\beta)}}
+\sum_{n\ge1}
+n^{-\beta/2}
+|n\rangle_+\otimes|n\rangle_-.
+}
+\]
+Tracing either factor gives
+\[
+\rho_\beta
+=
+\sum_{n\ge1}
+\frac{n^{-\beta}}{\zeta(\beta)}
+|n\rangle\langle n|.
+\]
+Its entropy is
+\[
+\boxed{
+S_{\mathbb N}(\beta)
+=
+\log\zeta(\beta)
+-\beta\frac{\zeta'(\beta)}{\zeta(\beta)}.
+}
+\]
+
+By unique factorization the global state is the tensor product of local pairs
+\[
+|\Psi_\beta\rangle
+=
+\bigotimes_p
+|\mathrm{TFD}_{p,\beta}\rangle,
+\]
+where
+\[
+|\mathrm{TFD}_{p,\beta}\rangle
+=
+\sqrt{1-p^{-\beta}}
+\sum_{a\ge0}
+p^{-a\beta/2}
+|a\rangle_+\otimes|a\rangle_-.
+\]
+With
+\[
+p^{-\beta/2}=\tanh\kappa_{p,\beta},
+\]
+this becomes
+\[
+|\mathrm{TFD}_{p,\beta}\rangle
+=
+\operatorname{sech}\kappa
+\sum_{a\ge0}
+\tanh^a\kappa\,|a,a\rangle.
+\]
+
+The reduced mean occupation is
+\[
+\bar n_p=\sinh^2\kappa
+=\frac{\mu_{p,\beta}^2}{4},
+\]
+and the local entropy takes the familiar bosonic form
+\[
+S_{p,\beta}
+=
+(\bar n_p+1)\log(\bar n_p+1)
+-
+\bar n_p\log\bar n_p.
+\]
+
+No physical interpretation of the two tensor factors is required for these identities.  They are the canonical purification of the arithmetic Gibbs law.
+
+\section{The Hagedorn boundary}
+
+The limit \(\beta\downarrow1\) is singular globally but regular on every finite set of primes.
+
+For fixed \(n\),
+\[
+\mathbb P_\beta(n)
+=
+\frac{n^{-\beta}}{\zeta(\beta)}
+\longrightarrow0,
+\]
+while the total mass remains one.  At the same time,
+\[
+\mathbb P_\beta(v_p=a)
+\longrightarrow
+(1-p^{-1})p^{-a}.
+\]
+Thus every finite collection of valuation variables has a perfectly good limit.
+
+The global vacuum fidelity is
+\[
+|\langle0|\Psi_\beta\rangle|^2
+=
+\prod_p(1-p^{-\beta})
+=
+\frac1{\zeta(\beta)}
+\longrightarrow0.
+\]
+Moreover,
+\[
+\sum_p\mathbb P_\beta(v_p>0)
+=
+\sum_p p^{-\beta}
+\]
+is finite for \(\beta>1\) and divergent at \(\beta=1\).  The critical product state therefore leaves the ordinary finite-prime occupation sector.
+
+This is the arithmetic Hagedorn transition in the present representation: local prime states survive; the global vector escapes.
+
+The same transition is visible in the transverse masses:
+\[
+\frac14\sum_p\mu_{p,\beta}^2
+=
+\mathbb E_\beta[\Omega(n)],
+\]
+which is finite for \(\beta>1\) and divergent at \(\beta=1\).  The boundary is an accumulation of infinitely many individually light prime channels.
+
+\section{The dual ghost}
+
+The Nyman--Casimir reduction leads to a sequence \(h=(h_n)_{n\ge1}\) satisfying
+\[
+\boxed{
+H(m):=\sum_{k\ge1}h_{mk}
+=
+\frac{h_1}{m}
+\qquad(m\ge1),
+}
+\]
+together with finite homogeneous Casimir energy.  It is convenient to write
+\[
+q_n=nh_n.
+\]
+
+The multiple-sum equations alone already determine all finite divisibility marginals.
+
+\begin{theorem}[Critical cylinder law]
+Assume the sums \(H(m)\) above converge.  For every prime \(p\) and \(a\ge0\),
+\[
+\boxed{
+\sum_{v_p(n)=a}h_n
+=
+h_1(1-p^{-1})p^{-a}.
+}
+\]
+More generally, for a finite set of primes \(P\),
+\[
+\boxed{
+\sum_{\substack{v_p(n)=a_p\\ p\in P}}h_n
+=
+h_1
+\prod_{p\in P}(1-p^{-1})p^{-a_p}.
+}
+\]
+\end{theorem}
+
+\begin{proof}
+For one prime,
+\[
+\sum_{v_p(n)=a}h_n
+=
+H(p^a)-H(p^{a+1}).
+\]
+The general statement follows by finite inclusion-exclusion.
+\end{proof}
+
+After normalization by \(h_1\), these are exactly the \(\beta\downarrow1\) valuation marginals of the number Gibbs state.  Thus any nonzero dual ghost is locally indistinguishable, on every finite prime cylinder, from the Hagedorn/Haar boundary state.
+
+The associated local square-root amplitude is
+\[
+\Omega_p
+=
+\sqrt{1-p^{-1}}
+\sum_{a\ge0}p^{-a/2}|a\rangle.
+\]
+Its phase generating function is
+\[
+B_p(e^{i\theta})
+=
+\frac{\sqrt{1-p^{-1}}}
+{1-p^{-1/2}e^{i\theta}},
+\]
+and
+\[
+|B_p(e^{i\theta})|^2
+=
+K_{p,1}\!\left(
+\frac12+\frac{i\theta}{\log p}
+\right).
+\]
+The local finite-place shadow kernel is therefore the spectral density of the amplitude forced on a hypothetical ghost by the exact divisibility equations.
+
+\section{Finite variation cannot support the ghost}
+
+The preceding cylinder law is locally positive, but it cannot be realized by a finite atomic measure on \(\N\).
+
+\begin{theorem}[Finite-variation no-ghost theorem]
+Suppose \(h_1\ne0\), the ghost equations hold, and
+\[
+\sum_{n\ge1}|h_n|<\infty.
+\]
+Then a contradiction follows.  Hence every nonzero ghost necessarily satisfies
+\[
+\boxed{
+\sum_{n\ge1}|h_n|=\infty.
+}
+\]
+\end{theorem}
+
+\begin{proof}
+Normalize \(h_1=1\).  The coefficients define a finite complex measure on \(\N\).  Fix \(n\).  For an increasing finite set \(P\) of primes, prescribe the exact valuations \(v_p(n)\) for \(p\in P\).  These cylinders decrease to \(\{n\}\).  Their masses equal a fixed finite factor contributed by the primes dividing \(n\), multiplied by
+\[
+\prod_{\substack{p\in P\\p\nmid n}}
+(1-p^{-1}).
+\]
+This tends to zero.  Continuity from above gives zero mass to every singleton.  Countable additivity then gives total mass zero, contradicting \(H(1)=1\).
+\end{proof}
+
+A useful corollary follows at once.
+
+\begin{corollary}[\(\ell^2\) no-ghost]
+If
+\[
+q_n=nh_n\in\ell^2(\N),
+\]
+then \(h=0\).
+\end{corollary}
+
+\begin{proof}
+Cauchy--Schwarz gives
+\[
+\sum_n|h_n|
+=
+\sum_n\frac{|q_n|}{n}
+\le
+\|q\|_2
+\left(\sum_n\frac1{n^2}\right)^{1/2}.
+\]
+The preceding theorem excludes \(h_1\ne0\).  If \(h_1=0\), the same cylinder argument applied to the zero multiple-sum measure gives \(h_n=0\) for every \(n\).
+\end{proof}
+
+\section{Positive mass kills the threshold state}
+
+The previous corollary becomes an operator theorem after adding any positive Casimir mass.
+
+Let
+\[
+E_\mu(q)
+=
+\langle q,(L+\mu^2I)q\rangle.
+\]
+
+\begin{theorem}[Massive no-ghost theorem]
+Assume \(\mu>0\), the ghost equations hold, and
+\[
+E_\mu(q)<\infty.
+\]
+Then \(h=0\).
+\end{theorem}
+
+\begin{proof}
+Finite massive energy implies \(q\in\ell^2\).  The preceding corollary applies.
+\end{proof}
+
+There is also a direct estimate that shows how the boundary charge disappears.  Since
+\[
+h_1
+=
+m\sum_{k\ge1}h_{mk}
+=
+\sum_{k\ge1}\frac{q_{mk}}{k},
+\]
+we have
+\[
+|h_1|
+\le
+\left(\sum_{k\ge1}|q_{mk}|^2\right)^{1/2}
+\left(\sum_{k\ge1}\frac1{k^2}\right)^{1/2}.
+\]
+The decimated \(\ell^2\) tail tends to zero as \(m\to\infty\), hence \(h_1=0\).
+
+Thus any nonzero obstruction is necessarily a zero-mass threshold state, outside \(\ell^2\), outside finite variation, and supported only at the arithmetic boundary.
+
+\section{Dilation sees every boundary coefficient}
+
+Let
+\[
+(U_mq)_k=q_{mk}
+\]
+be arithmetic decimation.  The causal/adjoint anomaly gives an exact coefficient probe.
+
+\begin{proposition}[Dilation-orbit anomaly]
+For
+\[
+H_+=A_\kappa^*A_\kappa,
+\qquad
+H_-=A_\kappa A_\kappa^*,
+\]
+one has
+\[
+\boxed{
+\langle U_mq,(H_+-H_-)U_mq\rangle
+=
+r|q_m|^2.
+}
+\]
+\end{proposition}
+
+\begin{proof}
+Since
+\[
+H_+-H_-=rP_0,
+\]
+the left side is
+\[
+r|\langle e_0,U_mq\rangle|^2=r|q_m|^2.
+\]
+\end{proof}
+
+This isolates the exact theorem that would annihilate the ghost.
+
+\begin{theorem}[Dilation-covariant annihilation]
+Suppose a vector \(q\) obeys
+\[
+\langle U_mq,H_+U_mq\rangle
+=
+\langle U_mq,H_-U_mq\rangle
+\qquad\text{for every }m\ge1.
+\]
+Then
+\[
+q=0.
+\]
+\end{theorem}
+
+\begin{proof}
+The preceding proposition gives
+\[
+r|q_m|^2=0
+\]
+for every \(m\).
+\end{proof}
+
+This theorem is elementary.  Its importance lies in the location of its hypothesis.  The arithmetic problem is to derive this dilation-covariant identification from the completed shadow boundary condition rather than to postulate it.
+
+\section{The polyphase form of the Casimir gradient}
+
+The interaction between additive shift and multiplicative dilation is encoded by a block-sum map.
+
+Write the Casimir gradient as
+\[
+d_0=q_1,\qquad
+d_n=q_{n+1}-q_n\quad(n\ge1).
+\]
+Then
+\[
+\|d\|_2^2
+=
+|q_1|^2+\sum_{n\ge1}|q_{n+1}-q_n|^2.
+\]
+
+For each \(m\), define
+\[
+(B_md)_k
+=
+\sum_{j=mk}^{m(k+1)-1}d_j.
+\]
+
+\begin{proposition}[Polyphase decimation]
+The gradient of \(U_mq\) is \(B_md\), and
+\[
+\|B_md\|_2\le\sqrt m\,\|d\|_2.
+\]
+Moreover
+\[
+\boxed{
+m^{-1/2}B_md\longrightarrow0
+\quad\text{strongly in }\ell^2
+}
+\]
+for every \(d\in\ell^2\).
+\end{proposition}
+
+\begin{proof}
+The first statement is telescoping.  The norm bound follows from Cauchy--Schwarz on disjoint blocks.  For finitely supported \(d\), the normalized norm tends to zero directly.  The operators \(m^{-1/2}B_m\) are uniformly contractive, so density gives strong convergence for all \(d\in\ell^2\).
+\end{proof}
+
+Hence a nonzero ghost must retain a fixed arithmetic boundary charge while its normalized decimated bulk energy disappears.  This is the operator form of boundary concentration.
+
+\section{The Möbius inverse as a threshold state}
+
+The primal cell-incidence channel gives a complementary view.  If \(x_n\) are logarithmic-cell coefficients, define
+\[
+g_1=x_1,\qquad
+g_d=x_d-x_{d-1}\quad(d\ge2).
+\]
+The output Dirichlet coefficients take the form
+\[
+a_m=\sum_{d\mid m}d\,g_d.
+\]
+For the Hardy vacuum,
+\[
+a_1=1,\qquad a_m=0\quad(m>1).
+\]
+Möbius inversion therefore gives
+\[
+g_d=\frac{\mu(d)}{d}
+\]
+and
+\[
+\boxed{
+x_n=M_1(n)
+=
+\sum_{d\le n}\frac{\mu(d)}{d}.
+}
+\]
+
+Its homogeneous Casimir action is finite and exact:
+\[
+\boxed{
+E_C(x)
+=
+\sum_{d\ge1}\frac{\mu(d)^2}{d^2}
+=
+\frac{\zeta(2)}{\zeta(4)}
+=
+\frac{15}{\pi^2}.
+}
+\]
+Thus the canonical formal inverse already lives at finite zero-mass action.  The obstruction is not divergence of the homogeneous energy.  It is failure of the stronger \(\ell^2\) boundary condition.
+
+If finite exact arithmetic data are prescribed through conductor \(N\) and the tail is chosen to minimize a positive-mass Casimir action, the Euler--Lagrange equation gives the unique geometric continuation
+\[
+x_{N+k}=x_Nr^k,
+\]
+where
+\[
+r+r^{-1}=2+\mu^2.
+\]
+At unit mass,
+\[
+r=\varphi^{-2}.
+\]
+The golden stable root is therefore the minimum-energy continuation ratio of the finite Möbius inverse in the unit-mass graph.
+
+\section{The geometric first-order counterpart}
+
+A second first-order system arises from the doubled Lorentzian carrier
+\[
+W=\R^{3,1}\oplus\R^{3,1},
+\]
+with canonical quarter-turn
+\[
+\mathcal J(x_1,x_2)=(x_2,-x_1),
+\qquad
+\mathcal J^2=-I,\qquad
+\mathcal J^4=I.
+\]
+After splitting off a positive transverse two-plane, the enlarged null form takes the shape
+\[
+Q_8=Q_K+|q|^2,
+\]
+and the corresponding first-order Clifford maps satisfy
+\[
+\mathcal D_-\mathcal D_+
+=
+-(Q_K+|q|^2)I_8.
+\]
+At \(q=0\) the two four-component incidence equations decouple; for \(q\ne0\) they are locked.
+
+The arithmetic system developed above has the parallel first-order form
+\[
+\mathbb D_\kappa^2
+=
+\diag(L+\mu^2I,L+\mu^2I-rP_0).
+\]
+Its quarter-turn has the same order-four algebra, positive mass restores invertibility, and the massless limit exposes a boundary mode.
+
+The correspondence is therefore structural:
+\[
+\begin{tikzcd}[column sep=huge,row sep=large]
+\text{doubled Klein/Clifford carrier}
+\arrow[r, "\mathcal D_\pm"]
+\arrow[d, "\mathcal J^2=-I"']
+&
+Q_K+|q|^2
+\arrow[d, "\text{massive locking}"]
+\\
+\text{doubled Hardy/Casimir carrier}
+\arrow[r, "\mathbb D_\kappa"]
+&
+L+\mu^2
+\end{tikzcd}
+\]
+The missing map is an intertwiner identifying the physical transverse norm with the arithmetic Casimir mass in a common representation.  Nothing in the foregoing algebra requires that identification, but it makes clear what such an identification would have to preserve.
+
+\section{The remaining boundary theorem}
+
+The finite arithmetic bulk is already acyclic in the Hodge--Koszul construction.  The co-Poisson transform supplies the exact prime--Archimedean shadow relation.  The obstruction appears only when the finite shadow endpoint is sent to infinity.
+
+The results above reduce the problem to one statement.
+
+\begin{problem}[No escape at the arithmetic shadow boundary]
+Show that the completed prime--Archimedean shadow condition excludes a nonzero sequence \(h\) satisfying simultaneously:
+\begin{enumerate}[label=(\roman*)]
+\item
+\[
+\sum_{k\ge1}h_{mk}=\frac{h_1}{m}
+\qquad(m\ge1);
+\]
+\item finite homogeneous Casimir energy;
+\item infinite total variation and failure of \(\ell^2\) at the zero-mass threshold;
+\item the critical profinite cylinder law
+\[
+\sum_{\substack{v_p(n)=a_p\\p\in P}}h_n
+=
+h_1\prod_{p\in P}(1-p^{-1})p^{-a_p};
+\]
+\item compatibility with the completed causal/shadow boundary operator.
+\end{enumerate}
+\end{problem}
+
+Equivalently, one may seek to derive the dilation-covariant partner identity
+\[
+\langle U_mq,H_+U_mq\rangle
+=
+\langle U_mq,H_-U_mq\rangle
+\qquad(m\ge1)
+\]
+from the completed arithmetic boundary condition.  The coefficientwise annihilation theorem would then give \(q=0\).
+
+The problem is now sharply localized.  The finite prime algebra is not the source of the ghost.  The local shadow kernels are not the source of the ghost.  Positive mass is not the source of the ghost.  The only remaining place is the singular zero-mass completion in which the shadow endpoint can escape to infinity while all finite prime marginals remain regular.
+
+\section{Conclusion}
+
+Several structures that arise separately in arithmetic, Hardy theory, discrete spectral theory, and the geometry of doubled first-order systems are governed by the same elementary hyperbolic transfer.
+
+The finite-place radius \(q^{-1/2}\), its Cayley coordinate, the Casimir mass, and the modular stable root are related by
+\[
+q^{-1/2}=\tanh\kappa,\qquad
+r=e^{-2\kappa},\qquad
+\mu=2\sinh\kappa.
+\]
+The point \(q=5\) is the unit-mass point
+\[
+\kappa=\log\varphi,
+\]
+where the finite-place shadow center, the minimal modular eigenvalue pair, the unit-mass Casimir factor, and the normalized Hardy transfer coincide.
+
+The number Gibbs state gives the same local hyperbolic variables prime by prime.  At \(\beta=1\), its local marginals remain regular while its global vector leaves the ordinary arithmetic Hilbert sector.  The dual RH ghost, if it exists, is forced to have exactly those critical local marginals.  It is therefore not an arbitrary defect.  It is the singular atomic realization of the Hagedorn/profinite boundary state.
+
+The half-line factorization identifies the final obstruction with a boundary index.  At finite cutoff the index is a shadow-symmetric dipole.  In the infinite limit one endpoint disappears.  The Riemann problem in this representation is therefore a no-escape theorem for the missing endpoint.
+
+That formulation is narrower than the original spectral question.  It is also more geometric.  The bulk has already forgotten which way is forward; only the boundary still knows.
+
+\appendix
+
+\section{The finite-place kernel and the local outer factor}
+
+Let
+\[
+a=q^{-1/2}.
+\]
+Then
+\[
+B_a(z)
+=
+\frac{\sqrt{1-a^2}}{1-az}
+\]
+is outer in the disk and
+\[
+|B_a(e^{i\theta})|^2
+=
+\frac{1-a^2}{1+a^2-2a\cos\theta}
+=
+K_{q,1}\!\left(\frac12+\frac{i\theta}{\log q}\right).
+\]
+Its Taylor coefficients have squared moduli
+\[
+(1-a^2)a^{2n}
+=
+(1-q^{-1})q^{-n},
+\]
+the critical local prime occupation law.
+
+\section{The finite part of number entropy}
+
+Let \(\beta=1+\eps\).  From the Laurent expansion
+\[
+\zeta(1+\eps)
+=
+\frac1\eps+\gamma+O(\eps)
+\]
+one obtains
+\[
+\log\zeta(1+\eps)
+=
+-\log\eps+\gamma\eps+O(\eps^2)
+\]
+and
+\[
+-\frac{\zeta'(1+\eps)}{\zeta(1+\eps)}
+=
+\frac1\eps-\gamma+O(\eps).
+\]
+Therefore
+\[
+\boxed{
+S_{\mathbb N}(1+\eps)
+=
+\frac1\eps-\log\eps+(1-\gamma)+O(\eps).
+}
+\]
+The constant \(1-\gamma\) is the finite part of the number entropy at the Hagedorn boundary.
+
+\section{Formalization anchors}
+
+Several ingredients used above already have machine-checked counterparts in the GPPVerify Lean development, including:
+\begin{itemize}
+\item the minimal trace-three hyperbolic matrix, its discriminant \(5\), and the roots \(\varphi^{\pm2}\);
+\item the finite-place identity
+\[
+K_{5,1}(1/2)=\varphi^2;
+\]
+\item the zeta Gibbs partition sum and its number entropy;
+\item the von Mangoldt representation of the internal energy;
+\item the finite arithmetic shadow involution and Hodge--Koszul bulk identities.
+\end{itemize}
+The present paper adds the transfer-theoretic identifications between these modules and isolates the infinite boundary theorem still required.
+
+\begin{thebibliography}{9}
+
+\bibitem{ToupinForward}
+D. Toupin,
+\emph{Which Way Is Forward? Orientation, Mass, and the Shadow Lift},
+Golden Physics Project, working preprint, 2026.
+
+\bibitem{ToupinRH}
+D. Toupin,
+\emph{Arithmetic Principal Series, the Prime--Archimedean Heat Trace, and Exact Reflection-Positive Criteria for the Riemann Hypothesis},
+Golden Physics Project, working manuscript, 2026.
+
+\bibitem{GPPVerify}
+Golden Physics Project,
+\emph{GPPVerify: Lean 4 Formalization Library},
+2026.
+
+\end{thebibliography}
+
+\end{document}
