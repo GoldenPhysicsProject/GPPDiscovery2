@@ -171,3 +171,150 @@ This is an exact operator-level correspondence of architecture. No identificatio
 4. Combine with multiplicative decimation U_m and the ghost constraints.
 5. Seek a theorem that all-m dilation covariance annihilates the surviving P_0 threshold charge.
 
+## 10. Order-four doubled Hardy lift
+
+Define
+
+J = [[0,-I],[I,0]].
+
+Then J^2=-I and J^4=I. Direct block multiplication gives
+
+J D_r J^{-1} = -[[0,A_r],[A_r*,0]].
+
+Therefore J exchanges the causal and adjoint first-order factors up to the central sign. Since
+
+D_r^2 = diag(H_+,H_-),
+H_+=A_r*A_r,
+H_-=A_rA_r*,
+
+one has
+
+J D_r^2 J^{-1}=diag(H_-,H_+).
+
+The mismatch of the two even sectors is exactly
+
+H_+-H_-=rP_0.
+
+Thus the order-four lift exchanges the two partner sectors and the sole obstruction to their equality after causal compression is the boundary vacuum projection.
+
+## 11. Rapidity parametrization and correction of the finite-place parameter
+
+Important distinction: the local finite-place Poisson radius and the Cayley/impedance contraction are not the same parameter.
+
+Write
+
+a_q = q^{-1/2}.
+
+On the unitary line s=1/2+it, with theta=t log q,
+
+K_{q,1}(s)
+= (1-a_q^2)/(1+a_q^2-2a_q cos theta).
+
+Thus a_q is the genuine Poisson radius of the finite-place kernel.
+
+Define the Cayley/impedance contraction
+
+r_q=(1-a_q)/(1+a_q)=(sqrt(q)-1)/(sqrt(q)+1).
+
+Introduce the hyperbolic parameter
+
+kappa_q = artanh(a_q).
+
+Then exactly
+
+a_q = tanh(kappa_q),
+r_q = exp(-2 kappa_q),
+mu_q = 2 sinh(kappa_q) = 2/sqrt(q-1),
+
+and
+
+mu_q^2=(1-r_q)^2/r_q.
+
+So the earlier use of r_q as the finite-place "contraction" must be read specifically as the Cayley/impedance contraction derived from the finite-place Poisson radius, not as the Poisson radius itself.
+
+At q=5,
+
+a_5=1/sqrt(5),
+kappa_5=artanh(1/sqrt(5))=asinh(1/2)=log(phi),
+mu_5=1,
+r_5=exp(-2 log phi)=phi^{-2}.
+
+This makes the q=5/golden coincidence a single hyperbolic coordinate identity.
+
+## 12. Finite-place extrema recover the modular eigenvalue pair
+
+With a=tanh(kappa),
+
+K_q(theta)
+=1/(cosh(2kappa)-sinh(2kappa) cos theta).
+
+Hence
+
+K_q(0)=exp(2kappa)=r_q^{-1},
+K_q(pi)=exp(-2kappa)=r_q.
+
+At q=5 this gives
+
+K_5(0)=phi^2,
+K_5(pi)=phi^{-2}.
+
+Thus the same q=5 finite-place kernel contains both the expanding and contracting eigenvalues of the minimal trace-3 hyperbolic SL2(Z) sector as its two extremal phase values. In the original spectral variable, the second point is t=pi/log 5.
+
+This is stronger than the previously formalized center identity K_{5,1}(1/2)=phi^2. It should be formalized separately.
+
+## 13. Causal Green kernel and intrinsic stochastic normalization
+
+With r=exp(-2kappa) and mu=2sinh(kappa),
+
+A_kappa = exp(kappa)I-exp(-kappa)S,
+
+A_kappa^{-1}
+= exp(-kappa) sum_{n>=0} exp(-2nkappa) S^n.
+
+Multiplying by mu gives
+
+mu A_kappa^{-1}
+= sum_{n>=0}(1-r)r^n S^n.
+
+The coefficients form a normalized geometric probability law. Therefore mu A_kappa^{-1} is a one-sided Markov/unital averaging kernel on constants (formally, and boundedly on the Hardy space).
+
+At unit mass mu=1, no external normalization is needed:
+
+A_{log phi}^{-1}
+= sum_{n>=0} phi^{-(2n+1)} S^n,
+
+and sum_{n>=0}phi^{-(2n+1)}=1.
+
+Thus q=5 is uniquely the finite place in this family for which the causal inverse itself is already normalized as a Markov/unital kernel. This gives a more intrinsic unit-mass characterization than the earlier unit-variance observation.
+
+## 14. Direct finite-place Poisson factorization
+
+The finite-place kernel itself factors as the modulus square of the normalized outer function
+
+B_a(z)=sqrt(1-a^2)/(1-a z),
+
+namely
+
+K_q(theta)=|B_{a_q}(e^{i theta})|^2.
+
+Equivalently its precision is
+
+K_q^{-1} = (1-a_q^2)^{-1}(I-a_q S)^*(I-a_q S)
+
+at the Toeplitz-symbol level.
+
+The squared Taylor amplitudes of B_a form the local prime Gibbs law
+
+P_q(N=n)=(1-q^{-1})q^{-n}.
+
+Thus the finite-place shadow kernel, the local prime-gas occupation law, and the one-sided Hardy outer factor are three forms of the same local object. The Cayley transform of its radius then produces the golden Casimir transfer parameter at q=5.
+
+## 15. Updated boundary of claim
+
+There are now two exact first-order structures:
+- the physical finite-dimensional doubled Klein/Clifford factorization with transverse norm |q|;
+- the infinite-dimensional Hardy/Casimir factorization with dimensionless mass mu.
+
+The map mu=2sinh(kappa), a=tanh(kappa), r=e^{-2kappa} is exact internally on the Hardy/local-kernel side, but no theorem yet identifies physical |q| with arithmetic mu. That remains an intertwiner target.
+
+The strongest current project-internal target is to prove that the orientation/deck symmetry of the doubled causal/adjoint system descends to the arithmetic Hardy realization in a way that annihilates the rank-one zero-mass boundary charge. Boundary self-adjointness alone is known to be insufficient.
