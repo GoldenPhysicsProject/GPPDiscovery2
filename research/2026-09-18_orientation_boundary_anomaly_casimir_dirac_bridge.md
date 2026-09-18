@@ -585,3 +585,58 @@ so this same transfer is the unit-mass Markov kernel previously derived.
 ## 24. Domain warning
 
 C=(I+S)(I-S)^{-1} is unbounded because 1 lies on the spectrum of S. The identities above are exact as rational transfer-function identities and on the natural domain of (I-S)^{-1}. They do not by themselves prove that a dual RH ghost lies in the domain of C or in the associated local Dirichlet/de Branges space. Establishing precisely that boundary regularity remains equivalent to killing the threshold defect and must not be assumed.
+
+
+## 25. Correction: the conservative pair exists for every mass
+
+The earlier equal-coefficient ansatz
+
+alpha=c(1-z)/(lambda-z), beta=c/(lambda-z)
+
+was unnecessarily restrictive. The canonical conservative pair for arbitrary lambda>1 is
+
+alpha_lambda(z)=sqrt(lambda)(1-z)/(lambda-z),
+
+beta_lambda(z)=(lambda-1)/(lambda-z).
+
+Indeed, on |z|=1,
+
+lambda|1-z|^2+(lambda-1)^2=|lambda-z|^2,
+
+so
+
+|alpha_lambda|^2+|beta_lambda|^2=1.
+
+Writing
+
+mu=(lambda-1)/sqrt(lambda),
+
+one has
+
+beta_lambda/alpha_lambda=mu/(1-z).
+
+In operator form, with A_kappa=lambda^{-1/2}(lambda I-S),
+
+alpha_lambda(S)=(I-S)A_kappa^{-1},
+
+beta_lambda(S)=mu A_kappa^{-1},
+
+and the conservative identity is exactly
+
+alpha*alpha+beta*beta
+=
+A_kappa^{-*}(L+mu^2 I)A_kappa^{-1}
+=I.
+
+Therefore q=5 is NOT selected by mere existence of a conservative two-channel completion. Such a completion exists for every positive mass.
+
+The correct unique golden statement is:
+
+beta_lambda/alpha_lambda = 1/(1-z)
+iff mu=1
+iff lambda=phi^2
+iff q=5.
+
+Thus q=5 is the unique member of the canonical conservative family for which the channel ratio is the unscaled Nyman singular inverse and the mass channel itself is the causal Green function without an external mass factor.
+
+This correction should replace any earlier wording saying that "conservative completion uniquely selects q=5."
