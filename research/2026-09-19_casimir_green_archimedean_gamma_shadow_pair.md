@@ -153,3 +153,159 @@ so that the GLOBAL incoming defect cancels before the positive square is taken.
 
 That would give a zero-independent prime-Archimedean first-order network whose local
 metrics are all fixed by Haar/shadow geometry.
+
+
+## 7. Exact Tate convolution identity
+
+The older Shadow Euler manuscript contains the standard Tate real-place local zeta integral
+
+Z_infty(s)
+=
+int_0^infinity exp(-pi r^2) r^s dr/r
+=
+(1/2) pi^(-s/2) Gamma(s/2).
+
+The zero-product claims elsewhere in that manuscript must be handled with care because some
+displayed gamma-only forms are RH-conditional.  The Tate integral itself is unconditional.
+
+Define the multiplicative shadow of a function by
+
+(S f)(r)=r^(-1) f(r^(-1)).
+
+Then, for the Mellin convention
+
+M[f](s)=int_0^infinity f(r) r^s dr/r,
+
+one has exactly
+
+M[Sf](s)=M[f](1-s).
+
+Let
+
+f_infty(r)=exp(-pi r^2).
+
+Its multiplicative Haar convolution with its shadow is
+
+(f_infty *_x S f_infty)(r)
+=
+int_0^infinity
+f_infty(x)
+S f_infty(r/x)
+dx/x.
+
+Directly,
+
+S f_infty(r/x)
+=
+(x/r) exp(-pi x^2/r^2),
+
+hence
+
+(f_infty *_x S f_infty)(r)
+=
+(1/r)
+int_0^infinity
+exp[-pi x^2(1+r^-2)] dx
+=
+1/[2 sqrt(1+r^2)].
+
+Therefore
+
+boxed(
+2/sqrt(1+r^2)
+=
+4 (f_infty *_x S f_infty)(r)
+).
+
+Taking Mellin transforms gives
+
+M[2/sqrt(1+r^2)](s)
+=
+4 Z_infty(s) Z_infty(1-s)
+
+=
+pi^(-1/2) Gamma(s/2)Gamma((1-s)/2),
+
+exactly the shadow-paired Riemann Archimedean factor derived above.
+
+Thus the Casimir amplitude is not merely analogous to the Tate local factor.  It is the
+multiplicative Haar convolution of the self-dual Tate Gaussian with its functional shadow.
+
+## 8. Log-Haar autocorrelation form
+
+Set
+
+g_infty(u)
+=
+e^(u/2) exp(-pi e^(2u)),
+qquad r=e^u.
+
+Then
+
+Z_infty(1/2+it)
+=
+int_R g_infty(u)e^(itu) du.
+
+Its ordinary autocorrelation is explicitly
+
+C_infty(a)
+=
+int_R g_infty(v)g_infty(v+a) dv
+
+=
+1/[2 sqrt(2 cosh a)].
+
+Therefore
+
+boxed(
+4 C_infty(a)
+=
+sqrt(2) sech(a)^(1/2)
+=
+psi_infty(a)
+).
+
+So the positive inversion-even Haar kernel discovered from Casimir capacity is exactly four
+times the autocorrelation of the Tate Gaussian half-density.
+
+By Wiener--Khinchin,
+
+Fourier[psi_infty](t)
+=
+4 |Z_infty(1/2+it)|^2
+=
+pi^(-1/2)|Gamma(1/4+it/2)|^2.
+
+This identifies three previously separate real-place constructions:
+
+1. Tate's self-dual Gaussian;
+2. the Casimir harmonic Green amplitude;
+3. the positive shadow-paired Gamma spectral weight.
+
+They are one convolution/autocorrelation structure.
+
+## 9. Significance for the global program
+
+At the real place the required fixed positive polarization is now generated from an
+explicit primitive amplitude rather than postulated:
+
+primitive half-density:
+  g_infty(u)=e^(u/2)e^(-pi e^(2u));
+
+shadow pairing:
+  g_infty with its reflected/orientation-dual copy;
+
+positive boundary kernel:
+  psi_infty(u)=sqrt(2)sech(u)^(1/2);
+
+spectral multiplier:
+  pi^(-1/2)|Gamma(1/4+it/2)|^2.
+
+This is exactly the architecture sought in the first-order sign program:
+retain the two oriented amplitudes separately, pair them by shadow, and only then obtain
+the positive square.
+
+The next finite-place comparison should ask whether each local prime Poisson kernel is
+likewise the autocorrelation / Julia defect of a primitive one-sided Haar amplitude.
+If yes, all places will share one local template and the remaining RH content will be
+only the global causal sewing.
