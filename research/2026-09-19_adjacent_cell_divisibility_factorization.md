@@ -314,3 +314,124 @@ This gives a direct algebraic bridge between:
 
 The next step is to determine the norm of the HARMONICALLY repaired tail after the
 divisibility-zeta/Hardy transfer, rather than estimate the raw terminal jump.
+
+
+## 10. Exact Casimir-capacity minimizer
+
+The previously identified discrete ghost energy uses the exact Casimir conductance
+
+E_C[y]
+=
+sum_{d>N} d(d+1)|y_d-y_{d-1}|^2.
+
+Fix
+
+y_N=A,
+lim_{n->infinity}y_n=0.
+
+Since
+
+sum_{d>N} 1/[d(d+1)] = 1/(N+1),
+
+Cauchy--Schwarz gives the SHARP bound
+
+boxed(
+E_C[y] >= (N+1)|A|^2
+).
+
+Equality holds iff
+
+y_d-y_{d-1}
+=
+-A(N+1)/[d(d+1)],   d>N,
+
+which telescopes to the exact harmonic extension
+
+boxed(
+y_n=A(N+1)/(n+1),   n>=N
+).
+
+Thus the previously observed threshold mode h_n~C/n is not merely a formal equality case
+of a Hardy inequality. It is literally the unique finite-energy harmonic extension of a
+boundary value at conductor N to the point at infinity for the discrete Casimir network.
+
+For the Möbius endpoint A=M_1(N),
+
+boxed(
+E_C,min(N)=(N+1)|M_1(N)|^2
+).
+
+This is an exact zero-independent origin of the half-density threshold.
+
+It also explains the earlier topology correction: the Casimir-harmonic extension has a
+1/n tail, so separate arithmetic-progression sums diverge logarithmically even though
+mean-zero Ramanujan pairings can converge by cancellation.
+
+## 11. Canonically Casimir-completed Möbius approximant
+
+Continue the canonical Möbius cell vector beyond N by the harmonic tail above:
+
+x_n=M_1(n),              n<=N,
+
+x_n=M_1(N)(N+1)/(n+1), n>=N.
+
+Then the adjacent differences are
+
+g_d=mu(d)/d,                                  d<=N,
+
+g_d=-M_1(N)(N+1)/[d(d+1)],                   d>N.
+
+Since the unfiltered cell transform is
+
+sum_d g_d d^{1-s},
+
+the exact Casimir-harmonic Möbius approximant is
+
+boxed(
+M_N^C(s)
+=
+sum_{d<=N}mu(d)d^{-s}
+-
+(N+1)M_1(N)
+sum_{d>N} d^{-s}/(d+1)
+).
+
+The completed filtered output is
+
+boxed(
+F_N^C(s)=zeta(s) M_N^C(s)
+).
+
+The tail series converges already for Re(s)>0, so the harmonic completion naturally lives
+through the entire open critical strip rather than only in the absolute Euler-product
+half-plane.
+
+At s=1,
+
+sum_{d>N} 1/[d(d+1)]=1/(N+1),
+
+hence
+
+boxed(
+M_N^C(1)=0
+)
+
+for every N. Thus the canonical Casimir completion builds the pole-cancelling zero of
+1/zeta(s) at s=1 into every finite approximation.
+
+On the critical line the tail has the asymptotic scale
+
+(N+1)|M_1(N)|
+sum_{d>N} d^{-1/2-it}/(d+1)
+
+=O(sqrt(N)|M_1(N)|),
+
+again exactly the square root of the endpoint capacity.
+
+This is a substantially better finite object than an abrupt Möbius truncation: it preserves
+the exact low-conductor inverse, removes the hard endpoint jump, obeys the Casimir Euler
+equation in the tail, and carries the correct zero at the zeta pole.
+
+The next calculation is to determine whether F_N^C converges in the causal Hardy graph
+topology more strongly than the abrupt truncation, and whether its boundary error admits an
+Archimedean Gamma cancellation.
