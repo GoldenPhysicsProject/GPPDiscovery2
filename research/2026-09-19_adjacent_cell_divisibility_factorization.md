@@ -185,3 +185,132 @@ This is a finite boundary-control problem.  It avoids assuming a bounded global 
 A successful construction would prove density of the arithmetic cell range, hence eliminate the Nyman/Burnol inner defect.
 
 The obstruction, if any, must be an asymptotic boundary charge at infinity rather than local arithmetic invertibility.
+
+
+## 8. Exact capacity of the far endpoint
+
+The first-order factorization identifies the natural pre-divisibility boundary energy
+
+E[y]
+=
+sum_{d>N} d^2 |y_d-y_{d-1}|^2
+
+for a tail correction with prescribed endpoint
+
+y_N=A,
+lim_{n->infinity}y_n=0.
+
+Put
+
+R_N=sum_{d>N}1/d^2.
+
+Because
+
+-A=sum_{d>N}(y_d-y_{d-1}),
+
+Cauchy--Schwarz gives
+
+|A|^2
+<=
+[sum_{d>N}d^2|Delta y_d|^2]
+[sum_{d>N}d^-2]
+=
+E[y] R_N.
+
+Therefore
+
+boxed(
+E[y]>=|A|^2/R_N
+).
+
+Equality is attained by
+
+Delta y_d
+=
+-A d^-2/R_N,
+
+hence by the explicit harmonic tail
+
+boxed(
+y_n
+=
+A [sum_{d>n}d^-2]/R_N
+).
+
+Thus the exact endpoint capacity is
+
+boxed(
+Cap_N=1/R_N
+),
+
+and since
+
+R_N~1/N,
+
+one has
+
+boxed(
+E_min(N)~N|A|^2
+).
+
+For the canonical Möbius endpoint A=M_1(N),
+
+boxed(
+E_min(N)
+=
+|M_1(N)|^2/[sum_{d>N}d^-2]
+~N|M_1(N)|^2
+).
+
+This is an exact structural origin of the half exponent: a boundary amplitude of order
+N^-1/2 has order-one first-order capacity. Faster decay makes the endpoint cheap; slower
+decay makes it expensive.
+
+No RH statement follows from this alone. In particular RH is not being replaced by the
+strong condition sqrt(N) M_1(N)->0. The point is that the d*Delta graph topology has a
+critical boundary-capacity exponent 1/2 before the divisibility-zeta channel is even
+applied.
+
+## 9. Exact telescoping formula for the truncated inverse
+
+For
+
+x_n=M_1(n), 1<=n<=N,
+
+the unfiltered cell combination satisfies
+
+sum_{n=1}^N M_1(n)
+[n^{1-s}-(n+1)^{1-s}]
+
+=
+sum_{n=1}^N mu(n)n^{-s}
+-
+M_1(N)(N+1)^{1-s}.
+
+Therefore the filtered output is exactly
+
+boxed(
+F_N(s)
+=
+zeta(s)
+[
+sum_{n<=N}mu(n)n^{-s}
+-
+M_1(N)(N+1)^{1-s}
+]
+).
+
+The second term is the analytic image of the terminal cell boundary charge.
+
+For Re(s)>1 it disappears in the ordinary Dirichlet limit. On the critical boundary its
+raw magnitude is proportional to sqrt(N)|M_1(N)|, precisely the square root of the
+capacity scale above.
+
+This gives a direct algebraic bridge between:
+- the finite Möbius inverse;
+- the endpoint charge;
+- the half-density exponent;
+- and the failure of naive truncation on the critical Hardy boundary.
+
+The next step is to determine the norm of the HARMONICALLY repaired tail after the
+divisibility-zeta/Hardy transfer, rather than estimate the raw terminal jump.
