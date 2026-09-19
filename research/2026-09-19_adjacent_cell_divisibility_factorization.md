@@ -435,3 +435,109 @@ equation in the tail, and carries the correct zero at the zeta pole.
 The next calculation is to determine whether F_N^C converges in the causal Hardy graph
 topology more strongly than the abrupt truncation, and whether its boundary error admits an
 Archimedean Gamma cancellation.
+
+
+## 12. Casimir harmonic Green function and the Archimedean shadow pair
+
+The exact Casimir-harmonic tail
+
+y_n proportional to 1/(n+1)
+
+has a canonical continuous analogue
+
+k(x)=1/(1+x).
+
+Its Mellin transform is the Euler beta integral:
+
+boxed(
+int_0^infinity x^{-s}/(1+x) dx
+=
+Gamma(s)Gamma(1-s)
+=
+pi/sin(pi s),
+  0<Re(s)<1
+).
+
+Thus the unique harmonic Green profile selected by the discrete Casimir energy is the
+discrete counterpart of the elementary shadow-paired Gamma/Beta kernel.
+
+This does not by itself identify the full Riemann Archimedean factor
+pi^{-s/2}Gamma(s/2); the half-argument and Gaussian normalization still belong to the
+real-place theta channel.  What is exact is the common shadow-pair structure.
+
+### Endpoint scaling gives the completion resolvent
+
+Let a=N+1 and define
+
+R_N(s)
+=
+a^s
+sum_{d>=a} d^{-s}/(d+1).
+
+For Re(s)>0,
+
+R_N(s) -> 1/s
+
+locally uniformly on compact subsets.
+
+Indeed,
+
+R_N(s)
+=
+(1/a)
+sum_{d>=a}
+(d/a)^(-s) / (d/a+1/a),
+
+which is a Riemann sum for
+
+int_1^infinity t^{-s-1}dt=1/s.
+
+Therefore the far-end Casimir harmonic correction has the universal local resolvent 1/s.
+
+Under functional shadow s->1-s, orientation reversal contributes the opposite first-order
+sign.  Hence the oriented two-endpoint combination is
+
+boxed(
+1/s - 1/(1-s)
+=
+1/s + 1/(s-1)
+).
+
+This is exactly the elementary pole pair in the completed logarithmic derivative xi'/xi.
+
+Equivalently,
+
+(1/(2s-1))
+[
+1/s+1/(s-1)
+]
+=
+1/[s(s-1)],
+
+the previously identified Casimir completion pole.
+
+This gives a direct discrete interpretation of the two completion poles:
+
+- they are the two oriented endpoint resolvents of the Casimir harmonic Green function;
+- the minus sign from orientation converts the shadow resolvent 1/(1-s) into the
+  physical pole term +1/(s-1);
+- only after the two first-order endpoint signs are paired does the even Casimir
+  denominator s(s-1) appear.
+
+This is precisely the project's "do not square too early" sign principle in the discrete
+Möbius boundary problem.
+
+### Consequence for the Gamma comparison
+
+The continuous Green profile produces
+
+Gamma(s)Gamma(1-s),
+
+while the Riemann real place uses the Gaussian/half-density factor Gamma(s/2).
+The remaining Archimedean calculation should therefore be organized as a change from the
+linear Casimir Green coordinate to the Gaussian theta coordinate, rather than treating the
+Gamma factor as an unrelated correction.
+
+A concrete next target is to derive the half-argument Gamma tower from the Casimir harmonic
+kernel after the quadratic scale map x=r^2 (equivalently doubled logarithmic coordinate),
+and compare the resulting endpoint resolvents with the exact theta boundary Ward identity.
