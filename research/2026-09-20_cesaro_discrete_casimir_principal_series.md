@@ -374,3 +374,135 @@ purely absolutely continuous spectrum [1/4,infinity). This confirms the derivati
 is not used to motivate the RH interpretation.
 
 Status: exact operator synthesis + literature-verified spectral theorem; no RH claim.
+
+
+## 12. Hyperbolic radial form
+
+The elementary generating-function equation
+
+-w(1+w) H_{ww}=lambda H
+
+has a direct hyperbolic coordinate.
+
+Put
+
+w=sinh^2(r/2).
+
+Then
+
+w(1+w)=(1/4)sinh^2 r,
+
+and direct differentiation gives
+
+boxed(
+-H_{rr}+coth(r) H_r=lambda H.
+)
+
+Now make the half-density gauge
+
+H(r)=sqrt(sinh r) psi(r).
+
+The first derivative disappears and one obtains
+
+boxed(
+[-d^2/dr^2 + 1/4 + 3/(4 sinh^2 r)] psi
+=
+lambda psi.
+)
+
+This is exactly the one-dimensional Schrodinger form of the angular-momentum-one radial
+Casimir equation on the hyperbolic plane.  In particular the threshold 1/4 and the
+principal-series parameter lambda=1/4+t^2 are built into the geometry.
+
+The discrete Jacobi operator, its Gauss hypergeometric generating equation, and this
+hyperbolic radial problem are therefore three realizations of the same Casimir spectral
+parameter.
+
+This is an exact differential-equation equivalence.  It is not, by itself, a unitary
+equivalence of the original l2 space with a radial hyperbolic L2 space; the unitary
+spectral transform is the continuous-dual-Hahn transform in Section 8.
+
+## 13. Exact principal-series scattering phase
+
+Use
+
+s=1/2+i t,
+lambda=s(1-s)=1/4+t^2.
+
+The normalized generating solution is
+
+H_s(w)=w 2F1(s,1-s;2;-w).
+
+As w->infinity, Gauss connection formula gives
+
+H_s(w)
+~
+A_-(s) w^(1-s)
++
+A_+(s) w^s,
+
+with
+
+A_-(s)=Gamma(1-2s)/[(1-s)Gamma(1-s)^2],
+
+A_+(s)=Gamma(2s-1)/[s Gamma(s)^2].
+
+Since w~e^r/4 and psi=H/sqrt(sinh r), these become the two scattering waves
+
+e^(-i t r), e^(+i t r).
+
+With the convention S_C(t)=outgoing/incoming, the ratio is
+
+S_C(t)
+=
+4^(1-2s) A_+(s)/A_-(s).
+
+Using the duplication formula and s=1/2+i t gives the exact simplification
+
+boxed(
+S_C(t)
+=
+-
+[Gamma(1+i t)/Gamma(1-i t)]
+[Gamma(3/2-i t)/Gamma(3/2+i t)].
+)
+
+Hence
+
+|S_C(t)|=1
+
+for real t, as required by the self-adjoint Casimir problem.
+
+The first factor is the phase associated with the same Gamma(1+i t) whose modulus square is
+the celestial modular weight
+
+P(t)=|Gamma(1+i t)|^2=pi t/sinh(pi t).
+
+The second half-integer Gamma ratio is the extra K-type-one boundary phase of this radial
+problem.
+
+Thus the exact spectral-measure bridge from Section 9 and the scattering phase are two
+sides of one principal-series Gamma structure.
+
+## 14. Interpretation for the RH program
+
+The zero-independent ambient problem is now exceptionally rigid:
+
+- discrete Green operator: G=C C^*;
+- self-adjoint Casimir: L=G^(-1);
+- exact spectrum: [1/4,infinity);
+- asymptotic characters: n^(-1/2 +/- i t);
+- hyperbolic radial equation: K-type-one principal series;
+- Gamma scattering phase: S_C(t);
+- continuous-dual-Hahn spectral transform;
+- celestial modular factor P(t) sitting explicitly in the spectral density.
+
+The arithmetic problem should therefore be treated as a boundary/intertwining problem on
+this carrier, not as a search for another ambient spectral operator.
+
+A high-value next step is to transform the Ramanujan/Mobius boundary generators through
+the continuous-dual-Hahn spectral map and determine whether their closed span can be
+described by an explicit inner/scattering multiplier.  If that multiplier is precisely the
+Nyman bad-zero Blaschke factor, the Hardy ghost and the discrete Casimir pictures become
+literally the same spectral boundary defect.
+
