@@ -1,3 +1,12 @@
+> **v21 correction, 2026-09-20.** Which Way Is Forward? v21 no longer interprets
+> the four-lift Hilbert carrier as a finite gauge/Haar quotient.  The simultaneous reversal
+> is an anti-linear real structure relative to the microscopic complex structure, and
+> `(1+D)/2` is the corresponding real-part projection.  The calculation below remains a
+> valid statement about the linear shadow-even compression of the finite Möbius operator,
+> and it still proves that symmetry/compression alone does not create positivity.  It must
+> not be cited as the physical Hilbert-space quotient mechanism of v21.  See
+> `2026-09-20_v21_real_structure_primitive_character_RH_target.md`.
+
 # Shadow-even Haar averaging self-adjointizes the finite Möbius bulk but does not make it positive
 
 Date: 2026-09-18
