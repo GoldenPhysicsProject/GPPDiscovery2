@@ -28,10 +28,22 @@ is more than can be said for most reformulations of RH.
 
 ## Why N-convergence comes first
 
-Going from dim 33 to dim 41 at c=7 moved `lambda_min` from `2.4e-25` to
-`3.67e-27`, a factor of 65. So `N=20` is **not converged** and any slope fitted
-to it is meaningless. The scan does `c=7` at `N = 20, 28, 36` before anything
-else. If it is still moving at 36, raise N before trusting the c-scan.
+The current far-end run at `c=19` has reached `N=36,44,52`.  The absolute
+smallest eigenvalues continue to move by roughly five to six decimal orders at
+each step, so `lambda_1` is **not N-converged** and no c-slope based on the
+absolute values is presently meaningful.
+
+The first diagnostic is now basis conditioning: record the smallest eigenvalue
+(or an equivalent condition diagnostic) of the overlap/Gram matrix alongside
+`lambda_1`.  If they track, the common decay is a degenerating-basis scale
+rather than spectral information.  Precision must also scale with
+`-log10(lambda_1)`; a fixed decimal budget will eventually manufacture a sign
+artifact.
+
+The dimensionless ratio `lambda_1/lambda_2` moves much less than the two
+absolute eigenvalues and is worth tracking, but it is not yet certified as an
+N-limit.  Grid-spacing and c-dependence tests come before interpreting any
+apparent geometric or golden-ratio convergence.
 
 ## Running
 
