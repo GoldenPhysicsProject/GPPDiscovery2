@@ -18,4 +18,4 @@
 
 - ln E ~ -0.4148 * [sqrt c] + -2.034, max|resid| 1.2790
 
-Flatness of E across tau-windows is the signature of LOCALLY UNIFORM convergence, which is what Hurwitz needs.
+`E(c)` is flat across the sampled tau-windows at each fixed `c`, which shows only tau-window stability for this diagnostic. It does **not** establish the c→∞ locally uniform convergence needed for a Hurwitz argument. In the present table `E(c)` decreases through `c=17` and then rises through `c=29`; no c→∞ convergence is demonstrated.
