@@ -710,3 +710,51 @@ This does **not** authorize dropping the coherent term by hand. The remaining RH
 > prove that the completed co-Poisson/pole/Archimedean scalar boundary construction implements the Hodge quotient (or an equivalent Feshbach subtraction) so that the physical Weil observable sees the connected current (29), while the coherent exact component is accounted for by the completion channels, with at most subexponential defect.
 
 If that identification is established, the prime-side norm estimate needed by the vacuum-instability theorem is already closed by (36).
+
+
+## 11. Independent finite-matrix audit in the live continuation
+
+Because the local Python/container runtime was unavailable during this chat, the core identities were independently evaluated in a small real-matrix model directly in the execution runtime.
+
+Parameters:
+- causal Hilbert dimension (8);
+- prime channels (p=2,3,5);
+- causal lags (1,2,3);
+- critical real weights (r_p=p^{-1/2});
+- Jordan--Wigner fermionic creation/contraction matrices.
+
+Observed residuals:
+[
+max_{p,q}|V_pV_q-V_qV_p|_F=0,
+]
+while
+[
+max_{p,q}|V_pV_q^*-V_q^*V_p|_F
+=2.449489742783178,
+]
+confirming that the missing mixed adjoint commutators are genuinely present.
+
+The corrected Hodge identity had Frobenius residual
+[
+|D^2-A_{m diag}-R_{m curv}|_F
+=
+1.1749496091904413	imes10^{-15}.
+]
+
+For the degree-zero Hodge projector and connected decomposition:
+[
+|Pi^2-Pi|_F, |Pi^*-Pi|_F
+le
+6.150930332726244	imes10^{-16},
+]
+[
+|mathcal Rd-pi(X)I|_F=0,
+]
+and
+[
+|P+pi(X)Gamma-P^{m conn}|_F
+=
+8.632093056965055	imes10^{-16}.
+]
+
+Thus the two new operator identities are numerically reproduced to floating-point precision in a concrete common-causal-space model. This is a discovery-layer audit, not a substitute for Lean formalization.
