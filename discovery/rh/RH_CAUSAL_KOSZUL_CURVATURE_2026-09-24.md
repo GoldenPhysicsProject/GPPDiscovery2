@@ -491,3 +491,222 @@ O(Le^{-L/2}).
 This is stronger than mere bulk invertibility: the normalized degree-zero Hodge metric becomes beta-flat exponentially fast with the arithmetic cutoff.
 
 What remains open is the exact scalar extraction. A proof of RH would require showing that the completed pole--prime--Archimedean Weil boundary observable is a bounded/Feshbach functional of this connected Hodge response (plus a subexponential defect). Equations (17)--(23) do not assert that identification; they sharpen the parent-space object that a correct completion must couple to.
+
+
+## 10. Exact coherent/connected decomposition of the causal prime connection
+
+The Hodge structure gives an exact infinite-dimensional connected subtraction, not a finite-rank removal.
+
+Let the one-form space be
+\[
+\mathcal H_1=\bigoplus_{p\le X}H_L,
+\]
+and write
+\[
+(df)_p=T_pf,
+\qquad
+d^*(g_p)=\sum_pT_p^*g_p,
+\qquad
+A=d^*d.
+\]
+Since \(A\) is invertible in the coercive regime, define
+\[
+h=A^{-1}d^*,
+\qquad
+\Pi=dh=dA^{-1}d^*.
+\]
+Then \(\Pi\) is the orthogonal projection onto \(\operatorname{ran}d\), and
+\[
+I-\Pi
+\]
+projects onto
+\[
+\ker d^*.
+\]
+
+Define the local-resolvent row
+\[
+\mathcal R(g_p)
+=
+\sum_{p\le X}T_p^{-1}g_p.
+\tag{24}
+\]
+Since \(T_p^{-1}T_p=I\),
+\[
+\boxed{
+\mathcal R d=\pi(X)I.
+}
+\tag{25}
+\]
+Consequently
+\[
+\boxed{
+\mathcal R\Pi
+=
+\pi(X)h.
+}
+\tag{26}
+\]
+
+Let
+\[
+J=[X_0,d],
+\qquad
+\Gamma=hJ.
+\]
+The causal zeta connection is
+\[
+P_L
+=
+Z_L^{-1}[X_0,Z_L]
+=
+-\sum_{p\le X}T_p^{-1}[X_0,T_p]
+=
+-\mathcal RJ.
+\tag{27}
+\]
+Using \(I=\Pi+(I-\Pi)\),
+\[
+\boxed{
+P_L
+=
+-\pi(X)\Gamma
+-
+\mathcal R(I-\Pi)J.
+}
+\tag{28}
+\]
+
+Thus the raw prime connection splits exactly into
+
+1. the coherent Hodge-exact current \(-\pi(X)\Gamma\);
+2. the transverse connected current
+\[
+\boxed{
+P_L^{\rm conn}
+:=
+-\mathcal R(I-\Pi)J.
+}
+\tag{29}
+\]
+
+This is the required infinite-dimensional subtraction mechanism that the finite-rank scalarization no-go left open.
+
+### Polynomial bound for the connected row
+
+Let \(g=(g_p)\in\ker d^*\). Then
+\[
+0=d^*g
+=
+\sum_p(I-\overline{r_p}V_p^*)g_p,
+\]
+so
+\[
+\sum_pg_p
+=
+\sum_p\overline{r_p}V_p^*g_p.
+\tag{30}
+\]
+Also
+\[
+T_p^{-1}-I=r_pV_pT_p^{-1}.
+\tag{31}
+\]
+Therefore
+\[
+\mathcal Rg
+=
+\sum_p
+\left(
+\overline{r_p}V_p^*
++
+r_pV_pT_p^{-1}
+\right)g_p.
+\tag{32}
+\]
+
+For \(\Re s\ge1/2\),
+\[
+|r_p|\le p^{-1/2},
+\qquad
+\|T_p^{-1}\|
+\le
+\frac1{1-p^{-1/2}}.
+\]
+Hence
+\[
+\|\mathcal R|_{\ker d^*}\|
+\le
+C_0
+\left(\sum_{p\le X}\frac1p\right)^{1/2},
+\tag{33}
+\]
+where one may take the absolute constant
+\[
+C_0=1+\frac1{1-2^{-1/2}}.
+\]
+Using only the trivial comparison with the harmonic series,
+\[
+\sum_{p\le X}\frac1p
+\le
+\sum_{2\le n\le X}\frac1n
+\le
+1+\log X,
+\]
+so
+\[
+\boxed{
+\|\mathcal R(I-\Pi)\|
+=
+O(\sqrt L).
+}
+\tag{34}
+\]
+
+The differentiated column obeys
+\[
+([X_0,T_p]f)
+=
+-(\log p)r_pV_pf.
+\]
+Thus
+\[
+\|J\|^2
+\le
+\sum_{p\le X}\frac{(\log p)^2}{p}
+\le
+\sum_{2\le n\le X}\frac{(\log n)^2}{n}
+=
+O(L^3),
+\]
+and therefore
+\[
+\boxed{
+\|J\|=O(L^{3/2}).
+}
+\tag{35}
+\]
+
+Combining (29), (34), and (35),
+\[
+\boxed{
+\|P_L^{\rm conn}\|
+=
+O(L^2).
+}
+\tag{36}
+\]
+
+This bound is uniform in the vertical spectral parameter and uses no zeta-zero information and no prime number theorem.
+
+With Mertens' theorem for primes, (34) sharpens to \(O(\sqrt{\log\log X})\), but that improvement is unnecessary for RH stability.
+
+### Meaning of the result
+
+Equation (28) isolates the entire exponential scalar-prime conditioning into the coherent Hodge-exact piece \(-\pi(X)\Gamma\). Once that exact range component is removed, the surviving connected prime connection is polynomially bounded.
+
+This does **not** authorize dropping the coherent term by hand. The remaining RH-strength theorem is now extremely specific:
+
+> prove that the completed co-Poisson/pole/Archimedean scalar boundary construction implements the Hodge quotient (or an equivalent Feshbach subtraction) so that the physical Weil observable sees the connected current (29), while the coherent exact component is accounted for by the completion channels, with at most subexponential defect.
+
+If that identification is established, the prime-side norm estimate needed by the vacuum-instability theorem is already closed by (36).
