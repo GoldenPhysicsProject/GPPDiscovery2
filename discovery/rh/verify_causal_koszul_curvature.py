@@ -123,3 +123,68 @@ def audit(
 
 if __name__ == "__main__":
     audit()
+
+
+def audit_connected_decomposition(
+    primes=(2, 3, 5, 7),
+    lags=(1, 2, 3, 4),
+    dim_h=18,
+    t=1.371,
+):
+    """Check P = -m Gamma - R(I-Pi)J on the degree-zero causal space."""
+    n = len(primes)
+    assert len(lags) == n
+    V = [right_shift(dim_h, lag) for lag in lags]
+    ih = np.eye(dim_h, dtype=complex)
+    r = np.array([p ** (-0.5 - 1j * t) for p in primes], dtype=complex)
+    logp = np.log(np.array(primes, dtype=float))
+    T = [ih - r[i] * V[i] for i in range(n)]
+    Tinv = [np.linalg.inv(x) for x in T]
+
+    # d : H0 -> H1 as a vertical block column.
+    d = np.vstack(T)
+    dstar = d.conj().T
+    A = dstar @ d
+    Ainv = np.linalg.inv(A)
+    h = Ainv @ dstar
+    Pi = d @ h
+    i1 = np.eye(n * dim_h, dtype=complex)
+
+    # J=[X,d], using [X,T_p]=-(log p) r_p V_p.
+    Jblocks = [-(logp[i] * r[i]) * V[i] for i in range(n)]
+    J = np.vstack(Jblocks)
+
+    # R=(T_1^{-1},...,T_m^{-1}).
+    R = np.hstack(Tinv)
+
+    Gamma = h @ J
+    P = -(R @ J)
+    Pconn = -(R @ (i1 - Pi) @ J)
+    identity_err = np.linalg.norm(P + n * Gamma - Pconn)
+
+    projection_err = max(
+        np.linalg.norm(Pi @ Pi - Pi),
+        np.linalg.norm(Pi.conj().T - Pi),
+    )
+    rd_err = np.linalg.norm(R @ d - n * ih)
+
+    # Numerical operator norms to compare against the analytic polynomial mechanism.
+    conn_norm = np.linalg.norm(Pconn, 2)
+    gamma_norm = np.linalg.norm(Gamma, 2)
+    p_norm = np.linalg.norm(P, 2)
+    transverse_row_norm = np.linalg.norm(R @ (i1 - Pi), 2)
+    j_norm = np.linalg.norm(J, 2)
+
+    print("\nconnected decomposition audit")
+    print("projection error =", projection_err)
+    print("||R d - m I|| =", rd_err)
+    print("||P + m Gamma - P_conn|| =", identity_err)
+    print("||P|| =", p_norm)
+    print("||Gamma|| =", gamma_norm)
+    print("||P_conn|| =", conn_norm)
+    print("||R(I-Pi)|| =", transverse_row_norm)
+    print("||J|| =", j_norm)
+
+
+if __name__ == "__main__":
+    audit_connected_decomposition()
