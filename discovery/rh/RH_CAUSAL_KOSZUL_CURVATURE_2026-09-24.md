@@ -343,3 +343,151 @@ The next load-bearing task is now sharper:
 If the physical boundary source has the expected coherent size \(O(e^{L/2}\operatorname{poly}(L))\), (13) reduces the resulting one-propagator response to polynomial size. The exact boundary identity is still missing and remains RH-strength.
 
 No RH claim is made here.
+
+
+## 9. Degree-zero Hodge Ward current and beta-flatness
+
+The degree-zero sector gives a second exact structure which is closer to the desired connected response.
+
+Set
+\[
+A_s=d_s^*d_s=\sum_{p\le X}T_p(s)^*T_p(s).
+\]
+Whenever the coercive bound above is positive, define the Hodge contraction from one-forms to the vacuum sector by
+\[
+h_s=A_s^{-1}d_s^*.
+\]
+Then, on degree zero,
+\[
+\boxed{h_s d_s=I.}
+\tag{15}
+\]
+
+Let \(X_0\) denote multiplication by the causal coordinate on \(H_L\), extended trivially to fermion degree. Define the differentiated Hodge current
+\[
+\Gamma_s
+=
+h_s[X_0,d_s]
+=
+A_s^{-1}
+\sum_{p\le X}T_p(s)^*[X_0,T_p(s)].
+\tag{16}
+\]
+
+Commuting the exact contraction identity (15) with \(X_0\) gives the Ward relation
+\[
+\boxed{
+[X_0,h_s]d_s+h_s[X_0,d_s]=0,
+}
+\qquad
+\boxed{
+\Gamma_s=-[X_0,h_s]d_s.
+}
+\tag{17}
+\]
+
+Thus the connected prime current in the Hodge parent is a pure commutator of the Green contraction with the causal coordinate.
+
+For one prime,
+\[
+(T^*T)^{-1}T^*=T^{-1},
+\]
+so
+\[
+\Gamma=T^{-1}[X_0,T].
+\]
+For many primes, with
+\[
+W_p=A_s^{-1}T_p^*T_p,
+\qquad
+\sum_pW_p=I,
+\]
+and
+\[
+J_p=T_p^{-1}[X_0,T_p],
+\]
+one has the exact weighted-current identity
+\[
+\boxed{
+\Gamma_s=\sum_{p\le X}W_pJ_p.
+}
+\tag{18}
+\]
+The raw causal logarithmic zeta connection is the unweighted sum of these local currents (up to the fixed sign convention). Equation (18) therefore identifies the Hodge response as the normalized/connected parent current rather than the coherent raw scalar sum.
+
+Now write
+\[
+s=\beta/2+it.
+\]
+Since
+\[
+\partial_\beta T_p=-\frac12[X_0,T_p],
+\]
+we obtain
+\[
+\partial_\beta A_s
+=
+-\frac12(B_s+B_s^*),
+\qquad
+B_s=\sum_pT_p^*[X_0,T_p].
+\tag{19}
+\]
+Since \(\Gamma_s=A_s^{-1}B_s\),
+\[
+\boxed{
+\frac12
+\left(
+A_s^{1/2}\Gamma_sA_s^{-1/2}
++
+A_s^{-1/2}\Gamma_s^*A_s^{1/2}
+\right)
+=
+- A_s^{-1/2}(\partial_\beta A_s)A_s^{-1/2}.
+}
+\tag{20}
+\]
+
+So the Hermitian part of the Hodge current is exactly the negative relative beta derivative of the positive degree-zero Hodge metric. This is the same thermodynamic geometry seen earlier for the positive zeta-gauge metric, but now with the many-prime Hodge denominator already built in.
+
+At \(\beta\ge1\),
+\[
+\|B_s\|
+\le
+\sum_{p\le X}
+(1+p^{-1/2})\frac{\log p}{\sqrt p}.
+\tag{21}
+\]
+Standard Chebyshev bounds and partial summation give
+\[
+\sum_{p\le X}\frac{\log p}{\sqrt p}
+=
+O(\sqrt X),
+\qquad
+A_s\ge c\frac{X}{\log X}I
+\]
+for all sufficiently large \(X\). Therefore
+\[
+\boxed{
+\|\Gamma_s\|
+=
+O\!\left(\frac{\log X}{\sqrt X}\right)
+=
+O(Le^{-L/2}),
+}
+\tag{22}
+\]
+uniformly in \(t\), and likewise
+\[
+\boxed{
+\left\|
+A_s^{-1/2}(\partial_\beta A_s)A_s^{-1/2}
+\right\|
+=
+O(Le^{-L/2}).
+}
+\tag{23}
+\]
+
+This is stronger than mere bulk invertibility: the normalized degree-zero Hodge metric becomes beta-flat exponentially fast with the arithmetic cutoff.
+
+What remains open is the exact scalar extraction. A proof of RH would require showing that the completed pole--prime--Archimedean Weil boundary observable is a bounded/Feshbach functional of this connected Hodge response (plus a subexponential defect). Equations (17)--(23) do not assert that identification; they sharpen the parent-space object that a correct completion must couple to.
