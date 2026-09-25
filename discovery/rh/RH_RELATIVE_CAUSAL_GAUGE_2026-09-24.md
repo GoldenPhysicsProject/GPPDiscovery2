@@ -308,3 +308,105 @@ not automatically a regular matrix element of that Hodge inverse.
 The next target is therefore precise: build a chiral/relative Feshbach system for
 (R_L), not for (Z_L) and (A_L) separately, and control only its completed
 endpoint anomaly.
+
+
+## 7. Shape derivative of the CCM central energy
+
+The same endpoint anomaly has an exact shape-derivative interpretation.
+
+Let
+[
+Q_{00}(L)=C_L(0)=mathcal W(h_L),
+qquad
+h_L(u)=(1-|u|/L)_+.
+]
+
+For the prime part,
+[
+Q_{00}^{m p}(L)
+=
+-2sum_{log nle L}
+rac{Lambda(n)}{sqrt n}
+left(1-rac{log n}{L}ight).
+]
+Hence, away from the discrete cutoff points (L=log n),
+[
+rac12rac d{dL}left(LQ_{00}^{m p}(L)ight)
+=
+-P_{1/2}(e^L).
+]
+There is no boundary delta term because the triangular weight vanishes at
+(log n=L).
+
+For the elementary term
+[
+Q_{00}^{0,2}(L)
+=
+rac{32}{L}sinh^2(L/4),
+]
+so
+[
+rac12rac d{dL}left(LQ_{00}^{0,2}(L)ight)
+=
+4sinh(L/2).
+]
+
+For the real-place term, direct differentiation of the exact v34 integral gives,
+with (a=e^{-L/2}),
+[
+rac12rac d{dL}left(LQ_{00}^{infty}(L)ight)
+=
+c_infty-racpi2
++operatorname{artanh}(a)+arctan(a).
+]
+
+Combining all three channels and using
+[
+arctan(sinh(L/2))
+=
+racpi2-2arctan(e^{-L/2}),
+]
+one obtains
+[
+oxed{
+q_L'(0)
+=
+rac12rac d{dL}left(LQ_{00}(L)ight)
++
+r_{m sh}(L),
+}
+]
+where
+[
+oxed{
+r_{m sh}(L)
+=
+2a+arctan(a)-operatorname{artanh}(a)+rac23a^3,
+qquad a=e^{-L/2}.
+}
+]
+
+For large (L),
+[
+r_{m sh}(L)
+=
+2e^{-L/2}+O(e^{-7L/2}).
+]
+
+Therefore the one-scalar RH criterion is equivalently a polynomial bound on the
+Hadamard/shape derivative of the central CCM window energy:
+[
+oxed{
+RH
+iff
+rac d{dL}left(LQ_{00}(L)ight)
+=
+O((1+L)^M)
+quad	ext{for some finite }M.
+}
+]
+
+This identifies (q_L'(0)) as a boundary flux of the same finite-window Weil
+energy whose Galerkin matrix is the CCM matrix. It gives a direct target for a
+boundary Ward/Rellich identity: prove that the completed relative causal gauge has
+only polynomial shape flux.
