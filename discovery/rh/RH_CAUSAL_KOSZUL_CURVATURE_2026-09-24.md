@@ -758,3 +758,174 @@ and
 ]
 
 Thus the two new operator identities are numerically reproduced to floating-point precision in a concrete common-causal-space model. This is a discovery-layer audit, not a substitute for Lean formalization.
+
+
+## 12. Exact co-Poisson covariant anticommutation and the surviving shadow-odd joint
+
+The classical co-Poisson identity in the v34 programme can be combined directly with the causal zeta gauge.
+
+Let
+[
+mathscr R
+]
+be logarithmic reflection, let (mathcal C) be the half-density cosine/shadow involution, and let (mathcal Z) be the arithmetic half-density periodization operator. On the common co-Poisson test domain,
+[
+oxed{
+mathscr Rmathcal Z=mathcal Zmathcal C.
+}
+	ag{37}
+]
+Formally, or on any finite/invertible regularization where the products are bounded,
+[
+mathcal C=mathcal Z^{-1}mathscr Rmathcal Z.
+	ag{38}
+]
+
+Let (X_0) be logarithmic coordinate multiplication. Since
+[
+mathscr R X_0=-X_0mathscr R,
+]
+define the zeta-gauged coordinate
+[
+Y
+=
+mathcal Z^{-1}X_0mathcal Z
+=
+X_0+mathcal A,
+qquad
+mathcal A
+=
+mathcal Z^{-1}[X_0,mathcal Z].
+	ag{39}
+]
+Then
+[
+oxed{
+Ymathcal C+mathcal C Y=0.
+}
+	ag{40}
+]
+Indeed,
+[
+{Y,mathcal C}
+=
+mathcal Z^{-1}{X_0,mathscr R}mathcal Z
+=
+0.
+]
+
+Equivalently, the prime logarithmic connection satisfies the exact Ward identity
+[
+oxed{
+mathcal Amathcal C+mathcal Cmathcal A
+=
+-left(X_0mathcal C+mathcal C X_0ight).
+}
+	ag{41}
+]
+
+In Mellin representation this is exactly the logarithmic derivative of the zeta functional equation, but (40)--(41) exhibit its operator meaning: the prime connection is the gauge field which makes the covariant coordinate odd under the Archimedean shadow involution.
+
+The same similarity also gives, with
+[
+G=mathcal Z^*mathcal Z,
+]
+the formal positive-metric identities
+[
+Y^*G=GY,
+qquad
+mathcal C^*Gmathcal C=G.
+	ag{42}
+]
+As already emphasized in v34, boundary self-adjointness alone is blind to off-axis zeros; the issue is the causal/Hardy realization and the conditioning/domain of the similarity at the critical boundary.
+
+### Combination with the new Hodge split
+
+From (28),
+[
+mathcal A
+=
+-pi(X)Gamma
++
+P_L^{m conn},
+qquad
+|P_L^{m conn}|=O(L^2).
+]
+Insert this into (41):
+[
+oxed{
+pi(X){Gamma,mathcal C}
+=
+{X_0,mathcal C}
++
+{P_L^{m conn},mathcal C}.
+}
+	ag{43}
+]
+Since (mathcal C) is unitary on the half-density boundary,
+[
+|{P_L^{m conn},mathcal C}|
+le
+2|P_L^{m conn}|
+=
+O(L^2).
+	ag{44}
+]
+
+Thus the shadow-even component of the exponentially scaled coherent Hodge current is already fixed by the explicit Archimedean operator modulo a polynomial term.
+
+Writing
+[
+B_{m even}
+=
+rac12(B+mathcal C Bmathcal C),
+qquad
+B_{m odd}
+=
+rac12(B-mathcal C Bmathcal C),
+]
+equation (41) determines (mathcal A_{m even}) exactly:
+[
+oxed{
+mathcal A_{m even}
+=
+-rac12
+left(
+X_0+mathcal C X_0mathcal C
+ight).
+}
+	ag{45}
+]
+The unresolved information is therefore entirely in
+[
+oxed{
+mathcal A_{m odd}
+=
+rac12
+left(
+mathcal A-mathcal Cmathcal Amathcal C
+ight),
+}
+	ag{46}
+]
+equivalently in the shadow-odd part of (pi(X)Gamma) up to the polynomial connected error.
+
+This matches the v34 no-go/Hardy analysis: functional-equation symmetry fixes the unitary boundary relation, while RH is exactly the extra one-sided causal/inner condition. Off-critical zeros can only survive in the shadow-odd causal sector.
+
+### New minimal joint
+
+The previous generic completion problem can therefore be reduced further:
+
+> control the shadow-odd component of the coherent Hodge current after the co-Poisson completion.
+
+Everything else is now either exact or polynomial:
+- transverse connected prime current: (O(L^2));
+- shadow-even coherent component: fixed by the Archimedean Ward identity modulo (O(L^2));
+- elementary pole modes: exactly killed by the massive/theta boundary Ward operator;
+- Archimedean semibounded channel: already controlled.
+
+A subexponential bound on the physical scalarization of
+[
+pi(X)Gamma_{m odd}
+]
+would therefore be sufficient for the existing vacuum-instability criterion. This is the same causal content as the Hardy innerness problem, but now isolated inside one canonical Hodge-current component rather than the full prime--Archimedean distribution.
