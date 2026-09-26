@@ -379,3 +379,117 @@ After that, the next tests are:
 5. check Bullet-Cluster-type lensing and early-universe constraints.
 
 No dark-matter discovery is claimed at this stage.
+
+
+## 10. Correction: occupation energy and field-amplitude energy are different moments
+
+The critical cylinder law naturally lives in an occupation-number basis.  Therefore the
+most canonical Fock interpretation is
+
+\[
+\rho_p
+=
+(1-p^{-1})
+\sum_{a\ge0}p^{-a}|a\rangle\langle a|,
+\qquad
+\langle N_p\rangle=\frac1{p-1}.
+\]
+
+If a finite-place quantum has real-place rest mass
+
+\[
+m_p=M_*\mu_p=\frac{2M_*}{\sqrt{p-1}},
+\]
+
+then the normal-ordered particle Hamiltonian
+
+\[
+H_{\rm phys}
+=
+\sum_p m_p N_p
+\]
+
+has expectation
+
+\[
+\boxed{
+\frac{\langle H_{\rm phys}\rangle}{M_*}
+=
+C_1
+:=
+2\sum_p\frac1{(p-1)^{3/2}}
+\approx3.4368.
+}
+\]
+
+This converges.  In contrast,
+
+\[
+\sum_p\langle N_p\rangle
+=
+\sum_p\frac1{p-1}
+\]
+
+diverges logarithmically (prime-harmonically).  The boundary state therefore contains an
+infinite soft occupation cloud but can carry finite physical rest energy.
+
+The coefficient
+
+\[
+C_2
+=
+4\sum_p\frac1{(p-1)^2}
+\approx5.500260
+\]
+
+computed above is instead the expectation of the dimensionless mass-square weighted number:
+
+\[
+\boxed{
+C_2
+=
+\left\langle
+\sum_p\frac{m_p^2}{M_*^2}N_p
+\right\rangle.
+}
+\]
+
+Equivalently it is the coefficient obtained if the real-place field covariance is taken
+directly proportional to the Haar occupation without the canonical oscillator factor
+\(1/m_p\).
+
+For an ordinary canonically normalized oscillator,
+
+\[
+\langle \chi_p^2\rangle
+\sim
+\frac{\langle N_p\rangle}{m_p},
+\]
+
+so the mass-term energy \(m_p^2\langle\chi_p^2\rangle\) scales as
+\(m_p\langle N_p\rangle\), i.e. with \(C_1\), not \(C_2\).
+
+Therefore:
+
+\[
+\boxed{
+C_1\approx3.4368
+\text{ is the canonical particle-energy constant;}
+}
+\]
+
+\[
+\boxed{
+C_2\approx5.500260
+\text{ is a second mass moment and requires an additional noncanonical/geometric
+normalization to become an energy-density ratio.}
+}
+\]
+
+In particular the numerical proximity of the first-four-prime partial sum
+\(193/36=5.361111\ldots\) to the cosmological dark/baryonic ratio must be treated as
+numerology until the stress tensor is derived and shown to probe \(C_2\) rather than
+\(C_1\).
+
+This correction strengthens the research program by identifying exactly which observable
+must emerge from the adelic gravitational coupling.
