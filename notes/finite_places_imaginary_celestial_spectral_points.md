@@ -192,3 +192,93 @@ those frequencies are candidates for the Riemann ordinates.
 The missing theorem remains the same: prove that the zeta zero condition is a
 normal-mode condition of that closed unitary sewing rather than an open
 analytic resonance condition.
+
+
+## 7. The Riemann Cayley map is literally the celestial spectral Cayley map
+
+Using
+\[
+s=\frac{1+i\lambda}{2},
+\]
+the arithmetic Cayley coordinate becomes
+\[
+\boxed{
+\beta(s)=\frac{s-1}{s}
+=\frac{i\lambda-1}{i\lambda+1}.
+}
+\]
+
+This is the ordinary Cayley transform of the spectral variable \(i\lambda\).
+
+For physical principal-series \(\lambda\in\mathbf R\),
+\[
+\left|\frac{i\lambda-1}{i\lambda+1}\right|=1,
+\]
+so the unitary celestial axis maps exactly to the boundary of the Cayley disk.
+
+For the finite-place point \(i\lambda_p=\sqrt p\),
+\[
+\beta_p
+=
+\frac{\sqrt p-1}{\sqrt p+1}
+=
+r_p,
+\]
+the finite-place impedance contraction already derived independently.
+
+Hence the diagram closes exactly:
+\[
+\boxed{
+\lambda\in\mathbf R
+\ \longleftrightarrow\
+|\beta|=1
+}
+\]
+for the unitary continuum, while
+\[
+\boxed{
+i\lambda_p=\sqrt p
+\ \longleftrightarrow\
+\beta_p=r_p\in(0,1)
+}
+\]
+for finite prime channels.
+
+Since
+\[
+a_p=p^{-1/2},
+\qquad
+r_p=\frac{1-a_p}{1+a_p},
+\]
+one also has
+\[
+a_p=\frac1{i\lambda_p},
+\qquad
+r_p=\frac{i\lambda_p-1}{i\lambda_p+1}.
+\]
+
+Thus the Poisson radius, impedance radius, Riemann Cayley coordinate, and
+analytically continued celestial spectral parameter form one exact Möbius
+coordinate system.
+
+In hyperbolic coordinates,
+\[
+a_p=\tanh\kappa_p
+\]
+gives
+\[
+\boxed{
+i\lambda_p=\coth\kappa_p,
+\qquad
+r_p=e^{-2\kappa_p}.
+}
+\]
+At \(p=5\),
+\[
+\coth(\log\varphi)=\sqrt5,
+\qquad
+e^{-2\log\varphi}=\varphi^{-2}.
+\]
+
+This is the cleanest explanation so far of why the user's
+\(i\lambda=\sqrt5\) observation hit the golden transfer point exactly.
