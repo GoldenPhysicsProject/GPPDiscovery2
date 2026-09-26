@@ -194,3 +194,55 @@ Lean target started in:
   GppVerify/RiemannHypothesis/GoldenMobiusAudit.lean
 
 No RH proof is claimed here.
+
+
+### 8. Stronger hyperbolic-geometric identification
+
+There is an exact geometric reason the same constant occurs in the dyadic atlas and in
+golden dynamics.
+
+A real 2x2 matrix of negative determinant acts on the upper half-plane as an
+orientation-reversing isometry by inserting complex conjugation.  For the golden matrix
+
+  M = [[1,1],[1,0]],
+
+the corresponding upper-half-plane isometry is
+
+  g(z) = (conj(z)+1)/conj(z) = 1 + 1/conj(z).
+
+Its boundary action is exactly
+
+  x -> 1 + 1/x.
+
+At the normalized center of an affine Hardy chart,
+
+  g(i) = 1+i.
+
+But i and 1+i are precisely the center and horizontal edge point of the unit-aspect
+normalized Whitney cell used in the dyadic atlas.  Therefore the worst same-height atlas
+step is literally one golden Möbius step.
+
+Their hyperbolic distance is
+
+  d_H(i,1+i) = 2 asinh(1/2) = 2 log(phi).
+
+The Cayley pseudohyperbolic radius is
+
+  tanh(d_H/2) = tanh(log phi) = 1/sqrt(5),
+
+and the relative precision margin is
+
+  exp(-d_H) = phi^(-2).
+
+So the chain is exact:
+
+  golden boundary map
+    -> normalized Whitney step i -> 1+i
+    -> hyperbolic length 2 log phi
+    -> Cayley radius 1/sqrt(5)
+    -> stable/precision multiplier phi^(-2).
+
+This does not make phi an RH invariant, because changing the atlas aspect ratio changes the
+cell displacement.  It does show that the phi^(-2) already present in v34 is the natural
+hyperbolic contraction of the *specific standard dyadic Hardy atlas*, not an accidental
+algebraic simplification.
