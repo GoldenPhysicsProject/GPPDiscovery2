@@ -478,3 +478,72 @@ The existing data are suggestive but do not yet prove the identification:
 
 The next proof target is therefore not another numerical phi match. It is an exact
 intertwiner between these two boundary pairs.
+
+
+### 15. Important no-go: phi^{-2} is a boundary multiplier, not an interior norm contraction
+
+The golden projective map should not be confused with the contractive transfer still
+needed for RH.
+
+The orientation-reversing upper-half-plane map
+
+  g(z)=1+1/conj(z)
+
+is a hyperbolic isometry. Its square is the PSL(2,Z) hyperbolic element
+
+  [[2,1],[1,1]]
+
+with eigenvalues phi^2 and phi^{-2}.  Its invariant geodesic has endpoints
+phi and -phi^{-1}; the points i and 1+i lie on that axis.  One golden step moves along
+the axis by
+
+  d_H(i,1+i)=2 log phi,
+
+and the square has translation length 4 log phi.
+
+Thus |G'(phi)|=phi^{-2} is the *boundary* stable multiplier of a hyperbolic isometry.
+There is no contraction of the Poincare metric in the bulk.  Consequently this phi^{-2}
+cannot, by itself, prove the Hilbert/Krein contraction ||C||<=1 needed by
+KreinGraphClosure.lean.
+
+This cleanly separates two notions that happened to use the same word "contraction":
+
+* dyadic chart / boundary recovery contraction: phi^{-2};
+* physical Hilbert-space transfer contractivity: ||C||<=1.
+
+Any RH use of the golden map must connect the former to the latter through an additional
+positive kernel or reproducing-space estimate. The Möbius algebra alone cannot do it.
+
+### 16. Exact physical Sherman--Morrison translations are parity-opposite
+
+For the actual completed/non-pole finite CCM relation
+
+  Q = A + (1/2) c c^T - (1/2) s s^T,
+
+let
+
+  q = c^T Q_e^{-1} c,
+  p = s^T Q_o^{-1} s.
+
+Sherman--Morrison gives
+
+  c^T A_e^{-1}c = 2q/(2-q),
+  s^T A_o^{-1}s = 2p/(p+2).
+
+In reciprocal response coordinates
+
+  y_e=2/q,   y_o=2/p,
+
+this is exactly
+
+  y_e(A)=y_e(Q)-1,
+  y_o(A)=y_o(Q)+1.
+
+So the *physical* pole removal already contains the same unit translations found in the
+projective audit, but with opposite signs in the two parity channels.
+
+The missing intertwiner can now be stated sharply: identify one of these reciprocal
+quadratic response coordinates with the canonical linear-amplitude projective ratio
+A_Suzuki/B_Suzuki (or prove an operator-valued version relating the two).  Without that
+identification the golden word is a canonical boundary-frame symmetry, not yet the CCM
+arithmetic return map.
