@@ -281,3 +281,102 @@ word.  The shortest nontrivial hyperbolic word is then the golden one above.
 Nothing here proves that the physical return map actually equals G or G^2.  Until that
 coordinate identification is established, the modular observation is a structural clue
 only.
+
+
+### 10. The actual completed shadow quotient is reciprocal — and this changes the audit
+
+There is now a direct arithmetic reciprocal, not merely a hypothetical one.
+
+For the centered Cayley coordinate
+
+  beta(s)=(s-1)/s,
+
+functional-equation shadow gives exactly
+
+  beta(1-s)=1/beta(s)
+
+away from s=0,1.
+
+Likewise the manuscript's projective half-density coordinate
+
+  w(s)=exp(2 pi (s-1/2))
+
+satisfies
+
+  w(1-s)=1/w(s).
+
+Most importantly, the actual completed Hardy/de Branges shadow quotient
+
+  Theta_a(z)=F(a+z)/F(a-z)
+
+satisfies identically
+
+  Theta_a(-z)=1/Theta_a(z)
+
+where numerator and denominator are nonzero.  For F=xi and z=it this is the concrete
+completed transfer used by the RH Hardy criterion.
+
+So the reciprocal involution itself is genuine arithmetic structure.
+
+### 11. Same-coordinate test: the naive golden closure fails in the natural impedance chart
+
+The remaining question is whether the *unit translation* from the pole Sherman--Morrison
+update acts on this same reciprocal coordinate.
+
+The natural linearized Schur/Herglotz impedance of a scalar transfer q is
+
+  m(q)=(1+q)/(1-q).
+
+Under the exact arithmetic shadow q -> 1/q,
+
+  m(1/q) = -m(q).
+
+Thus reciprocal shadow becomes a sign flip in the impedance coordinate.
+
+If the rank-one boundary update is the unit translation m -> m+1, then shadow followed by
+feedback gives
+
+  m -> 1-m,
+
+which is an involution, not the golden map.  Its fixed point is 1/2.
+
+This is an important no-go.  The direct argument
+
+  shadow = reciprocal
+  and
+  Sherman--Morrison = translation
+  therefore
+  golden map
+
+is valid only if *both operations are written in one and the same projective coordinate*.
+In the standard Schur/Herglotz coordinate conversion, they are not: the reciprocal
+Schur action becomes sign reversal before the additive rank-one law is applied.
+
+The finite parity pole scalars make the same point.  Functional-equation reflection
+exchanges the light-cone pole classes s=0 and s=1.  In the parity basis
+c=p+q, s=p-q it acts as c->c, s->-s.  Quadratic parity responses
+<c,A^{-1}c> and <s,A^{-1}s> are therefore individually reflection-invariant, not
+reciprocated.  So the previously proposed concrete condition x->4/x is not forced by
+the existing parity symmetry.
+
+### 12. What survives
+
+Three exact golden facts survive the no-go:
+
+1. the dyadic affine Hardy atlas has exact worst-cell margin phi^{-2};
+2. the golden PGL(2,Z) word T R has stable multiplier phi^{-2};
+3. the arithmetic shadow really is reciprocal on beta(s), w(s), and Theta.
+
+What is **not** established is that the physical arithmetic rank-one update is T in one of
+those reciprocal coordinates.  In the natural Herglotz coordinate it is instead paired
+with sign reversal and gives an affine involution.
+
+Therefore the golden ratio should currently be treated as an exact geometric conditioning
+constant / modular structural clue, not as the missing RH positivity mechanism.
+
+A genuine revival would require finding a different *arithmetically canonical* projective
+coordinate in which:
+  (i) completed shadow is reciprocal, and
+  (ii) the actual pole/Feshbach update is unit translation.
+The coordinate may not be chosen merely to conjugate the maps into that form; it must be
+defined independently from the arithmetic operator.
