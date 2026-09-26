@@ -263,3 +263,207 @@ If such an intertwiner is constructed without importing zero data, the
 bad-zero model space vanishes and RH follows.
 
 These results do **not** yet establish that final no-escape theorem.
+
+
+## 7. The 1D conformal weight removes the apparent factor-of-two mystery
+
+For a scalar celestial primary in two dimensions,
+\[
+h=\bar h=\frac{\Delta}{2}.
+\]
+On the celestial principal series,
+\[
+\Delta=1+i\lambda,
+\qquad
+h=\bar h=\frac12+\frac{i\lambda}{2}.
+\]
+
+Therefore the arithmetic identification
+\[
+s=h
+\]
+is more primitive than \(\Delta=2s\).  The latter is simply the scalar
+two-dimensional relation \(\Delta=h+\bar h=2h\).
+
+This means the arithmetic zeta variable itself has exactly the natural
+one-dimensional conformal normalization:
+\[
+s=\frac12+it,
+\qquad
+s\mapsto1-s,
+\qquad
+s(1-s).
+\]
+The two-dimensional celestial normalization is then obtained by doubling:
+\[
+\Delta=2s=1+2it,
+\qquad \lambda=2t.
+\]
+
+This is the clean representation-theoretic reason the same half-density axis
+appears in the 1D arithmetic and 2D celestial descriptions.
+
+## 8. Existing automorphic model: the same principal series already scatters through zeta
+
+There is a classical exact model that should be treated as a guide rather
+than as a proof of RH.  For the modular surface
+\[
+\mathrm{PSL}_2(\mathbf Z)\backslash\mathbb H,
+\]
+the Eisenstein series \(E(z,s)\) satisfies the hyperbolic Casimir equation
+with eigenvalue \(s(1-s)\), its continuous unitary spectrum is
+\(\Re s=1/2\), and the Weyl/intertwining reflection is \(s\leftrightarrow1-s\).
+
+Its constant term has the form
+\[
+E(z,s)=y^s+\phi(s)y^{1-s}+\cdots,
+\]
+with scattering coefficient
+\[
+\boxed{
+\phi(s)=\frac{\xi(2s-1)}{\xi(2s)}.
+}
+\]
+
+Thus the same \(\mathrm{SL}_2(\mathbf R)\) principal-series parameter that
+appears as a one-dimensional conformal weight already carries a genuine
+arithmetic scattering system whose global intertwining coefficient is built
+from the completed zeta function.
+
+Adelically this is even closer to the present framework: the global Weyl
+intertwining operator factors into local intertwining operators over the real
+place and all \(p\)-adic places.  The primes are therefore local components of
+one global principal-series representation, not external decorations.
+
+This gives an exact known precedent for the proposed dictionary:
+\[
+\text{1D conformal principal series}
+\leftrightarrow
+\text{automorphic principal series}
+\leftrightarrow
+\text{arithmetic scattering}.
+\]
+
+However, it also supplies a decisive warning.  Standard Eisenstein
+resonances are not forced onto the unitary axis.  A zero \(\rho\) of \(\xi\)
+appears in the standard modular scattering coefficient after an affine
+rescaling such as \(2s=\rho\) or \(2s-1=\rho\), so even under RH the
+corresponding scattering pole/zero lies at real part \(1/4\) or \(3/4\), not
+at \(1/2\).  Ordinary unitarity of an open scattering system therefore does
+not prove RH.
+
+The missing ingredient must distinguish a closed/unitary normal-mode
+condition from a generic open-system resonance condition.
+
+## 9. The exact de Branges / Wigner-delay scattering family
+
+Put
+\[
+F(z)=\frac{\xi(\frac12+z)}{\xi(\frac12)}.
+\]
+Then \(F\) is even:
+\[
+F(-z)=F(z).
+\]
+
+For every \(\omega>0\), define the boundary transfer function
+\[
+\Theta_\omega(t)
+=
+\frac{F(\omega+it)}{F(\omega-it)}
+=
+\frac{\xi(\frac12+\omega+it)}
+{\xi(\frac12+\omega-it)}.
+\]
+For real \(t\), reality of \(\xi\) gives
+\[
+|\Theta_\omega(t)|=1.
+\]
+So boundary unitarity is unconditional.
+
+The nontrivial question is causality/innerness.  Extending \(t\) to the
+appropriate Hardy half-plane, a pole of \(\Theta_\omega\) occurs precisely
+when a zero of \(F\) lies to the forbidden side of the vertical line
+\(\Re z=\omega\).  Hence
+\[
+\boxed{
+\mathrm{RH}
+\iff
+\Theta_\omega
+\text{ is a causal inner transfer function for every }\omega>0.
+}
+\]
+This is the scattering-language version of the already derived Hardy leakage
+criterion.
+
+Its Wigner-Smith phase delay is
+\[
+\tau_\omega(t)
+=
+\frac1{i}\frac{d}{dt}\log\Theta_\omega(t)
+=
+2\,\Re\frac{F'}{F}(\omega+it).
+\]
+
+If RH holds and the positive ordinates are \(\gamma\), the Hadamard product
+gives the positive Breit--Wigner/Poisson decomposition
+\[
+\boxed{
+\tau_\omega(t)
+=
+2\sum_{\gamma>0}
+\left[
+\frac{\omega}{\omega^2+(t-\gamma)^2}
++
+\frac{\omega}{\omega^2+(t+\gamma)^2}
+\right].
+}
+\]
+As \(\omega\downarrow0\), these Lorentzians converge distributionally to the
+critical-line counting measure.  Thus the zeta ordinates are literally the
+centres of the delay resonances of the completed transfer family when RH
+holds.
+
+An off-line zero creates a pole in the causal half-plane for sufficiently
+small \(\omega\), i.e. an incoming/acausal Hardy defect.  This makes the
+physical slogan precise:
+
+\[
+\boxed{
+\text{RH is not merely unitarity + resonance;}
+\quad
+\text{it is boundary unitarity + causality/passivity + resonance.}
+}
+\]
+
+The existing arithmetic-shadow theorem
+\[
+I-T_\omega^*T_\omega
+=
+\mathfrak H_\omega^*\mathfrak H_\omega
+\]
+then says that the failure of RH is exactly positive incoming leakage.
+
+## 10. New proof target suggested by the automorphic/celestial comparison
+
+The standard modular Eisenstein model shows that zeta really does occur as a
+principal-series scattering coefficient, but also shows why ordinary open
+scattering is too weak.  The celestial/arithmetic doubling suggests the
+stronger object to seek:
+
+1. start with the adelic/local principal-series channels;
+2. retain both shadow-related boundary copies rather than imposing an outgoing
+   resonance condition on one copy;
+3. glue them by the completed prime--Archimedean current;
+4. prove that the doubled transfer is a conservative causal colligation;
+5. identify its closed normal-mode condition with \(F(z)=0\).
+
+If steps 1--5 can be implemented without using the zeros as input, then the
+normal-mode generator is self-adjoint, its spectral parameter \(t\) is real,
+and \(F(it)=0\) forces every nontrivial zero onto \(\Re s=1/2\).
+
+This is now the sharpest structural route: use the known automorphic
+principal-series scattering system as the local/global template, but replace
+its open resonance boundary condition by the doubled shadow boundary
+condition already present in the arithmetic purification and celestial
+scalar representation.
