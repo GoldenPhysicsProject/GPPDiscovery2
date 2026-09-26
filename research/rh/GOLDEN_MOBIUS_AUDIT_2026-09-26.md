@@ -246,3 +246,38 @@ This does not make phi an RH invariant, because changing the atlas aspect ratio 
 cell displacement.  It does show that the phi^(-2) already present in v34 is the natural
 hyperbolic contraction of the *specific standard dyadic Hardy atlas*, not an accidental
 algebraic simplification.
+
+
+### 9. Modular-group interpretation (structural clue, not closure)
+
+The translation T(y)=y+1 is one standard modular generator.  The reciprocal operation
+R(y)=1/y is the orientation-reversing partner of the usual modular inversion
+S(y)=-1/y.  Therefore the golden word
+
+  G = T R
+
+is an orientation-reversing PGL(2,Z) element.  Its square is
+
+  G^2 = [[2,1],[1,1]] in SL(2,Z),
+
+with trace 3 and eigenvalues phi^2 and phi^(-2).
+
+This is notable because the v34 global automorphic lift already lives on
+SL(2,Z)\H through the Eisenstein series.  The same two elementary operations that appear
+separately in the RH architecture are therefore the modular generators in disguise:
+
+* the parity Sherman--Morrison boundary update gives T after y=2/x;
+* reciprocal/shadow duality would give R;
+* the automorphic completion supplies the ambient modular geometry.
+
+The trace-three hyperbolic element G^2 is the discriminant-five / golden geodesic.  Its
+stable eigenvalue is phi^(-2), exactly the dyadic Hardy conditioning constant found above.
+
+This suggests a concrete global test: express the completed automorphic boundary/Feshbach
+transfer in the same projective impedance coordinate y.  If functional-equation reflection
+acts as R and the rank-one pole update acts as T, the completed return map is a modular
+word.  The shortest nontrivial hyperbolic word is then the golden one above.
+
+Nothing here proves that the physical return map actually equals G or G^2.  Until that
+coordinate identification is established, the modular observation is a structural clue
+only.
