@@ -547,3 +547,70 @@ quadratic response coordinates with the canonical linear-amplitude projective ra
 A_Suzuki/B_Suzuki (or prove an operator-valued version relating the two).  Without that
 identification the golden word is a canonical boundary-frame symmetry, not yet the CCM
 arithmetic return map.
+
+
+### 17. Basis-consistency audit kills the naive physical identification
+
+A crucial correction: one cannot diagonalize reflection in one boundary basis and then
+keep the shear matrix from another basis unchanged.
+
+For the finite symmetric Weyl pair from the CCM construction,
+
+  A_W(-z)=-A_W(z),       B_W(-z)=B_W(z),
+
+and with reciprocal Weyl coordinate
+
+  q=A_W/B_W,
+
+reflection is simply
+
+  R_0(q)=-q.
+
+A unit rank-one feedback in this reciprocal Weyl coordinate is
+
+  T_0(q)=q+1.
+
+Therefore the actual algebraic composite in this coordinate is
+
+  T_0 R_0(q)=1-q,
+
+an involution. Its finite fixed point is q=1/2, not phi.
+
+Now rotate to the swap/Suzuki coordinate
+
+  r=(1+q)/(1-q).
+
+This conjugates reflection to reciprocal inversion:
+
+  R(r)=1/r.
+
+But it also conjugates the physical translation. One must transform BOTH maps. The
+conjugated translation is
+
+  T_r(r)=(3r+1)/(1-r),
+
+not r->r+1. Hence
+
+  T_r R(r)=(r+3)/(r-1),
+
+and this still squares to the identity. Its fixed points are 3 and -1. It is not the
+golden map.
+
+So the earlier exact Suzuki word
+
+  r -> 1 + 1/r
+
+is a legitimate canonical reflection-plus-shear operation, but the unit shear there is
+a *different boundary-frame operation* from the conjugate of q->q+1.
+
+This is a strong no-go against identifying phi with the finite CCM Sherman--Morrison
+feedback merely by changing projective coordinates. Projective conjugacy preserves the
+order/type of the composite: an involution cannot become the hyperbolic golden word.
+
+A golden arithmetic return map would therefore require a genuinely different physical
+shear/update in the Suzuki frame, not just a re-expression of the known reciprocal-Weyl
+rank-one feedback.
+
+This correction strengthens the useful conclusion: phi^{-2} remains exact in the dyadic
+Hardy atlas and exact in the canonical Suzuki modular word, but current evidence does not
+identify either with the load-bearing CCM pole update.
