@@ -282,3 +282,79 @@ e^{-2\log\varphi}=\varphi^{-2}.
 
 This is the cleanest explanation so far of why the user's
 \(i\lambda=\sqrt5\) observation hit the golden transfer point exactly.
+
+
+## 8. Prime axis versus zero axis in the same spectral plane
+
+For any complex Riemann parameter \(s\), define the celestial/1D spectral
+coordinate by
+\[
+\lambda=-i(2s-1).
+\]
+A hypothetical zeta zero
+\[
+\rho=\frac12+\eta+i\gamma
+\]
+therefore maps to
+\[
+\boxed{
+\lambda_\rho=2\gamma-2i\eta.
+}
+\]
+Hence
+\[
+\mathrm{RH}
+\iff
+\lambda_\rho\in\mathbf R
+\quad\text{for every nontrivial zero.}
+\]
+
+By contrast, a finite prime place maps to
+\[
+\boxed{
+\lambda_p=-i\sqrt p,
+}
+\]
+which is purely imaginary.
+
+Thus, in this common \(\lambda\)-plane, the proposed adelic geometry has two
+orthogonal spectral loci:
+
+\[
+\boxed{
+\text{finite prime channels: }\lambda=-i\sqrt p
+\quad\text{(discrete imaginary axis),}
+}
+\]
+\[
+\boxed{
+\text{unitary global modes: }\lambda\in\mathbf R
+\quad\text{(continuous principal-series axis).}
+}
+\]
+
+At the level of the Casimir,
+\[
+C(\lambda)=\frac{1+\lambda^2}{4},
+\]
+finite places have
+\[
+C_p=-\frac{p-1}{4}<0,
+\]
+whereas a critical zero ordinate has
+\[
+C_\gamma=\frac14+\gamma^2>0.
+\]
+
+This resembles the standard scattering separation between evanescent/bound
+spectral data on an imaginary momentum axis and propagating unitary data on a
+real momentum axis.  That is an interpretation, not yet a constructed
+scattering theorem.  The project already has the required positive prime
+operator \(Qe_p=pe_p\); in functional-calculus language,
+\[
+i\lambda_{\rm finite}=\sqrt Q.
+\]
+The next structural target is therefore a zero-independent boundary coupling
+whose scattering/normal-mode operator takes the positive prime spectrum of
+\(Q\) into the real principal-series spectrum while preserving the completed
+Archimedean channel.
