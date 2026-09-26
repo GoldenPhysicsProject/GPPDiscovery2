@@ -380,3 +380,101 @@ coordinate in which:
   (ii) the actual pole/Feshbach update is unit translation.
 The coordinate may not be chosen merely to conjugate the maps into that form; it must be
 defined independently from the arithmetic operator.
+
+
+### 13. Stronger result: the canonical Suzuki boundary pair contains the golden word exactly
+
+The previous no-go applies to the Herglotz impedance coordinate. But the Suzuki
+0/pi boundary pair has a more primitive homogeneous coordinate in which the golden word
+is exact.
+
+Recall the already-proved reflection algebra
+
+  A(-z) = -B(z),
+  B(-z) = -A(z).
+
+Define the projective boundary ratio
+
+  q(z)=A(z)/B(z).
+
+Then, wherever A and B are nonzero,
+
+  q(-z)=1/q(z).
+
+Now perform the elementary boundary-frame shear
+
+  (A,B) -> (A+B,B).
+
+On q this acts as
+
+  q -> q+1.
+
+Therefore reflection followed by the unit shear is exactly
+
+  q -> 1 + 1/q.
+
+This is the golden Möbius map, in the SAME projective boundary coordinate.
+
+No zeta input is needed for the identity; it is a theorem of the canonical Suzuki
+reflection pair itself. If the reflected-and-sheared boundary ratio is a fixed point,
+
+  q = 1 + 1/q,
+
+then
+
+  q^2=q+1,
+
+and positivity/reality would select q=phi.
+
+This is stronger than the earlier hypothetical x->4/x construction: the reciprocal and
+the translation genuinely coexist on one canonical homogeneous boundary ratio.
+
+### 14. Relation to the Sherman--Morrison scalar
+
+There is an exact projective conjugacy explaining the coefficient 2 in the finite pole
+formulas.
+
+Write the homogeneous pair as (A,B)=(2,x), so
+
+  q=A/B=2/x.
+
+The unit shear (A,B)->(A+B,B) gives
+
+  (2,x) -> (2+x,x).
+
+Renormalizing the first homogeneous coordinate back to 2 gives
+
+  x -> 2x/(x+2),
+
+which is exactly the odd Sherman--Morrison map.
+
+Likewise swapping the homogeneous coordinates,
+
+  (2,x)->(x,2),
+
+and renormalizing the first coordinate to 2 gives
+
+  x -> 4/x,
+
+exactly the previously introduced poleDual map.
+
+So oddSchur and poleDual are not arbitrary formulas: they are the affine-chart
+representatives of unit shear and coordinate swap on a two-dimensional projective
+boundary pair.
+
+This makes the remaining identification precise:
+
+  Does the concrete finite CCM pole-response homogeneous pair coincide, after the natural
+  residue normalization, with the canonical Suzuki 0/pi boundary pair?
+
+If yes, the golden map is literally the composite arithmetic boundary operation.
+If no, the golden structure remains a separate canonical boundary-frame symmetry.
+
+The existing data are suggestive but do not yet prove the identification:
+* the finite Weyl response is a ratio of two boundary amplitudes;
+* the Suzuki pair is the canonical reflected Weyl pair;
+* the pole coefficient 1/2 is exactly what makes the Sherman--Morrison inverse-response
+  shift a unit translation.
+
+The next proof target is therefore not another numerical phi match. It is an exact
+intertwiner between these two boundary pairs.
