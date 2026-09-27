@@ -1,5 +1,12 @@
 # Archimedean completion as pole mode minus the trivial-zero oscillator ladder
 
+Clarification from the continuation audit: “pole mode” below means the pole
+of the isolated rational/Archimedean summand. The entire completed function
+\(\xi(s)\) has no pole at \(s=1\); the \(1/(s-1)\) term is cancelled by
+\(\zeta'/\zeta(s)\) in the full logarithmic derivative. Matching elementary
+resolvent shapes is not by itself a proved identification of two physical
+random variables or of the complete boundary system.
+
 Date: 2026-09-27
 Status: exact algebraic/spectral decomposition of the real-place boundary density. No RH claim. No external search used.
 

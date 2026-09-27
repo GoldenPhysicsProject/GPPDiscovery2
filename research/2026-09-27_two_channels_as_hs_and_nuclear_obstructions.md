@@ -1,4 +1,14 @@
-# The two critical RH channels are successive Hilbert--Schmidt and nuclear obstructions
+# Historical two-channel estimate, corrected operator interpretation
+
+**Correction, 2026-09-27:** the column norm estimates below are correct,
+but the common-module synthesis operator \(V_2:\ell^2(\mathcal P)\to\mathcal K\)
+is already trace class. A summable row expansion proves this. \(V_1\) is
+not even bounded on \(\ell^2\), and the remaining \(k=2\) failure is bounded
+extension to the all-ones/\(\ell^\infty\) boundary coefficients, not nuclearity
+on Hilbert space. The original low-mode completion interpretation in sections
+5–8 is superseded by
+[the exact domain correction](2026-09-27_coherent_synthesis_domain_correction.md).
+The diagonal Euler operator's Schatten/det3 threshold is unchanged.
 
 Date: 2026-09-27
 Status: exact norm/ideal estimates for the universal SU(1,1) prime coherent family. No RH proof.
@@ -95,7 +105,9 @@ But
 \infty.
 \]
 
-Thus the tail is Hilbert--Schmidt but not absolutely/nuclearly summable at the level of columns.
+Thus this particular column expansion is not absolutely summable. Nevertheless
+the operator is nuclear by a different, row-wise expansion; column divergence
+alone cannot establish failure of nuclearity.
 
 This is the distinct m=2 obstruction.
 
@@ -138,7 +150,7 @@ m=1
 \\[3pt]
 m=2
 &:&
-\text{Hilbert--Schmidt but failure of nuclear/trace summability},
+\text{trace class on }\ell^2\text{, but divergent all-ones boundary synthesis},
 \\[3pt]
 m\ge3
 &:&
