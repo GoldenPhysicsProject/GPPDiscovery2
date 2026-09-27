@@ -6,6 +6,7 @@ on:
       - codex/discovery-workbench
     paths:
       - "DiscoveryLean/**"
+      - "DiscoveryLean.lean"
       - "lakefile.toml"
       - "lean-toolchain"
       - ".github/workflows/discovery-lean.yml"
