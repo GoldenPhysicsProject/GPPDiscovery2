@@ -57,4 +57,6 @@ theorem odd_even_repetition_split (x : ℝ)
     x / (1 - x) = x / (1 - x ^ 2) + x ^ 2 / (1 - x ^ 2) := by
   field_simp [h1, h2] <;> ring
 
+end
+
 end DiscoveryLean.PrimeModularCovariance
