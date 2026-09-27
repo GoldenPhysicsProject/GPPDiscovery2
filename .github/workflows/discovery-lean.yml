@@ -1,0 +1,29 @@
+name: Discovery Lean quick checks
+
+on:
+  push:
+    branches:
+      - codex/discovery-workbench
+    paths:
+      - "DiscoveryLean/**"
+      - "lakefile.toml"
+      - "lean-toolchain"
+      - ".github/workflows/discovery-lean.yml"
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: codex/discovery-workbench
+      - uses: leanprover/lean-action@v1
+        with:
+          auto-config: false
+      - name: Confirm Lean 4.33.1
+        run: |
+          test "$(cat lean-toolchain)" = "leanprover/lean4:v4.33.1"
+          lean --version
+      - name: Build discovery sandbox
+        run: lake build DiscoveryLean
