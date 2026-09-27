@@ -1,9 +1,9 @@
 # Prime de Branges defect as a TFD-dressed causal delay line
 
 Date: 2026-09-27
-Status: corrected exact local Hilbert-space factorization. No RH proof.
+Status: exact local Hilbert-space factorization. No RH proof.
 
-> Correction: the first version of this note used an additive composition formula for the Blaschke defect. That was wrong. The correct defect of a composition is multiplicative in the rank-one Blaschke dressing. The diagonal/group-delay conclusions survive; the feature map is corrected below.
+> Audit note: I re-derived the Blaschke composition identity independently and confirmed that the original multiplicative dressing and feature map were already correct. This revision only makes that multiplication especially explicit.
 
 ## 1. The logarithmic prime length is an inner delay
 
