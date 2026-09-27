@@ -220,32 +220,44 @@ but the full condition is stronger: all power traces must arise from one common 
 
 ## 6. Relation to the existing positive-contraction criterion
 
-The intrinsic Hausdorff theorem gives, under RH,
+The intrinsic Hausdorff theorem gives
 
 mu_n=R^n <Omega,C^n Omega>,
 
 with 0<=C<=I and ||Omega||^2=mu_0=2R.
 
-The density-matrix criterion is the trace-class spectral sharpening of the same normalized moment problem. In the zero model,
-
-C has support points x_gamma=1/(R gamma^2),
-
-while rho weights those support points by their first moment so that Tr rho=1.
-
-Indeed if sigma is the Hausdorff probability law satisfying
+Let sigma be the spectral measure of C in Omega, so
 
 mu_n/R^n = int x^n dsigma(x),
+sigma([0,1])=2R.
 
-then
+Under RH its measure is
 
-d tau(x) = x dsigma(x)
+boxed:
+dsigma(x)
+=
+2R sum_gamma m_gamma x_gamma delta_{x_gamma}(dx),
 
-has total mass one after the normalization implied by mu_0=2R, and its moments are the density trace powers.
+where x_gamma=(R gamma^2)^(-1).
 
-This supplies a bridge between:
-- the BPY contraction C;
-- the fermionic Fredholm target;
-- a genuine density matrix / entanglement spectrum.
+Thus sigma/(2R) is the size-biased eigenvalue law of rho_RH. Its moments satisfy
+
+int x^n dsigma(x)/(2R)
+=
+sum_gamma m_gamma x_gamma^(n+1)
+=
+Tr(rho_RH^(n+1)).
+
+Equivalently,
+
+boxed:
+Tr(rho^m)
+=
+(1/(2R)) int x^(m-1) dsigma(x).
+
+Important caveat: an arbitrary positive contraction representation does not by itself manufacture a trace-class density matrix. De-biasing sigma by x must recover the spectral counting measure, including the exact multiplicities in the Fredholm model. For the fixed BPY sequence that extra structure follows after the Stieltjes criterion has forced RH and the poles/residues of -H'/H identify the atoms. It should not be assumed in advance.
+
+This is the precise bridge between the BPY contraction, the fermionic Fredholm target, and the global density-matrix spectrum.
 
 ## 7. Connection to the prime TFD program
 
