@@ -190,3 +190,46 @@ Candidate mechanisms to test:
 - a BPY connected-state matrix coefficient in which the vacuum evaluation is replaced by an honest bounded observable.
 
 If the reconstruction map can be made an algebra homomorphism on the physical quotient without assuming zero locations, RH closes immediately.
+
+
+## 9. Exact half-plus-half exponent budget: why separated reconstruction stops at Re s>1
+
+There is a sharper version of the evaluation obstruction.
+
+For the Hardy space on an infinite polydisk, point evaluation at w=(w_p)_p is bounded only when the reproducing-kernel product
+
+product_p (1-|w_p|^2)^(-1)
+
+is finite; in particular it is sufficient/necessary here that
+
+sum_p |w_p|^2 < infinity.
+
+Take the natural arithmetic radial regularization
+
+w_p=p^(-epsilon-i t).
+
+Then bounded evaluation requires
+
+sum_p p^(-2 epsilon)<infinity,
+
+hence
+
+boxed:
+epsilon>1/2.
+
+But the internal zeta vector itself belongs to H2 only after spending
+
+boxed:
+sigma>1/2.
+
+If these two operations are treated as independent bounded Hilbert-space steps, the total scalar exponent is therefore
+
+sigma+epsilon>1.
+
+That is exactly the ordinary Euler-product half-plane.
+
+So the failure to cross Re s=1 by a naive two-step Hardy construction is not accidental: it is an exact half-density + half-density exponent budget.
+
+This recovers the project's earlier critical-splitting lesson in a new compact-group form. A proof of RH cannot be obtained by separately bounding the prime state and then separately bounding scalar evaluation. One must cancel/quotient/connect the two stages before taking norms, or use a rigged/graded reconstruction in which the two half-density costs are not additive.
+
+This also explains why the H1 identity Z_s M_s=1 is potentially important: the boson/Mobius pair cancels before the singular evaluation is attempted.
