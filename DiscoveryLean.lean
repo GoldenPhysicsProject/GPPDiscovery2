@@ -7,3 +7,4 @@ import DiscoveryLean.CriticalBPYCoercivity
 import DiscoveryLean.SchurGapTransfer
 import DiscoveryLean.CasimirCriticalLine
 import DiscoveryLean.PrimeLocalGram
+import DiscoveryLean.ShadowEulerSchur
