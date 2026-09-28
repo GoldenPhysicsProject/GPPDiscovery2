@@ -2,3 +2,4 @@ import DiscoveryLean.PrimeModularCovariance
 import DiscoveryLean.PositiveFredholmFactor
 import DiscoveryLean.CayleyHardyKernel
 import DiscoveryLean.PrincipalSeriesDoubling
+import DiscoveryLean.FourComponentRigidity
