@@ -1,0 +1,13 @@
+{
+  "uses_riemann_zero_data": false,
+  "metric": "ds^2 = 4 (log zeta)''(1+2r) (dr^2+dt^2)",
+  "rows": [
+    {"r":1.0,"g":0.17228071150600033,"metric_lambda":0.6891228460240013,"gaussian_curvature":-1.278017746641183,"berry_A_t":0.16482268215827725,"berry_field_over_area":-0.5},
+    {"r":0.5,"g":0.8844818339635239,"metric_lambda":3.5379273358540955,"gaussian_curvature":-1.0667114278111924,"berry_A_t":0.5699609930945329,"berry_field_over_area":-0.5},
+    {"r":0.2,"g":6.097722060874184,"metric_lambda":24.390888243496736,"gaussian_curvature":-1.007685040397031,"berry_A_t":1.9903740349192929,"berry_field_over_area":-0.5},
+    {"r":0.1,"g":24.831493070580656,"metric_lambda":99.32597228232262,"gaussian_curvature":-1.0012352455497846,"berry_A_t":4.458337245149884,"berry_field_over_area":-0.5},
+    {"r":0.05,"g":99.82236634556143,"metric_lambda":399.28946538224574,"gaussian_curvature":-1.0001776468997219,"berry_A_t":9.441036385284637,"berry_field_over_area":-0.5},
+    {"r":0.02,"g":624.8165191897926,"metric_lambda":2499.2660767591706,"gaussian_curvature":-1.000012434535108,"berry_A_t":24.430204415270573,"berry_field_over_area":-0.5},
+    {"r":0.01,"g":2499.8145037540853,"metric_lambda":9999.258015016341,"gaussian_curvature":-1.0000016029881844,"berry_A_t":49.42651470159642,"berry_field_over_area":-0.5}
+  ]
+}
