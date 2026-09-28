@@ -4,3 +4,4 @@ import DiscoveryLean.CayleyHardyKernel
 import DiscoveryLean.PrincipalSeriesDoubling
 import DiscoveryLean.FourComponentRigidity
 import DiscoveryLean.CriticalBPYCoercivity
+import DiscoveryLean.SchurGapTransfer
