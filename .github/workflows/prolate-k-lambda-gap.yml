@@ -26,10 +26,10 @@ jobs:
         with:
           python-version: '3.11'
       - run: pip install -r requirements.txt
-      - run: python discovery/rh/prolate_k_lambda_gap_scan.py --c \${{ matrix.c }} --N 28 --T 300 --dps 70 --lmax 180 --quad 1200 --out result.json
+      - run: python discovery/rh/prolate_k_lambda_gap_scan.py --c ${{ matrix.c }} --N 28 --T 300 --dps 100 --lmax 140 --out result.json
       - uses: actions/upload-artifact@v4
         with:
-          name: prolate-gap-c\${{ matrix.c }}
+          name: prolate-gap-c${{ matrix.c }}
           path: result.json
 
   collect:
