@@ -23,8 +23,11 @@ theorem parallel_sum_energy_identity
       =
       (k * N / (k + N)) * z^2
       + ((k + N) * x - N * z)^2 / (k + N) := by
+  have hy : y = z - x := by
+    linarith
+  rw [hy]
   field_simp [hkN]
-  nlinarith [hxy]
+  ring
 
 theorem parallel_sum_lower_bound
     (k N x y z : ℝ)
