@@ -59,17 +59,34 @@ def sector_matrix(Q, parity: str):
     return V, V.T * Q * V
 
 
-def xi_logder(s):
-    """xi'/xi from elementary completion + zeta'/zeta."""
-    zp = mp.zeta(s, derivative=1)
-    z = mp.zeta(s)
+def xi_entire(s):
+    """Entire xi evaluation with the zeta pole analytically cancelled.
+
+    We use zeta(s)=eta(s)/(1-2^(1-s)) and keep
+        (s-1)/(1-2^(1-s))
+    as one removable factor.  This is stable at s=1, which occurs in the
+    omega=1/2, x=0 diagnostic and defeated the naive xi'/xi formula.
+    """
+    log2 = mp.log(2)
+    t = s - 1
+    if abs(t) < mp.mpf(10) ** (-(mp.mp.dps // 3)):
+        ratio = 1 / log2
+    else:
+        ratio = t / (-mp.expm1(-t * log2))
     return (
-        1 / s
-        + 1 / (s - 1)
-        - mp.log(mp.pi) / 2
-        + mp.digamma(s / 2) / 2
-        + zp / z
+        mp.mpf("0.5")
+        * s
+        * ratio
+        * mp.power(mp.pi, -s / 2)
+        * mp.gamma(s / 2)
+        * mp.altzeta(s)
     )
+
+
+def xi_logder(s):
+    """xi'/xi evaluated from the entire xi, including removable points."""
+    x = xi_entire(s)
+    return mp.diff(xi_entire, s) / x
 
 
 def finite_logder(z, coeff, L):
