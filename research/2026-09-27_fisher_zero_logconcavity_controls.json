@@ -1,0 +1,13 @@
+{
+  "uses_riemann_zero_data": false,
+  "A": 12.0,
+  "eps": 0.1,
+  "b": 1.0,
+  "log_density_curvature_upper_bound": -11.88888888888889,
+  "C0": 10.425469051899913,
+  "arcosh_C0": 3.035090852608831,
+  "first_complex_zero": [36.42109023130597, 37.69911184307752],
+  "reflected_complex_zero": [-36.42109023130597, 37.69911184307752],
+  "abs_phi_at_first_zero": 1.1967722885151814e-14,
+  "abs_phi_at_reflected_zero": 1.1967722885151814e-14
+}
