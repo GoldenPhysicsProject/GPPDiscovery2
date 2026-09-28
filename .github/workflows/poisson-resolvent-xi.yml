@@ -1,0 +1,81 @@
+name: Poisson resolvent xi scan
+
+on:
+  workflow_dispatch:
+  push:
+    branches: ['codex/discovery-workbench']
+    paths:
+      - 'discovery/rh/poisson_resolvent_xi_scan.py'
+      - '.github/workflows/poisson-resolvent-xi.yml'
+
+permissions:
+  contents: write
+
+jobs:
+  point:
+    runs-on: ubuntu-latest
+    timeout-minutes: 90
+    strategy:
+      fail-fast: false
+      max-parallel: 6
+      matrix:
+        c: [3, 5, 7, 11, 13, 17]
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - run: pip install -r requirements.txt
+      - run: python discovery/rh/poisson_resolvent_xi_scan.py --c ${{ matrix.c }} --N 28 --T 300 --dps 70 --xmax 50 --nx 101 --omegas 0.25,0.5,1.0,2.0 --out result.json
+      - uses: actions/upload-artifact@v4
+        with:
+          name: poisson-resolvent-c${{ matrix.c }}
+          path: result.json
+
+  collect:
+    needs: point
+    if: always()
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: codex/discovery-workbench
+      - uses: actions/download-artifact@v4
+        with:
+          path: artifacts
+      - name: Collect
+        run: |
+          python - <<'PY'
+          import glob,json,os
+          rows=[]
+          for fn in glob.glob("artifacts/**/result.json",recursive=True):
+              rows.append(json.load(open(fn)))
+          rows.sort(key=lambda r:r["c"])
+          os.makedirs("research",exist_ok=True)
+          with open("research/2026-09-28_poisson_resolvent_xi_scan_results.jsonl","w") as f:
+              for r in rows:
+                  f.write(json.dumps(r)+"\n")
+          md=[
+            "# Zero-free Poisson-resolvent comparison with completed xi",
+            "",
+            "Finite ground-state shifted log-derivative versus 2 Re xi-prime/xi. No zeta-zero list or root finding.",
+            "",
+            "| c | omega | RMS rel err | max abs err | min finite P | min target P |",
+            "|---:|---:|---:|---:|---:|---:|",
+          ]
+          for r in rows:
+              for q in r["rows"]:
+                  def sf(x):
+                      try:return f"{float(x):.4e}"
+                      except:return str(x)
+                  md.append(f"| {r['c']} | {q['omega']} | {sf(q['rms_relative_error'])} | {sf(q['max_absolute_error'])} | {sf(q['min_finite_poisson_density'])} | {sf(q['min_target_density'])} |")
+          open("research/2026-09-28_poisson_resolvent_xi_scan_results.md","w").write("\n".join(md)+"\n")
+          print("\n".join(md))
+          PY
+      - name: Commit results
+        run: |
+          git config user.name gpp-bot
+          git config user.email dtoupin@goldenphysics.org
+          git add research/2026-09-28_poisson_resolvent_xi_scan_results.*
+          git commit -m "Discovery: record Poisson resolvent xi scan" || echo nochange
+          git push origin HEAD:codex/discovery-workbench
