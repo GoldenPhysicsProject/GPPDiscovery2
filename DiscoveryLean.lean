@@ -5,3 +5,4 @@ import DiscoveryLean.PrincipalSeriesDoubling
 import DiscoveryLean.FourComponentRigidity
 import DiscoveryLean.CriticalBPYCoercivity
 import DiscoveryLean.SchurGapTransfer
+import DiscoveryLean.CasimirCriticalLine
