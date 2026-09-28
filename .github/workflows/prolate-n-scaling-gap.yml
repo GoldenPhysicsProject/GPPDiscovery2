@@ -1,0 +1,87 @@
+name: Prolate N-scaling gap scan
+
+on:
+  workflow_dispatch:
+  push:
+    branches: ['codex/discovery-workbench']
+    paths:
+      - '.github/workflows/prolate-n-scaling-gap.yml'
+
+permissions:
+  contents: write
+
+jobs:
+  point:
+    runs-on: ubuntu-latest
+    timeout-minutes: 120
+    strategy:
+      fail-fast: false
+      max-parallel: 6
+      matrix:
+        include:
+          - {c: 7, N: 20}
+          - {c: 7, N: 28}
+          - {c: 7, N: 36}
+          - {c: 11, N: 28}
+          - {c: 11, N: 36}
+          - {c: 11, N: 44}
+          - {c: 11, N: 56}
+          - {c: 13, N: 44}
+          - {c: 13, N: 56}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - run: pip install -r requirements.txt
+      - run: python discovery/rh/prolate_k_lambda_gap_scan_hp.py --c ${{ matrix.c }} --N ${{ matrix.N }} --T 300 --dps 100 --lmax 100 --out result.json
+      - uses: actions/upload-artifact@v4
+        with:
+          name: prolate-nscale-c${{ matrix.c }}-N${{ matrix.N }}
+          path: result.json
+
+  collect:
+    needs: point
+    if: always()
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: codex/discovery-workbench
+      - uses: actions/download-artifact@v4
+        with:
+          path: artifacts
+      - name: Collect
+        run: |
+          python - <<'PY'
+          import glob,json,os
+          rows=[]
+          for fn in glob.glob("artifacts/**/result.json",recursive=True):
+              rows.append(json.load(open(fn)))
+          rows.sort(key=lambda r:(r["c"],r["N"]))
+          os.makedirs("research",exist_ok=True)
+          with open("research/2026-09-28_prolate_n_scaling_gap_results.jsonl","w") as f:
+              for r in rows: f.write(json.dumps(r)+'\n')
+          md=[
+            "# Prolate k_lambda N-scaling gap scan",
+            "",
+            "Tests whether the deterioration at c>=11 is a fixed-Galerkin-N truncation effect. Exact-Mellin projection, 100-digit arithmetic, no zeta-zero data.",
+            "",
+            "| c | N | overlap | eps/gap | lam1 | gap |",
+            "|---:|---:|---:|---:|---:|---:|",
+          ]
+          for r in rows:
+              def sf(x):
+                  try:return f"{float(x):.6e}"
+                  except:return str(x)
+              md.append(f"| {r['c']} | {r['N']} | {sf(r['overlap'])} | {sf(r['rayleigh_excess_over_gap'])} | {sf(r['lam1'])} | {sf(r['gap'])} |")
+          open("research/2026-09-28_prolate_n_scaling_gap_results.md","w").write("\n".join(md)+"\n")
+          print("\n".join(md))
+          PY
+      - name: Commit results
+        run: |
+          git config user.name gpp-bot
+          git config user.email dtoupin@goldenphysics.org
+          git add research/2026-09-28_prolate_n_scaling_gap_results.*
+          git commit -m "Discovery: record prolate N-scaling gap scan" || echo nochange
+          git push origin HEAD:codex/discovery-workbench
