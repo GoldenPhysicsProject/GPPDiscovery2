@@ -239,3 +239,51 @@ xi(1/2+z)/xi(1/2).
 If achieved, positivity/self-adjointness would supply exactly the missing spectral reality mechanism.
 
 This is currently a hypothesis, but it is more compatible with the critical thermodynamic limit than demanding an ordinary trace-class global density matrix at the boundary.
+
+
+## 10. Exact TFD fidelity equals the zeta coherent kernel
+
+For beta,beta'>1 the global normalized TFD vectors in the ordinary Fock representation are
+
+|Omega_beta>
+=
+1/sqrt(zeta(beta))
+sum_n n^(-beta/2)|n,n>.
+
+Their overlap is exactly
+
+boxed:
+<Omega_beta'|Omega_beta>
+=
+zeta((beta+beta')/2)
+/
+sqrt[zeta(beta)zeta(beta')].
+
+Prime by prime the same formula is
+
+product_p
+[
+sqrt((1-p^-beta)(1-p^-beta'))
+/
+(1-p^{-(beta+beta')/2})
+].
+
+Thus the zeta reproducing/coherent kernel is literally the Uhlmann/TFD fidelity amplitude between arithmetic KMS vacua.
+
+With a relative modular-time phase,
+
+|Omega_{beta,t}>
+=
+1/sqrt(zeta(beta))
+sum_n n^(-beta/2-it)|n,n>,
+
+one has
+
+boxed:
+<Omega_{beta,u}|Omega_{beta,t}>
+=
+zeta(beta+i(t-u))/zeta(beta).
+
+Therefore the AdS2 information metric derived from the zeta kernel is the fidelity susceptibility of the prime thermal vacuum family.
+
+The divergence of that metric at beta=1 is an orthogonality catastrophe / thermodynamic-limit boundary, not a coordinate artifact.
