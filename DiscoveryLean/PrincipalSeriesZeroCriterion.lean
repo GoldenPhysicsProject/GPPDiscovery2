@@ -26,20 +26,20 @@ namespace DiscoveryLean.PrincipalSeriesZeroCriterion
 
 open Complex
 
+noncomputable section
+
 /-- Centered-square / Casimir-defect coordinate. -/
 def centeredSq (s : ℂ) : ℂ := (s - (1 / 2 : ℂ)) ^ 2
 
 /-- Imaginary part of the centered square. -/
 theorem centeredSq_im (s : ℂ) :
     (centeredSq s).im = 2 * (s.re - 1 / 2) * s.im := by
-  simp [centeredSq, pow_two, mul_im]
-  ring
+  simp [centeredSq, pow_two, mul_im] <;> ring
 
 /-- Real part of the centered square. -/
 theorem centeredSq_re (s : ℂ) :
     (centeredSq s).re = (s.re - 1 / 2)^2 - s.im^2 := by
-  simp [centeredSq, pow_two, mul_re]
-  ring
+  simp [centeredSq, pow_two, mul_re] <;> ring
 
 /-- The non-positive real centered-square ray is exactly the critical line. -/
 theorem centeredSq_nonpos_real_iff_critical (s : ℂ) :
