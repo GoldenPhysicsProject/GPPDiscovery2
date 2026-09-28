@@ -69,8 +69,18 @@ def xi_entire(s):
     """
     log2 = mp.log(2)
     t = s - 1
-    if abs(t) < mp.mpf(10) ** (-(mp.mp.dps // 3)):
-        ratio = 1 / log2
+    if abs(t) < mp.mpf("1e-8"):
+        # Bernoulli expansion of t/(1-exp(-log(2)t)).
+        # Keeping the linear term is essential: ratio'(0)=1/2.
+        # A constant removable-value patch gives a WRONG xi'/xi(1).
+        ratio = (
+            1 / log2
+            + t / 2
+            + log2 * t**2 / 12
+            - log2**3 * t**4 / 720
+            + log2**5 * t**6 / 30240
+            - log2**7 * t**8 / 1209600
+        )
     else:
         ratio = t / (-mp.expm1(-t * log2))
     return (
