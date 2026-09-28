@@ -109,4 +109,6 @@ theorem rhStrip_iff_everyStripZeroPrincipal :
   · intro h s hz h0 h1
     exact (onPrincipalSeries_iff_critical s).1 (h s hz h0 h1)
 
+end
+
 end DiscoveryLean.PrincipalSeriesZeroCriterion
