@@ -1,41 +1,39 @@
 #!/usr/bin/env python3
-"""Literal CCM prolate k_lambda vacuum-gap diagnostic.
+"""Literal CCM prolate k_lambda vacuum-gap diagnostic, arbitrary precision.
 
-Implements the "educated guess" of Connes--Consani--Moscovici, Zeta
-Spectral Triples, eqs. (7.5)--(7.6), without zeta-zero data:
+No zeta-zero ordinates are used.
 
-    PW_lambda = -d/dx ((lambda^2-x^2)d/dx) + (2 pi lambda x)^2,
-    k_lambda(u) = E(h_lambda)(u)
-                = sqrt(u) sum_{n>=1} h_lambda(nu),
+Implements the Connes--Consani--Moscovici prolate trial state
 
-where h_lambda is the (unique up to scale) linear combination of the n=0
+    PW_lambda h = -d/dx((lambda^2-x^2)h') + (2*pi*lambda*x)^2 h,
+    k_lambda(u) = sqrt(u) sum_{n>=1} h_lambda(nu),
+
+where h_lambda is the unique (up to scale) linear combination of the n=0
 and n=4 even prolate modes with vanishing integral.
 
-The prolate modes are computed by a stable Legendre-Galerkin diagonalization
-rather than scipy.special.pro_ang1.  In the orthonormal Legendre basis,
-multiplication by z^2 is tridiagonal on each parity sector, so the
-discretization is symmetric and zero-independent.
+Two numerical details matter critically:
 
-For u in [lambda^-1,lambda], h_lambda is the time-limited prolate profile
-on [-lambda,lambda], so the E-sum has at most lambda^2 terms.
+1. The prolate eigenproblem is solved with mpmath eigsy in the orthonormal
+   even Legendre basis.  Float64 prolate vectors create an O(1e-30)
+   Rayleigh floor after squaring, which is already much larger than the
+   finite Weil gaps at c>=11.
 
-The script projects the even part of k_lambda into the same finite Weil basis
-as connes-cvs and measures its overlap, Rayleigh excess, residual, and
-excitation gap relative to the true finite even ground state.
+2. Fourier coefficients of k_lambda are evaluated ANALYTICALLY.  Since the
+   Galerkin h_lambda is a finite Legendre polynomial, k_lambda(e^y) is a
+   finite piecewise sum of exponentials.  The log-Fourier integrals are
+   therefore elementary exponentials, so no float quadrature is needed.
 
-No Riemann-zero ordinates are used.
+This makes the diagnostic capable in principle of following the tiny finite
+Weil gaps rather than hitting an unrelated double-precision floor.
 """
 
 from __future__ import annotations
 
 import argparse
 import json
-import math
 import time
 
 import mpmath as mp
-import numpy as np
-from numpy.polynomial.legendre import leggauss, legval
 import connes_cvs as cc
 
 
@@ -57,155 +55,186 @@ def sector_matrix(Q, parity: str):
     return V, V.T * Q * V
 
 
-def _a(l: int) -> float:
-    """Coefficient of phi_{l+1} in z phi_l for orthonormal Legendre phi."""
-    return (l + 1) / math.sqrt((2 * l + 1) * (2 * l + 3))
+def leg_a(l: int):
+    return mp.mpf(l + 1) / mp.sqrt((2 * l + 1) * (2 * l + 3))
 
 
-def _b(l: int) -> float:
-    """Coefficient of phi_{l-1} in z phi_l."""
+def leg_b(l: int):
     if l == 0:
-        return 0.0
-    return l / math.sqrt((2 * l - 1) * (2 * l + 1))
+        return mp.mpf("0")
+    return mp.mpf(l) / mp.sqrt((2 * l - 1) * (2 * l + 1))
 
 
-def prolate_zero_integral_coeffs(lam: float, lmax: int = 180):
-    """Return standard-Legendre coefficients of normalized h_lambda.
+def legendre_power_polynomials(lmax: int):
+    """P_l(z) in the monomial basis, all coefficients as mp.mpf."""
+    P = [[mp.mpf(1)]]
+    if lmax == 0:
+        return P
+    P.append([mp.mpf(0), mp.mpf(1)])
+    for l in range(1, lmax):
+        # P_{l+1} = ((2l+1) z P_l - l P_{l-1})/(l+1)
+        out = [mp.mpf(0)] * (l + 2)
+        fac1 = mp.mpf(2 * l + 1) / (l + 1)
+        fac2 = mp.mpf(l) / (l + 1)
+        for j, val in enumerate(P[l]):
+            out[j + 1] += fac1 * val
+        for j, val in enumerate(P[l - 1]):
+            out[j] -= fac2 * val
+        P.append(out)
+    return P
 
-    Scale x=lambda*z.  Up to an irrelevant additive constant in the
-    eigenvalue, the prolate operator becomes
 
-        -d_z((1-z^2)d_z) + gamma^2 z^2, gamma=2*pi*lambda^2.
+def p_even_at_zero(l: int):
+    """Exact P_l(0) for even l."""
+    if l % 2:
+        return mp.mpf(0)
+    r = l // 2
+    return ((-1) ** r) * mp.binomial(2 * r, r) / (mp.mpf(4) ** r)
 
-    On the even orthonormal Legendre basis phi_l, l=0,2,..., z^2 couples only
-    l to l and l+/-2.
 
-    The first and third even eigenvectors are the modes labelled n=0 and n=4.
-    Since all Legendre modes l>0 integrate to zero, the integral of an
-    eigenfunction is determined only by its l=0 coefficient.  Hence
+def prolate_zero_integral_power_coeffs(c: int, lmax: int):
+    """Return monomial coefficients of h_lambda(x) in z=x/lambda.
 
-        h_lambda ~ v4[0] h0 - v0[0] h4
+    The even Legendre Galerkin matrix is symmetric and tridiagonal.
+    The first and third even eigenvectors are the n=0 and n=4 prolate modes.
 
-    has *exactly* vanishing integral in this Galerkin representation.
+    Because only P_0 has nonzero integral, the combination
+
+        v4[0] v0 - v0[0] v4
+
+    has exactly zero integral in the finite Galerkin representation.
     """
     if lmax % 2:
         lmax += 1
-    ls = np.arange(0, lmax + 1, 2, dtype=int)
+    lam = mp.sqrt(c)
+    gamma = 2 * mp.pi * c
+    ls = list(range(0, lmax + 1, 2))
     m = len(ls)
 
-    z2 = np.zeros((m, m), dtype=float)
+    M = mp.matrix(m)
     for i, l in enumerate(ls):
-        z2[i, i] = _a(int(l)) ** 2 + _b(int(l)) ** 2
+        M[i, i] = (
+            l * (l + 1)
+            + gamma**2 * (leg_a(l) ** 2 + leg_b(l) ** 2)
+        )
         if i + 1 < m:
-            off = _a(int(l)) * _a(int(l) + 1)
-            z2[i, i + 1] = off
-            z2[i + 1, i] = off
+            off = gamma**2 * leg_a(l) * leg_a(l + 1)
+            M[i, i + 1] = off
+            M[i + 1, i] = off
 
-    gamma = 2.0 * math.pi * lam * lam
-    op = np.diag(ls * (ls + 1)).astype(float) + (gamma * gamma) * z2
-    eigvals, eigvecs = np.linalg.eigh(op)
+    eigvals, eigvecs = mp.eigsy(M)
 
-    # Orient n=0 and n=4 modes so their value at z=0 is positive.
-    p0 = np.zeros(m)
-    for i, l in enumerate(ls):
-        unit = np.zeros(int(l) + 1)
-        unit[int(l)] = 1.0
-        p0[i] = math.sqrt((2 * int(l) + 1) / 2.0) * legval(0.0, unit)
+    # Orient the selected eigenvectors by their value at z=0.
+    p0 = []
+    for l in ls:
+        p0.append(mp.sqrt(mp.mpf(2 * l + 1) / 2) * p_even_at_zero(l))
+
     for col in (0, 2):
-        if float(np.dot(eigvecs[:, col], p0)) < 0:
-            eigvecs[:, col] *= -1
+        val0 = mp.fsum(eigvecs[i, col] * p0[i] for i in range(m))
+        if val0 < 0:
+            for i in range(m):
+                eigvecs[i, col] = -eigvecs[i, col]
 
-    v0 = eigvecs[:, 0]
-    v4 = eigvecs[:, 2]
-    comb = v4[0] * v0 - v0[0] * v4
-    comb /= np.linalg.norm(comb)
+    v0 = [eigvecs[i, 0] for i in range(m)]
+    v4 = [eigvecs[i, 2] for i in range(m)]
+    comb = [v4[0] * v0[i] - v0[0] * v4[i] for i in range(m)]
+    norm = mp.sqrt(mp.fsum(x * x for x in comb))
+    comb = [x / norm for x in comb]
 
-    # Standard Legendre coefficients for the x-normalized function
-    # h_lambda(x)=lambda^{-1/2} sum c_l phi_l(x/lambda).
-    coeff = np.zeros(lmax + 1, dtype=float)
+    # Standard Legendre coefficients of
+    # h_lambda(x)=lambda^(-1/2) sum comb_l phi_l(x/lambda).
+    legcoef = [mp.mpf(0)] * (lmax + 1)
     for i, l in enumerate(ls):
-        coeff[int(l)] = (
-            comb[i] * math.sqrt((2 * int(l) + 1) / 2.0) / math.sqrt(lam)
+        legcoef[l] = (
+            comb[i]
+            * mp.sqrt(mp.mpf(2 * l + 1) / 2)
+            / mp.sqrt(lam)
         )
 
-    # Because the standard P_0 coefficient is zero, integral is exactly zero
-    # up to floating arithmetic.
-    integral = 2.0 * lam * coeff[0]
-    return eigvals, coeff, integral
+    polys = legendre_power_polynomials(lmax)
+    power = [mp.mpf(0)] * (lmax + 1)
+    for l in ls:
+        a_l = legcoef[l]
+        if a_l == 0:
+            continue
+        for j, q in enumerate(polys[l]):
+            power[j] += a_l * q
+
+    # h is even; remove exact/roundoff odd noise.
+    for j in range(1, len(power), 2):
+        power[j] = mp.mpf(0)
+
+    # Integral over x in [-lambda,lambda] is exactly 2 lambda * legcoef[0].
+    h_integral = 2 * lam * legcoef[0]
+
+    return eigvals, power, h_integral
 
 
-def h_eval(x: np.ndarray, lam: float, coeff: np.ndarray) -> np.ndarray:
-    x = np.asarray(x, dtype=float)
-    z = x / lam
-    out = np.zeros_like(z)
-    mask = np.abs(z) <= 1.0 + 5e-14
-    if np.any(mask):
-        zz = np.clip(z[mask], -1.0, 1.0)
-        out[mask] = legval(zz, coeff)
-    return out
+def exp_integral(alpha, lo, hi):
+    if hi <= lo:
+        return mp.mpc(0)
+    return (mp.exp(alpha * hi) - mp.exp(alpha * lo)) / alpha
 
 
-def k_eval_log(y: np.ndarray, lam: float, coeff: np.ndarray) -> np.ndarray:
-    """Evaluate k_lambda(exp y)=sqrt(u) sum h_lambda(nu)."""
-    y = np.asarray(y, dtype=float)
-    u = np.exp(y)
-    out = np.zeros_like(u)
-    max_n = int(math.floor(lam * lam + 1e-10))
-    for n in range(1, max_n + 1):
-        mask = n * u <= lam * (1.0 + 5e-14)
-        if np.any(mask):
-            out[mask] += h_eval(n * u[mask], lam, coeff)
-    return np.sqrt(u) * out
+def k_fourier_coeff(k: int, c: int, power):
+    """Exact log-Fourier coefficient of k_lambda on [-A,A].
+
+    k_lambda(e^y)
+      = e^(y/2) sum_{1<=n<=lambda/e^y} h_lambda(n e^y).
+
+    With h_lambda(z)=sum_m power[m] z^m in z=x/lambda, each active
+    summand is a finite sum of exp((m+1/2)y).  Its support is
+    y <= log(lambda/n), giving an elementary integral.
+    """
+    lam = mp.sqrt(c)
+    L = mp.log(c)
+    A = L / 2
+    omega = 2 * mp.pi * k / L
+    lo = -A
+
+    total = mp.mpc(0)
+    for n in range(1, c + 1):
+        hi = mp.log(lam / n)
+        if hi <= lo:
+            continue
+        n_over_lam = mp.mpf(n) / lam
+        for m, coeff in enumerate(power):
+            if coeff == 0:
+                continue
+            alpha = mp.mpf(m) + mp.mpf("0.5") - 1j * omega
+            total += (
+                coeff
+                * (n_over_lam ** m)
+                * exp_integral(alpha, lo, hi)
+            )
+
+    # Centered y to CCM x=y+A basis contributes exp(-i omega A)=(-1)^k.
+    return ((-1) ** k) * total / mp.sqrt(L)
 
 
-def prolate_fourier_vector(
-    c: int,
-    N: int,
-    lmax: int = 180,
-    quad_n: int = 1200,
-):
-    """Project the even part of literal k_lambda into the CCM Fourier basis."""
-    lam = math.sqrt(c)
-    L = math.log(c)
-    A = L / 2.0
+def prolate_fourier_vector(c: int, N: int, lmax: int):
+    eigvals, power, h_integral = prolate_zero_integral_power_coeffs(c, lmax)
 
-    peigs, coeff, h_integral = prolate_zero_integral_coeffs(lam, lmax=lmax)
+    coeffs_complex = [k_fourier_coeff(k, c, power) for k in range(-N, N + 1)]
+    total_power = mp.fsum(abs(z) ** 2 for z in coeffs_complex)
+    odd_power = mp.fsum(mp.im(z) ** 2 for z in coeffs_complex)
+    odd_fraction = odd_power / total_power if total_power else mp.nan
 
-    gx, gw = leggauss(quad_n)
-    y = A * gx
-    w = A * gw
-
-    kp = k_eval_log(y, lam, coeff)
-    km = k_eval_log(-y, lam, coeff)
-    ke = 0.5 * (kp + km)
-    ko = 0.5 * (kp - km)
-
-    even_norm2 = float(np.dot(w, ke * ke))
-    odd_norm2 = float(np.dot(w, ko * ko))
-    odd_fraction = odd_norm2 / max(even_norm2 + odd_norm2, 1e-300)
-
-    coeffs = [0.0] * (2 * N + 1)
-    for k in range(0, N + 1):
-        omega = 2.0 * math.pi * k / L
-        integ = float(np.dot(w, ke * np.cos(omega * y)))
-        ak = ((-1) ** k) * integ / math.sqrt(L)
-        coeffs[N + k] = ak
-        coeffs[N - k] = ak
-
-    v = mp.matrix([mp.mpf(str(x)) for x in coeffs])
+    # Orthogonal projection to inversion-even sector = real part in centered basis.
+    vals = [mp.re(z) for z in coeffs_complex]
+    v = mp.matrix(vals)
     norm = mp.sqrt((v.T * v)[0])
     if norm == 0:
         raise RuntimeError("prolate k_lambda projection vanished")
     v /= norm
 
     diag = {
-        "lambda": lam,
-        "prolate_gamma": 2.0 * math.pi * lam * lam,
-        "prolate_eig0": float(peigs[0]),
-        "prolate_eig4": float(peigs[2]),
-        "h_integral": h_integral,
-        "k_odd_fraction": odd_fraction,
-        "projected_even_norm2": even_norm2,
+        "lambda": mp.nstr(mp.sqrt(c), 30),
+        "prolate_gamma": mp.nstr(2 * mp.pi * c, 30),
+        "prolate_eig0": mp.nstr(eigvals[0], 30),
+        "prolate_eig4": mp.nstr(eigvals[2], 30),
+        "h_integral": mp.nstr(h_integral, 30),
+        "k_odd_fraction": mp.nstr(odd_fraction, 30),
     }
     return v, diag
 
@@ -215,9 +244,8 @@ def main():
     p.add_argument("--c", type=int, required=True)
     p.add_argument("--N", type=int, default=28)
     p.add_argument("--T", type=int, default=300)
-    p.add_argument("--dps", type=int, default=70)
-    p.add_argument("--lmax", type=int, default=180)
-    p.add_argument("--quad", type=int, default=1200)
+    p.add_argument("--dps", type=int, default=100)
+    p.add_argument("--lmax", type=int, default=140)
     p.add_argument("--out", default="result.json")
     a = p.parse_args()
 
@@ -230,9 +258,7 @@ def main():
     l1, l2 = eig[0], eig[1]
     gap = l2 - l1
 
-    vp, diag = prolate_fourier_vector(
-        a.c, a.N, lmax=a.lmax, quad_n=a.quad
-    )
+    vp, diag = prolate_fourier_vector(a.c, a.N, a.lmax)
     ve = Ve.T * vp
     ve /= mp.sqrt((ve.T * ve)[0])
 
@@ -255,20 +281,21 @@ def main():
         T=a.T,
         dps=a.dps,
         lmax=a.lmax,
-        quad=a.quad,
-        L=float(mp.log(a.c)),
-        lam1=mp.nstr(l1, 30),
-        lam2=mp.nstr(l2, 30),
-        gap=mp.nstr(gap, 30),
-        prolate_rayleigh=mp.nstr(ray, 30),
-        rayleigh_excess=mp.nstr(rex, 30),
-        residual_norm=mp.nstr(res, 30),
-        overlap=mp.nstr(ov, 30),
-        one_minus_overlap_sq=mp.nstr(angle_def, 30),
-        rayleigh_excess_over_gap=mp.nstr(ray_bound, 30),
-        residual_over_dist2=mp.nstr(dk, 30),
+        L=mp.nstr(mp.log(a.c), 30),
+        lam1=mp.nstr(l1, 40),
+        lam2=mp.nstr(l2, 40),
+        gap=mp.nstr(gap, 40),
+        prolate_rayleigh=mp.nstr(ray, 40),
+        rayleigh_excess=mp.nstr(rex, 40),
+        residual_norm=mp.nstr(res, 40),
+        overlap=mp.nstr(ov, 40),
+        one_minus_overlap_sq=mp.nstr(angle_def, 40),
+        rayleigh_excess_over_gap=mp.nstr(ray_bound, 40),
+        residual_over_dist2=mp.nstr(dk, 40),
         seconds=round(time.time() - t0, 1),
         uses_zero_data=False,
+        analytic_fourier=True,
+        arbitrary_precision_prolate=True,
         **diag,
     )
     open(a.out, "w").write(json.dumps(rec))
