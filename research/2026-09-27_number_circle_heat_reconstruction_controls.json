@@ -1,0 +1,20 @@
+{
+  "uses_riemann_zero_data": false,
+  "xi_reconstruction": [
+    {"s":"0.5","abs_error":0.0},
+    {"s":"2.3","abs_error":0.0},
+    {"s":"(0.5 + 5.0j)","abs_error":5.69446786300007e-72},
+    {"s":"(0.7 + 3.2j)","abs_error":1.6979398272800086e-72}
+  ],
+  "theta_modularity": [
+    {"t":0.2,"abs_error":4.045105352922953e-71,"heat_eval_norm":0.7861515920795441},
+    {"t":0.5,"abs_error":5.519064421492876e-72,"heat_eval_norm":0.4579822529769937},
+    {"t":1.0,"abs_error":6.162113532105209e-72,"heat_eval_norm":0.2078879640735702},
+    {"t":2.0,"abs_error":8.76921736785423e-72,"heat_eval_norm":0.04321391840448567},
+    {"t":5.0,"abs_error":1.3741145966707652e-71,"heat_eval_norm":0.00038820320392676626}
+  ],
+  "mixed_heat_shift_flow": [
+    {"s":"(0.4 + 2.0j)","t":0.3,"abs_error":0.0},
+    {"s":"1.7","t":0.8,"abs_error":0.0}
+  ]
+}
