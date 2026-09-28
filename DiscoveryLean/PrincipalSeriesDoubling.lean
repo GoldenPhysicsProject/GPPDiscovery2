@@ -15,7 +15,9 @@ realization or construct the PSL(2,R) -> PSL(2,C) intertwiner.
 
 namespace DiscoveryLean.PrincipalSeriesDoubling
 
-noncomputable def arithmeticWeight (tau : ℝ) : ℝ × ℝ := (1 / 2, tau)
+noncomputable section
+
+def arithmeticWeight (tau : ℝ) : ℝ × ℝ := ((1 : ℝ) / 2, tau)
 
 def celestialDelta (w : ℝ × ℝ) : ℝ × ℝ :=
   (2 * w.1, 2 * w.2)
@@ -37,11 +39,12 @@ theorem spectral_parameter_doubles (tau : ℝ) :
 theorem simultaneous_shadow (w : ℝ × ℝ) :
     celestialDelta (shadow1 w) = shadow2 (celestialDelta w) := by
   rcases w with ⟨a, b⟩
-  simp [celestialDelta, shadow1, shadow2]
-  ring
+  ext <;> simp [celestialDelta, shadow1, shadow2] <;> ring
 
 theorem critical_shadow_fixed_real_part (tau : ℝ) :
     (shadow1 (arithmeticWeight tau)).1 = 1 / 2 := by
   norm_num [shadow1, arithmeticWeight]
+
+end
 
 end DiscoveryLean.PrincipalSeriesDoubling
