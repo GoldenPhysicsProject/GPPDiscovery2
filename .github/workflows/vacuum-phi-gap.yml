@@ -1,0 +1,81 @@
+name: Vacuum Phi gap scan
+
+on:
+  workflow_dispatch:
+  push:
+    branches: ['codex/discovery-workbench']
+    paths:
+      - 'discovery/rh/vacuum_phi_gap_scan.py'
+      - '.github/workflows/vacuum-phi-gap.yml'
+
+permissions:
+  contents: write
+
+jobs:
+  point:
+    runs-on: ubuntu-latest
+    timeout-minutes: 90
+    strategy:
+      fail-fast: false
+      max-parallel: 6
+      matrix:
+        c: [3, 5, 7, 11, 13, 17]
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - run: pip install -r requirements.txt
+      - run: python discovery/rh/vacuum_phi_gap_scan.py --c ${{ matrix.c }} --N 28 --T 300 --dps 70 --out result.json
+      - uses: actions/upload-artifact@v4
+        with:
+          name: phi-gap-c${{ matrix.c }}
+          path: result.json
+
+  collect:
+    needs: point
+    if: always()
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: codex/discovery-workbench
+      - uses: actions/download-artifact@v4
+        with:
+          path: artifacts
+      - name: Collect
+        run: |
+          python - <<'PY'
+          import glob, json, math, os
+          rows=[]
+          for fn in glob.glob("artifacts/**/result.json", recursive=True):
+              rows.append(json.load(open(fn)))
+          rows.sort(key=lambda r:r["c"])
+          os.makedirs("research", exist_ok=True)
+          out="research/2026-09-28_vacuum_phi_gap_scan_results.jsonl"
+          with open(out,"w") as f:
+              for r in rows:
+                  f.write(json.dumps(r)+"\n")
+          md=["# Zero-free Riemann-Phi vacuum-gap scan","",
+              "Direct projection of Riemann's explicit Phi kernel into the finite Weil basis. No zeta-zero data used.","",
+              "| c | N | overlap | 1-overlap^2 | eps/gap | residual/dist2 | lam1 | even gap |",
+              "|---:|---:|---:|---:|---:|---:|---:|---:|"]
+          for r in rows:
+              def sf(x):
+                  try: return f"{float(x):.4e}"
+                  except: return str(x)
+              md.append(f"| {r['c']} | {r['N']} | {sf(r['overlap'])} | {sf(r['one_minus_overlap_sq'])} | "
+                        f"{sf(r['rayleigh_excess_over_gap'])} | {sf(r['residual_over_dist2'])} | "
+                        f"{sf(r['lam1'])} | {sf(r['gap'])} |")
+          md += ["","Interpretation: the variational theorem gives 1-overlap^2 <= eps/gap. "
+                 "The direct Phi profile is only a control; the sharper prolate k_lambda candidate remains the CCM target."]
+          open("research/2026-09-28_vacuum_phi_gap_scan_results.md","w").write("\n".join(md)+"\n")
+          print("\n".join(md))
+          PY
+      - name: Commit results
+        run: |
+          git config user.name gpp-bot
+          git config user.email dtoupin@goldenphysics.org
+          git add research/2026-09-28_vacuum_phi_gap_scan_results.*
+          git commit -m "Discovery: record zero-free Phi vacuum gap scan" || echo nochange
+          git push origin HEAD:codex/discovery-workbench
