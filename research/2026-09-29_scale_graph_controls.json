@@ -1,0 +1,429 @@
+{
+  "status": "floating-point identity controls; not RH evidence",
+  "numpy_version": "2.3.5",
+  "scipy_version": "1.17.0",
+  "trace_tfd": {
+    "kappa": 0.5,
+    "points": [
+      -2.0,
+      -0.3,
+      0.0,
+      0.4,
+      1.8,
+      3.05
+    ],
+    "precision_max_error": 2.220446049250313e-15,
+    "tfd_max_error": 8.881784197001252e-16,
+    "block_determinants": [
+      0.24999999999999994,
+      0.25000000000000355,
+      0.2500000000000006,
+      0.2500000000000003,
+      0.25
+    ],
+    "growth": [
+      {
+        "time": 0.0,
+        "quotient_norm": 1.0000000000000004,
+        "ambient_exact_norm": 1.0
+      },
+      {
+        "time": 0.1,
+        "quotient_norm": 1.073721785709688,
+        "ambient_exact_norm": 1.104987562112089
+      },
+      {
+        "time": 1.0,
+        "quotient_norm": 1.867479225046394,
+        "ambient_exact_norm": 2.414213562373095
+      },
+      {
+        "time": 3.0,
+        "quotient_norm": 2.8780076512475263,
+        "ambient_exact_norm": 6.16227766016838
+      },
+      {
+        "time": 10.0,
+        "quotient_norm": 4.584392093894014,
+        "ambient_exact_norm": 20.04987562112089
+      }
+    ]
+  },
+  "schur": {
+    "seed": 29092026,
+    "arithmetic_dimension": 12,
+    "connected_dimension": 17,
+    "max_error": 2.220446049250313e-16,
+    "samples": [
+      {
+        "cutoff": 1,
+        "a": [
+          0.0,
+          0.0
+        ],
+        "q": 0.5008636137331602,
+        "formula": 0.68,
+        "least_squares": 0.6800000000000003,
+        "error": 2.220446049250313e-16
+      },
+      {
+        "cutoff": 1,
+        "a": [
+          0.001,
+          0.002
+        ],
+        "q": 0.5008636137331602,
+        "formula": 0.6792467459194226,
+        "least_squares": 0.6792467459194227,
+        "error": 1.1102230246251565e-16
+      },
+      {
+        "cutoff": 1,
+        "a": [
+          0.3,
+          -0.7
+        ],
+        "q": 0.5008636137331602,
+        "formula": 0.7406903360650986,
+        "least_squares": 0.7406903360650988,
+        "error": 2.220446049250313e-16
+      },
+      {
+        "cutoff": 5,
+        "a": [
+          0.0,
+          0.0
+        ],
+        "q": 2.5449338926904943,
+        "formula": 0.68,
+        "least_squares": 0.6800000000000003,
+        "error": 2.220446049250313e-16
+      },
+      {
+        "cutoff": 5,
+        "a": [
+          0.001,
+          0.002
+        ],
+        "q": 2.5449338926904943,
+        "formula": 0.6762502126526998,
+        "least_squares": 0.6762502126526999,
+        "error": 1.1102230246251565e-16
+      },
+      {
+        "cutoff": 5,
+        "a": [
+          0.3,
+          -0.7
+        ],
+        "q": 2.5449338926904943,
+        "formula": 0.9798390416983138,
+        "least_squares": 0.9798390416983137,
+        "error": 1.1102230246251565e-16
+      },
+      {
+        "cutoff": 12,
+        "a": [
+          0.0,
+          0.0
+        ],
+        "q": 7.401362853860527,
+        "formula": 0.68,
+        "least_squares": 0.6800000000000003,
+        "error": 2.220446049250313e-16
+      },
+      {
+        "cutoff": 12,
+        "a": [
+          0.001,
+          0.002
+        ],
+        "q": 7.401362853860527,
+        "formula": 0.6728138254061443,
+        "least_squares": 0.6728138254061442,
+        "error": 1.1102230246251565e-16
+      },
+      {
+        "cutoff": 12,
+        "a": [
+          0.3,
+          -0.7
+        ],
+        "q": 7.401362853860527,
+        "formula": 0.9027471195177931,
+        "least_squares": 0.9027471195177933,
+        "error": 2.220446049250313e-16
+      }
+    ]
+  },
+  "concentration": {
+    "model": "synthetic C=I, c=e1, A=1, a(z)=z^m",
+    "rows": [
+      {
+        "multiplicity": 1,
+        "cutoff": 100,
+        "scaled_offset": 0.0,
+        "z": 0.0,
+        "distance": 1.0,
+        "scaled_limit": 1.0
+      },
+      {
+        "multiplicity": 1,
+        "cutoff": 100,
+        "scaled_offset": 1.0,
+        "z": 0.1,
+        "distance": 0.7348469228349536,
+        "scaled_limit": 0.8164965809277261
+      },
+      {
+        "multiplicity": 1,
+        "cutoff": 100,
+        "scaled_offset": 2.0,
+        "z": 0.2,
+        "distance": 0.46188021535170065,
+        "scaled_limit": 0.5773502691896258
+      },
+      {
+        "multiplicity": 1,
+        "cutoff": 10000,
+        "scaled_offset": 0.0,
+        "z": 0.0,
+        "distance": 1.0,
+        "scaled_limit": 1.0
+      },
+      {
+        "multiplicity": 1,
+        "cutoff": 10000,
+        "scaled_offset": 1.0,
+        "z": 0.01,
+        "distance": 0.8083316151184489,
+        "scaled_limit": 0.8164965809277261
+      },
+      {
+        "multiplicity": 1,
+        "cutoff": 10000,
+        "scaled_offset": 2.0,
+        "z": 0.02,
+        "distance": 0.5658032638058332,
+        "scaled_limit": 0.5773502691896258
+      },
+      {
+        "multiplicity": 1,
+        "cutoff": 1000000,
+        "scaled_offset": 0.0,
+        "z": 0.0,
+        "distance": 1.0,
+        "scaled_limit": 1.0
+      },
+      {
+        "multiplicity": 1,
+        "cutoff": 1000000,
+        "scaled_offset": 1.0,
+        "z": 0.001,
+        "distance": 0.8156800843467984,
+        "scaled_limit": 0.8164965809277261
+      },
+      {
+        "multiplicity": 1,
+        "cutoff": 1000000,
+        "scaled_offset": 2.0,
+        "z": 0.002,
+        "distance": 0.5761955686512465,
+        "scaled_limit": 0.5773502691896258
+      },
+      {
+        "multiplicity": 2,
+        "cutoff": 100,
+        "scaled_offset": 0.0,
+        "z": 0.0,
+        "distance": 1.0,
+        "scaled_limit": 1.0
+      },
+      {
+        "multiplicity": 2,
+        "cutoff": 100,
+        "scaled_offset": 1.0,
+        "z": 0.31622776601683794,
+        "distance": 0.7348469228349536,
+        "scaled_limit": 0.8164965809277261
+      },
+      {
+        "multiplicity": 2,
+        "cutoff": 100,
+        "scaled_offset": 2.0,
+        "z": 0.6324555320336759,
+        "distance": 0.19999999999999998,
+        "scaled_limit": 0.3333333333333333
+      },
+      {
+        "multiplicity": 2,
+        "cutoff": 10000,
+        "scaled_offset": 0.0,
+        "z": 0.0,
+        "distance": 1.0,
+        "scaled_limit": 1.0
+      },
+      {
+        "multiplicity": 2,
+        "cutoff": 10000,
+        "scaled_offset": 1.0,
+        "z": 0.1,
+        "distance": 0.8083316151184486,
+        "scaled_limit": 0.8164965809277261
+      },
+      {
+        "multiplicity": 2,
+        "cutoff": 10000,
+        "scaled_offset": 2.0,
+        "z": 0.2,
+        "distance": 0.31999999999999995,
+        "scaled_limit": 0.3333333333333333
+      },
+      {
+        "multiplicity": 2,
+        "cutoff": 1000000,
+        "scaled_offset": 0.0,
+        "z": 0.0,
+        "distance": 1.0,
+        "scaled_limit": 1.0
+      },
+      {
+        "multiplicity": 2,
+        "cutoff": 1000000,
+        "scaled_offset": 1.0,
+        "z": 0.03162277660168379,
+        "distance": 0.8156800843467984,
+        "scaled_limit": 0.8164965809277261
+      },
+      {
+        "multiplicity": 2,
+        "cutoff": 1000000,
+        "scaled_offset": 2.0,
+        "z": 0.06324555320336758,
+        "distance": 0.3320000000000001,
+        "scaled_limit": 0.3333333333333333
+      },
+      {
+        "multiplicity": 3,
+        "cutoff": 100,
+        "scaled_offset": 0.0,
+        "z": 0.0,
+        "distance": 1.0,
+        "scaled_limit": 1.0
+      },
+      {
+        "multiplicity": 3,
+        "cutoff": 100,
+        "scaled_offset": 1.0,
+        "z": 0.4641588833612779,
+        "distance": 0.7348469228349533,
+        "scaled_limit": 0.8164965809277261
+      },
+      {
+        "multiplicity": 3,
+        "cutoff": 100,
+        "scaled_offset": 2.0,
+        "z": 0.9283177667225558,
+        "distance": 0.03481553119113954,
+        "scaled_limit": 0.17407765595569785
+      },
+      {
+        "multiplicity": 3,
+        "cutoff": 10000,
+        "scaled_offset": 0.0,
+        "z": 0.0,
+        "distance": 1.0,
+        "scaled_limit": 1.0
+      },
+      {
+        "multiplicity": 3,
+        "cutoff": 10000,
+        "scaled_offset": 1.0,
+        "z": 0.2154434690031884,
+        "distance": 0.8083316151184486,
+        "scaled_limit": 0.8164965809277261
+      },
+      {
+        "multiplicity": 3,
+        "cutoff": 10000,
+        "scaled_offset": 2.0,
+        "z": 0.4308869380063768,
+        "distance": 0.16015144347924193,
+        "scaled_limit": 0.17407765595569785
+      },
+      {
+        "multiplicity": 3,
+        "cutoff": 1000000,
+        "scaled_offset": 0.0,
+        "z": 0.0,
+        "distance": 1.0,
+        "scaled_limit": 1.0
+      },
+      {
+        "multiplicity": 3,
+        "cutoff": 1000000,
+        "scaled_offset": 1.0,
+        "z": 0.10000000000000002,
+        "distance": 0.8156800843467981,
+        "scaled_limit": 0.8164965809277261
+      },
+      {
+        "multiplicity": 3,
+        "cutoff": 1000000,
+        "scaled_offset": 2.0,
+        "z": 0.20000000000000004,
+        "distance": 0.17268503470805216,
+        "scaled_limit": 0.17407765595569785
+      }
+    ]
+  },
+  "off_real": {
+    "kappa": 0.5,
+    "imaginary_offset": 0.2,
+    "rows": [
+      {
+        "n": 5,
+        "real_H1_norm_squared": 1.0000000000000016,
+        "off_real_abs": 0.49325516101925854,
+        "off_real_log_abs": -0.70672867084118
+      },
+      {
+        "n": 20,
+        "real_H1_norm_squared": 1.000000000000001,
+        "off_real_abs": 2.534032700357355,
+        "off_real_log_abs": 0.9298119864555234
+      },
+      {
+        "n": 100,
+        "real_H1_norm_squared": 1.0000000000000013,
+        "off_real_abs": 4510288.334042414,
+        "off_real_log_abs": 15.321871641595468
+      },
+      {
+        "n": 300,
+        "real_H1_norm_squared": 1.0000000000000013,
+        "off_real_abs": 3.5390480047330546e+23,
+        "off_real_log_abs": 54.22331490462521
+      }
+    ],
+    "invisible_factor_roots": [
+      [
+        -2.3,
+        -0.2
+      ],
+      [
+        -2.3,
+        0.2
+      ],
+      [
+        2.3,
+        -0.2
+      ],
+      [
+        2.3,
+        0.2
+      ]
+    ],
+    "invisible_factor_root_error": 0.0
+  }
+}
