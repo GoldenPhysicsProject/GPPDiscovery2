@@ -335,3 +335,123 @@ the character is m^{r(1/2-rho)}, so subpower two-sided transport forces
   Re(rho)=1/2.
 
 This is now the preferred principal-series closure target.
+
+
+## 12. Exact generalized-eigencharacter identity for the half-density zeta incidence
+
+There is a sharper arithmetic spectral statement hiding in the same matrix.
+
+Let
+  z=s-1/2
+and define the centered power character
+  v_s(n)=n^{-z}=n^{1/2-s}.
+
+For the infinite algebraic transpose of the half-density zeta matrix,
+  Z^T(d,n)=sqrt(d/n) 1_{d|n},
+we have in the absolute Euler domain Re(s)>1:
+
+  (Z^T v_s)(d)
+   = sum_{n:d|n} sqrt(d/n) n^{1/2-s}.
+
+Write n=dm. Then
+
+  sqrt(d/(dm)) (dm)^{1/2-s}
+   = m^{-1/2} d^{1/2-s} m^{1/2-s}
+   = d^{1/2-s} m^{-s}.
+
+Therefore
+
+  boxed:
+  Z^T v_s = zeta(s) v_s.
+
+This is exact wherever the multiple sum converges absolutely.
+
+Hence the centered Mellin character is a generalized eigencharacter of the
+half-density zeta incidence transform, with eigenvalue zeta(s).
+
+Formally,
+  Z^{-T} v_s = zeta(s)^{-1} v_s.
+
+The finite theorem found earlier,
+  (Z_N^{-T}v_s)(d)
+   = d^{1/2-s} sum_{m<=N/d} mu(m)m^{-s},
+is exactly the cutoff reciprocal-eigenvalue relation. At a zeta zero the inverse
+dual necessarily becomes singular.
+
+This is a major conceptual simplification:
+
+  zeta zero = completed generalized kernel character of half-density incidence.
+
+The character itself is explicit and zero-independent:
+  v_rho(n)=n^{1/2-rho}.
+
+Its modulus is
+  |v_rho(n)|=n^{1/2-Re(rho)}.
+
+Thus the principal-series question becomes exactly whether the completed generalized
+kernel character lives in the physical half-density boundary with subpower scale growth.
+
+## 13. Archimedean multiplier completes the same eigenvalue
+
+The fixed Riemann seed satisfies, with the established Fourier convention,
+
+  phihat(t) zeta(1/2+it)=Xi(t),
+
+where Xi is the centered completed zeta function.
+
+Thus on the parameter
+  s=1/2+it,
+the arithmetic eigenvalue zeta(s) from section 12 is multiplied by the Archimedean
+seed factor to give the completed eigenvalue.
+
+This means the completed Poisson/Riemann synthesis is not adding an unrelated scalar
+completion. It completes the eigenvalue of the SAME half-density incidence character.
+
+The desired completed operator should therefore be read schematically as
+
+  arithmetic half-density incidence
+      --Archimedean Riemann-seed multiplier-->
+  completed incidence,
+
+with generalized character v_s and completed eigenvalue xi(s) (up to the fixed
+normalization convention relating Xi(t) and xi(s)).
+
+At xi(rho)=0, the completed generalized character v_rho is a kernel character.
+
+This provides the missing non-arbitrary spectral interpretation of the retentive
+cofiber K(rho).
+
+## 14. Global-representation dual object and the remaining topology
+
+Let
+  P = direct_sum_{n>=1} c_n.
+
+P is projective because projectives are closed under direct sums.
+
+In a multiplicative global family, Barrero et al. record that projectives are also
+closed under internal Homs. Therefore the internal functional object
+
+  P^vee := Hom(P,1)
+
+is again projective.
+
+At the trivial group,
+  P^vee(1)=Hom_A(P,1)
+contains the product of the coefficient lines Hom(c_n,1), so centered power
+characters are honest algebraic boundary elements there, not merely informal
+sequences.
+
+This is useful but does NOT by itself solve RH:
+the completed generalized eigenrelation involves the transpose/multiple direction and
+the Hilbert topology of that boundary element. Algebraic projectivity/injectivity does
+not control the norm of the infinite dual character.
+
+The exact missing promotion is:
+
+  show that the Poisson/Riemann completion sends the algebraic generalized
+  kernel character v_rho into a nonzero CONTINUOUS element/functional of the
+  physical Haar-half-density boundary, with two-sided subpower transport.
+
+Once this is done,
+  |v_rho(n)|=n^{1/2-Re(rho)}
+and the Haar quotient theorem force Re(rho)=1/2.
