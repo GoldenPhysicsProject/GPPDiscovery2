@@ -1,0 +1,318 @@
+{
+  "status": "finite diagnostics, no independent certification of zeros or proof of RH",
+  "data": [
+    {
+      "name": "zeta_zeros_100k.txt",
+      "bytes": 4378137,
+      "sha256": "a29267118ca0cf08480dfef2f53a86b4e3724d9f632fb23e00d7f1d3a92a5dda",
+      "rows": 100001,
+      "first_ordinate": 14.134725141734695,
+      "last_ordinate": 74921.92979395842,
+      "strictly_increasing": true
+    },
+    {
+      "name": "zeros6.txt",
+      "bytes": 36018936,
+      "sha256": "2ef7b752c2f17405222e670a61098250c8e4e09047f823f41e2b41a7b378e7c6",
+      "rows": 2001052,
+      "first_ordinate": 14.134725142,
+      "last_ordinate": 1132490.658714411,
+      "strictly_increasing": true
+    }
+  ],
+  "shared_decimal_comparison": {
+    "rows": 100001,
+    "max_difference": "2.9931095287836783088299E-9",
+    "worst_row": 42358,
+    "larger_than_half_last_decimal_count": 22956
+  },
+  "time": 0.6931471805599453,
+  "ambient_and_quotient_exact_norm_from_proof": 1.4142135623730951,
+  "minimum_width_clusters": [
+    {
+      "count": 2,
+      "first_row": 1115578,
+      "last_row": 1115579,
+      "first_ordinate": 663318.508310486,
+      "last_ordinate": 663318.51126914,
+      "width": 0.0029586540767922997
+    },
+    {
+      "count": 3,
+      "first_row": 716289,
+      "last_row": 716291,
+      "first_ordinate": 442835.615658532,
+      "last_ordinate": 442835.763934766,
+      "width": 0.14827623398741707
+    },
+    {
+      "count": 4,
+      "first_row": 1855472,
+      "last_row": 1855475,
+      "first_ordinate": 1056694.248144099,
+      "last_ordinate": 1056694.87256986,
+      "width": 0.624425760935992
+    },
+    {
+      "count": 8,
+      "first_row": 1806626,
+      "last_row": 1806633,
+      "first_ordinate": 1031162.157396963,
+      "last_ordinate": 1031164.812875737,
+      "width": 2.655478773987852
+    },
+    {
+      "count": 12,
+      "first_row": 1981093,
+      "last_row": 1981104,
+      "first_ordinate": 1122124.902787728,
+      "last_ordinate": 1122129.662465283,
+      "width": 4.759677554946393
+    }
+  ],
+  "selected_windows": [
+    {
+      "first_row": 1115578,
+      "count": 2,
+      "height": 663318.508310486,
+      "width": 0.0029586540767922997,
+      "averaging_T": 0,
+      "gram_min_eigenvalue": 1.4399005553222821e-05,
+      "condition_number": 138897.4810518637,
+      "operator_norm": 1.2091660644323827,
+      "generalized_eigen_residual": 6.997721958892704e-17,
+      "norm_status": "finite numerical control",
+      "pair_formula": 1.2091660644324602
+    },
+    {
+      "first_row": 716289,
+      "count": 3,
+      "height": 442835.615658532,
+      "width": 0.14827623398741707,
+      "averaging_T": 0,
+      "gram_min_eigenvalue": 0.00015712967829955256,
+      "condition_number": 18864.40691856499,
+      "operator_norm": 1.3289531304052653,
+      "generalized_eigen_residual": 2.9367674328279186e-17,
+      "norm_status": "finite numerical control"
+    },
+    {
+      "first_row": 1855472,
+      "count": 4,
+      "height": 1056694.248144099,
+      "width": 0.624425760935992,
+      "averaging_T": 0,
+      "gram_min_eigenvalue": 3.083075003293763e-05,
+      "condition_number": 110822.94845444719,
+      "operator_norm": 1.3708688962415816,
+      "generalized_eigen_residual": 9.976249653558978e-17,
+      "norm_status": "finite numerical control"
+    },
+    {
+      "first_row": 1806626,
+      "count": 8,
+      "height": 1031162.157396963,
+      "width": 2.655478773987852,
+      "averaging_T": 0,
+      "gram_min_eigenvalue": 0.008154604194421666,
+      "condition_number": 406.70602822592207,
+      "operator_norm": 1.383974851315533,
+      "generalized_eigen_residual": 6.273976578610714e-17,
+      "norm_status": "finite numerical control"
+    },
+    {
+      "first_row": 1981093,
+      "count": 12,
+      "height": 1122124.902787728,
+      "width": 4.759677554946393,
+      "averaging_T": 0,
+      "gram_min_eigenvalue": 0.003637750029462119,
+      "condition_number": 882.7845400775653,
+      "operator_norm": 1.3835027133118316,
+      "generalized_eigen_residual": 7.987466349751763e-17,
+      "norm_status": "finite numerical control"
+    },
+    {
+      "first_row": 1,
+      "count": 12,
+      "height": 14.134725142,
+      "width": 42.311522554999996,
+      "averaging_T": 0,
+      "gram_min_eigenvalue": 0.9570683410213268,
+      "condition_number": 1.0897151519101251,
+      "operator_norm": 1.025034681587,
+      "generalized_eigen_residual": 1.3395535326006673e-16,
+      "norm_status": "finite numerical control"
+    },
+    {
+      "first_row": 99990,
+      "count": 12,
+      "height": 74914.182211352,
+      "width": 7.747582607989898,
+      "averaging_T": 0,
+      "gram_min_eigenvalue": 0.02481445285878626,
+      "condition_number": 107.21818654114672,
+      "operator_norm": 1.3455259505087929,
+      "generalized_eigen_residual": 1.577328355261794e-16,
+      "norm_status": "finite numerical control"
+    },
+    {
+      "first_row": 2001041,
+      "count": 12,
+      "height": 1132485.303923249,
+      "width": 5.354791162069887,
+      "averaging_T": 0,
+      "gram_min_eigenvalue": 0.008383468369196054,
+      "condition_number": 377.84296781438564,
+      "operator_norm": 1.3815337555471778,
+      "generalized_eigen_residual": 1.1099851367955056e-16,
+      "norm_status": "finite numerical control"
+    }
+  ],
+  "closest_pair_time_averages": [
+    {
+      "first_row": 1115578,
+      "count": 2,
+      "height": 663318.508310486,
+      "width": 0.0029586540767922997,
+      "averaging_T": 0,
+      "gram_min_eigenvalue": 1.4399005553222821e-05,
+      "condition_number": 138897.4810518637,
+      "operator_norm": 1.2091660644323827,
+      "generalized_eigen_residual": 6.997721958892704e-17,
+      "norm_status": "finite numerical control",
+      "pair_formula": 1.2091660644324602
+    },
+    {
+      "first_row": 1115578,
+      "count": 2,
+      "height": 663318.508310486,
+      "width": 0.0029586540767922997,
+      "averaging_T": 1,
+      "gram_min_eigenvalue": 1.5857922898432353e-05,
+      "condition_number": 126118.92206102298,
+      "operator_norm": 1.1985135042714405,
+      "generalized_eigen_residual": 7.370429128438064e-17,
+      "norm_status": "finite numerical control",
+      "pair_formula": 1.198513504271751
+    },
+    {
+      "first_row": 1115578,
+      "count": 2,
+      "height": 663318.508310486,
+      "width": 0.0029586540767922997,
+      "averaging_T": 10,
+      "gram_min_eigenvalue": 0.00016028441864424092,
+      "condition_number": 12476.819222335624,
+      "operator_norm": 1.0589015488703353,
+      "generalized_eigen_residual": 2.7342040933288784e-18,
+      "norm_status": "finite numerical control",
+      "pair_formula": 1.058901548870324
+    },
+    {
+      "first_row": 1115578,
+      "count": 2,
+      "height": 663318.508310486,
+      "width": 0.0029586540767922997,
+      "averaging_T": 100,
+      "gram_min_eigenvalue": 0.014539857596206296,
+      "condition_number": 136.55292902743665,
+      "operator_norm": 1.0059649593329718,
+      "generalized_eigen_residual": 7.577928011933728e-17,
+      "norm_status": "finite numerical control",
+      "pair_formula": 1.0059649593329718
+    },
+    {
+      "first_row": 1115578,
+      "count": 2,
+      "height": 663318.508310486,
+      "width": 0.0029586540767922997,
+      "averaging_T": 1000,
+      "gram_min_eigenvalue": 0.938513502307097,
+      "condition_number": 1.131029543084365,
+      "operator_norm": 1.000063169225598,
+      "generalized_eigen_residual": 1.1070782505496746e-16,
+      "norm_status": "finite numerical control",
+      "pair_formula": 1.0000631692255981
+    },
+    {
+      "first_row": 1115578,
+      "count": 2,
+      "height": 663318.508310486,
+      "width": 0.0029586540767922997,
+      "averaging_T": 10000,
+      "gram_min_eigenvalue": 0.9673250843627317,
+      "condition_number": 1.0675572590134874,
+      "operator_norm": 1.0000335230322928,
+      "generalized_eigen_residual": 7.84578192086408e-17,
+      "norm_status": "finite numerical control",
+      "pair_formula": 1.0000335230322928
+    }
+  ],
+  "kernel_quadrature": [
+    {
+      "difference": 0,
+      "abs_error": 0.0
+    },
+    {
+      "difference": 0.002958654,
+      "abs_error": 2.220446049250313e-16
+    },
+    {
+      "difference": 0.2,
+      "abs_error": 1.9984014443252818e-15
+    },
+    {
+      "difference": 1,
+      "abs_error": 1.1102230246251565e-16
+    },
+    {
+      "difference": 2.3,
+      "abs_error": 3.2508717939805365e-15
+    }
+  ],
+  "laplace_quadrature": [
+    {
+      "c": 0,
+      "abs_error": 0.0
+    },
+    {
+      "c": 0.2,
+      "abs_error": 4.440892098500626e-16
+    },
+    {
+      "c": 0.7,
+      "abs_error": 4.440892098500626e-16
+    }
+  ],
+  "supplied_moment_controls": [
+    {
+      "power": 0,
+      "integral": 0.24999999999999994,
+      "comparison": 0.25,
+      "abs_error": 5.551115123125783e-17,
+      "comparison_status": "proved in supplied source"
+    },
+    {
+      "power": 1,
+      "integral": 0.125,
+      "comparison": 0.125,
+      "abs_error": 0.0,
+      "comparison_status": "proved in supplied source"
+    },
+    {
+      "power": 2,
+      "integral": 0.125,
+      "comparison": 0.125,
+      "abs_error": 0.0,
+      "comparison_status": "proved in supplied source"
+    },
+    {
+      "power": 3,
+      "integral": 0.15907359027997264,
+      "comparison": 0.15907359027997264,
+      "abs_error": 0.0,
+      "comparison_status": "conjectural supplied closed form; numerical only"
+    }
+  ]
+}
