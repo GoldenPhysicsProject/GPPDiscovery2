@@ -268,6 +268,12 @@ Next constructive requirement: an arithmetic estimate for a selective value topo
 
 Reproducible finite controls: `scripts/check_weighted_poisson_completion.py`; output `research/2026-09-30_weighted_poisson_controls.json`. The controls use numpy/scipy in float64 and verify normalizations, independent Gram calculations, and the polynomial norm limit. They are not infinite-dimensional proof checks.
 
+## 11. Later clarification: one cyclic Gaussian orbit remains a viable target
+
+The exact exponential operator norm above excludes a uniform subexponential operator bound in this topology. It does not exclude a subexponential bound for one fixed arithmetic state. The later note `research/2026-09-30_imaginary_axis_reconstruction_and_thermal_completion.md` constructs a zero-independent Gaussian q_tau whose evaluation is exp(tau z^2), nonzero at every possible zero, and proves that a subexponential bound on this single orbit already forces every zero onto the imaginary axis in the centered coordinate. Its translates are cyclic. Explicit Poisson trial functions give nearly constant residual norms over the tested times 0 through 20, without proving an all-time estimate. Thus a change of topology is necessary for the uniform-operator route described above, but is not shown necessary for this weaker sufficient route.
+
+The controls referenced above were reconstructed after workspace replacement and are now actually saved in the repository. The regenerated values agree with the displayed finite norms; their numerical output records the reconstruction.
+
 ## References
 
 - Supplied source: Barrero et al., *Global representation theory: Homological foundations*, arXiv:2505.21449v2, https://arxiv.org/abs/2505.21449 .
