@@ -1,0 +1,25 @@
+{
+  "status": "finite float64 controls; not infinite-dimensional proof checks",
+  "reconstructed_after_workspace_replacement": true,
+  "errors": {
+    "poisson_reflection": 2.238745137284558e-16,
+    "zeta_2": 4.440892098500626e-16,
+    "zeta_4": 2.220446049250313e-16,
+    "theta_mellin_(0.7+1.2j)": 8.649175382163032e-16,
+    "theta_mellin_(1.3+0.8j)": 1.3183898417423734e-16,
+    "theta_mellin_(2+0.3j)": 3.8163916471489756e-17,
+    "gram_integral": 4.849454171562684e-13,
+    "evaluation_norm": 2.6645352591003757e-15,
+    "two_mode_norm": 2.220446049250313e-16
+  },
+  "max_control_error": 4.849454171562684e-13,
+  "two_mode_norm": 1.0142461176278483,
+  "polynomial_norms": {
+    "1": 1.2746550499744564,
+    "2": 1.3871815199583504,
+    "4": 1.4136577128125007,
+    "8": 1.4142134234610961,
+    "12": 1.4142135623455765
+  },
+  "ambient_norm": 1.4142135623730951
+}
