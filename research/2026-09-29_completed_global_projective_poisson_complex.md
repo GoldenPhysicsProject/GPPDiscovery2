@@ -540,3 +540,117 @@ What remains is only:
 
 The global-representation compact/torsion-free construction supplies the algebraic
 nonzero class. The unresolved step is continuity under the physical Hilbert completion.
+
+
+## 17. Operator-level correction: the E-map mapping cone supplies zero survival without inserting xi by hand
+
+The scalar family K(s) is useful because it retains the density line, but it still
+uses xi(s) as a scalar differential. The genuinely zero-independent operator is the
+Riemann/Connes E-map itself.
+
+Let
+  g(u)=u^(1/2) f(u)
+and on multiplicative half-density space use
+  (U_n g)(u)=g(nu).
+
+The exact critical transfer is
+  Z_crit = sum_{n>=1} n^(-1/2) U_n
+on the Poisson test domain / rigged completion.
+
+For a complex Mellin parameter s define the evaluation functional
+  ell_s(g)
+    = integral_0^infinity g(u) u^(s-1/2) d*u
+whenever justified on the chosen test space.
+
+A change of variables gives the exact scale covariance
+  ell_s(U_m g)
+    = m^(1/2-s) ell_s(g).
+
+Likewise,
+  ell_s(Z_crit g)
+    = sum_n n^(-1/2) ell_s(U_n g)
+    = [sum_n n^(-s)] ell_s(g)
+    = zeta(s) ell_s(g)
+first in Re(s)>1.
+
+Thus
+  boxed:
+  ell_s o Z_crit = zeta(s) ell_s.
+
+This is the continuous/operator version of
+  Z^T v_s = zeta(s) v_s.
+
+At a nontrivial zeta zero rho, analytic continuation of the E-map Mellin identity gives
+  ell_rho o Z_crit = 0.
+Therefore ell_rho annihilates the E-map range and defines a nonzero algebraic/rigged
+functional on the mapping-cone/cokernel cohomology, provided one chooses a seed with
+ell_rho(g) != 0.
+
+The same functional automatically has
+  ell_rho o U_m
+    = m^(1/2-rho) ell_rho.
+
+So BOTH ingredients of the desired principal-series theorem -- zero survival and the
+correct scale character -- arise from ONE zero-independent operator Z_crit.
+
+No zero list and no rho-dependent metric are used.
+
+The completed Riemann seed h is Fourier self-dual and k=E(h) has Mellin transform Xi.
+The rank-two co-Poisson defect is killed exactly by K_0=-d^2/du^2+1/4, so the
+s=0,1 elementary channels can be removed before taking the cohomology.
+
+This is the operator-level realization that the scalar K(s) was encoding fiberwise.
+
+## 18. Exact analytic obstruction: ordinary L2 closure kills the zero cohomology
+
+One might now take the ordinary L2 closure of Ran(Z_crit) and quotient. That DOES NOT
+solve the problem.
+
+In Mellin space the critical transfer is multiplication by
+  zeta(1/2-it)
+on the real spectral axis (in the rigged sense). This multiplier is nonzero almost
+everywhere on R. Consequently its maximal multiplication range is dense in ordinary
+L2. The closed L2 cokernel is zero.
+
+This agrees exactly with the independent Astra no-go for the maximal xi multiplier.
+
+Therefore:
+- the E-map gives all zero characters in algebraic/rigged cohomology;
+- ordinary L2 completion erases them;
+- the missing physical topology must retain the E-map cohomology without losing the
+  half-density contraction property.
+
+This identifies the no-escape theorem with complete precision.
+
+## 19. Why global representation theory still matters after the E-map correction
+
+The global-projective construction is not replacing the E-map cohomology. It supplies
+finite compact arithmetic models of it.
+
+At cyclic finite level:
+- c_d(C_n) is divisor incidence;
+- Zcal_N is the finite half-density zeta transfer;
+- Mcal_N is its Mobius inverse;
+- the torsion-free theorem prevents algebraic disappearance under enlargement of the
+  finite-abelian quotient system.
+
+The E-map is the continuous Poisson-sewn limit:
+  Z_crit = sum_n n^(-1/2) U_n.
+
+Thus the finite projective tower and the continuous E-map are two realizations of the
+same half-density incidence transfer.
+
+The exact remaining theorem can now be stated without ambiguity:
+
+  HILBERTIZED E-MAP COHOMOLOGY THEOREM.
+  Construct a zero-independent Hilbert/OS completion of the E-map mapping cone such
+  that:
+  (i) every nontrivial zero functional ell_rho remains nonzero and bounded;
+  (ii) one multiplicative quotient/dilation U_m induces a contraction;
+  (iii) the Poisson reflection and rank-two completion are preserved.
+
+Then the one-sided reflected contraction theorem proves RH.
+
+This is strictly smaller than proving full Weil positivity, but it is not automatic:
+ordinary L2 violates (i), while real-trace Sobolev completions can violate off-real
+retention.
