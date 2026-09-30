@@ -148,3 +148,129 @@ elementary abelian 2-group family (or an exact theorem with the same torsion-fre
 survival conclusion in the naturally labelled category), the categorical no-escape
 part is supplied by Theorem 7.7. The remaining analytic estimate is the already
 isolated subexponential physical scale bound.
+
+
+## 8. Major strengthening: the finite zeta gauge is the half-density normalization of standard global projective incidence
+
+Barrero et al. define, for each finite group M, the standard projective
+c_M=e_{M,k}. They show
+
+c_M(T) = k[Epi(T,M)/Aut(M)] = k[s_M(T)],
+
+where s_M(T) is the set of normal subgroups N of T with T/N isomorphic to M.
+
+Take the full finite-abelian global family and restrict evaluations to cyclic groups.
+For T=C_n and M=C_d, cyclicity gives exactly one subgroup with quotient C_d when
+d divides n and none otherwise. Therefore
+
+dim c_{C_d}(C_n) = 1_{d|n}.
+
+More strongly, because that subgroup is unique, the nonzero one-dimensional
+evaluation has a canonical quotient-kernel basis vector.
+
+Hence the matrix
+
+A_N(n,d)=1_{d|n}
+
+is not an ad hoc arithmetic matrix: it is the evaluation/incidence matrix of the
+standard projective generators c_{C_d} on cyclic test objects C_n.
+
+Let D=diag(1,2,...,N). Then the project's finite half-density zeta gauge is exactly
+
+Z_N = D^{-1/2} A_N D^{1/2},
+
+because
+
+Z_N(n,d)=sqrt(d/n) 1_{d|n}.
+
+The inverse incidence matrix is the classical divisor Mobius matrix
+
+A_N^{-1}(n,d)=mu(n/d)1_{d|n},
+
+so automatically
+
+Z_N^{-1}(n,d)=mu(n/d)sqrt(d/n)1_{d|n}.
+
+Thus BOTH the zeta gauge and its Mobius inverse are the half-density normalized
+projective-incidence transform of the global representation category.
+
+This gives a representation-theoretic explanation of an exact structure that the
+project had previously discovered independently.
+
+## 9. The von Mangoldt gauge identity is projective evaluation of the divisor logarithm
+
+The standard arithmetic identity
+
+sum_{d|n} Lambda(d)=log n
+
+now reads as evaluation of an incidence/projective coefficient vector on C_n.
+
+After half-density normalization,
+
+sum_{d|n} sqrt(d/n) [Lambda(d)/sqrt(d)]
+= log n/sqrt(n),
+
+which is exactly the previously formalized zeta-gauge current identity
+
+Z_N (Lambda(d)/sqrt d) = log(n)/sqrt n
+
+away from cutoff truncation.
+
+So the tame primal logarithmic current is naturally the image, under standard
+global-projective incidence, of the von Mangoldt coefficient state.
+
+The raw dual Mobius obstruction found earlier is then the dual incidence inversion
+inside this same category. This explains why the primal direction is simple and the
+dual boundary observation recovers reciprocal-zeta/Mobius difficulty.
+
+## 10. Better family: finite abelian groups encode the prime labels intrinsically
+
+The earlier GL_r(F_2) basis-mixing obstruction can be avoided by not using
+C_2^r as the primary global-family object.
+
+Let U_ab be the full family of finite abelian groups, which is closed under subgroups,
+quotients and finite products and is therefore multiplicative global.
+
+For a finite set of distinct primes P define
+
+G_P = product_{p in P} C_p.
+
+Because the prime orders are distinct, this group is cyclic of squarefree order
+n_P=product P, but its p-primary factors are characteristic. Therefore automorphisms
+cannot mix different primes: the arithmetic label p is encoded intrinsically by the
+order of the Sylow factor.
+
+For P subset Q there is a canonical quotient G_Q -> G_P, exactly the desired
+'forget added primes' map. A torsion-free global class at G_P therefore survives
+under every larger-prime extension G_Q.
+
+This is a much better categorical host for the physical prime-labeled data than an
+unlabelled elementary-abelian C_2^r.
+
+The square-root sign hypercube still appears as the independent sign/parity data
+associated with the prime factors, but the global category itself now remembers
+which factor is the prime 2,3,5,... through group order rather than through an
+arbitrarily chosen F_2 basis.
+
+## 11. Natural maps from projective sums implement Dirichlet coefficient systems
+
+Yoneda gives
+
+Hom(c_{C_d}, X) approximately X(C_d)
+
+for the corresponding standard generators. In particular maps from finite direct sums
+
+P_N = direct_sum_{d<=N} c_{C_d}
+
+to a chosen global object are determined by coefficient data at the cyclic quotients.
+
+This means finite Dirichlet coefficient vectors can be promoted to actual natural
+morphisms of global representations rather than treated only as scalar matrices.
+
+The next construction should therefore seek the completed Poisson/Euler map as a
+morphism (or short complex) built from these c_{C_d}, with the half-density metric
+inserted on cyclic evaluation. Restriction to cyclic groups must recover the already
+verified Z_N/M_N arithmetic, while the ambient finite-abelian global family supplies
+the multiplicative hypothesis needed for the torsion-free survival theorem.
+
+This is now the preferred categorical implementation of the no-escape route.
