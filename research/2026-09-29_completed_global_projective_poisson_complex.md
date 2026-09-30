@@ -455,3 +455,88 @@ The exact missing promotion is:
 Once this is done,
   |v_rho(n)|=n^{1/2-Re(rho)}
 and the Haar quotient theorem force Re(rho)=1/2.
+
+
+## 15. Important weakening: one-sided contractive survival plus the functional equation is enough
+
+The previous formulation asked for two-sided subpower transport of a single zero line.
+That is stronger than necessary because zeta already supplies the reflected companion zero.
+
+Let V be an isometry (a contraction is enough) on a Hilbert realization, and let a
+nonzero bounded functional ell_s satisfy
+  ell_s(Vx)=chi_s ell_s(x),
+with
+  chi_s=m^{1/2-s},
+  m>1.
+
+Then
+  ||ell_s o V|| <= ||ell_s||,
+while covariance gives
+  ||ell_s o V||=|chi_s| ||ell_s||.
+
+Since ell_s is nonzero,
+  |chi_s|<=1.
+
+But
+  |chi_s|=m^{1/2-Re(s)}.
+
+Therefore
+  Re(s)>=1/2.
+
+Now use the unconditional zeta symmetry:
+if rho is a nontrivial zero, then
+  rho^sharp = 1-conj(rho)
+is also a nontrivial zero.
+
+If the SAME one-sided contractive survival theorem applies to every zero, it applies to
+rho^sharp and gives
+  Re(rho^sharp)>=1/2,
+i.e.
+  1-Re(rho)>=1/2,
+so
+  Re(rho)<=1/2.
+
+Combining:
+  boxed: Re(rho)=1/2.
+
+Thus we do NOT need:
+- a unitary group;
+- a surjective isometry;
+- two-sided scale transport;
+- an inverse/retraction with a controlled norm.
+
+We need only:
+
+  EVERY zero survives as a nonzero bounded eigenfunctional of ONE common
+  half-density quotient isometry/contraction.
+
+The functional equation supplies the opposite inequality automatically.
+
+This is materially weaker than the Astra two-sided theorem and fits the global-representation
+tower much better, because its structural pullbacks are naturally one-sided.
+
+## 16. New smallest closure theorem
+
+Contractive zero-retention theorem:
+
+Construct one zero-independent physical Hilbert completion H_phys of the half-density
+global-projective / Poisson boundary and, for one fixed quotient scale m>1, an isometry
+or contraction V_m on H_phys such that for every nontrivial zero rho there is a nonzero
+bounded functional ell_rho with
+
+  ell_rho(V_m x)=m^{1/2-rho} ell_rho(x).
+
+Then RH follows immediately by section 15 and the functional equation.
+
+This is now weaker than the two-sided subpower target and should be attacked first.
+
+The exact Riemann-seed intertwining
+  C S_m = m^{-1/2} T_{log m} C
+already identifies the required half-density quotient dynamics.
+
+What remains is only:
+  prove the completed zero functional is bounded/nonzero on the Poisson-sewn image
+  for EVERY zero.
+
+The global-representation compact/torsion-free construction supplies the algebraic
+nonzero class. The unresolved step is continuity under the physical Hilbert completion.
