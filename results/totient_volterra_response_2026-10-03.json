@@ -1,0 +1,136 @@
+{
+  "runs": [
+    {
+      "dps": 60,
+      "limit": 1000,
+      "max_identity_error": "3.5004461e-61",
+      "identity_errors": {
+        "zero_continuum_moment": "1.1426405e-61",
+        "cosine_transform_0.4": "1.3734389e-61",
+        "cosine_transform_2.3": "7.7787691e-62",
+        "cosine_transform_7.0": "1.1668154e-61",
+        "laplace_kernel_0.8": "0.0",
+        "laplace_kernel_1.7": "7.7787691e-62",
+        "laplace_kernel_(1.1 + 0.4j)": "4.0090858e-62",
+        "volterra_0.2": "1.5557538e-61",
+        "volterra_1.3": "3.5004461e-61",
+        "volterra_4.0": "0.0",
+        "mobius_regroup_2": "0.0",
+        "mobius_regroup_5": "7.7787691e-62",
+        "mobius_regroup_10": "2.5281e-61",
+        "mobius_regroup_30": "3.8893845e-62"
+      },
+      "samples": [
+        {
+          "x": "2.37",
+          "response": "0.522004660371964710523533833979",
+          "sqrt_x_times_response": "0.80361595996882679656",
+          "sum_absolute_terms": "0.52200466037196471052"
+        },
+        {
+          "x": "5.37",
+          "response": "0.324253033730626811158553061499",
+          "sqrt_x_times_response": "0.7514000003157277055",
+          "sum_absolute_terms": "2.2777828345890138272"
+        },
+        {
+          "x": "10.37",
+          "response": "0.0840999159652247310034654368128",
+          "sqrt_x_times_response": "0.27082262299106591581",
+          "sum_absolute_terms": "4.4430236242507855278"
+        },
+        {
+          "x": "30.37",
+          "response": "0.0301911607584621240276137792532",
+          "sqrt_x_times_response": "0.16638041629902877452",
+          "sum_absolute_terms": "13.338034511405392425"
+        },
+        {
+          "x": "100.37",
+          "response": "-0.0416257324288639049527441478502",
+          "sqrt_x_times_response": "-0.41702668933297995872",
+          "sum_absolute_terms": "44.15488828409692954"
+        },
+        {
+          "x": "300.37",
+          "response": "0.0222058214341310374914282573289",
+          "sqrt_x_times_response": "0.38485321632592976414",
+          "sum_absolute_terms": "132.33978569707526433"
+        },
+        {
+          "x": "999.37",
+          "response": "0.0194303443466389785130390880751",
+          "sqrt_x_times_response": "0.61424785902082317689",
+          "sum_absolute_terms": "440.24966526460766459"
+        }
+      ],
+      "status": "finite numerical checks only; no uniform decay bound"
+    },
+    {
+      "dps": 80,
+      "limit": 1000,
+      "max_identity_error": "3.1626594e-81",
+      "identity_errors": {
+        "zero_continuum_moment": "1.0717196e-81",
+        "cosine_transform_0.4": "2.1249118e-81",
+        "cosine_transform_2.3": "0.0",
+        "cosine_transform_7.0": "1.1859973e-81",
+        "laplace_kernel_0.8": "0.0",
+        "laplace_kernel_1.7": "1.5813297e-81",
+        "laplace_kernel_(1.1 + 0.4j)": "6.5888737e-82",
+        "volterra_0.2": "2.1084396e-81",
+        "volterra_1.3": "3.1626594e-81",
+        "volterra_4.0": "0.0",
+        "mobius_regroup_2": "0.0",
+        "mobius_regroup_5": "0.0",
+        "mobius_regroup_10": "7.9066485e-82",
+        "mobius_regroup_30": "9.5538669e-82"
+      },
+      "samples": [
+        {
+          "x": "2.37",
+          "response": "0.522004660371964710523533833979",
+          "sqrt_x_times_response": "0.80361595996882679656",
+          "sum_absolute_terms": "0.52200466037196471052"
+        },
+        {
+          "x": "5.37",
+          "response": "0.324253033730626811158553061499",
+          "sqrt_x_times_response": "0.7514000003157277055",
+          "sum_absolute_terms": "2.2777828345890138272"
+        },
+        {
+          "x": "10.37",
+          "response": "0.0840999159652247310034654368128",
+          "sqrt_x_times_response": "0.27082262299106591581",
+          "sum_absolute_terms": "4.4430236242507855278"
+        },
+        {
+          "x": "30.37",
+          "response": "0.0301911607584621240276137792532",
+          "sqrt_x_times_response": "0.16638041629902877452",
+          "sum_absolute_terms": "13.338034511405392425"
+        },
+        {
+          "x": "100.37",
+          "response": "-0.0416257324288639049527441478502",
+          "sqrt_x_times_response": "-0.41702668933297995872",
+          "sum_absolute_terms": "44.15488828409692954"
+        },
+        {
+          "x": "300.37",
+          "response": "0.0222058214341310374914282573289",
+          "sqrt_x_times_response": "0.38485321632592976414",
+          "sum_absolute_terms": "132.33978569707526433"
+        },
+        {
+          "x": "999.37",
+          "response": "0.0194303443466389785130390880751",
+          "sqrt_x_times_response": "0.61424785902082317689",
+          "sum_absolute_terms": "440.24966526460766459"
+        }
+      ],
+      "status": "finite numerical checks only; no uniform decay bound"
+    }
+  ]
+}
