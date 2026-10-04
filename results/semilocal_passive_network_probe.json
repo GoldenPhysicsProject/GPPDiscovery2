@@ -12,20 +12,20 @@
       "identity_residual_inf": 2.220446049250313e-16,
       "pole_rank2_residual_inf": 4.440892098500626e-16,
       "Q": {
-        "min": 0.00016253858495153165,
-        "max": 2.376407759381424,
+        "min": 0.00016253858495193335,
+        "max": 2.3764077593814243,
         "inertia": {
           "negative": 0,
           "zeroish": 0,
           "positive": 17
         },
-        "even_min": 0.00016253858495360416,
+        "even_min": 0.00016253858495360847,
         "even_inertia": {
           "negative": 0,
           "zeroish": 0,
           "positive": 9
         },
-        "odd_min": 0.014935643459315761,
+        "odd_min": 0.014935643459315763,
         "odd_inertia": {
           "negative": 0,
           "zeroish": 0,
@@ -33,14 +33,14 @@
         }
       },
       "Lprime": {
-        "min": 0.49235444227445274,
-        "max": 1.4672977477171856,
+        "min": 0.49235444227445324,
+        "max": 1.4672977477171858,
         "inertia": {
           "negative": 0,
           "zeroish": 0,
           "positive": 17
         },
-        "even_min": 0.4923544422744528,
+        "even_min": 0.49235444227445296,
         "even_inertia": {
           "negative": 0,
           "zeroish": 0,
@@ -54,8 +54,8 @@
         }
       },
       "Rmass": {
-        "min": -1.0539100776615724,
-        "max": 1.4046038347832819,
+        "min": -1.0539100776615713,
+        "max": 1.4046038347832823,
         "inertia": {
           "negative": 4,
           "zeroish": 0,
@@ -75,14 +75,14 @@
         }
       },
       "A": {
-        "min": -1.5650978270308333,
-        "max": 2.369175460384629,
+        "min": -1.565097827030834,
+        "max": 2.369175460384627,
         "inertia": {
           "negative": 1,
           "zeroish": 0,
           "positive": 16
         },
-        "even_min": -1.5650978270308358,
+        "even_min": -1.5650978270308356,
         "even_inertia": {
           "negative": 1,
           "zeroish": 0,
@@ -96,8 +96,8 @@
         }
       },
       "C": {
-        "min": -0.5848396835622878,
-        "max": 3.3494336038531767,
+        "min": -0.5848396835622882,
+        "max": 3.349433603853177,
         "inertia": {
           "negative": 1,
           "zeroish": 0,
@@ -118,19 +118,19 @@
       },
       "WR": {
         "min": -2.3798042647760984,
-        "max": 1.4683335809820308,
+        "max": 1.4683335809820317,
         "inertia": {
           "negative": 15,
           "zeroish": 0,
           "positive": 2
         },
-        "even_min": -2.379804264776099,
+        "even_min": -2.3798042647760984,
         "even_inertia": {
           "negative": 8,
           "zeroish": 0,
           "positive": 1
         },
-        "odd_min": -2.2715007597981223,
+        "odd_min": -2.2715007597981227,
         "odd_inertia": {
           "negative": 7,
           "zeroish": 0,
@@ -142,7 +142,7 @@
         "C_even_below_2S": 1,
         "C_odd_below_2S": 0,
         "C_even_lowest_minus_2S": -1.5650978270308356,
-        "C_even_second_minus_2S": 0.21336022493855433,
+        "C_even_second_minus_2S": 0.21336022493855322,
         "C_odd_lowest_minus_2S": 0.030156068138382452
       },
       "pole_scalar": {
@@ -150,10 +150,10 @@
         "s_Ao_inv_s": 1.0139039620323098
       },
       "Rmass_ground_alignment": {
-        "with_c": 2.6736783999737377e-16,
-        "with_s": 0.9299966703870066,
-        "parity_even_norm": 4.486466345558664e-16,
-        "parity_odd_norm": 0.9999999999999998
+        "with_c": 1.1108827924728158e-15,
+        "with_s": 0.9299966703870068,
+        "parity_even_norm": 1.3418565236538076e-15,
+        "parity_odd_norm": 1.0
       }
     },
     {
@@ -169,20 +169,20 @@
       "identity_residual_inf": 2.220446049250313e-16,
       "pole_rank2_residual_inf": 1.3322676295501878e-15,
       "Q": {
-        "min": 1.9498446462731175e-12,
-        "max": 2.6089424448231044,
+        "min": 1.9493579328609887e-12,
+        "max": 2.6089424448231053,
         "inertia": {
           "negative": 0,
           "zeroish": 1,
           "positive": 20
         },
-        "even_min": 1.9494952153534764e-12,
+        "even_min": 1.9493818679455737e-12,
         "even_inertia": {
           "negative": 0,
           "zeroish": 1,
           "positive": 10
         },
-        "odd_min": 1.0494359193423993e-09,
+        "odd_min": 1.0494358347238017e-09,
         "odd_inertia": {
           "negative": 0,
           "zeroish": 0,
@@ -190,20 +190,20 @@
         }
       },
       "Lprime": {
-        "min": 2.0410511099862485,
-        "max": 3.8428926081337296,
+        "min": 2.04105110998625,
+        "max": 3.8428926081337265,
         "inertia": {
           "negative": 0,
           "zeroish": 0,
           "positive": 21
         },
-        "even_min": 2.041051109986251,
+        "even_min": 2.0410511099862507,
         "even_inertia": {
           "negative": 0,
           "zeroish": 0,
           "positive": 11
         },
-        "odd_min": 2.0413612943271553,
+        "odd_min": 2.0413612943271544,
         "odd_inertia": {
           "negative": 0,
           "zeroish": 0,
@@ -211,20 +211,20 @@
         }
       },
       "Rmass": {
-        "min": -3.6426970641289698,
-        "max": -0.8700148486539756,
+        "min": -3.642697064128969,
+        "max": -0.8700148486539757,
         "inertia": {
           "negative": 21,
           "zeroish": 0,
           "positive": 0
         },
-        "even_min": -3.180562388768888,
+        "even_min": -3.180562388768887,
         "even_inertia": {
           "negative": 11,
           "zeroish": 0,
           "positive": 0
         },
-        "odd_min": -3.6426970641289707,
+        "odd_min": -3.6426970641289698,
         "odd_inertia": {
           "negative": 10,
           "zeroish": 0,
@@ -232,20 +232,20 @@
         }
       },
       "A": {
-        "min": -2.8339568908462938,
-        "max": 2.6055032687625905,
+        "min": -2.8339568908462907,
+        "max": 2.60550326876259,
         "inertia": {
           "negative": 1,
           "zeroish": 0,
           "positive": 20
         },
-        "even_min": -2.8339568908462884,
+        "even_min": -2.8339568908462907,
         "even_inertia": {
           "negative": 1,
           "zeroish": 0,
           "positive": 10
         },
-        "odd_min": 1.4686298643403443e-05,
+        "odd_min": 1.4686298643473266e-05,
         "odd_inertia": {
           "negative": 0,
           "zeroish": 0,
@@ -253,20 +253,20 @@
         }
       },
       "C": {
-        "min": 0.10801663437733122,
-        "max": 5.547476793986211,
+        "min": 0.10801663437733033,
+        "max": 5.547476793986212,
         "inertia": {
           "negative": 0,
           "zeroish": 0,
           "positive": 21
         },
-        "even_min": 0.10801663437733064,
+        "even_min": 0.10801663437733065,
         "even_inertia": {
           "negative": 0,
           "zeroish": 0,
           "positive": 11
         },
-        "odd_min": 2.9419882115222635,
+        "odd_min": 2.9419882115222626,
         "odd_inertia": {
           "negative": 0,
           "zeroish": 0,
@@ -274,20 +274,20 @@
         }
       },
       "WR": {
-        "min": -2.05788896550238,
-        "max": 2.128469192526063,
+        "min": -2.057888965502379,
+        "max": 2.1284691925260613,
         "inertia": {
           "negative": 18,
           "zeroish": 0,
           "positive": 3
         },
-        "even_min": -2.057888965502379,
+        "even_min": -2.0578889655023787,
         "even_inertia": {
           "negative": 9,
           "zeroish": 0,
           "positive": 2
         },
-        "odd_min": -1.962342611089908,
+        "odd_min": -1.9623426110899076,
         "odd_inertia": {
           "negative": 9,
           "zeroish": 0,
@@ -299,18 +299,18 @@
         "C_even_below_2S": 1,
         "C_odd_below_2S": 0,
         "C_even_lowest_minus_2S": -2.8339568908462898,
-        "C_even_second_minus_2S": 1.790022956527082e-07,
-        "C_odd_lowest_minus_2S": 1.4686298642985207e-05
+        "C_even_second_minus_2S": 1.7900229876133267e-07,
+        "C_odd_lowest_minus_2S": 1.4686298642097029e-05
       },
       "pole_scalar": {
-        "c_Ae_inv_c": -2.0000000000028297,
-        "s_Ao_inv_s": 1.999999920933181
+        "c_Ae_inv_c": -2.000000000002829,
+        "s_Ao_inv_s": 1.9999999209331814
       },
       "Rmass_ground_alignment": {
-        "with_c": 1.1013528360813302e-16,
-        "with_s": 0.9379443100985375,
-        "parity_even_norm": 9.760712182238293e-16,
-        "parity_odd_norm": 1.0000000000000002
+        "with_c": 1.7244932976178276e-16,
+        "with_s": 0.9379443100985388,
+        "parity_even_norm": 1.3976657117818195e-15,
+        "parity_odd_norm": 1.0000000000000009
       }
     },
     {
@@ -327,20 +327,20 @@
       "identity_residual_inf": 4.440892098500626e-16,
       "pole_rank2_residual_inf": 4.440892098500626e-16,
       "Q": {
-        "min": 1.134556695643883e-16,
-        "max": 2.6510681908801077,
+        "min": 7.988838366580874e-17,
+        "max": 2.6510681908801064,
         "inertia": {
           "negative": 0,
           "zeroish": 4,
           "positive": 21
         },
-        "even_min": -3.0172034235921045e-17,
+        "even_min": -1.0820287129314925e-16,
         "even_inertia": {
           "negative": 0,
           "zeroish": 2,
           "positive": 11
         },
-        "odd_min": 1.8357112819115904e-16,
+        "odd_min": 6.496925101804875e-17,
         "odd_inertia": {
           "negative": 0,
           "zeroish": 2,
@@ -348,8 +348,8 @@
         }
       },
       "Lprime": {
-        "min": 2.7969020434667624,
-        "max": 5.733036947770497,
+        "min": 2.7969020434667606,
+        "max": 5.733036947770499,
         "inertia": {
           "negative": 0,
           "zeroish": 0,
@@ -369,7 +369,7 @@
         }
       },
       "Rmass": {
-        "min": -5.511555434294752,
+        "min": -5.511555434294755,
         "max": -2.3663653281067982,
         "inertia": {
           "negative": 25,
@@ -382,7 +382,7 @@
           "zeroish": 0,
           "positive": 0
         },
-        "odd_min": -5.511555434294752,
+        "odd_min": -5.511555434294753,
         "odd_inertia": {
           "negative": 12,
           "zeroish": 0,
@@ -390,20 +390,20 @@
         }
       },
       "A": {
-        "min": -3.900043175897344,
-        "max": 2.6511064262855637,
+        "min": -3.900043175897341,
+        "max": 2.651106426285563,
         "inertia": {
           "negative": 1,
           "zeroish": 2,
           "positive": 22
         },
-        "even_min": -3.900043175897342,
+        "even_min": -3.9000431758973426,
         "even_inertia": {
           "negative": 1,
           "zeroish": 1,
           "positive": 11
         },
-        "odd_min": 1.8920116293280908e-13,
+        "odd_min": 1.8900646514677447e-13,
         "odd_inertia": {
           "negative": 0,
           "zeroish": 1,
@@ -411,7 +411,7 @@
         }
       },
       "C": {
-        "min": 0.48145538043347713,
+        "min": 0.4814553804334798,
         "max": 7.032604982616385,
         "inertia": {
           "negative": 0,
@@ -424,7 +424,7 @@
           "zeroish": 0,
           "positive": 13
         },
-        "odd_min": 4.381498556331008,
+        "odd_min": 4.38149855633101,
         "odd_inertia": {
           "negative": 0,
           "zeroish": 0,
@@ -432,20 +432,20 @@
         }
       },
       "WR": {
-        "min": -1.9550121073880575,
-        "max": 2.4946961188236556,
+        "min": -1.9550121073880586,
+        "max": 2.4946961188236543,
         "inertia": {
           "negative": 21,
           "zeroish": 0,
           "positive": 4
         },
-        "even_min": -1.955012107388059,
+        "even_min": -1.955012107388058,
         "even_inertia": {
           "negative": 11,
           "zeroish": 0,
           "positive": 2
         },
-        "odd_min": -1.868099983289465,
+        "odd_min": -1.8680999832894651,
         "odd_inertia": {
           "negative": 10,
           "zeroish": 0,
@@ -457,17 +457,17 @@
         "C_even_below_2S": 1,
         "C_odd_below_2S": 0,
         "C_even_lowest_minus_2S": -3.9000431758973413,
-        "C_even_second_minus_2S": -2.6645352591003757e-15,
-        "C_odd_lowest_minus_2S": 1.865174681370263e-13
+        "C_even_second_minus_2S": 8.881784197001252e-16,
+        "C_odd_lowest_minus_2S": 1.8918200339612667e-13
       },
       "pole_scalar": {
-        "c_Ae_inv_c": -1.9999999999999996,
+        "c_Ae_inv_c": -2.0,
         "s_Ao_inv_s": 1.999999999999996
       },
       "Rmass_ground_alignment": {
-        "with_c": 5.195038254650701e-16,
-        "with_s": 0.949466048530314,
-        "parity_even_norm": 1.837425488266655e-15,
+        "with_c": 3.307342981302123e-16,
+        "with_s": 0.9494660485303144,
+        "parity_even_norm": 9.36445340792203e-16,
         "parity_odd_norm": 0.9999999999999993
       }
     },
@@ -488,20 +488,20 @@
       "identity_residual_inf": 5.551115123125783e-16,
       "pole_rank2_residual_inf": 2.7755575615628914e-17,
       "Q": {
-        "min": -1.8751492210265665e-17,
-        "max": 2.859408170053575,
+        "min": -1.5946015089259686e-16,
+        "max": 2.8594081700535736,
         "inertia": {
           "negative": 0,
           "zeroish": 6,
           "positive": 19
         },
-        "even_min": -1.161649131777949e-16,
+        "even_min": -1.5481934090859682e-16,
         "even_inertia": {
           "negative": 0,
           "zeroish": 3,
           "positive": 10
         },
-        "odd_min": -7.684853800758924e-17,
+        "odd_min": -2.001225943898948e-16,
         "odd_inertia": {
           "negative": 0,
           "zeroish": 3,
@@ -509,8 +509,8 @@
         }
       },
       "Lprime": {
-        "min": 4.811933035820229,
-        "max": 8.86768169532083,
+        "min": 4.811933035820231,
+        "max": 8.867681695320835,
         "inertia": {
           "negative": 0,
           "zeroish": 0,
@@ -522,7 +522,7 @@
           "zeroish": 0,
           "positive": 13
         },
-        "odd_min": 5.600748942300158,
+        "odd_min": 5.600748942300161,
         "odd_inertia": {
           "negative": 0,
           "zeroish": 0,
@@ -530,20 +530,20 @@
         }
       },
       "Rmass": {
-        "min": -8.58067988421638,
-        "max": -4.683461934976465,
+        "min": -8.580679884216373,
+        "max": -4.683461934976466,
         "inertia": {
           "negative": 25,
           "zeroish": 0,
           "positive": 0
         },
-        "even_min": -7.755454150905713,
+        "even_min": -7.755454150905711,
         "even_inertia": {
           "negative": 13,
           "zeroish": 0,
           "positive": 0
         },
-        "odd_min": -8.580679884216375,
+        "odd_min": -8.580679884216378,
         "odd_inertia": {
           "negative": 12,
           "zeroish": 0,
@@ -558,13 +558,13 @@
           "zeroish": 4,
           "positive": 20
         },
-        "even_min": -4.825432389406574,
+        "even_min": -4.825432389406572,
         "even_inertia": {
           "negative": 1,
           "zeroish": 2,
           "positive": 10
         },
-        "odd_min": -6.294624959783127e-18,
+        "odd_min": 3.344811910980432e-16,
         "odd_inertia": {
           "negative": 0,
           "zeroish": 2,
@@ -572,8 +572,8 @@
         }
       },
       "C": {
-        "min": 2.249573239125925,
-        "max": 9.92735829415834,
+        "min": 2.2495732391259233,
+        "max": 9.927358294158335,
         "inertia": {
           "negative": 0,
           "zeroish": 0,
@@ -594,13 +594,13 @@
       },
       "WR": {
         "min": -1.773498527760668,
-        "max": 2.740766542847304,
+        "max": 2.7407665428473056,
         "inertia": {
           "negative": 21,
           "zeroish": 0,
           "positive": 4
         },
-        "even_min": -1.7734985277606679,
+        "even_min": -1.773498527760667,
         "even_inertia": {
           "negative": 11,
           "zeroish": 0,
@@ -618,18 +618,18 @@
         "C_even_below_2S": 1,
         "C_odd_below_2S": 0,
         "C_even_lowest_minus_2S": -4.82543238940657,
-        "C_even_second_minus_2S": 0.0,
+        "C_even_second_minus_2S": -1.7763568394002505e-15,
         "C_odd_lowest_minus_2S": -8.881784197001252e-16
       },
       "pole_scalar": {
-        "c_Ae_inv_c": -2.000000000000001,
-        "s_Ao_inv_s": 1.9999999999999996
+        "c_Ae_inv_c": -1.9999999999999996,
+        "s_Ao_inv_s": 2.0000000000000013
       },
       "Rmass_ground_alignment": {
-        "with_c": 7.678077799611815e-16,
+        "with_c": 4.848290078343172e-16,
         "with_s": 0.9607442621162591,
-        "parity_even_norm": 2.5591540942007615e-15,
-        "parity_odd_norm": 1.0000000000000002
+        "parity_even_norm": 1.0501192362639533e-15,
+        "parity_odd_norm": 1.0000000000000004
       }
     },
     {
@@ -650,20 +650,20 @@
       "identity_residual_inf": 1.3322676295501878e-15,
       "pole_rank2_residual_inf": 1.7763568394002505e-15,
       "Q": {
-        "min": -8.403104810371284e-17,
-        "max": 3.326377045537358,
+        "min": -1.4728765752596085e-16,
+        "max": 3.326377045537356,
         "inertia": {
           "negative": 0,
           "zeroish": 10,
           "positive": 19
         },
-        "even_min": -6.16823473641788e-16,
+        "even_min": -4.059347098542601e-16,
         "even_inertia": {
           "negative": 0,
           "zeroish": 5,
           "positive": 10
         },
-        "odd_min": -2.237691457717559e-16,
+        "odd_min": -4.470144573711603e-16,
         "odd_inertia": {
           "negative": 0,
           "zeroish": 5,
@@ -671,8 +671,8 @@
         }
       },
       "Lprime": {
-        "min": 5.4469043640653565,
-        "max": 10.667650126202705,
+        "min": 5.446904364065365,
+        "max": 10.667650126202702,
         "inertia": {
           "negative": 0,
           "zeroish": 0,
@@ -684,7 +684,7 @@
           "zeroish": 0,
           "positive": 15
         },
-        "odd_min": 7.031833905484007,
+        "odd_min": 7.031833905484008,
         "odd_inertia": {
           "negative": 0,
           "zeroish": 0,
@@ -692,14 +692,14 @@
         }
       },
       "Rmass": {
-        "min": -10.467053237855554,
-        "max": -5.347333053136408,
+        "min": -10.467053237855545,
+        "max": -5.347333053136413,
         "inertia": {
           "negative": 29,
           "zeroish": 0,
           "positive": 0
         },
-        "even_min": -9.36709364263075,
+        "even_min": -9.367093642630755,
         "even_inertia": {
           "negative": 15,
           "zeroish": 0,
@@ -713,20 +713,20 @@
         }
       },
       "A": {
-        "min": -5.839712488781791,
-        "max": 3.3239840698364205,
+        "min": -5.839712488781796,
+        "max": 3.323984069836422,
         "inertia": {
           "negative": 1,
           "zeroish": 8,
           "positive": 20
         },
-        "even_min": -5.839712488781792,
+        "even_min": -5.839712488781794,
         "even_inertia": {
           "negative": 1,
           "zeroish": 4,
           "positive": 10
         },
-        "odd_min": -3.0006281435424964e-17,
+        "odd_min": -2.6079967931607374e-16,
         "odd_inertia": {
           "negative": 0,
           "zeroish": 4,
@@ -734,8 +734,8 @@
         }
       },
       "C": {
-        "min": 2.6812783954669044,
-        "max": 11.844974954085117,
+        "min": 2.681278395466906,
+        "max": 11.84497495408512,
         "inertia": {
           "negative": 0,
           "zeroish": 0,
@@ -747,7 +747,7 @@
           "zeroish": 0,
           "positive": 15
         },
-        "odd_min": 8.520990884248683,
+        "odd_min": 8.520990884248695,
         "odd_inertia": {
           "negative": 0,
           "zeroish": 0,
@@ -755,20 +755,20 @@
         }
       },
       "WR": {
-        "min": -1.7696239678820325,
-        "max": 2.953061208881784,
+        "min": -1.769623967882032,
+        "max": 2.953061208881783,
         "inertia": {
           "negative": 24,
           "zeroish": 0,
           "positive": 5
         },
-        "even_min": -1.7696239678820327,
+        "even_min": -1.769623967882033,
         "even_inertia": {
           "negative": 12,
           "zeroish": 0,
           "positive": 3
         },
-        "odd_min": -1.6889889065233814,
+        "odd_min": -1.6889889065233805,
         "odd_inertia": {
           "negative": 12,
           "zeroish": 0,
@@ -780,18 +780,18 @@
         "C_even_below_2S": 1,
         "C_odd_below_2S": 0,
         "C_even_lowest_minus_2S": -5.839712488781792,
-        "C_even_second_minus_2S": -1.7763568394002505e-15,
-        "C_odd_lowest_minus_2S": -1.5987211554602254e-14
+        "C_even_second_minus_2S": -8.881784197001252e-15,
+        "C_odd_lowest_minus_2S": -3.552713678800501e-15
       },
       "pole_scalar": {
-        "c_Ae_inv_c": -2.000000000000001,
-        "s_Ao_inv_s": 2.000000000000002
+        "c_Ae_inv_c": -2.0000000000000013,
+        "s_Ao_inv_s": 2.0000000000000018
       },
       "Rmass_ground_alignment": {
-        "with_c": 2.3151612412042376e-16,
-        "with_s": 0.9707414656960383,
-        "parity_even_norm": 1.4461048456770248e-15,
-        "parity_odd_norm": 1.0
+        "with_c": 4.496072067697844e-16,
+        "with_s": 0.9707414656960378,
+        "parity_even_norm": 1.289353655501938e-15,
+        "parity_odd_norm": 0.9999999999999999
       }
     },
     {
@@ -815,20 +815,20 @@
       "identity_residual_inf": 1.3322676295501878e-15,
       "pole_rank2_residual_inf": 1.1102230246251565e-16,
       "Q": {
-        "min": -8.011061917310668e-16,
+        "min": -1.109579066785063e-15,
         "max": 3.5917916660115385,
         "inertia": {
           "negative": 0,
           "zeroish": 13,
           "positive": 20
         },
-        "even_min": -3.9121384876548184e-16,
+        "even_min": -8.399394669970331e-16,
         "even_inertia": {
           "negative": 0,
           "zeroish": 7,
           "positive": 10
         },
-        "odd_min": -3.581565522330568e-16,
+        "odd_min": -4.740728238830746e-16,
         "odd_inertia": {
           "negative": 0,
           "zeroish": 6,
@@ -836,8 +836,8 @@
         }
       },
       "Lprime": {
-        "min": 7.777969606166029,
-        "max": 14.105973572010111,
+        "min": 7.777969606166047,
+        "max": 14.105973572010114,
         "inertia": {
           "negative": 0,
           "zeroish": 0,
@@ -849,7 +849,7 @@
           "zeroish": 0,
           "positive": 17
         },
-        "odd_min": 10.024108983159062,
+        "odd_min": 10.024108983159069,
         "odd_inertia": {
           "negative": 0,
           "zeroish": 0,
@@ -857,14 +857,14 @@
         }
       },
       "Rmass": {
-        "min": -14.053550414261151,
-        "max": -7.698079355434504,
+        "min": -14.053550414261146,
+        "max": -7.69807935543449,
         "inertia": {
           "negative": 33,
           "zeroish": 0,
           "positive": 0
         },
-        "even_min": -12.640125204357906,
+        "even_min": -12.640125204357918,
         "even_inertia": {
           "negative": 17,
           "zeroish": 0,
@@ -878,20 +878,20 @@
         }
       },
       "A": {
-        "min": -6.790903212539739,
-        "max": 3.5938715094002545,
+        "min": -6.7909032125397495,
+        "max": 3.5938715094002553,
         "inertia": {
           "negative": 1,
           "zeroish": 11,
           "positive": 21
         },
-        "even_min": -6.790903212539741,
+        "even_min": -6.790903212539735,
         "even_inertia": {
           "negative": 1,
           "zeroish": 6,
           "positive": 10
         },
-        "odd_min": -5.804073403640199e-16,
+        "odd_min": -5.899690147498186e-17,
         "odd_inertia": {
           "negative": 0,
           "zeroish": 5,
@@ -900,7 +900,7 @@
       },
       "C": {
         "min": 4.873749512404528,
-        "max": 15.258524234344513,
+        "max": 15.258524234344515,
         "inertia": {
           "negative": 0,
           "zeroish": 0,
@@ -912,7 +912,7 @@
           "zeroish": 0,
           "positive": 17
         },
-        "odd_min": 11.664652724944258,
+        "odd_min": 11.664652724944261,
         "odd_inertia": {
           "negative": 0,
           "zeroish": 0,
@@ -920,20 +920,20 @@
         }
       },
       "WR": {
-        "min": -1.78607114601798,
-        "max": 3.111742919284633,
+        "min": -1.786071146017979,
+        "max": 3.1117429192846284,
         "inertia": {
           "negative": 27,
           "zeroish": 0,
           "positive": 6
         },
-        "even_min": -1.7860711460179806,
+        "even_min": -1.78607114601798,
         "even_inertia": {
           "negative": 14,
           "zeroish": 0,
           "positive": 3
         },
-        "odd_min": -1.7101859688305696,
+        "odd_min": -1.7101859688305692,
         "odd_inertia": {
           "negative": 13,
           "zeroish": 0,
@@ -945,18 +945,18 @@
         "C_even_below_2S": 1,
         "C_odd_below_2S": 0,
         "C_even_lowest_minus_2S": -6.79090321253974,
-        "C_even_second_minus_2S": -1.2434497875801753e-14,
-        "C_odd_lowest_minus_2S": -8.881784197001252e-15
+        "C_even_second_minus_2S": -8.881784197001252e-15,
+        "C_odd_lowest_minus_2S": -5.329070518200751e-15
       },
       "pole_scalar": {
-        "c_Ae_inv_c": -2.0000000000000004,
-        "s_Ao_inv_s": 2.000000000000001
+        "c_Ae_inv_c": -1.9999999999999993,
+        "s_Ao_inv_s": 2.0
       },
       "Rmass_ground_alignment": {
-        "with_c": 9.609193705319541e-16,
-        "with_s": 0.9778678280848957,
-        "parity_even_norm": 1.586905059182773e-15,
-        "parity_odd_norm": 1.0000000000000004
+        "with_c": 3.7367574338034714e-16,
+        "with_s": 0.9778678280848945,
+        "parity_even_norm": 1.1464879184977032e-15,
+        "parity_odd_norm": 0.9999999999999994
       }
     }
   ]
