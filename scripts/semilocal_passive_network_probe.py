@@ -232,7 +232,7 @@ def analyse(d):
     Ae = E.T @ d["A"] @ E
     Ao = O.T @ d["A"] @ O
     cevec = E.T @ d["c"]
-    soveс = O.T @ d["s"]
+    sovec = O.T @ d["s"]
     # Solve only if numerically nonsingular.
     out["pole_scalar"] = {}
     try:
@@ -240,7 +240,7 @@ def analyse(d):
     except np.linalg.LinAlgError:
         out["pole_scalar"]["c_Ae_inv_c"] = None
     try:
-        out["pole_scalar"]["s_Ao_inv_s"] = float(soveс @ np.linalg.solve(Ao, soveс))
+        out["pole_scalar"]["s_Ao_inv_s"] = float(sovec @ np.linalg.solve(Ao, sovec))
     except np.linalg.LinAlgError:
         out["pole_scalar"]["s_Ao_inv_s"] = None
 
