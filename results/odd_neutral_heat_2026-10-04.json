@@ -1,0 +1,16 @@
+{
+  "status": "synthetic falsifier; not arithmetic positivity or RH verification",
+  "dps": 80,
+  "artificial_centered_zero": "(0.2 + 2.0j)",
+  "time": "13.1595155706969659461281897349",
+  "pole_values": [
+    "0.0",
+    "0.0"
+  ],
+  "deflated_line_value": "(0.0 + 0.0j)",
+  "quartet_energy": "(-6.51323859389980775279969330408e-20 + 0.0j)",
+  "positive_online_tail": "1.79345452457539559549223617212e-20",
+  "total_energy": "-4.71978406932441215730745713196e-20",
+  "quartet_identity_error": "1.1429874e-100",
+  "heat_derivative_identity_error": "3.3735033e-80"
+}
