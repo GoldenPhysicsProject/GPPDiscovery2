@@ -370,3 +370,189 @@ Mandatory controls:
 - shifted product F_theta(s)=xi(s-theta)xi(s+theta).
 
 If a proposed bound survives either control without using the zeta degree-one local normalization, it has forgotten the arithmetic input.
+
+
+## 11. Exact insertion of the fixed-window two-box state
+
+This makes the connection to the current RH spine explicit.
+
+Let
+
+\[
+f_\ell=\ell^{-1/2}\mathbf 1_{[0,\ell]},
+\qquad
+h_\ell=f_\ell*\widetilde f_\ell
+=\left(1-\frac{|u|}{\ell}\right)_+,
+\]
+
+and for \(t>\ell\),
+
+\[
+a_t=f_\ell-T_tf_\ell.
+\]
+
+Then \(\|a_t\|_2^2=2\). For \(y\ge0\),
+
+\[
+\operatorname{Re}\langle a_t,T_ya_t\rangle
+=
+2h_\ell(y)-h_\ell(t-y),
+\]
+
+because the other cross term \(h_\ell(t+y)\) vanishes. Hence the common collision family has the exact profile
+
+\[
+\boxed{
+D_y[a_t]
+=
+\|a_t-T_ya_t\|_2^2
+=
+4(1-h_\ell(y))+2h_\ell(t-y).
+}
+\tag{TB1}
+\]
+
+This is important: the only \(t\)-dependent part is the moving triangular window \(h_\ell(t-y)\).
+
+Define
+
+\[
+P_\ell(t)
+=
+\sum_{n\ge2}\frac{\Lambda(n)}{\sqrt n}\,
+h_\ell(t-\log n).
+\]
+
+For \(L\ge t+\ell\), inserting (TB1) into the prime collision sum shows that its entire moving part is
+
+\[
+\boxed{2P_\ell(t).}
+\]
+
+For the real-place density, use the ladder
+
+\[
+w_\infty(y)
+=
+e^{y/2}
+-\sum_{k\ge1}e^{-(2k+1/2)y}.
+\]
+
+The triangular bilateral Laplace transform is
+
+\[
+\boxed{
+H_\ell(a)
+=
+\int_{-\ell}^{\ell}h_\ell(v)e^{av}\,dv
+=
+\frac{2(\cosh(a\ell)-1)}{\ell a^2}
+}
+\tag{TB2}
+\]
+
+for \(a\ne0\), with \(H_\ell(0)=\ell\).
+
+Since \(h_\ell(t-y)\) is supported on \(y\in[t-\ell,t+\ell]\), for \(t>\ell\),
+
+\[
+\begin{aligned}
+\int_0^L w_\infty(y)h_\ell(t-y)\,dy
+&=
+H_\ell(1/2)e^{t/2}\\
+&\quad-
+\sum_{k\ge1}
+H_\ell(2k+1/2)e^{-(2k+1/2)t}.
+\end{aligned}
+\]
+
+Put
+
+\[
+A_\ell=H_\ell(1/2)
+=
+\boxed{\frac{8}{\ell}\bigl(\cosh(\ell/2)-1\bigr)}
+\]
+
+and
+
+\[
+D_\ell(t)
+=
+\sum_{k\ge1}
+H_\ell(2k+1/2)e^{-(2k+1/2)t}>0.
+\]
+
+Then the entire moving contribution of the Euler–Archimedean collision form is
+
+\[
+\boxed{
+2\left[
+P_\ell(t)-A_\ell e^{t/2}+D_\ell(t)
+\right].
+}
+\tag{TB3}
+\]
+
+But the fixed-window explicit formula writes, for \(t>\ell\),
+
+\[
+C_\ell(t)
+=
+A_\ell e^{t/2}-P_\ell(t)-D_\ell(t).
+\]
+
+Therefore
+
+\[
+\boxed{
+\text{moving collision contribution}=-2C_\ell(t).
+}
+\tag{TB4}
+\]
+
+The remaining \(t\)-independent regularized piece is \(2C_\ell(0)\), giving exactly
+
+\[
+\boxed{
+Q[a_t]
+=
+2(C_\ell(0)-C_\ell(t)).
+}
+\tag{TB5}
+\]
+
+Thus the semilocal collision decomposition and the fixed-window growth criterion are not parallel routes: they are the same arithmetic object in two coordinate systems.
+
+For the dyadic window \(\ell=\log2\),
+
+\[
+\boxed{
+A_{\log2}
+=
+\frac{6\sqrt2-8}{\log2}.
+}
+\]
+
+This recovers the exact coefficient in the dyadic prime-window criterion.
+
+### Consequence for the proof search
+
+The full RH-level burden is now located in a single moving collision balance:
+
+\[
+P_\ell(t)
+-
+A_\ell e^{t/2}
++
+D_\ell(t)
+\ge -e^{o(t)}
+\]
+
+in the one-sided sense needed by the fixed-window theorem.
+
+Everything outside this moving window is a \(t\)-independent renormalization.
+
+This also explains why the degree-one Euler structure is the only plausible place left to gain leverage: the growing continuum collision \(A_\ell e^{t/2}\) must be matched by the moving prime-power window \(P_\ell(t)\), while the trivial-zero ladder \(D_\ell(t)\) is positive and exponentially decaying.
+
+The next attack should therefore be on \(P_\ell(t)\) itself through coherent local Euler factors, not on the full semilocal matrix.
