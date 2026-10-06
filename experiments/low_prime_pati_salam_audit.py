@@ -123,6 +123,20 @@ def main() -> None:
     print("B-L:", tuple(sp.Rational(v, 3) for v in X))
     print("adjoint branching dimensions: 15 = 8 + 1 + 3 + 3")
     print()
+    print("SU(4) root charges under X and B-L")
+    for i, j, label in [
+        (1, 2, "3<->5 color"),
+        (2, 3, "5<->7 color"),
+        (1, 3, "3<->7 composite color"),
+        (0, 1, "2<->3 leptoquark"),
+        (0, 2, "2<->5 leptoquark"),
+        (0, 3, "2<->7 leptoquark"),
+    ]:
+        dx = X[i] - X[j]
+        print(f"{label:24s}: Delta X={dx:2d}, Delta(B-L)={sp.Rational(dx,3)}")
+    print("Thus color roots are B-L neutral; lepton-color roots carry |B-L|=4/3.")
+    print()
+
 
     # One-generation Pati-Salam charge table.
     def Q(x: int, tL: sp.Rational, tR: sp.Rational) -> sp.Rational:
