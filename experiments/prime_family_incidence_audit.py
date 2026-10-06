@@ -176,6 +176,19 @@ def main() -> None:
     print("bare Dirichlet normalized eigenvalues:", proxy)
     print("The boundary-lift mechanism fixes rank only; it does not generate")
     print("the charged-fermion hierarchy.")
+    
+    
+    # Charge-selected p=2 boundary diagnostic.
+    # Replacing c by c q_electric^2 gives det = a*b*c*q^2 and is even under q -> -q.
+    charges = {"nu": 0.0, "e": -1.0, "u": 2.0 / 3.0, "d": -1.0 / 3.0}
+    print()
+    print("charge-selected p=2 boundary (same bare a,b,c; rank diagnostic only)")
+    for name, qel in charges.items():
+        Mq = charged_dirichlet(c * qel * qel, a, b)
+        vals = np.linalg.eigvalsh(Mq)
+        print(f"{name:2s} q={qel: .6f} det={np.linalg.det(Mq): .12e} eig={vals}")
+    print("This selector explains neutral-vs-charged rank only; it is not a mass-hierarchy fit.")
+    
 
 
 if __name__ == "__main__":
