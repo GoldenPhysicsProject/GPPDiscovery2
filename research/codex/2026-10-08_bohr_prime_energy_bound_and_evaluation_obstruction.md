@@ -137,3 +137,43 @@ still contain every individual ordinate of hypothetical off-line zeros.
 The prime-current concentration inequality is a genuine bound,
 but transferring it to deterministic point evaluations or the fully
 completed Weil correlation is the new, necessary estimate. No RH claim.
+
+
+## 7. A deterministic height-aspect inequality with increasing arithmetic cutoff
+
+The preceding Haar/Besicovitch average takes height T->infinity at fixed
+coefficient cutoff N. We can make N grow linearly with T, with
+**unconditional deterministic control**, by applying the classical
+Montgomery--Vaughan Dirichlet-polynomial mean value theorem:
+
+For arbitrary a_n and any interval I of length T,
+  int_I |sum_(n<=N) a_n n^(-it)|² dt
+    = T sum_(n<=N)|a_n|² + O(sum_(n<=N) n |a_n|²),
+with absolute implied constant. Set N=floor(T), a_n=Lambda(n)n^(-sigma).
+For each fixed 1/2<sigma<1, the PNT and partial summation give
+
+  sum_(n<=T) n Lambda(n)² n^(-2sigma)
+       = O_sigma(T^(2-2sigma) log T),
+  sum_(n>T) Lambda(n)² n^(-2sigma)
+       = O_sigma(T^(1-2sigma) log T).
+
+Hence the genuine quantitative prime-to-physical-height inequality is
+
+  **1/T int_T^(2T) |sum_(n<=T) Lambda(n)n^(-sigma-it)|² dt
+     = B(sigma) + O_sigma(T^(1-2sigma) log T).**
+
+This is an actual deterministic estimate with a growing arithmetic cutoff,
+valid for every sigma>1/2 (formula and stated rate for 1/2<sigma<1).
+Because 1-2sigma<0, the error decays. It uses the actual one-channel
+von Mangoldt coefficients, not any zero hypothesis.
+
+Compare this height aspect T~N to the fixed-height regime: for each
+fixed t and fixed 1/2<sigma<1, PNT gives
+  J_(sigma,N)(t) ~ N^(1-sigma-it)/(1-sigma-it),
+whose modulus diverges as N^(1-sigma). The limits N->infty and
+T->infty thus DO NOT commute. This makes precise why the genuine
+height-mean inequality cannot rule out a specific off-line zero.
+
+Ref: classical Montgomery--Vaughan mean-value theorem, e.g. Goldston
+and Gonek "Mean value theorems for long Dirichlet polynomials and
+tails of Dirichlet series" (1997). Need no new conjectures.
