@@ -421,3 +421,79 @@ mapping from the completed Weil observable into this quadratic
 prime-pair form would be a genuinely new RH-strength theorem.
 No such trace/linearization sewing map is proved here. This
 distinction must accompany every citation of the inequality.
+
+
+## 13. Exact sign-compatible linear-to-quadratic sewing with the genuine pole term
+
+This is an EXACT algebraic construction, unlike the missing positivity estimate.
+Let ℓ>0 and h_ℓ(u)=(1−|u|/ℓ)_+.
+Its Fourier dual is the normalized nonnegative probability measure
+
+  dν_ℓ(t)=[ℓ/(2π)] sinc(ℓt/2)^2 dt,  int dν_ℓ=1,
+  int e^(−itu)dν_ℓ(t)=h_ℓ(u).
+
+Let x>=e^ℓ and I_x=[xe^-ℓ,xe^ℓ]. Use the centered windowed arithmetic current and its CONTINUUM pole model
+  A_x(t) = sum_(n in I_x) Λ(n)n^(-1/2) e^(−it log(n/x)),
+  P_x(t) = int_(u in I_x)u^(-1/2)e^(−it log(u/x))du,
+  D_x(t)=A_x(t)−P_x(t).
+
+Then by Fourier duality, with L2(dν_ℓ) inner product ⟨f,g⟩=int conjugate(f)g dν,
+
+  ⟨1,A_x⟩ = S_ℓ(x)
+    = sum_(n in I_x) Λ(n)n^(-1/2)h_ℓ(log(n/x)),
+  ⟨1,P_x⟩ = A_ℓ sqrt(x),
+  A_ℓ=int_(-ℓ)^ℓ e^(v/2)h_ℓ(v)dv
+    = ℓ[sinh(ℓ/4)/(ℓ/4)]².
+
+Therefore, with Q_x=A_ℓ sqrt(x)−S_ℓ(x),
+
+  **Q_x=−⟨1,D_x⟩**,
+  and
+  **Q_x²≤||D_x||²_L2(dν_ℓ)**,
+
+  **||D_x||²−Q_x² =||D_x+Q_x*1||² >=0.**
+
+A positive quadratic norm can therefore control the SIGNED *linear*
+fixed-window prime deficit with its EXACT continuum pole subtraction,
+but only if one proves an actual bound on that completed norm:
+  ||D_x||_L2(dν_ℓ)≤C for all x.
+This would be a sufficient RH-strength condition by the paper's
+one-sided theorem; it is NOT derived by positivity alone.
+
+The fully expanded norm shows precisely the arithmetic work:
+ ||D_x||² =
+   sum_(n,m in I_x) Λ(n)Λ(m)/sqrt(nm) h_ℓ(log(n/m))
+   −2 sum_(n in I_x) Λ(n)/sqrt(n)
+       int_(u in I_x)u^-1/2 h_ℓ(log(n/u))du
+   + int_(u,v in I_x)(uv)^-1/2 h_ℓ(log(u/v))dudv.
+
+Its first term is a cross-prime quadratic energy; its second term
+is the essential SIGNED prime–continuum interaction; its third
+is the pole–pole continuum norm. These exact negative cross terms
+are absent from the earlier unconditional CrossPrime>=−B−D/H²
+bound in §12; therefore THAT estimate does not close RH.
+
+CAUTION: the statement ||D_x||≤C is *potentially stronger than RH*
+because the raw sharp-window current A_x(t) has no triangular
+smoothing before the norm. It need not be bounded under RH and
+is not asserted equivalent to RH. To weaken it toward the actual
+RH-equivalent target one should project D_x onto the 1-dimensional
+constant subspace, namely Q_x itself, at which point the missing
+bound is exactly RH again. Any intermediate low-rank projector
+needs a new, noncircular prime-side estimate.
+
+By the PNT, for each fixed t the normalized centered current
+D_x(t)/sqrt(x)->0 as x->infty. Moreover |D_x(t)|/sqrt(x) is
+uniformly bounded for all t,x sufficiently large by the
+trivial prime sum bound, and ν_ℓ is finite. Dominated convergence
+therefore proves the unconditional weak statement
+  ||D_x||_L2(dν_ℓ) = o(sqrt(x)),
+recovering PNT-scale control but not an O(1) RH estimate.
+This proves the linear-to-quadratic matching algebra and
+quantifies why PNT alone does not suffice.
+
+POSSIBLE EXPERIMENT: evaluate the Gram expansion with a sieve for
+x to 10^6 and compare ||D_x|| vs |Q_x| and sqrt(log x).
+If ||D_x|| grows even on zeta data, the full-norm route is an
+overstrong condition and the right target is a pole-subtracted
+projection with carefully controlled transverse fluctuation.
