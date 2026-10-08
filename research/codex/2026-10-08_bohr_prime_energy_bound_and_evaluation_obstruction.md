@@ -309,3 +309,34 @@ local transference is still the missing RH-strength step.
 The arithmetic one-parameter flow can be exceptional to Haar
 mean-square even when every finite collection of prime
 frequencies is equidistributed over very long t intervals.
+
+
+## 10. Exact exceptional-point counterexample: the SAME cross-prime term diverges at T=0
+
+The Fejer kernel Phi_H(omega)=sinc(H omega/2)^2 is nonnegative.
+At center T=0, EVERY summand in C_tri(0,H;N) is nonnegative.
+Fix any H>0 and 1/2<sigma<1. For large X, restrict the cross-prime
+sum to distinct ordinary primes p,q within
+  [X,(1+c_H)X],   c_H=min(1/2,1/(2H)).
+Then |(H/2)log(p/q)|<=1/4 and Phi_H(log(p/q))>=sinc(1/4)^2>0.
+PNT for the FIXED relative window c_H gives
+  sum_(X<=p<=(1+c_H)X) (log p)p^(-sigma)
+    ~ [(1+c_H)^(1-sigma)-1] X^(1-sigma)/(1-sigma).
+Its square dominates the diagonal sum
+  sum_(p in interval)(log p)^2 p^(-2sigma)
+   = O_sigma,H(X^(1-2sigma)log X),
+so the restricted offdiagonal block is
+  >= c_(sigma,H) X^(2-2sigma)       (large X)
+for some positive c_(sigma,H).
+Hence
+
+  **lim_(N->infty) C_tri(0,H;N)=+infinity for EVERY FIXED H>0,
+     even though ||C_tri(.,H)||_B2(T)^2 ->0 as H->infty.**
+
+This is a rigorous, directly arithmetic counterexample to upgrading
+the Fejer-smoothed Haar mean-square power bound to pointwise center
+height T=0. It exhibits the severe noncommutativity of prime cutoff,
+height averaging, and deterministic center evaluation.
+It does NOT mean the properly pole-subtracted/Archimedean-completed
+quantity diverges; the pole piece can cancel raw coherent growth.
+It demonstrates why the completed matching is indispensable.
