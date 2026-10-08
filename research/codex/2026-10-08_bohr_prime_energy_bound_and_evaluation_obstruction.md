@@ -340,3 +340,47 @@ height averaging, and deterministic center evaluation.
 It does NOT mean the properly pole-subtracted/Archimedean-completed
 quantity diverges; the pole piece can cancel raw coherent growth.
 It demonstrates why the completed matching is indispensable.
+
+
+## 11. Sharper cross-prime Fejer power-decay: integer spacing improves the exponent
+
+The cutoff split in §9 proves one (weak) rate; it is NOT sharp.
+A direct near-diagonal pair count yields a MUCH stronger unconditional bound:
+
+  **||C_tri(.,H)||_B2(T)^2 <<_sigma
+      H^(1-4sigma) [log(2+H)]^4,   1/2<sigma<1, H>=2.**
+
+Here is a complete elementary majorant (no conjectural prime pairs).
+By unique reduced cross-prime ratios (§9),
+  ||C_tri||_B2²
+   = sum_{cross n,m} Lambda(n)^2Lambda(m)^2 (nm)^(-2sigma)
+       sinc[(H/2)log(n/m)]^4.
+Majorize Lambda(n)^2 <= (log n)^2 and enlarge to ALL
+distinct integers n,m>=2 with b_n=(log n)^2 n^(-2sigma).
+
+Split pairs into "far" max(n,m)>2 min(n,m) and "near" n/2<=m<=2n.
+For far pairs, |log(n/m)|>=log 2, so sinc^4<=const/H^4.
+Their entire contribution <= const/H^4*(sum b_n)^2, finite
+because sigma>1/2.
+
+For near pairs, d=|m-n|>=1 and |log(n/m)|>=d/(2n).
+Moreover b_nb_m <= C_sigma n^(-4sigma)log(2n)^4.
+Then
+  sinc[(H/2)log(n/m)]^4 <= min[1,(4n/(H d))^4].
+The sum over near integers m is
+  O((n/H)^4)  if n<=H,
+  O(n/H)      if n>H.
+Hence the full near contribution is at most
+  C_sigma [H^-4 sum_{n<=H}n^(4-4sigma)log(2n)^4
+         + H^-1 sum_{n>H}n^(1-4sigma)log(2n)^4]
+  <<_sigma H^(1-4sigma)log(2+H)^4
+for 1/2<sigma<1 (so 4-4sigma>-1 and 1-4sigma<-1).
+
+This improves §9's decay exponent from
+4(2sigma-1)/(3+2sigma) to **4sigma-1**, e.g.
+sigma=3/4 now gives mean-square O(H^-2 log^4 H).
+All steps are explicit and unconditional. This bound is for
+the Bohr mean-square of the cross-prime **center-height function**,
+NOT its value at any fixed t and not the completed Weil distribution.
+§10 proves the same function may diverge at fixed center T=0 as
+N->infty, so the pointwise-upgrade obstruction remains exact.
