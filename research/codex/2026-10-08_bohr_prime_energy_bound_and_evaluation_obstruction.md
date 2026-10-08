@@ -177,3 +177,65 @@ height-mean inequality cannot rule out a specific off-line zero.
 Ref: classical Montgomery--Vaughan mean-value theorem, e.g. Goldston
 and Gonek "Mean value theorems for long Dirichlet polynomials and
 tails of Dirichlet series" (1997). Need no new conjectures.
+
+
+## 8. Exact micro-height prime-pair kernel and suppression of local Hecke returns
+
+For H>0, T real and finite N, exact integration (no averaging theorem) gives
+
+  I(T,H;N,sigma) = 1/H int_T^(T+H)|J_(sigma,N)(t)|² dt
+   = sum_(n,m<=N) Lambda(n)Lambda(m)/(nm)^sigma
+       * exp[-i(T+H/2)log(n/m)]
+       * sinc[(H/2)log(n/m)],
+
+with sinc(y)=sin(y)/y. The **off-diagonal** consists of correlations
+between distinct n,m, and H much smaller than N admits many n,m with
+|n-m| ≲ N/H. These are genuine cross-prime correlations and are not
+controlled by local Hecke recurrences.
+
+Separate only pairs with n=p^k and m=p^l from the SAME prime p, k≠l.
+Their average-integral factor is at most
+  2/(H |k-l| log p).
+For the complete infinite-prime same-p portion (absolutely summable
+under this bound for sigma>1/2), the total offdiagonal magnitude obeys
+
+  **|Off_sameprime| ≤ C_sigma/H**, where
+  C_sigma =
+    4 sum_p (log p) * [p^(-2sigma)/(1-p^(-2sigma))]
+      * [-log(1-p^(-sigma))] < infinity.
+
+Proof: write q=p^-sigma, then
+  sum_{k,l>=1,k!=l} q^(k+l)/|k-l|
+   = (2q²/(1-q²)) sum_{h>=1}q^h/h
+   = (2q²/(1-q²))[-log(1-q)].
+Multiply by 2 logp/H. Convergence: summand
+is O(logp*p^(-3sigma)), summable for sigma>1/2.
+
+This is a quantitative and genuinely unconditional **NO-GO** for
+the proposed insertion of local same-prime Hecke return moments
+into micro-height Dirichlet-polynomial quadratic forms: all
+offdiagonal same-prime Euler-return interactions are O(1/H),
+so they vanish as the observation window H increases.
+Any nontrivial short-height obstruction must sit in **cross-prime**
+pairs n=p^k, m=q^l, p≠q, including very close logarithmic frequencies.
+That is arithmetically different from the local rank defect D_p=2/p.
+
+A hypothetical off-axis zero rho=beta+i gamma appearing in the
+pole-subtracted explicit formula contributes a model term
+  N^(rho-s)/(rho-s),  s=sigma+it, sigma<beta.
+Its squared local average over an interval of length H centered
+at gamma is EXACTLY
+  N^(2(beta-sigma)) * [2/(H(beta-sigma))]
+     arctan[H/(2(beta-sigma))]
+  ~ [pi/(beta-sigma)] N^(2(beta-sigma))/H
+for H->infty. Hence ordinary mean value at H~N is blind to such a
+term whenever beta<1 and sigma>1/2, because
+2(beta-sigma)<1. To resolve it one needs a height interval
+H≲N^(2(beta-sigma)), well below the H~N diagonal regime.
+
+This is a scaling analysis of ONE possible zero term, not a
+lower bound for the full completed zero sum (other terms may
+interfere). It nevertheless identifies the precise frontier:
+short-height, **cross-prime** offdiagonal cancellation after
+subtracting the genuine pole term. MV diagonal estimates
+cannot see the hypothesized off-axis contributions.
