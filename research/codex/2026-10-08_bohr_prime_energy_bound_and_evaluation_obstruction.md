@@ -384,3 +384,40 @@ the Bohr mean-square of the cross-prime **center-height function**,
 NOT its value at any fixed t and not the completed Weil distribution.
 §10 proves the same function may diverge at fixed center T=0 as
 N->infty, so the pointwise-upgrade obstruction remains exact.
+
+
+## 12. A uniform POINTWISE O(1) inequality for the cross-prime quadratic form
+
+This is a different conclusion from §§9-11: it holds at *every*
+deterministic center T and cutoff N, not just in Bohr mean.
+For Fejer weight w_H, the integral
+  I_tri(T,H;N)=int_R w_H(t-T)|J_(sigma,N)(t)|² dt
+is NONNEGATIVE for each real T and H>0.
+
+Split exactly into I_tri=B_N(sigma)+S_same(T,H;N)+C_cross(T,H;N).
+Here B_N=sum_{n<=N}Lambda(n)^2 n^(-2sigma) <= B(sigma).
+By §9 the same-prime offdiagonal satisfies
+  |S_same|<=D_sigma/H²,
+  D_sigma=8 sum_p [p^(-2sigma)/(1-p^(-2sigma))] Li_2(p^(-sigma))
+  <infinity for sigma>1/2.
+Therefore the nontrivial signed different-prime correlation has the
+explicit, genuinely pointwise one-sided bound
+
+  **C_cross(T,H;N) >= -B(sigma)-D_sigma/H²,
+     for all T in R, H>0, N>=2 and fixed sigma>1/2.**
+
+This is a PROVED O(1) prime-side inequality that uses the zeta
+one-channel finite B(sigma), and is uniform over the arithmetic
+cutoff and deterministic center. For the F_theta shifted control,
+the corresponding finite bound is unavailable below
+sigma<=1/2+theta because B_theta diverges.
+
+**Fundamental limitation:** C_cross is QUADRATIC in Lambda, whereas
+the completed Weil/two-box prime sum is LINEAR in Lambda; their
+Archimedean/pole terms are not the same. Therefore one may NOT
+substitute this O(1) lower bound for the desired O(1) lower bound
+on S_l(x)-A_l sqrt(x). Constructing an exact and sign-compatible
+mapping from the completed Weil observable into this quadratic
+prime-pair form would be a genuinely new RH-strength theorem.
+No such trace/linearization sewing map is proved here. This
+distinction must accompany every citation of the inequality.
