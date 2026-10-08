@@ -89,3 +89,51 @@ them RH. Test a candidate "local evaluation bridge" against F_theta:
 it must fail to continue its current at sigma<=1/2+theta.
 This memo also answers Muse's challenge with an actual unconditional
 X<=Y inequality and isolates exactly why that inequality falls short.
+
+
+## 6. A stronger true inequality: sub-Gaussian prime-current concentration
+
+This goes beyond norm equivalences to a probability upper bound directly from prime independence.
+On the Haar prime torus, let Z_p be independent uniform unit complex numbers and
+
+  X_p = (log p) p^(-sigma) Z_p / (1 - p^(-sigma) Z_p),  sigma>1/2.
+
+This is the p-th Euler-local logarithmic prime current. Its Fourier series has no constant term, so E[X_p]=0, and by orthogonality
+
+  E|X_p|^2 = (log p)^2 p^(-2sigma)/(1-p^(-2sigma)).
+
+Consequently J_sigma := sum_p X_p converges in L2, and E|J_sigma|²=B(sigma) from §1. Set
+
+  K(sigma) = sum_p (log p)^2 /(p^sigma-1)^2.
+
+It is finite and satisfies K(sigma) ≤ R(sigma) B(sigma) with
+  R(sigma) = (1+2^(-sigma))/(1-2^(-sigma)),
+because |X_p|≤log(p)/(p^sigma−1) and for q=p^-sigma,
+  [q²/(1−q)²] / [q²/(1−q²)] = (1+q)/(1−q) ≤ R(sigma).
+
+Apply Hoeffding's lemma to the independent, centered and bounded real variables
+Re X_p and Im X_p, separately, then pass to the L2 limit. If |J|>=u,
+at least one of |Re J|, |Im J| is >=u/sqrt(2). The union bound yields
+
+  **P_Haar(|J_sigma| >= u) ≤ 4 exp[-u²/(4 K(sigma))]
+      ≤ 4 exp[-u²/(4 R(sigma) B(sigma))]**,  u>0.
+
+This is an UNCONDITIONAL exponential-tail inequality based on the real Euler product, valid for every fixed sigma>1/2; with sigma=1/2+eps it has characteristic scale O(1/eps). It makes no statement about the actual zeta logarithmic derivative at a specified height t.
+
+For a fixed finite set of primes, rational independence of their logarithms
+(unique prime factorization) plus Kronecker-Weyl transfers the same
+probability bound to the upper asymptotic density of real t along
+the genuine arithmetic flow Z_p=p^(-it). No uniform in cutoff
+equidistribution rate or localization at a prescribed zero ordinate follows.
+
+For shifted F_theta, the prime variable becomes the sum of geometric
+currents of radii p^(-(sigma-theta)) and p^(-(sigma+theta));
+the L2 variance diverges when sigma<=1/2+theta. Hence the full
+infinite-prime concentration theorem does not apply to the
+two-channel control at the same sigma.
+
+**Key boundary:** an exceptional set of Haar density zero can
+still contain every individual ordinate of hypothetical off-line zeros.
+The prime-current concentration inequality is a genuine bound,
+but transferring it to deterministic point evaluations or the fully
+completed Weil correlation is the new, necessary estimate. No RH claim.
