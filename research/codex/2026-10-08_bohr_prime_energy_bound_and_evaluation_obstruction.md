@@ -497,3 +497,73 @@ x to 10^6 and compare ||D_x|| vs |Q_x| and sqrt(log x).
 If ||D_x|| grows even on zeta data, the full-norm route is an
 overstrong condition and the right target is a pole-subtracted
 projection with carefully controlled transverse fluctuation.
+
+
+## 14. Exact SLIDING-PRIME-INTERVAL representation; a polylogarithmic variance is RH-equivalent
+
+The Fejer Gram energy of §13 has an additional *entirely arithmetic*
+representation, with no Fourier variable and no implicit zeros.
+For any real v,w, the overlap identity is
+  h_ℓ(v−w) =
+   (1/ℓ) int_R 1_[t,t+ℓ](v) 1_[t,t+ℓ](w) dt.
+This is just the intersection length of two real intervals.
+
+Let the signed measure on [-ℓ,ℓ] be
+  dη_x(v)= sum_{n∈[xe^-ℓ,xe^ℓ]}Λ(n)n^-1/2 δ_(log(n/x))(dv)
+          − sqrt(x)1_[-ℓ,ℓ](v)e^(v/2)dv.
+Then its energy is *exactly*
+  **E_ℓ(x):=||D_x||²
+    =(1/ℓ)int_R |η_x([t,t+ℓ])|² dt.**
+Explicitly, the integrand is the square of a *weighted Chebyshev
+interval error*, where u=x e^v:
+  η_x([t,t+ℓ])
+   = sum_{n∈[xe^-ℓ,xe^ℓ]∩[xe^t,xe^(t+ℓ)]}Λ(n)/sqrt(n)
+    − int_[xe^-ℓ,xe^ℓ]∩[xe^t,xe^(t+ℓ)]du/sqrt(u).
+The integral is supported in t∈[-2ℓ,ℓ], since all mass is
+inside [-ℓ,ℓ].
+
+This expresses the exact COMPLETED pole-subtracted quadratic form
+as a positive *sliding multiplicative prime-interval variance*.
+No spectral-positivity leap is necessary; it holds unconditionally.
+
+There is a clean RH equivalence at a *weaker than O(1)* scale:
+  **RH iff E_ℓ(x) = O_ℓ((log x)^4) as x->infty,
+    for any fixed ℓ>0 for which h_ℓ has no off-axis transform zeros
+    (in particular ℓ=log2).**
+
+Direction RH => bound:
+classical von Koch criterion under RH:
+  ψ(u)=u+O(sqrt(u)(log u)^2).
+For any endpoints a,b in [xe^-ℓ,xe^ℓ], partial summation yields
+  sum_(a<=n<=b)Λ(n)/sqrt(n) − int_a^b du/sqrt(u)
+     = O_ℓ((log x)^2), uniformly in a,b (for large x).
+Therefore each η_x([t,t+ℓ])=O_ℓ(log²x), integration support length
+3ℓ yields E_ℓ(x)=O_ℓ(log⁴x).
+
+Direction bound => RH:
+by Cauchy on the probability Fourier measure, §13 gives
+  |S_ℓ(x)-A_ℓ sqrt(x)| ≤ sqrt(E_ℓ(x))=O_ℓ(log²x)
+    =exp(o(logx)).
+The fixed-window Landau one-sided lemma (the GPP paper)
+then excludes any off-axis zeros, proving RH. Even an estimate
+  E_ℓ(x)=x^(o(1))
+is sufficient, and follows from RH's polylog upper bound;
+thus more sharply
+  **RH iff E_ℓ(x)=x^(o(1))**, interpreted uniformly as x→∞.
+
+This is not an unconditional proof of RH. It reformulates the
+missing prime-side bound as a concrete *positive arithmetic variance*
+of normalized Chebyshev discrepancies on all logarithmic windows.
+Previously the Gram positivity alone yielded a lower bound; the
+required new theorem is a polylogarithmic **UPPER** bound on
+E_ℓ(x) uniformly in x. Averaged Selberg variance estimates do not
+automatically give uniform control in x.
+
+For ℓ=log2, the continuum-pole constant is
+  A_ℓ = (6sqrt(2)-8)/log2.
+And the pure continuum Gram constant in §13 is exactly
+  C_ℓ = 8 cosh(ℓ) − (16/ℓ)[sinh(ℓ)-sinh(ℓ/2)].
+A reproducible numerical probe (not a verification of the analytic
+bound) was committed to
+ research/codex/scripts/dyadic_pole_gram_probe_2026_10_08.py
+in GPPDiscovery2 codex/discovery-workbench (commit 696de915).
