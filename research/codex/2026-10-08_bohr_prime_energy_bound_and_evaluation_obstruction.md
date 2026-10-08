@@ -239,3 +239,73 @@ interfere). It nevertheless identifies the precise frontier:
 short-height, **cross-prime** offdiagonal cancellation after
 subtracting the genuine pole term. MV diagonal estimates
 cannot see the hypothesized off-axis contributions.
+
+
+## 9. NEW quantitative cross-prime inequality: Fejer smoothing yields a power-saving in Haar center height
+
+This is an honest X<=Y analytic estimate, not a zero detector/equivalence.
+Let w_H(v)=H^-1(1-|v|/H)_+ on [-H,H], normalized to integral one.
+Its Fourier transform is Phi_H(omega)=sinc(H omega/2)^2>=0.
+Define the triangular-height averaged prime-current energy I_tri(T,H;N)
+= int_R w_H(t-T) |J_(sigma,N)(t)|² dt.
+The distinct-prime cross term is
+
+  C_tri(T,H;N) =
+    sum_{n=p^k,m=q^l<=N;p!=q}
+      Lambda(n)Lambda(m)(nm)^(-sigma)
+      exp[-iT log(n/m)] Phi_H(log(n/m)).
+
+For distinct prime bases the reduced ratio p^k/q^l uniquely identifies
+the ORDERED pair, so all cross-prime frequencies log(n/m) are distinct.
+Taking the *long-center-time Bohr mean square* therefore diagonalizes
+the cross term exactly:
+
+  **||C_tri(.,H;N)||_B2(T)^2 =
+     sum_{n=p^k,m=q^l<=N;p!=q}
+       Lambda(n)^2 Lambda(m)^2 (nm)^(-2sigma)
+         sinc[(H/2)log(n/m)]^4.**
+
+This extends by B2 convergence uniformly in N because the RHS is
+dominated by B(sigma)^2<infinity for sigma>1/2.
+
+For any auxiliary P>=2, split into n,m<=P and max(n,m)>P.
+For n!=m<=P, |log(n/m)| >= 1/(P+1). Therefore
+sinc[(H/2)log(n/m)]^4 <= 16(P+1)^4/H^4.
+For the remaining terms use |sinc|<=1 and B_tail(sigma,P)
+=sum_{n>P}Lambda(n)^2 n^(-2sigma). Hence the explicit inequality
+
+  **||C_tri(.,H)||_B2^2
+    <= 16(P+1)^4 B(sigma)^2/H^4
+       +2 B(sigma) B_tail(sigma,P).**
+
+By standard Chebyshev/PNT summation,
+  B_tail(sigma,P) <<_sigma P^(1-2sigma) log P,
+for 1/2<sigma<1. Choosing P=floor(H^[4/(3+2sigma)]) gives
+the genuine *power-decay bound*
+
+  **||C_tri(.,H)||_B2^2
+    <<_sigma H^[-4(2sigma-1)/(3+2sigma)] log H.**
+
+Compare rectangular height window: the parallel rate is only
+H^[-2(2sigma-1)/(1+2sigma)] log H; triangular Fejer improves
+the exponent because its Fourier kernel is squared.
+
+The same-prime contribution decays FASTER under Fejer averaging:
+  **|Off_sameprime,tri| <=
+    (8/H²) sum_p
+    [p^(-2sigma)/(1-p^(-2sigma))] Li_2(p^(-sigma))
+    = O_sigma(H^-2)**,
+using sinc²(x)<=1/x² and
+sum_{k!=l}q^(k+l)/(k-l)^2 = 2 q² Li_2(q)/(1-q²).
+(The p-th geometric log factors cancel against log(p)^2 from
+the two amplitudes.)
+
+This is a proven nonlinear prime-pair **averaged** inequality.
+It passes F_theta falsification in the *finite-energy sense*:
+the two-channel Hilbert norm ceases to exist when
+sigma<=1/2+theta. It does NOT control C_tri(T,H) at a fixed
+chosen T (e.g. an off-axis zero ordinate). That deterministic
+local transference is still the missing RH-strength step.
+The arithmetic one-parameter flow can be exceptional to Haar
+mean-square even when every finite collection of prime
+frequencies is equidistributed over very long t intervals.
