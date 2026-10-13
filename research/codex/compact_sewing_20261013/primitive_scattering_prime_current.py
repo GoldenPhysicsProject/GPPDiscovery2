@@ -19,3 +19,10 @@ for w in [mp.mpf('1.31'),mp.mpf('1.87'),mp.mpc('1.21','0.45')]:
     rhs=mp.sqrt(mp.pi)*mp.gamma(w-mp.mpf('.5'))/(4*mp.gamma(w))*(Z+2)
     assert abs(scat-rhs)<mp.mpf('1e-45')
 print('Finite exact coefficients and 50-digit scattering samples PASS')
+
+
+F=lambda y:2*mp.exp(-mp.pi*y*y)
+for y in [mp.mpf('.35'),mp.mpf('.8'),mp.mpf('2')]:
+    recovered=sum(int(mobius(n))*sum(F(n*k*y) for k in range(1,121)) for n in range(1,121))
+    assert abs(recovered-F(y))<mp.mpf('1e-45')
+print('Gaussian Möbius collapse at three scales PASS')
