@@ -38,12 +38,23 @@ def von_mangoldt_prime_powers(h,theta=mp.mpf(0)):
             pk*=p
     return total
 
+def continuous_reference(h):
+    N=mp.sinh(h)-h
+    return (2*h*mp.exp(h)-2*mp.sinh(h)-(mp.exp(2*h)-1)/2+h-h*h)/N
+
+def defect_closed(h):
+    N=mp.sinh(h)-h
+    return ((1-mp.exp(-2*h))/2-2*h*mp.exp(-h)+h-h*h)/N
+
 def row(h,theta=mp.mpf('0.25')):
     half=mp.mpf('0.5'); N=mp.sinh(h)-h
     zr=-2*N
     zw=arch(h)
     zp=von_mangoldt_prime_powers(h)
     zq=zr-zw-zp
+    I=continuous_reference(h)
+    D=defect_closed(h)
+    assert abs((zr-I-2)-D)<mp.mpf("1e-25"), "Abel smooth reference algebra mismatch"
     pr=-2*(G(half,half+theta,h)**2+G(half,half-theta,h)**2)/N
     aw=2*arch(h,theta)
     pp=2*von_mangoldt_prime_powers(h,theta)
