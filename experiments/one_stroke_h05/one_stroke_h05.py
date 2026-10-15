@@ -1,7 +1,7 @@
 """Independent float design: h=1/2 Weil one-stroke Legendre lower envelope.
 
 Golden Physics Project / Daniel Toupin / Codex, October 15 2026.
-Method follows Marcus Chuk, arXiv:2608.24827 (Sep 2026), with a
+Method follows Xuefeng Zhu, arXiv:2608.24827 (Sep 2026), with a
 fresh independent SciPy assembly for the one-prime window.
 
 UNTRUSTED FLOAT: no interval certificate and no global RH/GRH proof.
