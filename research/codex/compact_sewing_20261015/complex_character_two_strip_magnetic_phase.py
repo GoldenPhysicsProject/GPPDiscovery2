@@ -15,9 +15,8 @@ assert s.simplify(T*T-(a*a+b*b)*s.eye(4)) == s.zeros(4)
 assert T.T==T
 for sign in (1,-1):
     eig=s.Matrix([1,0,sign*a,sign*b])
-    assert s.expand(T*eig-sign*eig).subs(a*a+b*b,1) == s.zeros(4) if False else True
-    check=s.expand(T*eig-sign*(a*a+b*b)*eig)
-    assert all(s.factor(c)==0 for c in (T*eig-sign*eig).subs(b*b,1-a*a))
+    assert all(s.simplify(term.subs(b*b,1-a*a))==0
+               for term in (T*eig-sign*eig))
 # Witness for pure imaginary phase a=0, b=1.
 Ti=T.subs({a:0,b:1})
 H=s.Rational(3,4)*s.eye(4)+Ti
