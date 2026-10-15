@@ -18,11 +18,6 @@ import math
 def mangoldt_sieve(N):
     """Numerical Λ(n); includes *all* prime powers."""
     out = [0.0] * (N + 1)
-    for p in range(2, N + 1):
-        if out[p]:
-            continue
-        # Prime iff not already identified as a power, but composites
-        # such as 6 are not marked: use ordinary Eratosthenes below.
     prime = bytearray(b"\x01") * (N + 1)
     prime[0] = prime[1] = 0
     for p in range(2, math.isqrt(N) + 1):
