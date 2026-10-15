@@ -24,3 +24,12 @@ scope limitations are in private GPP-bridge Codex
 
 This is a finite rational algebra check, NOT a Lean theorem, RH or GRH proof.
 Method origin: Grok S27 invisible lift; one-stroke basis: X. Zhu.
+
+## Independent rational tail audit for L=1
+
+Run `python research/codex/s27_rational_tails_L1.py` for exact Fraction
+bounds on the complete even/odd Bessel and modified-Bessel tails at the
+reported S27 L=1 run (T=300, K=262 per parity). This removes the script's
+floating-point 400-term pole tail cutoff, using the exact decreasing
+ratio of successive parity terms. It is a *partial* verifier audit,
+not a proof of the finite Cholesky matrix or the whole Weil certificate.
