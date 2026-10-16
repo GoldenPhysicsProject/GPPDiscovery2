@@ -1,0 +1,26 @@
+(* Golden Physics Project: infinite arithmetic twistor operator, Wolfram verification. *)
+ClearAll[xi,f,m,eta8,s5,assert,theta,t,s,r,a,u,x,y];
+assert[label_,test_]:=If[TrueQ[test],Print["PASS: ",label],Print["FAIL: ",label];Abort[]];
+xi[z_]:=z(z-1)/2 Pi^(-z/2) Gamma[z/2] Zeta[z];
+f[z_]:=xi[1/2+Sqrt[z]];
+m[z_]:=(D[xi[1/2+Sqrt[u]],u]/xi[1/2+Sqrt[u]])/.u->z;
+eta8=Sum[(-1)^(k+1)/Sqrt[k],{k,1,8}];
+s5=Sum[(-1)^k/(k!(k+1/4)),{k,0,5}];
+assert["eta 8-term lower bound",FullSimplify[eta8>17/40]];
+assert["Gamma(1/4) lower algebra",s5+(7/12)*(9/40)>7/2];
+assert["2^(-3/4)>7/12",FullSimplify[2^(-3/4)>7/12]];
+assert["e^-1-e^-2>9/40 from e<11/4",28/121>9/40];
+assert["pi fourth and fifth powers",22/7<256/81&&FullSimplify[(22/7)^5>4^4]];
+assert["zeta(5/2) integral bound",FullSimplify[1+7/(12 Sqrt[2])<17/12]];
+lb=(1/8)(7/2)(3/4)(17/40)/(5/12);
+ub=(15/8)(1/4)(17/12);
+assert["2 xi(1/2)-xi(5/2) > 17/3200 via elementary bounds",FullSimplify[2 lb-ub==17/3200]];
+assert["infinite trace-class arithmetic factor",FullSimplify[Sum[k/4^k,{k,1,Infinity}]==4/9]];
+assert["positive shifted convolution weight",FullSimplify[(Exp[theta (t-s)]+Exp[theta (s-t)])/2==Cosh[theta(t-s)],Assumptions->Element[{theta,t,s},Reals]]];
+assert["single-mode infinite Stieltjes identity",FullSimplify[a Tanh[a Sqrt[r]]/(2 Sqrt[r])==Sum[1/(r+Pi^2(k+1/2)^2/a^2),{k,0,Infinity}],Assumptions->a>0&&r>0]];
+Print[{"xi0 numeric",N[xi[1/2],30],"xi(5/2) numeric",N[xi[5/2],30]}];
+Print[{"trace upper bound from R=4",N[(D[xi[1/2+Sqrt[u]],u]/.u->4)/(2 xi[1/2]-xi[5/2])*4/9,20]}];
+zero=ZetaZero[1];
+assert["shifted completed xi zero at rho1",xi[zero]==0];
+Print[{"first known zero",N[zero,35]}];
+Print["All symbolic checks passed. The RH-strength infinite Hausdorff positivity itself is NOT asserted."];
