@@ -10,7 +10,7 @@ assert["eta 8-term lower bound",FullSimplify[eta8>17/40]];
 assert["Gamma(1/4) lower algebra",s5+(7/12)*(9/40)>7/2];
 assert["2^(-3/4)>7/12",FullSimplify[2^(-3/4)>7/12]];
 assert["e^-1-e^-2>9/40 from e<11/4",28/121>9/40];
-assert["pi fourth and fifth powers",22/7<256/81&&FullSimplify[(22/7)^5>4^4]];
+assert["pi fourth and fifth powers",22/7<256/81&&FullSimplify[31/10<Pi]&&FullSimplify[(31/10)^5>4^4]];
 assert["zeta(5/2) integral bound",FullSimplify[1+7/(12 Sqrt[2])<17/12]];
 lb=(1/8)(7/2)(3/4)(17/40)/(5/12);
 ub=(15/8)(1/4)(17/12);
