@@ -29,7 +29,7 @@ check["twistor disk prequantum curvature",
  FullSimplify[curv==2/(1-x^2-y^2)^2]];
 (* Blaschke numerator and denominator have equal boundary absolute square. *)
 check["inner Blaschke unitary boundary despite interior zero",
- FullSimplify[(1-2a Cos[t]+a^2)-(1-2a Cos[t]+a^2)==0]];
+ FullSimplify[(w-a)(1/w-a)==(1-a w)(1-a/w),Assumptions->w!=0]];
 check["simple interior Blaschke zero",FullSimplify[(1/3-1/3)/(1-1/9)==0]];
 
 xi[z_]:=z(z-1)Gamma[z/2]Zeta[z]/(2 Pi^(z/2));
