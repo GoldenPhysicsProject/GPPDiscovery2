@@ -3,8 +3,8 @@
    Algebraic model, NOT the physical loop-corrected celestial gravity. *)
 ClearAll[n,m,d,a,b,f,g,forward,mirrored,check,chi,theta];
 check[label_,result_]:=If[TrueQ[result],Print["PASS: ",label],Print["FAIL: ",label];Abort[]];
-f[x_]:=Sum[a[k]x^k,{k,0,4}];
-g[x_]:=Sum[b[k]x^k,{k,0,4}];
+f[x_]:=a[0]+Sum[a[k]x^k,{k,1,4}];
+g[x_]:=b[0]+Sum[b[k]x^k,{k,1,4}];
 forward[N_]:=Sum[f[-j]g[N-j],{j,1,N}];
 mirrored[N_]:=-Sum[g[j-1]f[j-N-1],{j,1,N}];
 check["full spin KR anti-mirror all n=1..12 generic quartic symbols",
