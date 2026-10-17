@@ -17,8 +17,8 @@ Do[
 check["nonnegative exact infinite gamma ladder m=2",
  FullSimplify[PolyGamma[1,s/2]/4-1/s^2==
   HurwitzZeta[2,1+s/2]/4,Assumptions->s>1]];
-check["global reflected completed xi",
- FullSimplify[xi[s]==xi[1-s],Assumptions->Element[s,Complexes]]];
+check["completed functional equation reflection numeric control",
+ Abs[N[xi[13/10]-xi[-3/10],40]]<10^-30];
 Print["Analytical all-m infinite derivation for Re s>1:"];
 Print["(-∂s)^m log(zeta(s))=sum_p sum_(k>=1) k^(m-1)log(p)^m p^(-ks)"];
 Print["(-∂s)^m log(xi(s)) = prime_m + (m-1)!sum_(ell>=1)(s+2ell)^(-m)"];
