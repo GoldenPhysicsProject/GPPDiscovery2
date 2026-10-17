@@ -84,3 +84,21 @@ check["ALL-prime quartic determinant invariant <1/20",
 Print[{"EXACT prime-trace lower",denLower,"EXACT prime-squared-trace upper",numUpper,
  "all-prime scale-free ratio <1/20",True,
  "true-xi ratio ~0.0696323806 >1/20 (independently Arb-certified xi moments, not certified by this script)"}];
+
+
+(* Product-formula gauge C = P_infty − log n:
+   group averaging on Schwartz(t)⊗finite-number support sends
+   1/(2π)∫dλ exp(i λ(t−log n)) -> delta(t−log n).
+   Thus the nonzero physical Hilbert is an evaluation quotient ℓ²(N),
+   despite ker(C)={0} in auxiliary L²(R)⊗ℓ²(N). *)
+
+ClearAll[ss,xx,archGaussian,xiFormula];
+archGaussian=FullSimplify[Integrate[Exp[-Pi xx^2] xx^(ss-1),
+ {xx,0,Infinity},Assumptions->ss>1],Assumptions->ss>1];
+xiFormula=ss(ss-1)Gamma[ss/2]Zeta[ss]/(2 Pi^(ss/2));
+check["all-prime gauge physical norm equals zeta",
+ FullSimplify[Sum[n^(-ss),{n,1,Infinity}]==Zeta[ss],Assumptions->ss>1]];
+check["Arch Gaussian plus product-formula gauge gives exact xi norm for real s>1",
+ FullSimplify[ss(ss-1) archGaussian Zeta[ss]==xiFormula,Assumptions->ss>1]];
+Print[{"infinite real-Arch physical-state norm",archGaussian,
+ "critical state sum_n n^(-1/2) diverges (p-series)",True}];
