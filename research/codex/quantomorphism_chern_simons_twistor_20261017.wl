@@ -53,3 +53,34 @@ Print[{"quarticPrimeTraceFirst5000",ztrace,
 "scaleFreePrimeH1OverH0Sq",ztr2/ztrace^2,
 "trueXiH1OverH0Sq",h1/h0^2}];
 Print["ALL GAUGE/CS IDENTITIES ARE ANALYTIC OR FINITE ALGEBRA. NO RH POSITIVITY PROOF."];
+
+(* CERTIFIED ENTIRE PRIME-TAIL INEQUALITY, not a finite-prime heuristic.
+   For p>1000, log(p)<(3/2)p^(1/4) since max(log x/x^(1/4))=4/E<3/2;
+   (p-1)^4>p^4/16. Thus a_p^2<16(3/2)^8/p^2 and
+   total prime tail <16(3/2)^8/1000=6561/16000<411/1000.
+   Here lower/upper finite-prime contributions use fully exact rational
+   arctanh intervals for log(p), not machine floats. *)
+ClearAll[logLo,logHi,logBounds,r,lev,scale,scaleout,plist,intervals,denLower,numUpper];
+lev=8; scale=10^8; scaleout=10^8;
+logLo[z_]:=Module[{rr=(z-1)/(z+1)},
+   2 Sum[rr^(2j+1)/(2j+1),{j,0,lev-1}]];
+logHi[z_]:=Module[{rr=(z-1)/(z+1)},
+   logLo[z]+2 rr^(2lev+1)/((2lev+1)(1-rr^2))];
+logBounds[p_]:=Module[{kk=IntegerLength[p,2]-1,yy},
+ yy=p/2^kk;{kk logLo[2]+logLo[yy],kk logHi[2]+logHi[yy]}];
+plist=Prime[Range[PrimePi[1000]]];
+intervals=Table[Module[{bb=logBounds[pp],ll,uu},
+ ll=Floor[scale bb[[1]]];uu=Ceiling[scale bb[[2]]];
+ {Floor[scaleout ll^4/(scale^4(pp-1)^2)],
+  Ceiling[scaleout uu^8/(scale^8(pp-1)^4)]}],{pp,plist}];
+denLower=Total[intervals[[All,1]]]/scaleout;
+numUpper=Total[intervals[[All,2]]]/scaleout;
+check["CERT exact rational first-168-prime trace lower >11/2",denLower>11/2];
+check["CERT exact rational first-168-prime squared trace upper <53/50",numUpper<53/50];
+check["analytic infinite tail bound <411/1000",
+  FullSimplify[16(3/2)^8/1000<411/1000]];
+check["ALL-prime quartic determinant invariant <1/20",
+ FullSimplify[(53/50+411/1000)/(11/2)^2<1/20]];
+Print[{"EXACT prime-trace lower",denLower,"EXACT prime-squared-trace upper",numUpper,
+ "all-prime scale-free ratio <1/20",True,
+ "true-xi ratio ~0.0696323806 >1/20 (independently Arb-certified xi moments, not certified by this script)"}];
