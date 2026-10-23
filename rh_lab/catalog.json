@@ -53,6 +53,26 @@
       "timeout_s": 30, "default_run": false
     },
     {
+      "id": "ftheta_shift_arb",
+      "path": "experiments/arch_ftheta_shift_arb_crosscheck.py",
+      "method": "ball_crosscheck", "evidence": "numerical",
+      "claim": "Independent 384-bit Arb re-evaluation of Ftheta shifted one-mode lower witness and finite zeta head at K6 and K10.",
+      "assumptions": ["Optional python-flint==0.9.0 is installed.", "Wave234 source folded kernels and same bump basis as ftheta_arch_frequency_shift."],
+      "falsifiers": ["Reject if the Arb one-mode value is not strictly above the rational lower certificate.", "Reject if the finite zeta head is not below the proved analytic upper bound."],
+      "limitations": ["The finite Arb head check does not prove the infinite-tail theorem independently.", "Cross-Arch-only test, not the completed arithmetic form or RH."],
+      "timeout_s": 60, "default_run": false
+    },
+    {
+      "id": "ftheta_arch_frequency_shift",
+      "path": "experiments/arch_ftheta_shift_gap.py",
+      "method": "interval", "evidence": "interval_certified",
+      "claim": "The exact zeta-Arch annihilating polynomial witnesses distinguish the theta=1/4 shifted cross-Arch Gram by enormous rigorously certified Rayleigh ratios at K6 and K10.",
+      "assumptions": ["Wave234 exact folded kernels k_theta(w)=2cosh(theta*w)k_zeta(w) with theta=1/4.", "Both zeta and F_theta use the same sine2 bump basis and no prime, pole, or diagonal channels are included."],
+      "falsifiers": ["Check exact first K-1 zeta Laplace annihilations.", "Check the shifted n=0 minus-mode has strictly positive separation from all zeta nodes.", "Cross-check 50-digit outward finite interval bounds with an independent Arb evaluation."],
+      "limitations": ["Cross-Arch-only contrast; complete F_theta parity may be compensated by other channels, so it is not an RH proof.", "Only K=6 and 10 ratios are certified numerically; the structural nonvanishing argument works at every K>=2."],
+      "timeout_s": 30, "default_run": true
+    },
+    {
       "id": "sine2_cross_superexp_null",
       "path": "experiments/arch_cross_superexp_null.py",
       "method": "exact_rational", "evidence": "paper_proved",

@@ -98,6 +98,26 @@ so there is **no uniform lower spectral gap** on that infinite-dimensional
 space. This is compatible with positivity; it rules out coercivity of the
 cross-Arch operator alone.
 
+### Exact shifted-frequency adversarial discriminator
+
+For the Wave234 folded control \(F_{1/4}(s)=\zeta(s-1/4)\zeta(s+1/4)\), the
+cross-Arch kernel is \(k_\theta(w)=2\cosh(\theta w)k_0(w)\). It has Laplace
+rates \(\lambda_n\pm\theta\), so the exact annihilating polynomial above
+fails to vanish at the shifted rate \(\lambda_0-1/4=1/4\). The first
+shifted Gram square supplies a *strict* lower bound, and the full unshifted
+tail supplies an *upper* bound, on the **same exact coefficient vector**.
+
+`experiments/arch_ftheta_shift_gap.py` certifies at K=6 that
+\(R_{1/4}(v)>10^{14}R_0(v)\), and at K=10 that
+\(R_{1/4}(v)>10^{50}R_0(v)\), entirely through rational arithmetic and
+outward intervals. This is an exceptionally sensitive **cross-channel
+spectral discriminator**; it does **not** establish that the full theta
+Weil form is indefinite, nor that the full zeta Weil form is positive.
+An independent 384-bit `python-flint` Arb implementation re-evaluates the
+shifted one-mode witness and the finite unshifted head in
+`experiments/arch_ftheta_shift_arb_crosscheck.py`; the optional CI Arb job
+executes this separately from the fixed-point interval engine.
+
 Next target: obtain an exact source-to-target map for (B), enclose prime, pole, and diagonal-Arch contributions, then test the complete (K=6\) matrix and uniform (K\to\infty\) inequalities. The distinct rounded `Phat6` does **not** inherit any enclosure from the cross block until this map is established.
 
 ## Threat model
