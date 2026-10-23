@@ -53,6 +53,16 @@
       "timeout_s": 30, "default_run": false
     },
     {
+      "id": "sine2_cross_superexp_null",
+      "path": "experiments/arch_cross_superexp_null.py",
+      "method": "exact_rational", "evidence": "paper_proved",
+      "claim": "Analytic all-K strict negative definiteness of cross-Arch, but a constructive super-exponential upper bound on its smallest eigenvalue.",
+      "assumptions": ["Wave234 exact folded cross-Arch Laplace decomposition and translated sine-squared bump supports.", "K is an integer >=2; the executable rational inequalities run K=6,10."],
+      "falsifiers": ["Audit the annihilating polynomial P_K and Cauchy-Schwarz Laplace tail inequality.", "Verify the K6 and K10 bounds by exact rational Taylor arithmetic."],
+      "limitations": ["The upper bound is not a matching asymptotic.", "No all-K full sewn positivity, prime compensator, or RH consequence."],
+      "timeout_s": 30, "default_run": true
+    },
+    {
       "id": "sine2_cross_trace_budget",
       "path": "experiments/arch_cross_trace_gate.py",
       "method": "exact_rational", "evidence": "interval_certified",
