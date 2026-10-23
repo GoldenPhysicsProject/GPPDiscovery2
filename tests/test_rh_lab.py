@@ -42,6 +42,23 @@ class LabTests(unittest.TestCase):
             self.assertEqual(len(list(folder.glob("*.json"))), 1)
             self.assertEqual(json.loads(Path(record["artifact_path"]).read_text())["code_sha256"], record["code_sha256"])
 
+    def test_declared_stdin_pipeline(self):
+        with tempfile.TemporaryDirectory() as temp:
+            home = Path(temp)
+            base = {"path": "rh_lab/controls.py", "method": "exact_rational",
+                    "evidence": "numerical", "claim": "test", "assumptions": ["test"],
+                    "falsifiers": ["test"], "limitations": ["test"],
+                    "timeout_s": 15, "default_run": False}
+            manifest = home / "catalog.json"
+            manifest.write_text(json.dumps({"version": 1, "experiments": [
+                dict(base, id="producer"), dict(base, id="consumer", stdin_from="producer")]}),
+                                encoding="utf-8")
+            result = run("consumer", root=ROOT, catalog=manifest,
+                         output_dir=home / "runs", replay=True)
+            self.assertTrue(result["passed"])
+            self.assertIsNotNone(result["first"]["input_sha256"])
+            self.assertIsNotNone(result["stdin_source_sha256"])
+
     def test_existing_registry_when_checkout_available(self):
         # Scratch workspaces can contain only the new lab package; full GitHub
         # checkout CI verifies all registered paths.

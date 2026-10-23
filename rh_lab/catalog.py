@@ -35,6 +35,8 @@ def validate(record: dict, root: Path = ROOT) -> dict:
     if "args" in record and (not isinstance(record["args"], list) or
                              not all(isinstance(v, str) for v in record["args"])):
         raise ValueError("args must be a list of strings")
+    if "stdin_from" in record and not isinstance(record["stdin_from"], str):
+        raise ValueError("stdin_from must identify a registered experiment")
     return record
 
 
@@ -48,4 +50,11 @@ def load(root: Path = ROOT, catalog: Path = CATALOG) -> dict[str, dict]:
         if not isinstance(item["id"], str) or item["id"] in results or not item["id"].replace("-", "").replace("_", "").isalnum():
             raise ValueError("invalid or duplicate experiment id")
         results[item["id"]] = item
+    for key, item in results.items():
+        if "stdin_from" in item:
+            dep = item["stdin_from"]
+            if dep == key or dep not in results:
+                raise ValueError("unknown or self-referencing stdin producer")
+            if "stdin_from" in results[dep]:
+                raise ValueError("nested stdin producers are not supported")
     return results

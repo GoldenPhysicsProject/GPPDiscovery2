@@ -34,6 +34,7 @@
     {
       "id": "sine2_cross_arb",
       "path": "experiments/arch_hankel_sine2_arb_crosscheck.py",
+      "stdin_from": "sine2_cross_matrix",
       "method": "ball_crosscheck", "evidence": "numerical",
       "claim": "Independent python-flint Arb checks of the 36 cross-Arch intervals.",
       "assumptions": ["Optional python-flint dependency installed and same source kernel parameterization supplied."],

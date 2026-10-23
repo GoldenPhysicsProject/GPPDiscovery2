@@ -12,10 +12,12 @@ python -m rh_lab.cli check
 python -m unittest discover -s tests -v
 python -m rh_lab.cli run fake_quartet_control --replay
 python -m rh_lab.cli run sine2_cross_trace_budget --replay
+python -m rh_lab.cli run sine2_cross_arb --replay  # optional python-flint==0.9.0
 python -m rh_lab.cli smoke
 ```
 
 Core exact scripts need **no installed packages**. Optional Arb cross-check uses `python-flint`, and existing exploratory scripts may require `requirements.txt`. Free GitHub Actions runs the exact core on three Python versions and uploads JSON manifests. Run records are local under `.rh_runs/`, excluded from version control; explicitly chosen, independently reviewed certificate fixtures can be checked into the repo.
+`stdin_from` in the catalog declares a producer→verifier pipe. Both are invoked by the runner **without** a shell and the generated input's SHA-256 is included in the run manifest; replay regenerates and checks the input too. A separate free Actions job installs `python-flint==0.9.0` and executes the independent 256-bit Arb comparison.
 
 ## Experimental gate
 

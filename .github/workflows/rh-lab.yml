@@ -44,3 +44,22 @@ jobs:
           name: exact-rh-runs-py${{ matrix.python-version }}
           path: .rh_runs/*.json
           if-no-files-found: ignore
+
+  arb-crosscheck:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Install independent interval implementation
+        run: python -m pip install python-flint==0.9.0
+      - name: Generate rational enclosure and verify with 256-bit Arb
+        run: python -m rh_lab.cli run sine2_cross_arb --replay
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: arb-rh-run-py312
+          path: .rh_runs/*.json
+          if-no-files-found: ignore
