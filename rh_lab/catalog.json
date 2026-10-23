@@ -53,6 +53,16 @@
       "timeout_s": 30, "default_run": false
     },
     {
+      "id": "ftheta_full_s1_annihilator",
+      "path": "experiments/arch_annihilator_s1_source_check.py",
+      "method": "floating", "evidence": "numerical",
+      "claim": "Same exact-structure zeta moment-annihilator vector, evaluated in Wave234's complete prime/pole/diagonal-Arch/cross-Arch S1 parity forms, distinguishes Ftheta numerically and independently reproduces source K6 eigenvalues.",
+      "assumptions": ["Wave234 S1 pole, gamma, diagonal prime and sewing prime normalization is that of MuseResearch/turbo-source-wave234-s1-schur-definitions.md.", "SciPy and NumPy are installed; truncated quadrature through t=500 gives a numerical diagnostic, not rigorous analytic enclosure.", "K6 and K10 finite-sector arithmetic is not a proof of RH."],
+      "falsifiers": ["Reconstruct all K6 Q±C parity matrix entries independently and compare minimum eigenvalues against Turbo's Wave234 table.", "Check exact algebraic continuum prime sewing identity against the pole square for zeta annihilators.", "Increase t quadrature cutoff, precision and K; cross-check against Arb and explicit prime atoms."],
+      "limitations": ["The gamma tail and floating-point cancellation are not rigorous directed intervals; matrix sign claims here are numerical only.", "Wave252 Phat6 and the all-K WFLUC_K obstruction remain separate; this experiment does not prove RH."],
+      "timeout_s": 180, "default_run": false
+    },
+    {
       "id": "ftheta_shift_arb",
       "path": "experiments/arch_ftheta_shift_arb_crosscheck.py",
       "method": "ball_crosscheck", "evidence": "numerical",

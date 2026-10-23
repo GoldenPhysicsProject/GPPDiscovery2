@@ -9,6 +9,7 @@ on:
       - 'experiments/arch_cross_superexp_null.py'
       - 'experiments/arch_ftheta_shift_gap.py'
       - 'experiments/arch_ftheta_shift_arb_crosscheck.py'
+      - 'experiments/arch_annihilator_*.py'
       - 'experiments/arch_hankel_sine2_*.py'
       - 'experiments/arch_hankel_sine2_*.json'
       - '.github/workflows/rh-lab.yml'
@@ -20,6 +21,7 @@ on:
       - 'experiments/arch_cross_superexp_null.py'
       - 'experiments/arch_ftheta_shift_gap.py'
       - 'experiments/arch_ftheta_shift_arb_crosscheck.py'
+      - 'experiments/arch_annihilator_*.py'
       - '.github/workflows/rh-lab.yml'
 
 permissions:
@@ -69,5 +71,24 @@ jobs:
         if: always()
         with:
           name: arb-rh-run-py312
+          path: .rh_runs/*.json
+          if-no-files-found: ignore
+
+  source-normalization-probe:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Install optional numerical source auditors
+        run: python -m pip install numpy scipy
+      - name: Reproduce Wave234 parity eigenvalues and same-vector prime control
+        run: python -m rh_lab.cli run ftheta_full_s1_annihilator --replay
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: s1-normalization-probe-py312
           path: .rh_runs/*.json
           if-no-files-found: ignore
