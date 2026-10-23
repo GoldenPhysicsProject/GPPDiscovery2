@@ -56,6 +56,48 @@ for each cross-Arch entry and only positive integer arithmetic. It is a
 that an arithmetic compensator exists or that its actual Rayleigh quotient
 passes this test.
 
+### A noncoercivity theorem, valid at every finite K
+
+The strictly negative cross-Arch block has a second, apparently paradoxical
+feature: its smallest absolute eigenvalue shrinks at least super-exponentially
+with the number of translated bumps. Put
+
+\[
+\Lambda_K=2K-\tfrac32,\qquad
+X_K=\tfrac75(K-1)(K-\tfrac32)+\tfrac7{10}\Lambda_K.
+\]
+
+Then the **explicit** annihilating polynomial
+
+\[
+P_K(z)=\prod_{m=0}^{K-2}(z-e^{-\frac7{10}(2m+1/2)})
+\]
+
+gives a real nonzero coefficient vector in the K-bump basis whose first
+K-1 Arch Laplace moments vanish. The remaining tail proves
+
+\[
+0<\lambda_{\min}(-C_K)\le
+\frac{e^{-X_K}}{\Lambda_K^2(1-e^{-7/5})}.
+\]
+
+The paper proof is in `experiments/arch_cross_superexp_null.py` and its
+finite numerical corollaries are independently checked using **exact rational
+Taylor inequalities**: at K=6 the minimal eigenvalue is below 1e-18; at
+K=10 it is below 1e-52. This is strictly a statement about cross-Arch,
+not the **completed** form. It explains why even 1e-16 entrywise intervals
+are insufficient to certify a tiny lower spectral margin at K=6.
+
+An infinite-dimensional strengthening follows for compactly supported
+functions on any interval [a,b] contained in (0,infinity): the negative
+cross kernel is strictly positive as a quadratic form after sign reversal.
+Indeed L_n(f)=0 for all n would, under x=e^{-2u}, annihilate all polynomial
+moments of the finite measure (1/2)f(-log x/2)x^{-3/4}dx. Polynomial density
+forces f=0. Yet the operator on L²([a,b]) is compact (continuous kernel),
+so there is **no uniform lower spectral gap** on that infinite-dimensional
+space. This is compatible with positivity; it rules out coercivity of the
+cross-Arch operator alone.
+
 Next target: obtain an exact source-to-target map for (B), enclose prime, pole, and diagonal-Arch contributions, then test the complete (K=6\) matrix and uniform (K\to\infty\) inequalities. The distinct rounded `Phat6` does **not** inherit any enclosure from the cross block until this map is established.
 
 ## Threat model

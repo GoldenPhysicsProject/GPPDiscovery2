@@ -9,6 +9,7 @@ from pathlib import Path
 from rh_lab.catalog import ROOT, load, validate
 from rh_lab.controls import on_line, zero_residual
 from rh_lab.runner import run
+from experiments.arch_cross_superexp_null import exact_upper
 
 
 class LabTests(unittest.TestCase):
@@ -17,6 +18,11 @@ class LabTests(unittest.TestCase):
         a, b = Fraction(1, 4), Fraction(2)
         for t in [Fraction(i, 10) for i in range(-250, 251)]:
             self.assertGreaterEqual(on_line(t, a, b), 4*a*a*b*b)
+
+    def test_superexp_exact_witness(self):
+        self.assertLess(exact_upper(6), Fraction(1, 10**18))
+        self.assertLess(exact_upper(10), Fraction(1, 10**52))
+        self.assertLess(exact_upper(10), exact_upper(6))
 
     def test_traversal_rejected(self):
         good = {"id": "bad", "path": "../../outside.py", "method": "exact_rational",
