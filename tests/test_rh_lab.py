@@ -10,6 +10,7 @@ from rh_lab.catalog import ROOT, load, validate
 from rh_lab.controls import on_line, zero_residual
 from rh_lab.runner import run
 from experiments.arch_cross_superexp_null import exact_upper
+from experiments.arch_ftheta_shift_gap import theta_mode_rayleigh_lower
 
 
 class LabTests(unittest.TestCase):
@@ -23,6 +24,10 @@ class LabTests(unittest.TestCase):
         self.assertLess(exact_upper(6), Fraction(1, 10**18))
         self.assertLess(exact_upper(10), Fraction(1, 10**52))
         self.assertLess(exact_upper(10), exact_upper(6))
+
+    def test_ftheta_shift_breaks_cancellation(self):
+        self.assertGreater(theta_mode_rayleigh_lower(6), 10**14 * exact_upper(6))
+        self.assertGreater(theta_mode_rayleigh_lower(10), 10**50 * exact_upper(10))
 
     def test_traversal_rejected(self):
         good = {"id": "bad", "path": "../../outside.py", "method": "exact_rational",

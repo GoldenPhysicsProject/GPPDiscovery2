@@ -7,6 +7,7 @@ on:
       - 'tests/**'
       - 'experiments/arch_cross_trace_gate.py'
       - 'experiments/arch_cross_superexp_null.py'
+      - 'experiments/arch_ftheta_shift_gap.py'
       - 'experiments/arch_hankel_sine2_*.py'
       - 'experiments/arch_hankel_sine2_*.json'
       - '.github/workflows/rh-lab.yml'
@@ -16,6 +17,7 @@ on:
       - 'tests/**'
       - 'experiments/arch_cross_trace_gate.py'
       - 'experiments/arch_cross_superexp_null.py'
+      - 'experiments/arch_ftheta_shift_gap.py'
       - '.github/workflows/rh-lab.yml'
 
 permissions:
