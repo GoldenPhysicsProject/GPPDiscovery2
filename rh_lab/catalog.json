@@ -53,6 +53,16 @@
       "timeout_s": 30, "default_run": false
     },
     {
+      "id": "ftheta_shift_arb",
+      "path": "experiments/arch_ftheta_shift_arb_crosscheck.py",
+      "method": "ball_crosscheck", "evidence": "numerical",
+      "claim": "Independent 384-bit Arb re-evaluation of Ftheta shifted one-mode lower witness and finite zeta head at K6 and K10.",
+      "assumptions": ["Optional python-flint==0.9.0 is installed.", "Wave234 source folded kernels and same bump basis as ftheta_arch_frequency_shift."],
+      "falsifiers": ["Reject if the Arb one-mode value is not strictly above the rational lower certificate.", "Reject if the finite zeta head is not below the proved analytic upper bound."],
+      "limitations": ["The finite Arb head check does not prove the infinite-tail theorem independently.", "Cross-Arch-only test, not the completed arithmetic form or RH."],
+      "timeout_s": 60, "default_run": false
+    },
+    {
       "id": "ftheta_arch_frequency_shift",
       "path": "experiments/arch_ftheta_shift_gap.py",
       "method": "interval", "evidence": "interval_certified",

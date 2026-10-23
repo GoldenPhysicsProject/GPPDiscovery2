@@ -113,6 +113,10 @@ tail supplies an *upper* bound, on the **same exact coefficient vector**.
 outward intervals. This is an exceptionally sensitive **cross-channel
 spectral discriminator**; it does **not** establish that the full theta
 Weil form is indefinite, nor that the full zeta Weil form is positive.
+An independent 384-bit `python-flint` Arb implementation re-evaluates the
+shifted one-mode witness and the finite unshifted head in
+`experiments/arch_ftheta_shift_arb_crosscheck.py`; the optional CI Arb job
+executes this separately from the fixed-point interval engine.
 
 Next target: obtain an exact source-to-target map for (B), enclose prime, pole, and diagonal-Arch contributions, then test the complete (K=6\) matrix and uniform (K\to\infty\) inequalities. The distinct rounded `Phat6` does **not** inherit any enclosure from the cross block until this map is established.
 
