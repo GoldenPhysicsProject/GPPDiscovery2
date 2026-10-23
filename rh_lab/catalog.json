@@ -1,0 +1,76 @@
+{
+  "version": 1,
+  "experiments": [
+    {
+      "id": "fake_quartet_control",
+      "path": "rh_lab/controls.py",
+      "method": "exact_rational", "evidence": "paper_proved",
+      "claim": "Reflection, conjugation and strict positivity on the critical line do not imply RH for general entire functions.",
+      "assumptions": ["The explicitly defined degree-four polynomial is not the completed zeta function."],
+      "falsifiers": ["Evaluate the four purported roots with exact Gaussian rational arithmetic.", "Check the global sum-of-squares lower bound on the critical line."],
+      "limitations": ["This blocks an invalid inference; it does not establish any statement about zeros of zeta."],
+      "timeout_s": 10, "default_run": true
+    },
+    {
+      "id": "sine2_cross_tail",
+      "path": "experiments/arch_hankel_sine2_tail_certificate.py",
+      "method": "exact_rational", "evidence": "paper_proved",
+      "claim": "Wave234 sine-squared cross-Arch Laplace tail after n=7 has a rational bound smaller than 1e-9.",
+      "assumptions": ["The cross-kernel, support positions, and sine-squared Laplace formula match the Wave234 source derivation."],
+      "falsifiers": ["Recompute the finite rational Taylor inequalities.", "Change support separation to test whether the tail inequality breaks."],
+      "limitations": ["Cross-Arch only; no diagonal or prime/pole entries."],
+      "timeout_s": 30, "default_run": true
+    },
+    {
+      "id": "sine2_cross_matrix",
+      "path": "experiments/arch_hankel_sine2_k6_exact_intervals.py",
+      "method": "interval", "evidence": "interval_certified",
+      "claim": "Outward rational enclosures for all 36 entries of the specified six-by-six cross-Arch block.",
+      "assumptions": ["Wave234 analytic cross-kernel and the stated six sine-squared supports are exact and normalized as described."],
+      "falsifiers": ["Compare all entries against an independent Arb ball evaluation.", "Check every enclosure including the uniform infinite-tail remainder."],
+      "limitations": ["Not the full arithmetic matrix; not an enclosure for Phat6 unless a separate exact normalization bridge is proved."],
+      "timeout_s": 90, "default_run": true
+    },
+    {
+      "id": "sine2_cross_arb",
+      "path": "experiments/arch_hankel_sine2_arb_crosscheck.py",
+      "stdin_from": "sine2_cross_matrix",
+      "method": "ball_crosscheck", "evidence": "numerical",
+      "claim": "Independent python-flint Arb checks of the 36 cross-Arch intervals.",
+      "assumptions": ["Optional python-flint dependency installed and same source kernel parameterization supplied."],
+      "falsifiers": ["Reject if any Arb enclosure is disjoint from the exact interval."],
+      "limitations": ["Independent ball cross-check corroborates, but does not transform the conditional source formula into a theorem."],
+      "timeout_s": 90, "default_run": false
+    },
+    {
+      "id": "phat6_ldl_gate",
+      "path": "experiments/phat6_robust_interval_gate.py",
+      "method": "exact_rational", "evidence": "interval_certified",
+      "claim": "Exact LDL margin for a separately supplied rational Phat6; transfer to exact arithmetic is conditional on a missing entrywise enclosure.",
+      "assumptions": ["Private six-by-six input JSON with Phat6 is supplied as a command-line argument."],
+      "falsifiers": ["Check all six exact shifted LDL pivots.", "Derive every entrywise arithmetic enclosure from source formulas before transfer."],
+      "limitations": ["Not runnable without private input; no unconditional full matrix bound yet."],
+      "timeout_s": 30, "default_run": false
+    },
+    {
+      "id": "sine2_cross_trace_budget",
+      "path": "experiments/arch_cross_trace_gate.py",
+      "method": "exact_rational", "evidence": "interval_certified",
+      "claim": "Exact necessary trace compensation budget for any B making B + C_cross positive semidefinite.",
+      "assumptions": ["The artifact intervals enclose precisely the negative Gram cross-Arch matrix C.", "Any compensator B is in the same basis and normalization."],
+      "falsifiers": ["Check signs/symmetry of all diagonal intervals.", "Compare proposed B's certified trace to the necessary lower bound."],
+      "limitations": ["Necessary not sufficient; no compensator is supplied; no unconditional RH conclusion."],
+      "timeout_s": 10, "default_run": true
+    },
+    {
+      "id": "prime_cayley_channels",
+      "path": "experiments/prime_cayley_two_channel_weyl_check.py",
+      "method": "floating", "evidence": "numerical",
+      "claim": "Legacy prime-Cayley two-channel Weyl numerical audit.",
+      "assumptions": ["Legacy script parameterization; source must be inspected before any analytic promotion."],
+      "falsifiers": ["Test sensitivity to cutoff and precision.", "Compare against an analytically soluble local-channel limit."],
+      "limitations": ["Exploratory calculation; not a proof."],
+      "timeout_s": 90, "default_run": false
+    }
+  ]
+}

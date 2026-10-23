@@ -1,0 +1,65 @@
+name: RH discovery lab (stdlib exact gates)
+
+on:
+  push:
+    paths:
+      - 'rh_lab/**'
+      - 'tests/**'
+      - 'experiments/arch_cross_trace_gate.py'
+      - 'experiments/arch_hankel_sine2_*.py'
+      - 'experiments/arch_hankel_sine2_*.json'
+      - '.github/workflows/rh-lab.yml'
+  pull_request:
+    paths:
+      - 'rh_lab/**'
+      - 'tests/**'
+      - 'experiments/arch_cross_trace_gate.py'
+      - '.github/workflows/rh-lab.yml'
+
+permissions:
+  contents: read
+
+jobs:
+  exact-lab:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    strategy:
+      matrix:
+        python-version: ['3.11', '3.12', '3.13']
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: ${{ matrix.python-version }}
+      - name: Registry and unit tests (stdlib only)
+        run: |
+          python -m rh_lab.cli check
+          python -m unittest discover -s tests -v
+      - name: Certified-core replay and permanent audit artifacts
+        run: python -m rh_lab.cli smoke
+      - name: Publish run manifests
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: exact-rh-runs-py${{ matrix.python-version }}
+          path: .rh_runs/*.json
+          if-no-files-found: ignore
+
+  arb-crosscheck:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Install independent interval implementation
+        run: python -m pip install python-flint==0.9.0
+      - name: Generate rational enclosure and verify with 256-bit Arb
+        run: python -m rh_lab.cli run sine2_cross_arb --replay
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: arb-rh-run-py312
+          path: .rh_runs/*.json
+          if-no-files-found: ignore
