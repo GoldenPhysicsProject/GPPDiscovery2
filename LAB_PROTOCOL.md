@@ -40,6 +40,20 @@ The Wave234 sine² **cross** matrix is a negative Gram sum (C=-\sum_n L_nL_n^T).
 \lambda_{\max}(B)\geq \max_j(-C_{jj})\geq -\mathrm{tr}(C)/6
 \]
 
+More sharply, the fixed integer direction (v=(1000,692,485,342,241,170))
+gives the **exact rational Rayleigh witness**
+
+\[
+\lambda_{\max}(B)\ \ge\ {v^*Bv\over v^*v}\ \ge\
+{v^*(-C)v\over v^*v}\ >\ 0.2138.
+\]
+
+The last inequality is checked using the rigorous *upper* interval endpoint
+for each cross-Arch entry and only positive integer arithmetic. It is a
+**necessary** lower bound on a compensator's largest eigenvalue, not evidence
+that an arithmetic compensator exists or that its actual Rayleigh quotient
+passes this test.
+
 Next target: obtain an exact source-to-target map for (B), enclose prime, pole, and diagonal-Arch contributions, then test the complete (K=6\) matrix and uniform (K\to\infty\) inequalities. The distinct rounded `Phat6` does **not** inherit any enclosure from the cross block until this map is established.
 
 ## Threat model
