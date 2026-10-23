@@ -11,6 +11,12 @@ from rh_lab.controls import on_line, zero_residual
 from rh_lab.runner import run
 from experiments.arch_cross_superexp_null import exact_upper
 from experiments.arch_ftheta_shift_gap import theta_mode_rayleigh_lower
+from experiments.arch_annihilator_full_s1_probe import (
+    DELTA, A0, annihilator, gaussian_q_binomial_edge,
+    continuum_sewing_prime, pole_parts, prime_parts,
+    prime_power_atoms, sine2_autocorrelation,
+)
+import math
 
 
 class LabTests(unittest.TestCase):
@@ -28,6 +34,38 @@ class LabTests(unittest.TestCase):
     def test_ftheta_shift_breaks_cancellation(self):
         self.assertGreater(theta_mode_rayleigh_lower(6), 10**14 * exact_upper(6))
         self.assertGreater(theta_mode_rayleigh_lower(10), 10**50 * exact_upper(10))
+
+    def test_q_binomial_annihilator_and_zeta_pole_identity(self):
+        self.assertAlmostEqual(sine2_autocorrelation(0), 3/8, places=15)
+        self.assertAlmostEqual(sine2_autocorrelation(.5), 1/16, places=15)
+        self.assertEqual(sine2_autocorrelation(1), 0)
+        for k in (2, 3, 6, 10):
+            roots, coeff = annihilator(k)
+            edge = gaussian_q_binomial_edge(k)
+            self.assertLess(max(abs(a-b) for a,b in zip(reversed(coeff),edge)), 4e-15)
+            self.assertLess(abs(pole_parts(roots,0)["plus"]-
+                                continuum_sewing_prime(roots,0)), 1e-12)
+            self.assertLess(abs(pole_parts(roots,0)["plus"]+
+                                pole_parts(roots,0)["minus"]), 1e-12)
+
+    def test_prime_autocorrelation_and_squared_polynomial_grouping(self):
+        k=3
+        _, coeff = annihilator(k)
+        for theta in (0, .25):
+            prime = prime_parts(coeff,theta)
+            logs,weights=prime_power_atoms(prime["prime_cutoff"])
+            diag_terms,cross_terms=[],[]
+            for t,w in zip(logs,weights):
+                c=w if theta==0 else w*(2*math.cosh(theta*t))
+                a=math.fsum(coeff[j]*coeff[h]*sine2_autocorrelation(
+                    t+DELTA*(h-j)) for j in range(k) for h in range(k))
+                b=math.fsum(coeff[j]*coeff[h]*sine2_autocorrelation(
+                    t-(2*A0+DELTA*(j+h)+1))
+                    for j in range(k) for h in range(k))
+                diag_terms.append(2*c*a)
+                cross_terms.append(c*b)
+            self.assertAlmostEqual(prime["2D"],math.fsum(diag_terms),places=11)
+            self.assertAlmostEqual(prime["X"],math.fsum(cross_terms),places=11)
 
     def test_traversal_rejected(self):
         good = {"id": "bad", "path": "../../outside.py", "method": "exact_rational",

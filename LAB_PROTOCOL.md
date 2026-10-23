@@ -13,6 +13,7 @@ python -m unittest discover -s tests -v
 python -m rh_lab.cli run fake_quartet_control --replay
 python -m rh_lab.cli run sine2_cross_trace_budget --replay
 python -m rh_lab.cli run sine2_cross_arb --replay  # optional python-flint==0.9.0
+python -m rh_lab.cli run ftheta_full_s1_annihilator --replay  # optional numpy/scipy
 python -m rh_lab.cli smoke
 ```
 
@@ -119,6 +120,81 @@ shifted one-mode witness and the finite unshifted head in
 executes this separately from the fixed-point interval engine.
 
 Next target: obtain an exact source-to-target map for (B), enclose prime, pole, and diagonal-Arch contributions, then test the complete (K=6\) matrix and uniform (K\to\infty\) inequalities. The distinct rounded `Phat6` does **not** inherit any enclosure from the cross block until this map is established.
+
+### Source-normalized full S1 probe: a PNT-residual identity
+
+Using the *same* annihilator coefficients from the preceding cross-Arch
+experiment, `experiments/arch_annihilator_full_s1_probe.py` now assembles
+the complete **Wave234 S1** prime, pole and gamma/Arch parity scalars.
+The two prime contractions can be evaluated efficiently using the
+autocorrelation coefficients of \(P_K\) and the coefficients of \(P_K^2\)
+respectively. Source normalization was independently checked by assembling
+the entire parity matrices: at K=6 the resulting minimum eigenvalues agree
+with Turbo's Wave234 table for both zeta and \(F_{1/4}\).
+
+Two algebraic observations are valid *exactly*, independently of quadrature:
+
+1. With \(r_m=r_0q^m\), \(r_0=e^{-7/20}\), \(q=e^{-7/5}\), the reversed
+   coefficient vector of \(P_K(z)=\prod_{m=0}^{K-2}(z-r_0q^m)\) is given by
+   the **finite Gaussian q-binomial formula**
+
+   \[
+   v_{K-1-j}=(-r_0)^j q^{j(j-1)/2}
+   \begin{bmatrix}K-1\\j\end{bmatrix}_q.
+   \]
+
+   It converges for fixed j to an edge profile with Gaussian q-binomial
+   replaced by \(1/(q;q)_j\); the resulting coefficient sequence decays
+   superexponentially in j. The test vectors are hence an explicit
+   q-series boundary filter, not accidental numerical eigenvectors.
+
+2. Let \(V_K(u)=\sum_jv_j b_0(u-a_j)\). Because the sine-squared bump is
+   symmetric about its midpoint, the sewing autocorrelation
+   \(C_V(t)=\sum_{jk}v_jv_kG_0(t-a_j-a_k-1)\) is **exactly** the convolution
+   \((V_K*V_K)(t)\). Thus its continuous PNT density contribution satisfies
+
+   \[
+   \int_0^\infty e^{t/2} C_V(t)\,dt
+   =\left(\int_0^\infty e^{u/2}V_K(u)\,du\right)^2=:A_K^2.
+   \]
+
+   The polynomial has the root \(r_0=e^{-7/20}\), so the *opposite*
+   \(e^{-u/2}\) Mellin moment vanishes exactly; consequently the zeta
+   **diagonal pole term vanishes**, and its even/odd pole contributions
+   are \(\pm A_K^2\). Define the weighted prime/PNT discrepancy
+   \(\mathcal E_K^{\mathrm{prime}}=X_{V_K}-A_K^2\), with
+   \(X_{V_K}=\sum_n\Lambda(n)n^{-1/2} C_V(\log n)\). Put
+   \(E_K=\mathrm{Arch}_{++}(V_K)-2D_K\), where \(2D_K\) is the diagonal
+   prime term, and \(C_K=\mathrm{Arch}_{+-}(V_K)\). The *full* zeta parity
+   Rayleigh numerators therefore obey the **exact structural identity**
+
+   \[
+   \boxed{P^+_K(V_K)=E_K+C_K-\mathcal E_K^{\mathrm{prime}},\quad
+   P^-_K(V_K)=E_K-C_K+\mathcal E_K^{\mathrm{prime}}.}
+   \]
+
+   Hence nonnegativity on **this family of directions** is exactly
+   \(E_K\ge|\mathcal E_K^{\mathrm{prime}}-C_K|\). Proving it uniformly
+   remains an open arithmetic estimate. It is much narrower than a proof
+   of global Weil positivity or RH.
+
+The optional `arch_annihilator_s1_source_check.py` (NumPy/SciPy) yields:
+
+| K | object | \(P^+(V_K)/\|v\|^2\) | \(P^-(V_K)/\|v\|^2\) |
+|---:|---|---:|---:|
+| 6 | zeta | +0.0000464383 | +0.0013671625 |
+| 6 | \(F_{1/4}\) | −0.0034381234 | +0.0063762033 |
+| 10 | zeta | +0.0013304888 | +0.0000838035 |
+| 10 | \(F_{1/4}\) | +0.0208702571 | −0.0179306592 |
+
+The prime sums here are finite by the exact compact bump support, but
+the diagonal digamma integral is truncated and *not* rigorously enclosed.
+Changing its numerical cutoff from t=500 to t=800 alters the reported
+Rayleigh values by less than 1.4e−11 in these cases. This is useful source
+validation and an adversarial falsifier, **not certified positivity**, nor
+an identification with the Wave252 Phat6 matrix. The same vectors should
+now be studied analytically for all K through the localized smoothed
+prime-counting discrepancy and its explicit zero-expansion.
 
 ## Threat model
 
