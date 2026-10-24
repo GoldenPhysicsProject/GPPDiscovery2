@@ -16,6 +16,8 @@ on:
       - 'experiments/gamma_offsupport_laplace.py'
       - 'experiments/gamma_offsupport_arb_certificate.py'
       - 'experiments/gamma_uniform_operator_bound.py'
+      - 'experiments/prime_site_grade_*.py'
+      - 'experiments/prime_site_grade_signature_census.py'
       - 'experiments/arch_hankel_sine2_*.py'
       - 'experiments/arch_hankel_sine2_*.json'
       - '.github/workflows/rh-lab.yml'
@@ -34,6 +36,8 @@ on:
       - 'experiments/gamma_offsupport_laplace.py'
       - 'experiments/gamma_offsupport_arb_certificate.py'
       - 'experiments/gamma_uniform_operator_bound.py'
+      - 'experiments/prime_site_grade_*.py'
+      - 'experiments/prime_site_grade_signature_census.py'
       - '.github/workflows/rh-lab.yml'
 
 permissions:
@@ -81,6 +85,8 @@ jobs:
         run: python -m rh_lab.cli run ftheta_shift_arb --replay
       - name: Directed 384-bit off-support gamma Toeplitz enclosure
         run: python -m rh_lab.cli run gamma_offsupport_arb_certificate --replay
+      - name: Directed Arb finite-prime-site graded signature certificate
+        run: python -m rh_lab.cli run prime_site_grade_arb_certificate --replay
       - uses: actions/upload-artifact@v4
         if: always()
         with:
