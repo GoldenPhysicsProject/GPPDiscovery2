@@ -18,7 +18,13 @@ import argparse
 import json
 import math
 
-from experiments.arch_annihilator_full_s1_probe import (
+import sys
+from pathlib import Path
+
+# Direct script invocation by rh_lab.runner puts experiments/ on sys.path;
+# pytest/unittest module invocation starts at the repository root.
+sys.path.insert(0, str(Path(__file__).resolve().parent))
+from arch_annihilator_full_s1_probe import (
     A0, DELTA, sine2_autocorrelation,
 )
 
