@@ -400,6 +400,70 @@ unshifted source and the distinction between this fixed-window
 smoothed-PNT residual and its stepwise Schur-border fluctuation in
 GPP-bridge PR #11, Wave269.
 
+### Exact off-support gamma factorization (24 October)
+
+For the length-one sine-squared bump, let
+(S(z)=\int_0^1\sin^2(\pi u)e^{zu}\,du) and (G=b*\check b).
+At a lattice separation (x=\delta d\ge1), Fourier inversion of
+(|\widehat b(t)|^2) and the digamma integral give the exact identity
+
+\[
+A_{\rm gamma}(x)=-\sum_{n\ge0}e^{-\lambda_n(x-1)}S(-\lambda_n)^2,
+\qquad \lambda_n=2n+\tfrac12 \quad(\zeta).
+\]
+
+For the shifted (F_\theta=\zeta(s-\theta)\zeta(s+\theta)), sum the
+same right-hand side over (\lambda_n=2n+\frac12\pm\theta). Proof:
+the terms proportional to (G(x)) vanish by compact support for (x\ge1);
+the remaining digamma integral has kernel
+(-e^{-u/4}G(x-u/2)/(2(1-e^{-u}))). Expanding the denominator
+geometrically, Fourier-Laplace factorization gives
+(S(\lambda)S(-\lambda)=e^\lambda S(-\lambda)^2). No zeta-zero
+assumption enters.
+
+Since (\delta=7/10), this covers **all Toeplitz gamma entries with
+(d\ge2)**. Their gamma contributions are strictly negative and
+exponentially Laplace-convergent. For (d=0,1), the same Fourier step
+also removes the **infinite oscillatory integral**: writing (x=\delta d),
+(g=G(x)), (m=1) for zeta or (m=2) for (F_\theta), and offsets
+(\mathcal L_\zeta=\{\frac12\}),
+(\mathcal L_\theta=\{\frac12-\theta,\frac12+\theta\}), one obtains
+
+\[
+A_\gamma(x)=-m(\gamma_E+\log\pi)g
++\int_0^{x+1}\frac{2me^{-2v}g-
+\left[G(x-v)+G(x+v)\right]\sum_{\ell\in\mathcal L}e^{-\ell v}}
+{1-e^{-2v}}\,dv
+-mg\log\left(1-e^{-2(x+1)}\right).
+\]
+
+The apparent singularity at (v=0) is removable, with integrand
+limit (g\sum_{\ell\in\mathcal L}(\ell-2)). Thus **all** Toeplitz
+gamma entries admit a compact, nonoscillatory representation, though
+the finite-integral error enclosure remains to be done. The numerical
+compact-integral and original digamma evaluations at d=0..5 agree to
+within (1.54\cdot10^{-12}) for both zeta and (F_{1/4}); the compact
+integral agrees with the off-support Laplace sum to (5.6\cdot10^{-17}).
+At 60 modes, `gamma_offsupport_laplace.py`
+computes a purely rational tail upper bound below
+(1.67\cdot10^{-29}) in all eight d=2..5 / theta=0,1/4 cases.
+Independent digamma quadrature agrees within
+(2.0\cdot10^{-14}) on the same entries. The rational inequality uses
+(S(-\lambda)<20/\lambda^3), finite Taylor lower bounds on (e^t),
+and a geometric bound for the rest of the mode series.
+
+This is an independent route to cheaper directed transcendental
+enclosures for *larger matrices*. **The K=6 gate itself was already
+closed by Turbo Wave271**: an external analytic/interval estimate
+(\delta\le1.46\cdot10^{-9}) plus the Lean-kernel-checked transfer
+theorem in GPPVerify #425 gives the finite arithmetic lower bound
+(P_6\succeq1.91\cdot10^{-7}I). Our new off-support formula is **not
+needed to claim that finite-K result**, and supplies no uniform-in-K
+estimate. The finite 60 mode values in this alternative formula still
+need interval certification; the compact (d=0,1) integrals also require
+certified quadrature, despite no longer being oscillatory.
+RH remains open.
+
 ## Threat model
 
 The runner executes **trusted catalog scripts** with no shell interpolation, source hashes, fixed cwd, timeouts, and reproducible output hashes. It is **not** a process sandbox and cannot promise that scripts have no filesystem or network side effects; code review remains necessary. The committed manifest intentionally contains no credentials or private inputs.
