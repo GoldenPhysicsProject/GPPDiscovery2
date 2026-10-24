@@ -14,6 +14,7 @@ python -m rh_lab.cli run fake_quartet_control --replay
 python -m rh_lab.cli run sine2_cross_trace_budget --replay
 python -m rh_lab.cli run sine2_cross_arb --replay  # optional python-flint==0.9.0
 python -m rh_lab.cli run ftheta_full_s1_annihilator --replay  # optional numpy/scipy
+python -m rh_lab.cli run annihilator_zero_spectral_pairing --replay  # optional mpmath 1.4.1, numpy/scipy
 python -m rh_lab.cli smoke
 ```
 
@@ -195,6 +196,80 @@ validation and an adversarial falsifier, **not certified positivity**, nor
 an identification with the Wave252 Phat6 matrix. The same vectors should
 now be studied analytically for all K through the localized smoothed
 prime-counting discrepancy and its explicit zero-expansion.
+
+### Exact nontrivial-zero interference identity (classical explicit formula)
+
+We can make that zero expansion fully explicit, without assuming RH.
+Let \(\mathcal F_K(z)=\int_0^\infty V_K(u)e^{zu}\,du
+=e^{a_0z}S(z)P_K(e^{\delta z})\), and let \(\rho\) range over *all*
+nontrivial zeta zeros, counted with multiplicity. Since the sewing prime
+test is \(C_{V_K}=V_K*V_K\), its bilateral Laplace transform is
+\(\mathcal F_K(z)^2\). Mellin inversion on \(\Re z>1/2\) yields
+
+\[
+X_{V_K}={1\over 2\pi i}\int_{(c)}
+\mathcal F_K(z)^2\left(-{\zeta'\over\zeta}(\tfrac12+z)\right)dz.
+\]
+
+The classical explicit-formula contour shift takes residues at the pole
+\(z=1/2\), the nontrivial zeros \(z=\rho-1/2\), and the trivial zeros
+\(z=-2m-1/2\), \(m\ge1\). The annihilator kills the \(m=0\) Laplace
+moment exactly, so the entire folded cross-Arch sum agrees with the
+negative trivial-zero contribution in this direction. The result is
+
+\[
+\boxed{X_{V_K}-A_K^2-C_K
+=-\sum_{\rho}\mathcal F_K(\rho-\tfrac12)^2.}
+\]
+
+The sum converges absolutely at each finite K: the bump transform is
+\(O_K((1+|\Im z|)^{-3})\) in the critical strip and the number of zeros
+up to height T is \(O(T\log T)\). Complex-conjugate zeros make the sum
+real. The other, diagonal half of the classical Weil explicit formula
+identifies
+
+\[
+E_K=\sum_{\rho}\mathcal F_K(\rho-\tfrac12)
+\mathcal F_K(\tfrac12-\rho).
+\]
+
+Thus the **complete zeta S1 parity forms on this family** are
+
+\[
+\boxed{P^\pm_K(V_K)=E_K\pm Z_K,\qquad
+Z_K=\sum_{\rho}\mathcal F_K(\rho-\tfrac12)^2.}
+\]
+
+When RH holds, \(\rho=1/2+i\gamma\), so combining conjugates makes
+\(P^+=4\sum_{\gamma>0}(\Re\mathcal F_K(i\gamma))^2\) and
+\(P^-=4\sum_{\gamma>0}(\Im\mathcal F_K(i\gamma))^2\), with
+multiplicity. This is a **conditional positivity explanation**, not
+a proof of RH. The fake \(F_{1/4}\) shifts the zero arguments by
+\(\pm1/4\); in general \(\mathcal F(z)\mathcal F(-z)\) is no longer a
+square modulus.
+
+The independent mpmath experiment
+`experiments/annihilator_zero_spectral_check.py` compares the first 120
+**known on-line zero pairs** and their controlled \(\pm1/4\) shifts to
+the separately computed prime/pole/gamma matrices at K6 and K10. All
+eight diagonal/sewing comparisons agree within 1e−8; this is a
+convergence cross-check, **not a proof that no other off-line zeros exist**
+or a rigorously bounded zero tail. The exact exponential boundary-mode
+expansion is
+
+\[
+\mathcal F_K(z)=e^{a_0 z}S(z)e^{\delta(K-1)z}
+\prod_{m=0}^{K-2}(1-r_m e^{-\delta z}).
+\]
+
+For every *fixed* \(z\) with \(\Re z>0\), its infinite product tends
+to a nonzero q-Pochhammer factor and \(S(z)\neq0\). An individual
+hypothetical off-critical zero to the right would therefore introduce
+a nonzero exponentially growing oscillatory term into \(Z_K\). The
+unproved difficulty is showing such terms cannot cancel *collectively*
+across the complete zeta zero set, especially without a maximally
+rightward zero or when phases alias on the discrete K lattice. That is
+a genuine possible next attack, not a theorem established here.
 
 ## Threat model
 

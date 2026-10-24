@@ -10,6 +10,7 @@ on:
       - 'experiments/arch_ftheta_shift_gap.py'
       - 'experiments/arch_ftheta_shift_arb_crosscheck.py'
       - 'experiments/arch_annihilator_*.py'
+      - 'experiments/annihilator_zero_spectral_check.py'
       - 'experiments/arch_hankel_sine2_*.py'
       - 'experiments/arch_hankel_sine2_*.json'
       - '.github/workflows/rh-lab.yml'
@@ -22,6 +23,7 @@ on:
       - 'experiments/arch_ftheta_shift_gap.py'
       - 'experiments/arch_ftheta_shift_arb_crosscheck.py'
       - 'experiments/arch_annihilator_*.py'
+      - 'experiments/annihilator_zero_spectral_check.py'
       - '.github/workflows/rh-lab.yml'
 
 permissions:
@@ -83,9 +85,11 @@ jobs:
         with:
           python-version: '3.12'
       - name: Install optional numerical source auditors
-        run: python -m pip install numpy scipy
+        run: python -m pip install numpy scipy mpmath==1.4.1
       - name: Reproduce Wave234 parity eigenvalues and same-vector prime control
         run: python -m rh_lab.cli run ftheta_full_s1_annihilator --replay
+      - name: Independently compare prime channels against known zero-side Mellin amplitudes
+        run: python -m rh_lab.cli run annihilator_zero_spectral_pairing --replay
       - uses: actions/upload-artifact@v4
         if: always()
         with:

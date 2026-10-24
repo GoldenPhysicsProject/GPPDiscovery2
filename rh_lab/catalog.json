@@ -53,6 +53,16 @@
       "timeout_s": 30, "default_run": false
     },
     {
+      "id": "annihilator_zero_spectral_pairing",
+      "path": "experiments/annihilator_zero_spectral_check.py",
+      "method": "floating", "evidence": "numerical",
+      "claim": "Classical explicit-formula zero-side diagonal and sewing transforms numerically reproduce the separately assembled Wave234 S1 prime-pole-gamma forms on one common annihilating vector at K6/K10, for zeta and shifted off-critical Ftheta.",
+      "assumptions": ["The full Wave234 S1 prime/pole/gamma normalization is correct.", "Only the first 120 known zeta critical-line zero ordinates (and conjugates) are sampled using mpmath; no assertion that all zeta zeros are on the line.", "Requires optional numpy, scipy and mpmath."],
+      "falsifiers": ["Reverse the residue sign or omit the gamma trivial-zero term and compare directly to the prime-sum evaluator.", "Shift zero labels to rho +/- theta for the fake control and test the full parity projections.", "Increase zero count and diagonal gamma cutoff to detect missed contributions."],
+      "limitations": ["Numerical agreement is not an unconditional infinite-zero-tail enclosure.", "The exact formal identities are known Weil explicit-formula statements; reducing the zero sum does not itself prove RH.", "No unconditional all-K interference bound is established."],
+      "timeout_s": 240, "default_run": false
+    },
+    {
       "id": "ftheta_full_s1_annihilator",
       "path": "experiments/arch_annihilator_s1_source_check.py",
       "method": "floating", "evidence": "numerical",
