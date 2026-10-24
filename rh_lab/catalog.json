@@ -53,6 +53,16 @@
       "timeout_s": 30, "default_run": false
     },
     {
+      "id": "translated_arithmetic_sewing_source",
+      "path": "experiments/translated_arithmetic_sewing_scan.py",
+      "method": "floating", "evidence": "numerical",
+      "claim": "Independently assemble complete prime/pole/Arch sewing on continuously translated fixed K annihilators, audit translation-invariant diagonal budget, and compare the oscillatory arithmetic residual with finite known-line zero interference.",
+      "assumptions": ["Zeta Wave234 source prime/pole/gamma normalization in the existing full S1 auditor.", "SciPy for gamma quadrature; optional mpmath for the first 120 known on-line zero pairs.", "Translation a is nonnegative and limited by finite prime sieve budget."],
+      "falsifiers": ["At a=0 require agreement with the independently assembled unshifted full S1 parity form.", "Check each translated autocorrelation against direct all-j,h sum and the folded Arch Laplace mode rescaling.", "At 120 known zero pairs demand that source sewing and independent spectral interference agree to within 2e-8 numerically."],
+      "limitations": ["Every tested prime sum is exact-support but evaluated in floats; the gamma integral is truncated and not certified.", "A finite translation scan plus known on-line zeros establishes no all-a bound, no positivity theorem and no RH result.", "Near-saturation of a parity budget is diagnostic only, not an unconditional guarantee of strict positivity."],
+      "timeout_s": 180, "default_run": false
+    },
+    {
       "id": "translation_laplace_pole_control",
       "path": "experiments/translation_laplace_pole_probe.py",
       "method": "floating", "evidence": "numerical",

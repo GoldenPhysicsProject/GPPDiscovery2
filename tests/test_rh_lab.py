@@ -14,7 +14,10 @@ from experiments.arch_ftheta_shift_gap import theta_mode_rayleigh_lower
 from experiments.arch_annihilator_full_s1_probe import (
     DELTA, A0, annihilator, gaussian_q_binomial_edge,
     continuum_sewing_prime, pole_parts, prime_parts,
-    prime_power_atoms, sine2_autocorrelation,
+    prime_power_atoms, sine2_autocorrelation, folded_cross_arch,
+)
+from experiments.translated_arithmetic_sewing_scan import (
+    convolution_coefficients, translated_prime_cross, translated_cross_arch,
 )
 import math
 
@@ -66,6 +69,26 @@ class LabTests(unittest.TestCase):
                 cross_terms.append(c*b)
             self.assertAlmostEqual(prime["2D"],math.fsum(diag_terms),places=11)
             self.assertAlmostEqual(prime["X"],math.fsum(cross_terms),places=11)
+
+    def test_translated_prime_and_arch_source_grouping(self):
+        k=3
+        roots,coeff=annihilator(k)
+        conv=convolution_coefficients(coeff)
+        for a in (0., .2, .6):
+            limit=math.ceil(math.exp(2*(A0+a+DELTA*(k-1)+1)))
+            logs,weights=prime_power_atoms(limit)
+            grouped=translated_prime_cross(logs,weights,conv,a)
+            brute=math.fsum(w*math.fsum(coeff[j]*coeff[h]*sine2_autocorrelation(
+                t-2*(A0+a)-DELTA*(j+h)-1)
+                for j in range(k) for h in range(k))
+                for t,w in zip(logs,weights))
+            self.assertAlmostEqual(grouped,brute,places=11)
+            self.assertLessEqual(translated_cross_arch(roots,a),0.)
+        self.assertAlmostEqual(translated_cross_arch(roots,0.),
+                               folded_cross_arch(roots,0.),places=14)
+        self.assertAlmostEqual(translated_prime_cross(
+            *prime_power_atoms(math.ceil(math.exp(2*(A0+DELTA*(k-1)+1)))),
+            conv,0.),prime_parts(coeff,0.)["X"],places=11)
 
     def test_traversal_rejected(self):
         good = {"id": "bad", "path": "../../outside.py", "method": "exact_rational",

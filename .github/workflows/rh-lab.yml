@@ -12,6 +12,7 @@ on:
       - 'experiments/arch_annihilator_*.py'
       - 'experiments/annihilator_zero_spectral_check.py'
       - 'experiments/translation_laplace_pole_probe.py'
+      - 'experiments/translated_arithmetic_sewing_scan.py'
       - 'experiments/arch_hankel_sine2_*.py'
       - 'experiments/arch_hankel_sine2_*.json'
       - '.github/workflows/rh-lab.yml'
@@ -26,6 +27,7 @@ on:
       - 'experiments/arch_annihilator_*.py'
       - 'experiments/annihilator_zero_spectral_check.py'
       - 'experiments/translation_laplace_pole_probe.py'
+      - 'experiments/translated_arithmetic_sewing_scan.py'
       - '.github/workflows/rh-lab.yml'
 
 permissions:
@@ -94,6 +96,10 @@ jobs:
         run: python -m rh_lab.cli run annihilator_zero_spectral_pairing --replay
       - name: Planted off-line translation Laplace-pole stress test
         run: python -m rh_lab.cli run translation_laplace_pole_control --replay
+      - name: Translated complete prime-Arch source scan and finite zero interference
+        run: |
+          python -m rh_lab.cli run translated_arithmetic_sewing_source --replay
+          python experiments/translated_arithmetic_sewing_scan.py --k 6 --a-max 2 --step 0.2 --zeros 120 --arch-cutoff 500
       - uses: actions/upload-artifact@v4
         if: always()
         with:
