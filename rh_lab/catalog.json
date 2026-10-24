@@ -56,10 +56,10 @@
       "id": "gamma_offsupport_laplace_tail",
       "path": "experiments/gamma_offsupport_laplace.py",
       "method": "exact_rational", "evidence": "paper_proved",
-      "claim": "For lattice distances d>=2 the complete zeta and Ftheta gamma Toeplitz entries equal explicit negative Laplace-mode sums, with an elementary exact-rational N-mode tail bound.",
+      "claim": "For d>=2 the complete zeta and Ftheta gamma Toeplitz entries equal explicit negative Laplace-mode sums with an exact rational N-mode tail; at d=0,1 the same digamma-Fourier method gives compact nonoscillatory finite-interval integrals.",
       "assumptions": ["The sine-squared length-one bump has S(lambda)=exp(lambda)*S(-lambda) and compact autocorrelation G(x)=0 for |x|>=1.", "The Wave234 digamma spectral multiplier is Re psi(1/4+it/2)-log pi for zeta and the stated +/-theta/2 pair for Ftheta.", "For the tail cap, pi^2<10, e^t greater than its positive Taylor truncation, and the geometric ratio inequality for positive t."],
-      "falsifiers": ["Derive the digamma integral and use Fourier inversion of the bump autocorrelation before truncating any series.", "Cross-check d=2..5 for theta=0,1/4 against independently computed oscillatory digamma quadrature.", "Validate the exact-rational Taylor and geometric upper caps at N=60 against numerical remainders."],
-      "limitations": ["Only distances x>=1 are covered; diagonal and near-diagonal gamma entries still need separate treatment.", "Exact rational mode-tail bounds do not certify the finite mode values, which remain transcendental.", "No full-entry arithmetic enclosure, Phat6 source map, uniform K control, or RH proof is obtained."],
+      "falsifiers": ["Derive the digamma integral and use Fourier inversion of the bump autocorrelation before truncating any series.", "Cross-check d=0..5 for theta=0,1/4 against independently computed oscillatory digamma quadrature and d>=2 against the compact formula.", "Validate exact-rational Taylor and geometric upper caps at N=60 against numerical remainders."],
+      "limitations": ["The d=0,1 compact integrals still require certified quadrature; only d>=2 is covered by the explicit negative Laplace sum.", "Exact rational mode-tail bounds do not certify finite transcendental mode values.", "Turbo Wave271 already independently closed the finite K6 arithmetic gate; this alternate formula provides no uniform K control or RH proof."],
       "timeout_s": 30, "default_run": true
     },
     {

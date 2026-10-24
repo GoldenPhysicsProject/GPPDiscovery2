@@ -22,8 +22,19 @@ the geometric denominator gives lambda_n=2*(n+a).  Since the bump is
 symmetric around 1/2, S(lambda)=exp(lambda)S(-lambda), proving the sum.
 
 This removes oscillatory digamma quadrature from EVERY gamma Toeplitz
-entry at lattice separation d>=2 when delta=7/10.  Diagonals d=0,1
-remain untouched and require a separate source-integral certificate.
+entry at lattice separation d>=2 when delta=7/10.  For d=0,1 the
+same Fourier/integral method gives a compact NON-OSCILLATORY quadrature:
+
+ A(x)=-m*(EulerGamma+log(pi))*G(x)
+   + int_0^(x+1) [2m*exp(-2v)*G(x)
+     -(G(x-v)+G(x+v))*sum_{lambda in offsets}exp(-lambda*v)]
+                     /(1-exp(-2v)) dv
+   -m*G(x)*log(1-exp(-2*(x+1))).
+
+Here m=1 and offsets={1/2} for zeta; m=2 and offsets={1/2 +/-
+theta} for Ftheta.  The apparent v=0 singular is removable with limit
+G(x)*sum(lambda-2). This handles ALL Toeplitz offsets using a finite
+interval, though the finite quadrature still needs an Arb certificate.
 
 After N terms, a completely rational bound follows from
 S(-lambda)<20/lambda^3 (pi^2<10),
@@ -43,7 +54,7 @@ import sys
 from pathlib import Path
 
 sys.path.insert(0,str(Path(__file__).resolve().parent))
-from arch_annihilator_full_s1_probe import sine2_laplace
+from arch_annihilator_full_s1_probe import sine2_laplace, sine2_autocorrelation
 
 
 def rational_taylor_exp(t: Fraction, degree: int) -> Fraction:
@@ -82,6 +93,38 @@ def laplace_offsupport(d: int, theta: float, n_modes: int = 80) -> float:
                       for shift in shifts for n in range(n_modes))
 
 
+def compact_gamma_toeplitz(d: int, theta: float) -> float:
+    """Exact finite-support source formula, numerically quadratured by SciPy.
+
+    This is *not* yet an Arb enclosure of the finite integral. It provides
+    a second non-oscillatory, independent check on the off-support sum and
+    replaces an infinite oscillatory integral by length <=x+1.
+    """
+    import numpy as np
+    from scipy.integrate import quad
+
+    if d<0 or theta not in (0.,.25):
+        raise ValueError("d>=0, theta=0 or 1/4 required")
+    x=.7*d
+    shifts=[.5] if theta==0. else [.5-theta,.5+theta]
+    m=len(shifts)
+    gx=sine2_autocorrelation(x)
+
+    def integrand(v):
+        if abs(v)<1e-9:
+            return gx*math.fsum(lam-2 for lam in shifts)
+        neighbors=sine2_autocorrelation(x-v)+sine2_autocorrelation(x+v)
+        num=(2*m*math.exp(-2*v)*gx-
+             math.fsum(math.exp(-lam*v) for lam in shifts)*neighbors)
+        return num/(-math.expm1(-2*v))
+
+    stops=sorted(set(t for t in (0.,x+1,1-x,x-1) if t>=0. and t<=x+1))
+    local=math.fsum(quad(integrand,lo,hi,epsabs=1e-13,limit=500)[0]
+                    for lo,hi in zip(stops,stops[1:]))
+    tail=-m*gx*math.log1p(-math.exp(-2*(x+1)))
+    return -m*(float(np.euler_gamma)+math.log(math.pi))*gx+local+tail
+
+
 def direct_digamma_offsupport(d: int, theta: float, cutoff: float = 800.) -> float:
     """Independent oscillatory source gamma integral; not a certified tail."""
     from scipy.integrate import quad
@@ -117,22 +160,30 @@ def main():
     args=p.parse_args()
     rows=[]
     for theta in (0.,.25):
-        for d in range(2,6):
-            cap=rational_tail_cap(d,Fraction(0) if theta==0. else Fraction(1,4),
-                                  args.n_modes,args.taylor_degree)
+        for d in range(6):
             entry={'theta':theta,'d':d,'x':.7*d,
-                   'laplace_partial':laplace_offsupport(d,theta,args.n_modes),
-                   'rational_tail_upper':str(cap),
-                   'tail_upper_float':float(cap)}
+                   'compact_finite_integral_numeric':compact_gamma_toeplitz(d,theta)}
+            if d>=2:
+                cap=rational_tail_cap(d,Fraction(0) if theta==0. else Fraction(1,4),
+                                      args.n_modes,args.taylor_degree)
+                partial=laplace_offsupport(d,theta,args.n_modes)
+                entry.update({'laplace_partial':partial,
+                              'rational_tail_upper':str(cap),
+                              'tail_upper_float':float(cap),
+                              'laplace_compact_difference':(
+                                  entry['compact_finite_integral_numeric']-
+                                  partial)})
+                assert abs(entry['laplace_compact_difference'])<2e-10
             if args.compare_digamma:
                 direct=direct_digamma_offsupport(d,theta,args.cutoff)
                 entry['direct_digamma_numeric']=direct
-                entry['independent_discrepancy']=entry['laplace_partial']-direct
+                entry['independent_discrepancy']=(
+                    entry['compact_finite_integral_numeric']-direct)
                 # The direct cutoff is not rigorously enclosed; this is
                 # a regression/normalization diagnostic only.
                 assert abs(entry['independent_discrepancy'])<2e-10
             rows.append(entry)
-    print(json.dumps({'status':'Exact identity and rational mode-tail; finite terms not interval certified',
+    print(json.dumps({'status':'Exact compact-support identity and rational off-support mode-tail; finite quadratures not interval certified',
                       'rows':rows},indent=2))
 
 
