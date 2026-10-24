@@ -15,6 +15,7 @@ python -m rh_lab.cli run sine2_cross_trace_budget --replay
 python -m rh_lab.cli run sine2_cross_arb --replay  # optional python-flint==0.9.0
 python -m rh_lab.cli run ftheta_full_s1_annihilator --replay  # optional numpy/scipy
 python -m rh_lab.cli run annihilator_zero_spectral_pairing --replay  # optional mpmath 1.4.1, numpy/scipy
+python -m rh_lab.cli run translation_laplace_pole_control --replay  # optional mpmath 1.4.1
 python -m rh_lab.cli smoke
 ```
 
@@ -270,6 +271,79 @@ unproved difficulty is showing such terms cannot cancel *collectively*
 across the complete zeta zero set, especially without a maximally
 rightward zero or when phases alias on the discrete K lattice. That is
 a genuine possible next attack, not a theorem established here.
+
+### Continuous translation: a fixed-profile noncancellation theorem
+
+The preceding spectral-aliasing obstruction disappears if one freezes
+\(K\ge2\) and varies the bump train's **overall real translation** \(a\)
+continuously, rather than inferring growth from the discrete K sequence.
+Put
+
+\[
+W_K(z)=S(z)P_K(e^{\delta z}),\quad
+V_{K,a}(u)=\sum_j v_j b_0(u-a-\delta j),\quad
+\mathcal F_{K,a}(z)=e^{az}W_K(z).
+\]
+
+The exact sewn full-form scalar is
+
+\[
+C_K(a)=\sum_\rho m_\rho W_K(\rho-\tfrac12)^2
+e^{2a(\rho-1/2)},
+\]
+
+whose coefficients are absolutely summable, and \(m_\rho\) denotes
+the multiplicity of \(\rho\). Crucially \(W_K(z)\neq0\) throughout
+\(\Re z>0\): the
+polynomial roots have real part \(-2m-1/2<0\) and the sine-squared
+Laplace factor has no zeros for \(\Re z>0\).
+
+**Theorem (fixed-profile continuous-translation spectral test).** For
+any one fixed \(K\ge2\), the assertion \(C_K(a)\) is bounded for every
+real \(a\ge a_* >0\) is *equivalent to RH*. This is a mathematically
+complete equivalence, NOT proof that the bound holds.
+
+*Proof.* If RH holds, all \(\rho-1/2\) are imaginary and the absolute
+sum of coefficients bounds \(|C_K(a)|\) uniformly. Conversely, bounded
+\(C_K(a)\) makes
+
+\[
+L_K(p)=\int_{a_*}^\infty e^{-pa}C_K(a)\,da
+\]
+
+holomorphic for \(\Re p>0\). On \(\Re p>1\), absolute convergence
+permits exchanging sum and integral, giving
+
+\[
+L_K(p)=\sum_\rho
+\frac{m_\rho W_K(\rho-\tfrac12)^2
+e^{-[p-2(\rho-1/2)]a_*}}{p-2(\rho-1/2)}.
+\]
+
+The right side extends meromorphically across \(\Re p>0\), normally
+convergent away from its discrete poles. A hypothetical off-line zero
+\(\Re\rho>1/2\) creates a genuine pole at
+\(p=2(\rho-1/2)\) of residue \(m_\rho W_K(\rho-1/2)^2\neq0\).
+No distinct zero can cancel that residue at the same point. Analytic
+continuation contradicts holomorphy of \(L_K\). Functional-equation
+symmetry then yields RH. \(\square\)
+
+This **resolves collective spectral cancellation for continuous
+translations**, and shows that proving a uniform prime–Archimedean
+sewing bound for even a single fixed profile is sufficient. Such a
+bound is itself RH-strength and **is still missing**; the theorem does
+not establish positivity of the original form. It does not apply
+without further work to the discrete \(K\to\infty\) sequence, where
+phase aliases can occur.
+
+Numerical planted-zero control:
+`experiments/translation_laplace_pole_probe.py` uses the first 60
+known on-line zero pairs (not all zeta zeros), then their \(\pm1/4\)
+shifts. At K6 the RMS interference over unit-length translation
+windows stays around 0.00088 for the known on-line terms but grows
+from roughly 0.0068 near a=.35 to 1516 near a=25 for the planted
+off-critical terms. These are **finite zero-mode demonstrations**,
+not estimates for the actual complete arithmetic function.
 
 ## Threat model
 
