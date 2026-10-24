@@ -359,6 +359,47 @@ from roughly 0.0068 near a=.35 to 1516 near a=25 for the planted
 off-critical terms. These are **finite zero-mode demonstrations**,
 not estimates for the actual complete arithmetic function.
 
+### Independent arithmetic translation scan (24 October)
+
+`experiments/translated_arithmetic_sewing_scan.py` now evaluates the
+**finite, exactly supported prime-power source side** at each continuous
+translation (V_{K,a}(u)=V_K(u-a)). Unlike the prior planted-zero test,
+the primary signal is computed *without* using any zeros. The exact
+translation identities in the source's normalization are
+
+\[
+E_K=\mathrm{Arch}_{\rm diag}(V_K)-2D(V_K),\qquad
+C_K(a)=C_{\rm arch}(a)-\left[X_K(a)-e^a A_K^2\right],
+\quad P_K^\pm(a)=E_K\pm C_K(a).
+\]
+
+Here (X_K(a)=\sum_n\Lambda(n)n^{-1/2}(V_{K,a}*V_{K,a})(\log n)),
+(A_K=\int e^{u/2}V_K(u)\,du), and
+(C_{\rm arch}(a)=-\sum_{m\ge0}e^{-2\lambda_m a}M_m(V_K)^2).
+The diagonal (E_K) is translation-invariant; the pole is **exactly**
+(e^a A_K^2) because the other Mellin moment was annihilated.
+
+At K=6, the SciPy (t\le500) gamma quadrature gives
+(E_6\approx0.0013450382195147), in the **unnormalized** fixed-vector
+form. A source-side scan (a=0,.02,\ldots,3) yields a smallest sampled
+parity gap of roughly (9.234\cdot10^{-6}) at (a=2.34); its sewing
+amplitude uses **99.31%** of the even budget. Independently, the first
+120 *known on-line* zero pairs reproduce source sewing at 11 sampled
+translations (0\le a\le2) with maximum discrepancy
+(<6.3\cdot10^{-11}). The first known zero pair already contributes
+about 91.7% of (E_6) to the diagonal spectral weight, and the first
+two about 99.15%. The near-saturation thus has a concrete low-mode
+interference interpretation, not a mysterious source instability.
+
+These numbers are **numerical, finite-window and finite-zero checks**.
+The gamma cutoff error is not a certified infinite-tail enclosure;
+unobserved zeros are not ruled out. A finite scan does not establish
+(|C_K(a)|\le E_K) for every real (a\), much less the RH-strength
+unconditional uniform bound. Turbo independently audited the K=6
+unshifted source and the distinction between this fixed-window
+smoothed-PNT residual and its stepwise Schur-border fluctuation in
+GPP-bridge PR #11, Wave269.
+
 ## Threat model
 
 The runner executes **trusted catalog scripts** with no shell interpolation, source hashes, fixed cwd, timeouts, and reproducible output hashes. It is **not** a process sandbox and cannot promise that scripts have no filesystem or network side effects; code review remains necessary. The committed manifest intentionally contains no credentials or private inputs.
