@@ -69,3 +69,34 @@ counterexamples, (3) polarized/positive on an independently defined
 primitive quotient, (4) detects the H^1/defect channel via functorial
 comparison with elliptic models while (5) rejecting the Ftheta control.
 None of these five load-bearing conditions is proved by (SPHERE)–(BUNDLE).
+
+
+## Source-only geometric discriminator beyond clock/species counting
+
+For the shifted control F_theta(s)=xi(s-theta)xi(s+theta), ignoring its
+Archimedean factors the local Euler product is
+
+  Z_fake,p(T)=1/[(1-p^theta*T)(1-p^(-theta)*T)], T=p^-s.
+
+At p=2, theta=1/4, its first formal point count would have to equal
+2^(1/4)+2^(-1/4). Put x=2^(1/4). From 1<x<5/4 (check (5/4)^4>2),
+strict AM-GM gives 2<x+1/x, while x+1/x<x+1<9/4<3.
+Thus this is NOT an integer, so these local factors cannot be the
+ordinary Hasse–Weil point-count zeta of a finite-type variety over F2.
+In contrast the two factors of the projective line produce p+1, an
+integer for every p. See ftheta_geometric_integrality_gate.py.
+
+This is a *genuine arithmetic/geometric hypothesis* that F_theta fails,
+rather than inferring RH from its failure: zeta's own integral prime
+factors also do not force zero localization. Stronger future interface:
+graded cohomology / effective Frobenius-integrality / pure weights
+and a source-derived arithmetic spectral realization, not simply
+reciprocal symmetry or 'one clock = one state'. The middle H¹ motive of
+E controls its local L-factor; Sha is a distinct global-to-local kernel
+in Galois cohomology/ Selmer theory. A proposed BSD-zeta comparison
+must construct the map between these structures, not identify them by name.
+
+Relevant prior mathematical framework: Deninger's conjectural
+cohomological interpretation of the completed Riemann zeta function
+and Nekovar's Selmer/determinant/height complexes. Both are prior art,
+not our proof of the requisite zeta cohomology or positive pairing.
