@@ -336,6 +336,20 @@ not establish positivity of the original form. It does not apply
 without further work to the discrete \(K\to\infty\) sequence, where
 phase aliases can occur.
 
+**Prior-art correction within GPPVerify (24 October 2026).** The core
+bounded-detector \(\Rightarrow\) RH implication was **already
+kernel-checked** on main in `GppVerify/RiemannHypothesis/GroundStateDetector.lean`
+(PR #418) for a *single* sine-squared window. That Lean proof goes
+directly from the prime-side Laplace transform to a zero-free region
+using `GppSineSquarePacket.S_ne_zero`; it does **not** require summing
+zeros. `SingleQuartetInjection.lean` (PR #422) already addresses
+single-mode growth and a blind sampling lattice. The q-polynomial
+window above, its explicit trivial-zero/PNT cancellation and the
+independent complete Wave234 source checks are the present experiment's
+additional content. Do **not** count this fixed-profile bound criterion
+as a newly solved RH front. The window-generic Lean extension remains
+proposed, and the unconditional arithmetic bound remains the obstacle.
+
 Numerical planted-zero control:
 `experiments/translation_laplace_pole_probe.py` uses the first 60
 known on-line zero pairs (not all zeta zeros), then their \(\pm1/4\)
