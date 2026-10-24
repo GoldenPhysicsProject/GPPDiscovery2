@@ -53,6 +53,16 @@
       "timeout_s": 30, "default_run": false
     },
     {
+      "id": "translation_laplace_pole_control",
+      "path": "experiments/translation_laplace_pole_probe.py",
+      "method": "floating", "evidence": "numerical",
+      "claim": "For one fixed polynomial bump profile, sampled on-line zero modes produce a bounded continuous-translation interference signal, while its planted rho±1/4 adversary grows exponentially. The separate Laplace pole argument identifies collective noncancellation provided the completed arithmetic signal is bounded.",
+      "assumptions": ["The analytic Laplace transform W(z) has no zeros in Re(z)>0 for the specified sine-squared polynomial bump profile.", "Only 60 known on-line zeta zeros are sampled; mpmath is optional and provides a finite numerical control.", "The boundedness of the complete arithmetic sewing form for all translations is not assumed or established."],
+      "falsifiers": ["Check that the fixed polynomial has zeros only in Re(z)<0, and S(z) has no zeros in Re(z)>0.", "Use the Laplace transform to locate every hypothetical off-line zero as an uncancellable pole and audit normal convergence.", "Measure finite-zero RMS translation controls and compare exponential rates for planted theta shifts."],
+      "limitations": ["The analytic implication is another RH-equivalent boundedness criterion, not a proof of the missing arithmetic estimate.", "Sampled zero-mode RMS values are numerical; they exclude no unknown zeta zeros.", "The argument requires a continuum of translations and does not automatically hold for the discrete K lattice."],
+      "timeout_s": 120, "default_run": false
+    },
+    {
       "id": "annihilator_zero_spectral_pairing",
       "path": "experiments/annihilator_zero_spectral_check.py",
       "method": "floating", "evidence": "numerical",
