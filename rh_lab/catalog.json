@@ -53,6 +53,16 @@
       "timeout_s": 30, "default_run": false
     },
     {
+      "id": "gamma_offsupport_arb_certificate",
+      "path": "experiments/gamma_offsupport_arb_certificate.py",
+      "method": "ball_crosscheck", "evidence": "interval_certified",
+      "claim": "For every Toeplitz gamma offset d=2..5 in the specified zeta/Ftheta Wave234 sine-squared basis, output exact dyadic directed Arb enclosures including an exact rational bound on all omitted Laplace modes.",
+      "assumptions": ["The paper-derived digamma/Fourier compact-support identity for x=7d/10>=1 is valid in the specified Wave234 normalization.", "python-flint==0.9.0 supplies directed Arb operations; the N=60 J=36 tail inequality is proved by rational Taylor and geometric bounds."],
+      "falsifiers": ["Recompute all eight Arb intervals independently at 384 and 512 bits and require mutual overlap.", "Check exact dyadic endpoints by integer arithmetic and compare independent compact-source quadrature as a NONcertifying diagnostic.", "For θ=1/4 verify both shifted lambda mode families are present."],
+      "limitations": ["This certifies only gamma Toeplitz entries d>=2, conditional on the separately derived analytic source identity.", "Near-diagonal d=0,1 still need certified compact quadrature and prime/pole arithmetic must be enclosed separately.", "Finite K=6 was already closed by Turbo Wave271 and Lean #425 via a different route; no all-K bound or RH proof is supplied."],
+      "timeout_s": 90, "default_run": false
+    },
+    {
       "id": "gamma_offsupport_laplace_tail",
       "path": "experiments/gamma_offsupport_laplace.py",
       "method": "exact_rational", "evidence": "paper_proved",

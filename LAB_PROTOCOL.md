@@ -464,6 +464,22 @@ need interval certification; the compact (d=0,1) integrals also require
 certified quadrature, despite no longer being oscillatory.
 RH remains open.
 
+**Independent directed finite-term certification.**
+`experiments/gamma_offsupport_arb_certificate.py` evaluates all
+(d=2,3,4,5) zeta and (F_{1/4}) off-support gamma entries in
+384-bit Arb ball arithmetic, then includes the **exact rational**
+remainder cap for *all* omitted modes. The resulting true entries
+are enclosed between explicitly serialized *dyadic* endpoints
+(integer mantissa and binary exponent), so no decimal printing
+assumption is needed. For example the certified zeta d=2 interval
+has midpoint near (-0.1353965001694841055379776394) and radius
+below (10^{-29}). Every off-support entry is thereby certified
+strictly negative **under the analytic digamma/Fourier identity**.
+The (d=0,1) compact integrals are not yet enclosed by Arb; the
+full arithmetic entries require their separate prime/pole terms.
+The interval work improves reproducible source machinery, not the
+already-closed Wave271 finite K6 theorem or the open all-K estimate.
+
 ## Threat model
 
 The runner executes **trusted catalog scripts** with no shell interpolation, source hashes, fixed cwd, timeouts, and reproducible output hashes. It is **not** a process sandbox and cannot promise that scripts have no filesystem or network side effects; code review remains necessary. The committed manifest intentionally contains no credentials or private inputs.
