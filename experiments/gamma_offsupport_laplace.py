@@ -160,20 +160,24 @@ def main():
     args=p.parse_args()
     rows=[]
     for theta in (0.,.25):
-        for d in range(6):
-            entry={'theta':theta,'d':d,'x':.7*d,
-                   'compact_finite_integral_numeric':compact_gamma_toeplitz(d,theta)}
+        # The default certified-tail runner stays stdlib-only. SciPy is
+        # deliberately required only for the optional independent source
+        # audit, which additionally covers overlap d=0,1.
+        for d in (range(6) if args.compare_digamma else range(2,6)):
+            entry={'theta':theta,'d':d,'x':.7*d}
+            if args.compare_digamma:
+                entry['compact_finite_integral_numeric']=compact_gamma_toeplitz(d,theta)
             if d>=2:
                 cap=rational_tail_cap(d,Fraction(0) if theta==0. else Fraction(1,4),
                                       args.n_modes,args.taylor_degree)
                 partial=laplace_offsupport(d,theta,args.n_modes)
                 entry.update({'laplace_partial':partial,
                               'rational_tail_upper':str(cap),
-                              'tail_upper_float':float(cap),
-                              'laplace_compact_difference':(
-                                  entry['compact_finite_integral_numeric']-
-                                  partial)})
-                assert abs(entry['laplace_compact_difference'])<2e-10
+                              'tail_upper_float':float(cap)})
+                if args.compare_digamma:
+                    entry['laplace_compact_difference']=(
+                        entry['compact_finite_integral_numeric']-partial)
+                    assert abs(entry['laplace_compact_difference'])<2e-10
             if args.compare_digamma:
                 direct=direct_digamma_offsupport(d,theta,args.cutoff)
                 entry['direct_digamma_numeric']=direct
