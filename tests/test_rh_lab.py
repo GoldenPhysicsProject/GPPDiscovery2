@@ -19,6 +19,9 @@ from experiments.arch_annihilator_full_s1_probe import (
 from experiments.translated_arithmetic_sewing_scan import (
     convolution_coefficients, translated_prime_cross, translated_cross_arch,
 )
+from experiments.gamma_offsupport_laplace import (
+    rational_tail_cap, laplace_offsupport,
+)
 import math
 
 
@@ -89,6 +92,17 @@ class LabTests(unittest.TestCase):
         self.assertAlmostEqual(translated_prime_cross(
             *prime_power_atoms(math.ceil(math.exp(2*(A0+DELTA*(k-1)+1)))),
             conv,0.),prime_parts(coeff,0.)["X"],places=11)
+
+    def test_offsupport_gamma_mode_tail_certificate(self):
+        # Source kernel supports are length-one; d>=2 is the off-support zone.
+        for theta in (Fraction(0),Fraction(1,4)):
+            for d in range(2,6):
+                cap=rational_tail_cap(d,theta,n_modes=60,taylor_degree=36)
+                self.assertGreater(cap,0)
+                self.assertLess(cap,Fraction(2,10**29))
+                self.assertLess(laplace_offsupport(d,float(theta)),0.)
+        with self.assertRaises(ValueError):
+            laplace_offsupport(1,0.)
 
     def test_traversal_rejected(self):
         good = {"id": "bad", "path": "../../outside.py", "method": "exact_rational",

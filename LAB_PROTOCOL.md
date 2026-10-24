@@ -400,6 +400,44 @@ unshifted source and the distinction between this fixed-window
 smoothed-PNT residual and its stepwise Schur-border fluctuation in
 GPP-bridge PR #11, Wave269.
 
+### Exact off-support gamma factorization (24 October)
+
+For the length-one sine-squared bump, let
+(S(z)=\int_0^1\sin^2(\pi u)e^{zu}\,du) and (G=b*\check b).
+At a lattice separation (x=\delta d\ge1), Fourier inversion of
+(|\widehat b(t)|^2) and the digamma integral give the exact identity
+
+\[
+A_{\rm gamma}(x)=-\sum_{n\ge0}e^{-\lambda_n(x-1)}S(-\lambda_n)^2,
+\qquad \lambda_n=2n+\tfrac12 \quad(\zeta).
+\]
+
+For the shifted (F_\theta=\zeta(s-\theta)\zeta(s+\theta)), sum the
+same right-hand side over (\lambda_n=2n+\frac12\pm\theta). Proof:
+the terms proportional to (G(x)) vanish by compact support for (x\ge1);
+the remaining digamma integral has kernel
+(-e^{-u/4}G(x-u/2)/(2(1-e^{-u}))). Expanding the denominator
+geometrically, Fourier-Laplace factorization gives
+(S(\lambda)S(-\lambda)=e^\lambda S(-\lambda)^2). No zeta-zero
+assumption enters.
+
+Since (\delta=7/10), this covers **all Toeplitz gamma entries with
+(d\ge2)**. Their gamma contributions are strictly negative and
+exponentially Laplace-convergent; only (d=0,1) still need direct
+oscillatory source treatment. At 60 modes, `gamma_offsupport_laplace.py`
+computes a purely rational tail upper bound below
+(1.67\cdot10^{-29}) in all eight d=2..5 / theta=0,1/4 cases.
+Independent digamma quadrature agrees within
+(2.0\cdot10^{-14}) on the same entries. The rational inequality uses
+(S(-\lambda)<20/\lambda^3), finite Taylor lower bounds on (e^t),
+and a geometric bound for the rest of the mode series.
+
+This is a route to cheaper directed transcendental enclosures on the
+actual arithmetic K6 matrix, potentially useful beside GPPVerify #425.
+**The finite 60 mode values themselves still require interval
+certification**, the (d=0,1) entries remain, and no valid
+P-hat-to-source perturbation map is yet supplied. RH remains open.
+
 ## Threat model
 
 The runner executes **trusted catalog scripts** with no shell interpolation, source hashes, fixed cwd, timeouts, and reproducible output hashes. It is **not** a process sandbox and cannot promise that scripts have no filesystem or network side effects; code review remains necessary. The committed manifest intentionally contains no credentials or private inputs.
