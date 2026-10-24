@@ -383,6 +383,25 @@
       ],
       "timeout_s": 30,
       "default_run": true
+    },
+    {
+      "id": "ftheta_geometric_integrality_gate",
+      "path": "experiments/ftheta_geometric_integrality_gate.py",
+      "method": "exact_rational",
+      "evidence": "paper_proved",
+      "claim": "The shifted F1/4 local Euler product has a noninteger linear coefficient at p=2 and cannot be an ordinary finite-field zeta with those local factors, unlike the projective-line two-factor bundle.",
+      "assumptions": [
+        "Interpret a proposed local Euler product as the ordinary point-count Hasse–Weil zeta of a finite-type scheme over F2, not an arbitrary automorphic or analytically shifted product."
+      ],
+      "falsifiers": [
+        "At p=2 show 1<2^(1/4)<5/4 using rational fourth powers and 2<x+1/x<9/4<3 by AM-GM.",
+        "Compare to P1(F2) with exactly 3 points."
+      ],
+      "limitations": [
+        "Exclusion from ordinary finite-field point counts does not prove RH, BSD, or exclude all nongeometric analytic completions."
+      ],
+      "timeout_s": 10,
+      "default_run": true
     }
   ]
 }
