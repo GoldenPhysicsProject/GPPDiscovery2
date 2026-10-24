@@ -432,11 +432,16 @@ Independent digamma quadrature agrees within
 (S(-\lambda)<20/\lambda^3), finite Taylor lower bounds on (e^t),
 and a geometric bound for the rest of the mode series.
 
-This is a route to cheaper directed transcendental enclosures on the
-actual arithmetic K6 matrix, potentially useful beside GPPVerify #425.
-**The finite 60 mode values themselves still require interval
-certification**, the (d=0,1) entries remain, and no valid
-P-hat-to-source perturbation map is yet supplied. RH remains open.
+This is an independent route to cheaper directed transcendental
+enclosures for *larger matrices*. **The K=6 gate itself was already
+closed by Turbo Wave271**: an external analytic/interval estimate
+(\delta\le1.46\cdot10^{-9}) plus the Lean-kernel-checked transfer
+theorem in GPPVerify #425 gives the finite arithmetic lower bound
+(P_6\succeq1.91\cdot10^{-7}I). Our new off-support formula is **not
+needed to claim that finite-K result**, and supplies no uniform-in-K
+estimate. The finite 60 mode values in this alternative formula still
+need interval certification; the (d=0,1) entries remain separate.
+RH remains open.
 
 ## Threat model
 
