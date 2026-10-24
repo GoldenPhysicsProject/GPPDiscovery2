@@ -424,6 +424,28 @@
       ],
       "timeout_s": 30,
       "default_run": true
+    },
+    {
+      "id": "prime_site_grade_arb_certificate",
+      "path": "experiments/prime_site_grade_arb_certificate.py",
+      "method": "interval",
+      "evidence": "interval_certified",
+      "claim": "The 3×3 p=3 prime-site sigma-minus Wave234 S1 source block has first two positive principal minors; its third is negative for zeta and positive for the F1/4 combined shifts, with directed 384-bit Arb and independent overlapping 512-bit elementary-function enclosures.",
+      "assumptions": [
+        "Wave234 G0 sine² autocorrelation is correctly represented by the analytic compact formula.",
+        "This is ONLY the p=3 prime-site source contribution Qp^sigma=−(Dprime+sigma*Cprime), not the global completed form."
+      ],
+      "falsifiers": [
+        "Recompute every p=3 power using exact compact-support inequalities and independent precision intervals.",
+        "Check that 384/512-bit matrix entry enclosures and all signed principal minor intervals overlap.",
+        "Reconstruct the source's p=3 K=3 prime channels in a separate codepath."
+      ],
+      "limitations": [
+        "The certificate covers the stated 3×3 real matrix with theta=1/4, not all K, all primes, or the global height form.",
+        "Arithmetic source identity and full geometric interpretation are not Lean-formalized by this script."
+      ],
+      "timeout_s": 120,
+      "default_run": false
     }
   ]
 }
