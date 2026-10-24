@@ -480,6 +480,49 @@ full arithmetic entries require their separate prime/pole terms.
 The interval work improves reproducible source machinery, not the
 already-closed Wave271 finite K6 theorem or the open all-K estimate.
 
+**All-K pure gamma operator bound (not an all-K arithmetic bound).**
+`experiments/gamma_uniform_operator_bound.py` extracts one uniform
+statement from the same off-support identity. Let the Toeplitz gamma
+block of any finite lattice size K be
+\(T^{(K)}_{ij}=A_{|i-j|}\), with \(a_j=7/20+(7/10)j\), and let the
+folded gamma cross-block be \(H^{(K)}=-\sum_\lambda h_\lambda
+h_\lambda^*\), where
+\(h_\lambda(j)=e^{-\lambda a_j}S(-\lambda)\). For \(d\ge2\), the
+negative Laplace-mode expansion has only positive summands after
+changing its sign. Writing \(q=e^{-(7/10)\lambda_{\min}}\), with
+\(\lambda_{\min}=1/2\) for zeta or \(1/4\) for \(F_{1/4}\), gives
+
+\[
+|A_d|\le |A_2|q^{d-2},\qquad
+\|T^{(K)}\|_{\mathrm{op}}\le |A_0|+2|A_1|
++\frac{2|A_2|}{1-q}.
+\]
+
+The second term is trace class, with its uniform trace bound
+
+\[
+\|H^{(K)}\|_{\mathrm{op}}\le \operatorname{Tr}(-H^{(K)})
+\le\sum_\lambda\frac{e^{-2\lambda(7/20)}S(-\lambda)^2}
+{1-e^{-2\lambda(7/10)}}<\infty.
+\]
+
+The bounds therefore prove, at paper level and subject to the source
+normalization, that \(\sup_K\|T^{(K)}+H^{(K)}\|_{\mathrm{op}}<\infty\)
+for the **pure gamma** blocks. Numerically inserting the compact-source
+\(A_0,A_1\) integrals gives approximate constants \(2.171115\) for
+zeta and \(6.338408\) for \(F_{1/4}\); these **are not interval-certified
+decimal upper bounds**, although the exact formula is an upper bound.
+The script also computes an exact rational cap on the omitted cross
+trace modes: below \(3.11\times10^{-43}\) at N=80 in both cases.
+The source-normalization CI compares finite matrix norms at K=6,16,40.
+
+In particular this uniform pure Arch block cannot *by itself* offset
+Turbo Wave306's unbounded, atomic \(\gamma_1\) sewing C-channel in a
+common, unrescaled block decomposition; the compensating mechanism,
+if any, must involve prime, pole, SQ or jointly coupled channels.
+No claim is made for the all-K *completed arithmetic* operator, and
+this is **not a proof of RH**.
+
 ## Threat model
 
 The runner executes **trusted catalog scripts** with no shell interpolation, source hashes, fixed cwd, timeouts, and reproducible output hashes. It is **not** a process sandbox and cannot promise that scripts have no filesystem or network side effects; code review remains necessary. The committed manifest intentionally contains no credentials or private inputs.
