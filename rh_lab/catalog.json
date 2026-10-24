@@ -4,173 +4,385 @@
     {
       "id": "fake_quartet_control",
       "path": "rh_lab/controls.py",
-      "method": "exact_rational", "evidence": "paper_proved",
+      "method": "exact_rational",
+      "evidence": "paper_proved",
       "claim": "Reflection, conjugation and strict positivity on the critical line do not imply RH for general entire functions.",
-      "assumptions": ["The explicitly defined degree-four polynomial is not the completed zeta function."],
-      "falsifiers": ["Evaluate the four purported roots with exact Gaussian rational arithmetic.", "Check the global sum-of-squares lower bound on the critical line."],
-      "limitations": ["This blocks an invalid inference; it does not establish any statement about zeros of zeta."],
-      "timeout_s": 10, "default_run": true
+      "assumptions": [
+        "The explicitly defined degree-four polynomial is not the completed zeta function."
+      ],
+      "falsifiers": [
+        "Evaluate the four purported roots with exact Gaussian rational arithmetic.",
+        "Check the global sum-of-squares lower bound on the critical line."
+      ],
+      "limitations": [
+        "This blocks an invalid inference; it does not establish any statement about zeros of zeta."
+      ],
+      "timeout_s": 10,
+      "default_run": true
     },
     {
       "id": "sine2_cross_tail",
       "path": "experiments/arch_hankel_sine2_tail_certificate.py",
-      "method": "exact_rational", "evidence": "paper_proved",
+      "method": "exact_rational",
+      "evidence": "paper_proved",
       "claim": "Wave234 sine-squared cross-Arch Laplace tail after n=7 has a rational bound smaller than 1e-9.",
-      "assumptions": ["The cross-kernel, support positions, and sine-squared Laplace formula match the Wave234 source derivation."],
-      "falsifiers": ["Recompute the finite rational Taylor inequalities.", "Change support separation to test whether the tail inequality breaks."],
-      "limitations": ["Cross-Arch only; no diagonal or prime/pole entries."],
-      "timeout_s": 30, "default_run": true
+      "assumptions": [
+        "The cross-kernel, support positions, and sine-squared Laplace formula match the Wave234 source derivation."
+      ],
+      "falsifiers": [
+        "Recompute the finite rational Taylor inequalities.",
+        "Change support separation to test whether the tail inequality breaks."
+      ],
+      "limitations": [
+        "Cross-Arch only; no diagonal or prime/pole entries."
+      ],
+      "timeout_s": 30,
+      "default_run": true
     },
     {
       "id": "sine2_cross_matrix",
       "path": "experiments/arch_hankel_sine2_k6_exact_intervals.py",
-      "method": "interval", "evidence": "interval_certified",
+      "method": "interval",
+      "evidence": "interval_certified",
       "claim": "Outward rational enclosures for all 36 entries of the specified six-by-six cross-Arch block.",
-      "assumptions": ["Wave234 analytic cross-kernel and the stated six sine-squared supports are exact and normalized as described."],
-      "falsifiers": ["Compare all entries against an independent Arb ball evaluation.", "Check every enclosure including the uniform infinite-tail remainder."],
-      "limitations": ["Not the full arithmetic matrix; not an enclosure for Phat6 unless a separate exact normalization bridge is proved."],
-      "timeout_s": 90, "default_run": true
+      "assumptions": [
+        "Wave234 analytic cross-kernel and the stated six sine-squared supports are exact and normalized as described."
+      ],
+      "falsifiers": [
+        "Compare all entries against an independent Arb ball evaluation.",
+        "Check every enclosure including the uniform infinite-tail remainder."
+      ],
+      "limitations": [
+        "Not the full arithmetic matrix; not an enclosure for Phat6 unless a separate exact normalization bridge is proved."
+      ],
+      "timeout_s": 90,
+      "default_run": true
     },
     {
       "id": "sine2_cross_arb",
       "path": "experiments/arch_hankel_sine2_arb_crosscheck.py",
       "stdin_from": "sine2_cross_matrix",
-      "method": "ball_crosscheck", "evidence": "numerical",
+      "method": "ball_crosscheck",
+      "evidence": "numerical",
       "claim": "Independent python-flint Arb checks of the 36 cross-Arch intervals.",
-      "assumptions": ["Optional python-flint dependency installed and same source kernel parameterization supplied."],
-      "falsifiers": ["Reject if any Arb enclosure is disjoint from the exact interval."],
-      "limitations": ["Independent ball cross-check corroborates, but does not transform the conditional source formula into a theorem."],
-      "timeout_s": 90, "default_run": false
+      "assumptions": [
+        "Optional python-flint dependency installed and same source kernel parameterization supplied."
+      ],
+      "falsifiers": [
+        "Reject if any Arb enclosure is disjoint from the exact interval."
+      ],
+      "limitations": [
+        "Independent ball cross-check corroborates, but does not transform the conditional source formula into a theorem."
+      ],
+      "timeout_s": 90,
+      "default_run": false
     },
     {
       "id": "phat6_ldl_gate",
       "path": "experiments/phat6_robust_interval_gate.py",
-      "method": "exact_rational", "evidence": "interval_certified",
+      "method": "exact_rational",
+      "evidence": "interval_certified",
       "claim": "Exact LDL margin for a separately supplied rational Phat6; transfer to exact arithmetic is conditional on a missing entrywise enclosure.",
-      "assumptions": ["Private six-by-six input JSON with Phat6 is supplied as a command-line argument."],
-      "falsifiers": ["Check all six exact shifted LDL pivots.", "Derive every entrywise arithmetic enclosure from source formulas before transfer."],
-      "limitations": ["Not runnable without private input; no unconditional full matrix bound yet."],
-      "timeout_s": 30, "default_run": false
+      "assumptions": [
+        "Private six-by-six input JSON with Phat6 is supplied as a command-line argument."
+      ],
+      "falsifiers": [
+        "Check all six exact shifted LDL pivots.",
+        "Derive every entrywise arithmetic enclosure from source formulas before transfer."
+      ],
+      "limitations": [
+        "Not runnable without private input; no unconditional full matrix bound yet."
+      ],
+      "timeout_s": 30,
+      "default_run": false
     },
     {
       "id": "gamma_uniform_arch_operator_bound",
       "path": "experiments/gamma_uniform_operator_bound.py",
-      "method": "floating", "evidence": "paper_proved",
+      "method": "floating",
+      "evidence": "paper_proved",
       "claim": "Under the Wave234 gamma Fourier normalization, the pure Arch gamma Toeplitz plus folded gamma Hankel operator has an explicit norm bound independent of matrix size K; numerical source constants and finite sections are reproduced separately.",
-      "assumptions": ["Sine-squared support positions a_j=7/20+(7/10)j, and the exact Fourier-digamma/Laplace identities for the gamma Toeplitz and cross-Hankel kernels.", "The prime/pole/SQ and other non-Arch sewing channels are excluded from the operator considered here."],
-      "falsifiers": ["Verify the off-support mode identity and its positive-term geometric lag decay at every d>=2, then audit the Schur row-sum bound.", "Reconstruct the folded cross-Arch negative Gram representation and its trace bound independently.", "Compare increasing K numerical matrix norms with the K-independent analytic expression for zeta and the theta=1/4 control."],
-      "limitations": ["Printed constants use floating quadrature for d=0,1 and are not rigorous upper enclosures; the K-independence of the symbolic formula is the mathematical theorem.", "The exact-rational cross-trace tail certificate bounds only omitted modes, not the finite numerical head.", "This is a pure Arch-only bound: the completed arithmetic all-K positivity gap and RH remain open."],
-      "timeout_s": 120, "default_run": false
+      "assumptions": [
+        "Sine-squared support positions a_j=7/20+(7/10)j, and the exact Fourier-digamma/Laplace identities for the gamma Toeplitz and cross-Hankel kernels.",
+        "The prime/pole/SQ and other non-Arch sewing channels are excluded from the operator considered here."
+      ],
+      "falsifiers": [
+        "Verify the off-support mode identity and its positive-term geometric lag decay at every d>=2, then audit the Schur row-sum bound.",
+        "Reconstruct the folded cross-Arch negative Gram representation and its trace bound independently.",
+        "Compare increasing K numerical matrix norms with the K-independent analytic expression for zeta and the theta=1/4 control."
+      ],
+      "limitations": [
+        "Printed constants use floating quadrature for d=0,1 and are not rigorous upper enclosures; the K-independence of the symbolic formula is the mathematical theorem.",
+        "The exact-rational cross-trace tail certificate bounds only omitted modes, not the finite numerical head.",
+        "This is a pure Arch-only bound: the completed arithmetic all-K positivity gap and RH remain open."
+      ],
+      "timeout_s": 120,
+      "default_run": false
     },
     {
       "id": "gamma_offsupport_arb_certificate",
       "path": "experiments/gamma_offsupport_arb_certificate.py",
-      "method": "ball_crosscheck", "evidence": "interval_certified",
+      "method": "ball_crosscheck",
+      "evidence": "interval_certified",
       "claim": "For every Toeplitz gamma offset d=2..5 in the specified zeta/Ftheta Wave234 sine-squared basis, output exact dyadic directed Arb enclosures including an exact rational bound on all omitted Laplace modes.",
-      "assumptions": ["The paper-derived digamma/Fourier compact-support identity for x=7d/10>=1 is valid in the specified Wave234 normalization.", "python-flint==0.9.0 supplies directed Arb operations; the N=60 J=36 tail inequality is proved by rational Taylor and geometric bounds."],
-      "falsifiers": ["Recompute all eight Arb intervals independently at 384 and 512 bits and require mutual overlap.", "Check exact dyadic endpoints by integer arithmetic and compare independent compact-source quadrature as a NONcertifying diagnostic.", "For θ=1/4 verify both shifted lambda mode families are present."],
-      "limitations": ["This certifies only gamma Toeplitz entries d>=2, conditional on the separately derived analytic source identity.", "Near-diagonal d=0,1 still need certified compact quadrature and prime/pole arithmetic must be enclosed separately.", "Finite K=6 was already closed by Turbo Wave271 and Lean #425 via a different route; no all-K bound or RH proof is supplied."],
-      "timeout_s": 90, "default_run": false
+      "assumptions": [
+        "The paper-derived digamma/Fourier compact-support identity for x=7d/10>=1 is valid in the specified Wave234 normalization.",
+        "python-flint==0.9.0 supplies directed Arb operations; the N=60 J=36 tail inequality is proved by rational Taylor and geometric bounds."
+      ],
+      "falsifiers": [
+        "Recompute all eight Arb intervals independently at 384 and 512 bits and require mutual overlap.",
+        "Check exact dyadic endpoints by integer arithmetic and compare independent compact-source quadrature as a NONcertifying diagnostic.",
+        "For θ=1/4 verify both shifted lambda mode families are present."
+      ],
+      "limitations": [
+        "This certifies only gamma Toeplitz entries d>=2, conditional on the separately derived analytic source identity.",
+        "Near-diagonal d=0,1 still need certified compact quadrature and prime/pole arithmetic must be enclosed separately.",
+        "Finite K=6 was already closed by Turbo Wave271 and Lean #425 via a different route; no all-K bound or RH proof is supplied."
+      ],
+      "timeout_s": 90,
+      "default_run": false
     },
     {
       "id": "gamma_offsupport_laplace_tail",
       "path": "experiments/gamma_offsupport_laplace.py",
-      "method": "exact_rational", "evidence": "paper_proved",
+      "method": "exact_rational",
+      "evidence": "paper_proved",
       "claim": "For d>=2 the complete zeta and Ftheta gamma Toeplitz entries equal explicit negative Laplace-mode sums with an exact rational N-mode tail; at d=0,1 the same digamma-Fourier method gives compact nonoscillatory finite-interval integrals.",
-      "assumptions": ["The sine-squared length-one bump has S(lambda)=exp(lambda)*S(-lambda) and compact autocorrelation G(x)=0 for |x|>=1.", "The Wave234 digamma spectral multiplier is Re psi(1/4+it/2)-log pi for zeta and the stated +/-theta/2 pair for Ftheta.", "For the tail cap, pi^2<10, e^t greater than its positive Taylor truncation, and the geometric ratio inequality for positive t."],
-      "falsifiers": ["Derive the digamma integral and use Fourier inversion of the bump autocorrelation before truncating any series.", "Cross-check d=0..5 for theta=0,1/4 against independently computed oscillatory digamma quadrature and d>=2 against the compact formula.", "Validate exact-rational Taylor and geometric upper caps at N=60 against numerical remainders."],
-      "limitations": ["The d=0,1 compact integrals still require certified quadrature; only d>=2 is covered by the explicit negative Laplace sum.", "Exact rational mode-tail bounds do not certify finite transcendental mode values.", "Turbo Wave271 already independently closed the finite K6 arithmetic gate; this alternate formula provides no uniform K control or RH proof."],
-      "timeout_s": 30, "default_run": true
+      "assumptions": [
+        "The sine-squared length-one bump has S(lambda)=exp(lambda)*S(-lambda) and compact autocorrelation G(x)=0 for |x|>=1.",
+        "The Wave234 digamma spectral multiplier is Re psi(1/4+it/2)-log pi for zeta and the stated +/-theta/2 pair for Ftheta.",
+        "For the tail cap, pi^2<10, e^t greater than its positive Taylor truncation, and the geometric ratio inequality for positive t."
+      ],
+      "falsifiers": [
+        "Derive the digamma integral and use Fourier inversion of the bump autocorrelation before truncating any series.",
+        "Cross-check d=0..5 for theta=0,1/4 against independently computed oscillatory digamma quadrature and d>=2 against the compact formula.",
+        "Validate exact-rational Taylor and geometric upper caps at N=60 against numerical remainders."
+      ],
+      "limitations": [
+        "The d=0,1 compact integrals still require certified quadrature; only d>=2 is covered by the explicit negative Laplace sum.",
+        "Exact rational mode-tail bounds do not certify finite transcendental mode values.",
+        "Turbo Wave271 already independently closed the finite K6 arithmetic gate; this alternate formula provides no uniform K control or RH proof."
+      ],
+      "timeout_s": 30,
+      "default_run": true
     },
     {
       "id": "translated_arithmetic_sewing_source",
       "path": "experiments/translated_arithmetic_sewing_scan.py",
-      "method": "floating", "evidence": "numerical",
+      "method": "floating",
+      "evidence": "numerical",
       "claim": "Independently assemble complete prime/pole/Arch sewing on continuously translated fixed K annihilators, audit translation-invariant diagonal budget, and compare the oscillatory arithmetic residual with finite known-line zero interference.",
-      "assumptions": ["Zeta Wave234 source prime/pole/gamma normalization in the existing full S1 auditor.", "SciPy for gamma quadrature; optional mpmath for the first 120 known on-line zero pairs.", "Translation a is nonnegative and limited by finite prime sieve budget."],
-      "falsifiers": ["At a=0 require agreement with the independently assembled unshifted full S1 parity form.", "Check each translated autocorrelation against direct all-j,h sum and the folded Arch Laplace mode rescaling.", "At 120 known zero pairs demand that source sewing and independent spectral interference agree to within 2e-8 numerically."],
-      "limitations": ["Every tested prime sum is exact-support but evaluated in floats; the gamma integral is truncated and not certified.", "A finite translation scan plus known on-line zeros establishes no all-a bound, no positivity theorem and no RH result.", "Near-saturation of a parity budget is diagnostic only, not an unconditional guarantee of strict positivity."],
-      "timeout_s": 180, "default_run": false
+      "assumptions": [
+        "Zeta Wave234 source prime/pole/gamma normalization in the existing full S1 auditor.",
+        "SciPy for gamma quadrature; optional mpmath for the first 120 known on-line zero pairs.",
+        "Translation a is nonnegative and limited by finite prime sieve budget."
+      ],
+      "falsifiers": [
+        "At a=0 require agreement with the independently assembled unshifted full S1 parity form.",
+        "Check each translated autocorrelation against direct all-j,h sum and the folded Arch Laplace mode rescaling.",
+        "At 120 known zero pairs demand that source sewing and independent spectral interference agree to within 2e-8 numerically."
+      ],
+      "limitations": [
+        "Every tested prime sum is exact-support but evaluated in floats; the gamma integral is truncated and not certified.",
+        "A finite translation scan plus known on-line zeros establishes no all-a bound, no positivity theorem and no RH result.",
+        "Near-saturation of a parity budget is diagnostic only, not an unconditional guarantee of strict positivity."
+      ],
+      "timeout_s": 180,
+      "default_run": false
     },
     {
       "id": "translation_laplace_pole_control",
       "path": "experiments/translation_laplace_pole_probe.py",
-      "method": "floating", "evidence": "numerical",
+      "method": "floating",
+      "evidence": "numerical",
       "claim": "For one fixed polynomial bump profile, sampled on-line zero modes produce a bounded continuous-translation interference signal, while its planted rho±1/4 adversary grows exponentially. The separate Laplace pole argument identifies collective noncancellation provided the completed arithmetic signal is bounded.",
-      "assumptions": ["The analytic Laplace transform W(z) has no zeros in Re(z)>0 for the specified sine-squared polynomial bump profile.", "Only 60 known on-line zeta zeros are sampled; mpmath is optional and provides a finite numerical control.", "The boundedness of the complete arithmetic sewing form for all translations is not assumed or established."],
-      "falsifiers": ["Check that the fixed polynomial has zeros only in Re(z)<0, and S(z) has no zeros in Re(z)>0.", "Use the Laplace transform to locate every hypothetical off-line zero as an uncancellable pole and audit normal convergence.", "Measure finite-zero RMS translation controls and compare exponential rates for planted theta shifts."],
-      "limitations": ["The analytic implication is another RH-equivalent boundedness criterion, not a proof of the missing arithmetic estimate.", "Sampled zero-mode RMS values are numerical; they exclude no unknown zeta zeros.", "The argument requires a continuum of translations and does not automatically hold for the discrete K lattice."],
-      "timeout_s": 120, "default_run": false
+      "assumptions": [
+        "The analytic Laplace transform W(z) has no zeros in Re(z)>0 for the specified sine-squared polynomial bump profile.",
+        "Only 60 known on-line zeta zeros are sampled; mpmath is optional and provides a finite numerical control.",
+        "The boundedness of the complete arithmetic sewing form for all translations is not assumed or established."
+      ],
+      "falsifiers": [
+        "Check that the fixed polynomial has zeros only in Re(z)<0, and S(z) has no zeros in Re(z)>0.",
+        "Use the Laplace transform to locate every hypothetical off-line zero as an uncancellable pole and audit normal convergence.",
+        "Measure finite-zero RMS translation controls and compare exponential rates for planted theta shifts."
+      ],
+      "limitations": [
+        "The analytic implication is another RH-equivalent boundedness criterion, not a proof of the missing arithmetic estimate.",
+        "Sampled zero-mode RMS values are numerical; they exclude no unknown zeta zeros.",
+        "The argument requires a continuum of translations and does not automatically hold for the discrete K lattice."
+      ],
+      "timeout_s": 120,
+      "default_run": false
     },
     {
       "id": "annihilator_zero_spectral_pairing",
       "path": "experiments/annihilator_zero_spectral_check.py",
-      "method": "floating", "evidence": "numerical",
+      "method": "floating",
+      "evidence": "numerical",
       "claim": "Classical explicit-formula zero-side diagonal and sewing transforms numerically reproduce the separately assembled Wave234 S1 prime-pole-gamma forms on one common annihilating vector at K6/K10, for zeta and shifted off-critical Ftheta.",
-      "assumptions": ["The full Wave234 S1 prime/pole/gamma normalization is correct.", "Only the first 120 known zeta critical-line zero ordinates (and conjugates) are sampled using mpmath; no assertion that all zeta zeros are on the line.", "Requires optional numpy, scipy and mpmath."],
-      "falsifiers": ["Reverse the residue sign or omit the gamma trivial-zero term and compare directly to the prime-sum evaluator.", "Shift zero labels to rho +/- theta for the fake control and test the full parity projections.", "Increase zero count and diagonal gamma cutoff to detect missed contributions."],
-      "limitations": ["Numerical agreement is not an unconditional infinite-zero-tail enclosure.", "The exact formal identities are known Weil explicit-formula statements; reducing the zero sum does not itself prove RH.", "No unconditional all-K interference bound is established."],
-      "timeout_s": 240, "default_run": false
+      "assumptions": [
+        "The full Wave234 S1 prime/pole/gamma normalization is correct.",
+        "Only the first 120 known zeta critical-line zero ordinates (and conjugates) are sampled using mpmath; no assertion that all zeta zeros are on the line.",
+        "Requires optional numpy, scipy and mpmath."
+      ],
+      "falsifiers": [
+        "Reverse the residue sign or omit the gamma trivial-zero term and compare directly to the prime-sum evaluator.",
+        "Shift zero labels to rho +/- theta for the fake control and test the full parity projections.",
+        "Increase zero count and diagonal gamma cutoff to detect missed contributions."
+      ],
+      "limitations": [
+        "Numerical agreement is not an unconditional infinite-zero-tail enclosure.",
+        "The exact formal identities are known Weil explicit-formula statements; reducing the zero sum does not itself prove RH.",
+        "No unconditional all-K interference bound is established."
+      ],
+      "timeout_s": 240,
+      "default_run": false
     },
     {
       "id": "ftheta_full_s1_annihilator",
       "path": "experiments/arch_annihilator_s1_source_check.py",
-      "method": "floating", "evidence": "numerical",
+      "method": "floating",
+      "evidence": "numerical",
       "claim": "Same exact-structure zeta moment-annihilator vector, evaluated in Wave234's complete prime/pole/diagonal-Arch/cross-Arch S1 parity forms, distinguishes Ftheta numerically and independently reproduces source K6 eigenvalues.",
-      "assumptions": ["Wave234 S1 pole, gamma, diagonal prime and sewing prime normalization is that of MuseResearch/turbo-source-wave234-s1-schur-definitions.md.", "SciPy and NumPy are installed; truncated quadrature through t=500 gives a numerical diagnostic, not rigorous analytic enclosure.", "K6 and K10 finite-sector arithmetic is not a proof of RH."],
-      "falsifiers": ["Reconstruct all K6 Q±C parity matrix entries independently and compare minimum eigenvalues against Turbo's Wave234 table.", "Check exact algebraic continuum prime sewing identity against the pole square for zeta annihilators.", "Increase t quadrature cutoff, precision and K; cross-check against Arb and explicit prime atoms."],
-      "limitations": ["The gamma tail and floating-point cancellation are not rigorous directed intervals; matrix sign claims here are numerical only.", "Wave252 Phat6 and the all-K WFLUC_K obstruction remain separate; this experiment does not prove RH."],
-      "timeout_s": 180, "default_run": false
+      "assumptions": [
+        "Wave234 S1 pole, gamma, diagonal prime and sewing prime normalization is that of MuseResearch/turbo-source-wave234-s1-schur-definitions.md.",
+        "SciPy and NumPy are installed; truncated quadrature through t=500 gives a numerical diagnostic, not rigorous analytic enclosure.",
+        "K6 and K10 finite-sector arithmetic is not a proof of RH."
+      ],
+      "falsifiers": [
+        "Reconstruct all K6 Q±C parity matrix entries independently and compare minimum eigenvalues against Turbo's Wave234 table.",
+        "Check exact algebraic continuum prime sewing identity against the pole square for zeta annihilators.",
+        "Increase t quadrature cutoff, precision and K; cross-check against Arb and explicit prime atoms."
+      ],
+      "limitations": [
+        "The gamma tail and floating-point cancellation are not rigorous directed intervals; matrix sign claims here are numerical only.",
+        "Wave252 Phat6 and the all-K WFLUC_K obstruction remain separate; this experiment does not prove RH."
+      ],
+      "timeout_s": 180,
+      "default_run": false
     },
     {
       "id": "ftheta_shift_arb",
       "path": "experiments/arch_ftheta_shift_arb_crosscheck.py",
-      "method": "ball_crosscheck", "evidence": "numerical",
+      "method": "ball_crosscheck",
+      "evidence": "numerical",
       "claim": "Independent 384-bit Arb re-evaluation of Ftheta shifted one-mode lower witness and finite zeta head at K6 and K10.",
-      "assumptions": ["Optional python-flint==0.9.0 is installed.", "Wave234 source folded kernels and same bump basis as ftheta_arch_frequency_shift."],
-      "falsifiers": ["Reject if the Arb one-mode value is not strictly above the rational lower certificate.", "Reject if the finite zeta head is not below the proved analytic upper bound."],
-      "limitations": ["The finite Arb head check does not prove the infinite-tail theorem independently.", "Cross-Arch-only test, not the completed arithmetic form or RH."],
-      "timeout_s": 60, "default_run": false
+      "assumptions": [
+        "Optional python-flint==0.9.0 is installed.",
+        "Wave234 source folded kernels and same bump basis as ftheta_arch_frequency_shift."
+      ],
+      "falsifiers": [
+        "Reject if the Arb one-mode value is not strictly above the rational lower certificate.",
+        "Reject if the finite zeta head is not below the proved analytic upper bound."
+      ],
+      "limitations": [
+        "The finite Arb head check does not prove the infinite-tail theorem independently.",
+        "Cross-Arch-only test, not the completed arithmetic form or RH."
+      ],
+      "timeout_s": 60,
+      "default_run": false
     },
     {
       "id": "ftheta_arch_frequency_shift",
       "path": "experiments/arch_ftheta_shift_gap.py",
-      "method": "interval", "evidence": "interval_certified",
+      "method": "interval",
+      "evidence": "interval_certified",
       "claim": "The exact zeta-Arch annihilating polynomial witnesses distinguish the theta=1/4 shifted cross-Arch Gram by enormous rigorously certified Rayleigh ratios at K6 and K10.",
-      "assumptions": ["Wave234 exact folded kernels k_theta(w)=2cosh(theta*w)k_zeta(w) with theta=1/4.", "Both zeta and F_theta use the same sine2 bump basis and no prime, pole, or diagonal channels are included."],
-      "falsifiers": ["Check exact first K-1 zeta Laplace annihilations.", "Check the shifted n=0 minus-mode has strictly positive separation from all zeta nodes.", "Cross-check 50-digit outward finite interval bounds with an independent Arb evaluation."],
-      "limitations": ["Cross-Arch-only contrast; complete F_theta parity may be compensated by other channels, so it is not an RH proof.", "Only K=6 and 10 ratios are certified numerically; the structural nonvanishing argument works at every K>=2."],
-      "timeout_s": 30, "default_run": true
+      "assumptions": [
+        "Wave234 exact folded kernels k_theta(w)=2cosh(theta*w)k_zeta(w) with theta=1/4.",
+        "Both zeta and F_theta use the same sine2 bump basis and no prime, pole, or diagonal channels are included."
+      ],
+      "falsifiers": [
+        "Check exact first K-1 zeta Laplace annihilations.",
+        "Check the shifted n=0 minus-mode has strictly positive separation from all zeta nodes.",
+        "Cross-check 50-digit outward finite interval bounds with an independent Arb evaluation."
+      ],
+      "limitations": [
+        "Cross-Arch-only contrast; complete F_theta parity may be compensated by other channels, so it is not an RH proof.",
+        "Only K=6 and 10 ratios are certified numerically; the structural nonvanishing argument works at every K>=2."
+      ],
+      "timeout_s": 30,
+      "default_run": true
     },
     {
       "id": "sine2_cross_superexp_null",
       "path": "experiments/arch_cross_superexp_null.py",
-      "method": "exact_rational", "evidence": "paper_proved",
+      "method": "exact_rational",
+      "evidence": "paper_proved",
       "claim": "Analytic all-K strict negative definiteness of cross-Arch, but a constructive super-exponential upper bound on its smallest eigenvalue.",
-      "assumptions": ["Wave234 exact folded cross-Arch Laplace decomposition and translated sine-squared bump supports.", "K is an integer >=2; the executable rational inequalities run K=6,10."],
-      "falsifiers": ["Audit the annihilating polynomial P_K and Cauchy-Schwarz Laplace tail inequality.", "Verify the K6 and K10 bounds by exact rational Taylor arithmetic."],
-      "limitations": ["The upper bound is not a matching asymptotic.", "No all-K full sewn positivity, prime compensator, or RH consequence."],
-      "timeout_s": 30, "default_run": true
+      "assumptions": [
+        "Wave234 exact folded cross-Arch Laplace decomposition and translated sine-squared bump supports.",
+        "K is an integer >=2; the executable rational inequalities run K=6,10."
+      ],
+      "falsifiers": [
+        "Audit the annihilating polynomial P_K and Cauchy-Schwarz Laplace tail inequality.",
+        "Verify the K6 and K10 bounds by exact rational Taylor arithmetic."
+      ],
+      "limitations": [
+        "The upper bound is not a matching asymptotic.",
+        "No all-K full sewn positivity, prime compensator, or RH consequence."
+      ],
+      "timeout_s": 30,
+      "default_run": true
     },
     {
       "id": "sine2_cross_trace_budget",
       "path": "experiments/arch_cross_trace_gate.py",
-      "method": "exact_rational", "evidence": "interval_certified",
+      "method": "exact_rational",
+      "evidence": "interval_certified",
       "claim": "Exact necessary trace compensation budget for any B making B + C_cross positive semidefinite.",
-      "assumptions": ["The artifact intervals enclose precisely the negative Gram cross-Arch matrix C.", "Any compensator B is in the same basis and normalization."],
-      "falsifiers": ["Check signs/symmetry of all diagonal intervals.", "Compare proposed B's certified trace to the necessary lower bound."],
-      "limitations": ["Necessary not sufficient; no compensator is supplied; no unconditional RH conclusion."],
-      "timeout_s": 10, "default_run": true
+      "assumptions": [
+        "The artifact intervals enclose precisely the negative Gram cross-Arch matrix C.",
+        "Any compensator B is in the same basis and normalization."
+      ],
+      "falsifiers": [
+        "Check signs/symmetry of all diagonal intervals.",
+        "Compare proposed B's certified trace to the necessary lower bound."
+      ],
+      "limitations": [
+        "Necessary not sufficient; no compensator is supplied; no unconditional RH conclusion."
+      ],
+      "timeout_s": 10,
+      "default_run": true
     },
     {
       "id": "prime_cayley_channels",
       "path": "experiments/prime_cayley_two_channel_weyl_check.py",
-      "method": "floating", "evidence": "numerical",
+      "method": "floating",
+      "evidence": "numerical",
       "claim": "Legacy prime-Cayley two-channel Weyl numerical audit.",
-      "assumptions": ["Legacy script parameterization; source must be inspected before any analytic promotion."],
-      "falsifiers": ["Test sensitivity to cutoff and precision.", "Compare against an analytically soluble local-channel limit."],
-      "limitations": ["Exploratory calculation; not a proof."],
-      "timeout_s": 90, "default_run": false
+      "assumptions": [
+        "Legacy script parameterization; source must be inspected before any analytic promotion."
+      ],
+      "falsifiers": [
+        "Test sensitivity to cutoff and precision.",
+        "Compare against an analytically soluble local-channel limit."
+      ],
+      "limitations": [
+        "Exploratory calculation; not a proof."
+      ],
+      "timeout_s": 90,
+      "default_run": false
+    },
+    {
+      "id": "sphere_elliptic_zeta_bridge",
+      "path": "experiments/sphere_elliptic_zeta_bridge.py",
+      "method": "exact_rational",
+      "evidence": "paper_proved",
+      "claim": "Projective-line arithmetic zeta has two Tate factors; an elliptic curve adds a middle Frobenius factor, and reciprocal duality alone does not imply a positive invariant height.",
+      "assumptions": [
+        "For local elliptic tests E:y²=x³−x has good reduction at odd listed primes; the 2×2 bad matrix is abstract and is not arithmetic Frobenius."
+      ],
+      "falsifiers": [
+        "Count E points independently in F_p and F_{p²} and compare to Frobenius recurrence.",
+        "Verify F^T J F=qJ for both examples, and exhibit lack/existence of a positive symmetric invariant height."
+      ],
+      "limitations": [
+        "This is an existing arithmetic-geometry structural interface, not a new BSD or RH theorem.",
+        "Finite point tests do not prove a global analytic zero assertion; bad Euler factors remain model-dependent."
+      ],
+      "timeout_s": 30,
+      "default_run": true
     }
   ]
 }
