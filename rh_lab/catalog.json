@@ -446,6 +446,27 @@
       ],
       "timeout_s": 120,
       "default_run": false
+    },
+    {
+      "id": "epstein_idele_class_projection",
+      "path": "experiments/epstein_idele_class_projection.py",
+      "method": "exact_rational",
+      "evidence": "paper_proved",
+      "claim": "Explicit finite C2 class-character Fourier projection for the two integral forms of discriminant -20; principal-class coefficient f(2)=f(3)=0 but f(6)=2 (nonmultiplicative), while both class-character channels pass all coprime coefficient identities through 128.",
+      "assumptions": [
+        "Q0=x²+5y² and Q1=2x²+2xy+3y² are the reduced primitive forms of discriminant -20; identification with ideal classes and Hecke Euler products is classical prior art, not proved by finite enumeration."
+      ],
+      "falsifiers": [
+        "Independently enumerate r_Q(n) with justified bounds and verify all signed class-character relations.",
+        "Check f(6)≠f(2)f(3), although gcd(2,3)=1.",
+        "Increase cutoff and look for a failure of finite coprime multiplicativity of the projected channels."
+      ],
+      "limitations": [
+        "Finite integer coefficient enumeration and C2 Fourier algebra only; not a proof of general Hecke theory, off-line zero location, or RH.",
+        "The compact idele class character purity condition is necessary in this example but insufficient for GRH."
+      ],
+      "timeout_s": 30,
+      "default_run": true
     }
   ]
 }
