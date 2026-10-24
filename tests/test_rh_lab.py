@@ -22,6 +22,7 @@ from experiments.translated_arithmetic_sewing_scan import (
 from experiments.gamma_offsupport_laplace import (
     rational_tail_cap, laplace_offsupport,
 )
+from experiments.gamma_uniform_operator_bound import cross_trace_tail_cap
 import math
 
 
@@ -103,6 +104,20 @@ class LabTests(unittest.TestCase):
                 self.assertLess(laplace_offsupport(d,float(theta)),0.)
         with self.assertRaises(ValueError):
             laplace_offsupport(1,0.)
+
+    def test_all_k_pure_arch_cross_trace_rational_tail(self):
+        # The pure gamma Hankel block is a Gram operator. Its infinite
+        # trace is bounded by a convergent geometric expansion, with
+        # an EXACT rational cap on the omitted mode families.
+        for theta in (Fraction(0), Fraction(1,4)):
+            cap60 = cross_trace_tail_cap(theta, n_modes=60)
+            cap80 = cross_trace_tail_cap(theta, n_modes=80)
+            self.assertGreater(cap60, 0)
+            self.assertGreater(cap80, 0)
+            self.assertLess(cap80, cap60)
+            self.assertLess(cap80, Fraction(1, 10**41))
+        with self.assertRaises(ValueError):
+            cross_trace_tail_cap(Fraction(1,3))
 
     def test_traversal_rejected(self):
         good = {"id": "bad", "path": "../../outside.py", "method": "exact_rational",

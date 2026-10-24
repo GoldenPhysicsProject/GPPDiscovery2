@@ -53,6 +53,16 @@
       "timeout_s": 30, "default_run": false
     },
     {
+      "id": "gamma_uniform_arch_operator_bound",
+      "path": "experiments/gamma_uniform_operator_bound.py",
+      "method": "floating", "evidence": "paper_proved",
+      "claim": "Under the Wave234 gamma Fourier normalization, the pure Arch gamma Toeplitz plus folded gamma Hankel operator has an explicit norm bound independent of matrix size K; numerical source constants and finite sections are reproduced separately.",
+      "assumptions": ["Sine-squared support positions a_j=7/20+(7/10)j, and the exact Fourier-digamma/Laplace identities for the gamma Toeplitz and cross-Hankel kernels.", "The prime/pole/SQ and other non-Arch sewing channels are excluded from the operator considered here."],
+      "falsifiers": ["Verify the off-support mode identity and its positive-term geometric lag decay at every d>=2, then audit the Schur row-sum bound.", "Reconstruct the folded cross-Arch negative Gram representation and its trace bound independently.", "Compare increasing K numerical matrix norms with the K-independent analytic expression for zeta and the theta=1/4 control."],
+      "limitations": ["Printed constants use floating quadrature for d=0,1 and are not rigorous upper enclosures; the K-independence of the symbolic formula is the mathematical theorem.", "The exact-rational cross-trace tail certificate bounds only omitted modes, not the finite numerical head.", "This is a pure Arch-only bound: the completed arithmetic all-K positivity gap and RH remain open."],
+      "timeout_s": 120, "default_run": false
+    },
+    {
       "id": "gamma_offsupport_arb_certificate",
       "path": "experiments/gamma_offsupport_arb_certificate.py",
       "method": "ball_crosscheck", "evidence": "interval_certified",
