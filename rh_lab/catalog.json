@@ -402,6 +402,28 @@
       ],
       "timeout_s": 10,
       "default_run": true
+    },
+    {
+      "id": "prime_site_grade_signature_census",
+      "path": "experiments/prime_site_grade_signature_census.py",
+      "method": "floating",
+      "evidence": "numerical",
+      "claim": "Within the specified source-normalized finite-prime S1 parity block, K=3, p=3, negative parity, zeta inertia is (2+,1−) but combined shifted F1/4 inertia is (3+,0−), as a finite numerical counterexample to blanket prime-site signature blindness.",
+      "assumptions": [
+        "Use Wave234 S1 b=sin² bump, a_j=7/20+7j/10, and prime matrices Qp^sigma=−(Dprime+sigma Cprime).",
+        "Gamma and pole blocks are NOT attributed to a finite prime; each Ftheta shifted factor is a formal grade, not a geometric motive."
+      ],
+      "falsifiers": [
+        "Independently interval-certify all p=3 K=3 matrix entries and leading determinants with Arb.",
+        "Reconstruct both +theta and -theta matrices, check their exact sum and source weight normalization.",
+        "Reassemble full prime+pole+Arch form to see whether an interpretation as a full local height is false."
+      ],
+      "limitations": [
+        "Floating finite-K signature only; not an interval certificate or Lean kernel proof.",
+        "This is a prime-site matrix contribution, not a local geometric height or a completed RH Weil form."
+      ],
+      "timeout_s": 30,
+      "default_run": true
     }
   ]
 }
