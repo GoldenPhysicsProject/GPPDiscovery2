@@ -514,6 +514,29 @@
       ],
       "timeout_s": 30,
       "default_run": true
+    },
+    {
+      "id": "celestial_nodal_intersections",
+      "path": "experiments/celestial_nodal_intersections.py",
+      "method": "floating",
+      "evidence": "numerical",
+      "claim": "Exact shadow/Cayley mapping identifies all dimensional scalar principal-series circles under Delta_d=d*s, proving circle intersections cannot select discrete zero nodes; eta arithmetic phase cancellation and completed xi theta wave give exact distinct interference conditions, with first four critical nodes and Ftheta off-equator controls numerically replayed.",
+      "assumptions": [
+        "Existing complex conformal shadow and completed xi reflection identities are classical and already recorded in GPPVerify/Bridge.",
+        "mpmath numerical source probe is optional, not a certified all-zero theorem; exact theta formula follows Jacobi modularity."
+      ],
+      "falsifiers": [
+        "Vary d and s to verify normalized circles overlap for generic NONZERO spectral values, not just zeta ordinates.",
+        "Exhibit pairwise prime phase coincidences that are not zeros, including t=0 and 2pi/log(3/2).",
+        "Recalculate first four xi nodes via the independent theta integral and test Ftheta zeros north/south of the celestial equator."
+      ],
+      "limitations": [
+        "Two real nodal contours meet at zeros tautologically; reflection does not force all nodes onto equator.",
+        "No physical celestial CFT Hilbert intertwiner, 4D gravity derivation, Weil positivity, or proof of RH.",
+        "Numerical scans and mpmath residuals do not provide interval certifications or global zero exclusion."
+      ],
+      "timeout_s": 60,
+      "default_run": true
     }
   ]
 }
