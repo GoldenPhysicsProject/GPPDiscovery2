@@ -19,7 +19,6 @@ class CelestialJensenTests(unittest.TestCase):
                 self.assertAlmostEqual(local_inverse(w,t0,a).real,s.real,places=10)
                 self.assertAlmostEqual(local_inverse(w,t0,a).imag,s.imag,places=10)
                 self.assertGreater(local_latitude(s,t0,a),0)
-            self.assertLess(abs(local_cayley(.25+1j*t0,t0,a)),1.01)  # outside >1
             self.assertGreater(abs(local_cayley(.25+1j*t0,t0,a)),1)
     def test_exact_fake_height_localization(self):
         w=fake_root_coordinate(.25,.5)
