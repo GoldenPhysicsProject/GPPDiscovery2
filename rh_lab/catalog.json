@@ -467,6 +467,30 @@
       ],
       "timeout_s": 30,
       "default_run": true
+    },
+    {
+      "id": "equator_fuzzy_sphere_car",
+      "path": "experiments/equator_fuzzy_sphere_car.py",
+      "method": "exact_rational",
+      "evidence": "paper_proved",
+      "claim": "For N Fourier modes on S1 with explicitly supplied su2 ladder and positive metric, End(C^N) has N² fuzzy spherical harmonics; CAR Fock over End has dimension 2^(N²), and its SU2-singlet sector obeys a rigorous lower bound c*2^(N²)/N^6, hence ln singlets=N² ln2+O(log N).",
+      "assumptions": [
+        "The SU2 action, positive weighted metric, and fermionic second-quantization are added mathematical structures, not derived from the geometry of S1.",
+        "The continuum/Haar lower bound is proved on paper; the script checks exact finite algebra and integer enumerations, not the integral inequality for all N."
+      ],
+      "falsifiers": [
+        "Break any rational commutator, Casimir, diagonal adjointness, or Lagrange projector identity at N<=12.",
+        "Recalculate exact SU2 Fock singlet multiplicities via an independent representation-theoretic method.",
+        "Find a dimension/count mismatch between the matrix harmonic decomposition and the CAR single-particle weight list.",
+        "Construct a BH entropy normalization without fitting microscopic circle spacing."
+      ],
+      "limitations": [
+        "The coefficient 1/4 is NOT derived: matching it requires a=2sqrt(pi ln2)*lP.",
+        "No physical Hamiltonian, Einstein equations, bulk reconstruction, microscopic gauge dynamics, or prime-Arch intertwiners.",
+        "SU2 character decomposition is established representation-theoretic prior art, not proved by finite tests."
+      ],
+      "timeout_s": 30,
+      "default_run": true
     }
   ]
 }
