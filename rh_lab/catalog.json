@@ -495,7 +495,7 @@
     {
       "id": "equator_hawking_thermal_gate",
       "path": "experiments/equator_hawking_thermal_gate.py",
-      "method": "analytic_exact_bound",
+      "method": "conditional",
       "evidence": "paper_proved",
       "claim": "In the SU2-covariant free horizon CAR model with eps_l=l/R and Schwarzschild beta_H=4piR, S_N=sum_(l=0)^(N-1)(2l+1)hF(4pi*l) stays uniformly bounded independent of N; hence bare free angular modes at Hawking temperature do NOT yield the black-hole area law.",
       "assumptions": [
