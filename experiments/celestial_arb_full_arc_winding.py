@@ -21,7 +21,6 @@ def verify(segments=2048,bits=256):
     h=arb("14.1347251417346937904572519835624702707842571156992431756855")
     pi=arb.pi()
     I=acb(0,1)
-    c=acb(a,I*h)
     # fixed rational center h is distinct from the separately Arb-certified
     # height gamma. The width of the first zero interval must be controlled.
     rho=acb.zeta_zeros(1,1)[0]
@@ -33,7 +32,7 @@ def verify(segments=2048,bits=256):
 
     def s_of_theta(theta):
         w=r*(I*theta).exp()
-        return acb(arb(1)/2,I*h)+a*(1+w)/(1-w)
+        return acb(arb(1)/2)+I*h+a*(1+w)/(1-w)
 
     def xi(s):
         s=acb(s)
