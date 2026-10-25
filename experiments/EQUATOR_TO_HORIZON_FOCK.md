@@ -74,3 +74,25 @@ Cayley β(s)=(s−1)/s takes Re s=1/2 to |β|=1, and β(1−bar s)=1/conj β(s),
 Next gates: derive SU(2) ladder/metric functorially from source boundary dynamics instead of choosing them; couple an actual gravitational action and fix a/lP rather than fit it; specify a physical Hamiltonian and microcanonical state count; produce an invariant continuum reconstruction rather than just fuzzy angular algebra; attempt arithmetic intertwiners without baking in zero localization. RH and BSD OPEN. The model is a concrete, tested **mathematical possibility**, not a proof reality is fundamentally one-dimensional.
 
 Prior art: H. Steinacker, *Quantum Geometry, Matrix Theory*, Ch. 3 (fuzzy sphere and harmonic decomposition), https://homepage.univie.ac.at/harold.steinacker/matrix-fuzzy-physics-book-openversion.pdf ; S. Carlip, *Black Hole Entropy from Conformal Field Theory in Any Dimension*, Phys. Rev. Lett. 82 (1999), https://doi.org/10.1103/PhysRevLett.82.2828 ; R. Wald, *The Thermodynamics of Black Holes*, https://pmc.ncbi.nlm.nih.gov/articles/PMC5253844/ .
+
+
+## New decisive thermal gate — unrestricted free angular modes FAIL
+
+An entropy capacity is **not** an entropy of a physical black hole. Daniel's already uploaded *Modular Thermality of the Celestial Spectral Weight* studies P(lambda)=pi lambda/sinh(pi lambda) and the Rindler modular period beta=2pi. For a Schwarzschild horizon radius R the asymptotic Hawking inverse temperature is beta_H=4pi R (G=ℏ=c=kB=1). A straightforward free, SO(3)-covariant Hamiltonian on the above CAR space is
+  H_free=Σ_(ell=0)^(N-1)Σ_(m=-ell)^ell (ell/R)c†_(ell,m)c_(ell,m).
+The energy is scalar within each SU(2) irrep, so this Hamiltonian is rotationally symmetric. Each fermionic level at dimensionless x=beta_H eps_ell=4pi ell has entropy
+  h_F(x)=log(1+e^(−x))+x/(1+e^x).
+The thermal entropy is S_N/kB=Σ_(ell=0)^(N-1)(2ell+1)h_F(4pi ell).
+
+**Theorem 3 (exact thermal no-go for this free dispersion).** For all N≥1,
+  ln2 ≤ S_N/kB ≤ ln2 + q(3−q)/(1−q)^2 + 4pi*q(3+q)/(1−q)^3,
+  q=e^(−4pi), and the upper bound is ≈0.6932891138856213 nats.
+**Proof.** h_F(0)=ln2 and for x≥0, h_F(x)≤(1+x)e^(−x), since log(1+y)≤y and x/(1+e^x)≤x e^(−x). Sum Σ_(ell≥1)(2ell+1)(1+4pi ell)q^ell using standard geometric-series formulas. QED.
+
+Thus S_N/N²→0 even though the Hilbert space has exponential 2^(N²) capacity. A SU(2) gauge projection cannot automatically turn these suppressed free angular excitations into a black-hole area law. **This kills the naive idea that a Fock space count alone is a physical horizon entropy derivation**.
+
+A deliberately *extra-soft* SU(2)-invariant dispersion eps_ell=ell/(NR) produces
+  S_N/kB=Σ_(ell<N)(2ell+1) h_F(4pi ell/N),
+with a positive N² limit coefficient 2∫_0^1 u h_F(4pi u) du. This is a mathematical alternative, NOT derived by the carrier algebra or Schwarzschild geometry. It must emerge independently from a redshifted edge-mode dynamics or genuinely many-body horizon Hamiltonian. The physical Hawking temperature alone does not grant the entropy law.
+
+Experiment: experiments/equator_hawking_thermal_gate.py; tests/test_equator_hawking_thermal_gate.py. Source note: the beta=2pi celestial modular KMS scale in Daniel's paper is not itself an identification of the CAR Hamiltonian or Schwarzschild beta_H; constructing the intertwiner is another open step.
