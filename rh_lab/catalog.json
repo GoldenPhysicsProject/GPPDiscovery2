@@ -491,6 +491,29 @@
       ],
       "timeout_s": 30,
       "default_run": true
+    },
+    {
+      "id": "equator_hawking_thermal_gate",
+      "path": "experiments/equator_hawking_thermal_gate.py",
+      "method": "analytic_exact_bound",
+      "evidence": "paper_proved",
+      "claim": "In the SU2-covariant free horizon CAR model with eps_l=l/R and Schwarzschild beta_H=4piR, S_N=sum_(l=0)^(N-1)(2l+1)hF(4pi*l) stays uniformly bounded independent of N; hence bare free angular modes at Hawking temperature do NOT yield the black-hole area law.",
+      "assumptions": [
+        "Fermionic independent angular modes in each spin-l multiplet; one-body energy eps_l=l/R; thermal Gibbs state with Schwarzschild beta_H=4piR.",
+        "The source SU2 Fock construction is a model, not established microscopic black hole physics."
+      ],
+      "falsifiers": [
+        "Independently verify hF(x)<=exp(-x)(1+x) and the closed-form geometric sums bounding total thermal entropy.",
+        "Try physically motivated near-horizon redshift, interaction or edge mode Hamiltonians: the no-go only concerns the named free angular dispersion.",
+        "Verify that the softened eps_l=l/(NR) changes entropy scaling but requires independent dynamical justification."
+      ],
+      "limitations": [
+        "This is a no-go for a specific free rotationally invariant Hamiltonian, not for all quantum horizons or CFTs.",
+        "An area law in the maximally mixed CAR state is not a physical black-hole entropy derivation.",
+        "No gravity equations, gravitational 1/4, or RH correspondence are obtained."
+      ],
+      "timeout_s": 30,
+      "default_run": true
     }
   ]
 }
