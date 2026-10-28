@@ -101,3 +101,38 @@ The new positive Gram is **not the signed Weil form**: it has cross-harmonic \(k
 The verified universal modular-strip Schur multiplier \(\tanh^2(\pi\tau)\) vanishes at \(\tau=0\). On the full frequency line it therefore provides **no uniform strictly positive coercivity constant** without additional arithmetic information or a justified zero-mode restriction.
 
 **Provenance:** Astra's positive geometric occupation source and covariance (GPPVerify PR #455), Turbo's Wave234 sector sewing, and Codex's independent innovation factorization and shifted-zeta falsification. Neither local PSD nor the strip dictionary proves RH.
+
+
+## E. Infinite local operator: positive trace class, but no uniform gap
+
+The same factorization has an **exact infinite-dimensional meaning** for each fixed \(0<x<1\). On \(\ell^2(\{1,2,\ldots\})\), define \(v_j(k)={\bf1}_{k\ge j}x^{k-j}\). Then
+
+\[
+C_x=\sum_{j=1}^{\infty}(1-x)x^j\,|v_j\rangle\langle v_j|,
+\qquad
+\|v_j\|_{\ell^2}^2=\frac1{1-x^2}.
+\]
+
+The nonnegative rank-one series converges in trace norm, since
+
+\[
+\boxed{\operatorname{Tr} C_x=
+\sum_{j\ge1}(1-x)x^j\|v_j\|^2
+=\frac{x}{1-x^2}.}
+\]
+
+Equivalently, if \(S\) is the unilateral right shift, then \(L=(I-xS)^{-1}\), \(D=(1-x)\operatorname{diag}(x,x^2,\ldots)\), and \(C_x=LDL^*\). This exhibits the covariance as a causal discrete Green/innovation kernel, but **not** a boundedly invertible global norm.
+
+Indeed, for the \(N\times N\) leading block,
+\[
+0<\lambda_{\min}(C_x^{(N)})
+\le \langle e_N,C_x^{(N)}e_N\rangle
+=x^N(1-x^N)\longrightarrow0.
+\]
+Thus no positive lower coercivity constant independent of the occupation cutoff \(N\) follows from the local covariance, even at a single fixed prime. The infinite operator is compact, positive and infinite rank, with eigenvalues accumulating at zero. Finite positive definiteness and infinite-dimensional uniform coercivity are distinct claims.
+
+At the physical midpoint \(x_p=p^{-1/2}\), the local trace is
+\[
+\operatorname{Tr}C_{x_p}=\frac{p^{-1/2}}{1-p^{-1}}.
+\]
+Its sum over all primes diverges. Consequently the unsmeared direct sum over prime sites is not trace class, despite every local site being positive trace class. Compact log-support tests still involve finitely many prime powers and have well-defined quasi-local covariance. This is another reason a global bulk/boundary sewing estimate cannot be obtained merely by assembling local PSD blocks.
