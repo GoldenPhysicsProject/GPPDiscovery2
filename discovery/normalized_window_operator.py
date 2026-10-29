@@ -43,6 +43,9 @@ def analyze_cross_coupling_operator(M: np.ndarray,
     eigM = np.linalg.eigvalsh(M)
     tnorm = float(np.max(np.abs(eigT)))
     rows = np.sum(np.abs(T),axis=1)
+    pairwise_min = min((float(np.linalg.eigvalsh(M[np.ix_([i,j],[i,j])])[0])
+                        for i in range(n) for j in range(i+1,n)),
+                       default=float(eigM[0]))
     # A dimensionless threshold relevant to I+T.
     tolT = relative_tolerance * max(1,n)
     return {
@@ -53,6 +56,8 @@ def analyze_cross_coupling_operator(M: np.ndarray,
         "norm_T": tnorm,
         "max_normalized_row_sum": float(np.max(rows)),
         "numeric_psd_M": bool(eigM[0] >= -tolerance),
+        "numeric_all_pairwise_psd": bool(pairwise_min >= -tolerance),
+        "min_pairwise_eig_M": pairwise_min,
         "numeric_psd_by_normalized_spectrum": bool(eigT[0] >= -1.0-tolT),
         "sufficient_operator_norm": bool(tnorm <= 1.0+tolT),
         "sufficient_gershgorin": bool(np.max(rows) <= 1.0+tolT),
@@ -71,12 +76,14 @@ def tests():
     result = analyze_cross_coupling_operator(pairwise_misses_global)
     same(result["min_eig_M"],-.2)
     assert not result["numeric_psd_M"]
+    assert result["numeric_all_pairwise_psd"]
     assert not result["sufficient_gershgorin"]
 
     notebooklm_example = np.array([[1., .7, .7],[.7,1.,-.7],[.7,-.7,1.]])
     result = analyze_cross_coupling_operator(notebooklm_example)
     same(result["min_eig_M"],-.4)
     assert not result["numeric_psd_M"]
+    assert result["numeric_all_pairwise_psd"]
 
     # This is PSD but the OPERATOR-NORM and Gershgorin sufficient tests FAIL.
     # M=ones has eigenvalues 3,0,0. T=M-I has eigenvalues 2,-1,-1.
@@ -85,6 +92,15 @@ def tests():
     same(result["min_eig_M"],0)
     same(result["min_eig_T"],-1)
     same(result["norm_T"],2)
+    assert result["numeric_psd_M"]
+    assert result["numeric_psd_by_normalized_spectrum"]
+    assert not result["sufficient_operator_norm"]
+    assert not result["sufficient_gershgorin"]
+
+    # Imported from the NotebookLM suite. Exponential correlation matrices
+    # are PSD despite potentially violating both stronger sufficient tests.
+    decay = np.fromfunction(lambda i,j: np.exp(-.8*np.abs(i-j)), (5,5))
+    result = analyze_cross_coupling_operator(decay)
     assert result["numeric_psd_M"]
     assert result["numeric_psd_by_normalized_spectrum"]
     assert not result["sufficient_operator_norm"]
@@ -118,6 +134,7 @@ def tests():
     print("PASS: negative 3-window example despite positive pairs")
     print("PASS: NotebookLM frustrated-triangle control")
     print("PASS: PSD matrix may fail both sufficient tests")
+    print("PASS: positive 5-window exponential-decay kernel may fail both tests")
     print("PASS: normalized row dominance correctly certifies positive control")
     print("PASS: non-symmetric / singular scalar diagonal inputs rejected")
     print("PASS: sharp prime block null is not confused with positive definite block")
