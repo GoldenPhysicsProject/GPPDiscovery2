@@ -31,5 +31,7 @@ jobs:
         run: python discovery/arb_semilocal_weil_matrix.py --n 2 --lambda-num 5 --lambda-den 2 --require-positive
       - name: Completed prime-Archimedean matrix at lambda 3, N=2
         run: python discovery/arb_semilocal_weil_matrix.py --n 2 --lambda-num 3 --lambda-den 1 --require-positive
+      - name: Completed Weil 41-mode interval LDL at lambda 5/2
+        run: python discovery/arb_semilocal_weil_matrix.py --n 20 --lambda-num 5 --lambda-den 2 --require-positive --quiet
       - name: Numerical controls with explicit uncertainty limits
         run: python discovery/normalized_window_operator.py
