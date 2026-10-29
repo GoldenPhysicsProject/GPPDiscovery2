@@ -252,3 +252,46 @@ This materially reduces the previous direct high-Fourier threshold estimate (~1,
 
 
 **Rigorous negative-symbol control at the origin:** The exact closed gamma-tilt integral from `discovery/semilocal_log_kinetic_decomposition.md` gives `H_L(0)=8sinh(L/2)−2I(L)−c∞−2P_L`, with `I(L)=log[2/(1+e^(−L/2))]−(1/2)log[2/(1+e^(−L))]+π/4−atan(e^(−L/2))`. At λ=5/2, 192-bit Arb certifies **`H_L(0)=−0.06814475320760466453958374604394319±2×10^(−56)<0`**. Thus the exact corrected full-line symbol is genuinely *indefinite* as a pointwise multiplier near ξ=0, even though corrected finite Galerkin compressions through 41 modes are rigorously positive. This is not a contradiction: a function with spatial support [0,L] cannot have its Fourier mass concentrated arbitrarily close to ξ=0. The support-induced uncertainty and low/high Schur control are essential. The CI now gates the negative-origin sign and the positive all-real-frequency tail together in `discovery/semilocal_symbol_tail_certificate.py` at commit `fee2fef99a9a8811951121ef527529ecf6b09ca3`, workflow `48fdac07c343e2636f36bf9977ab89b556766d94`.
+
+
+## Adaptive Arb-certified bad-frequency cover: dramatically smaller infinite Fourier tail
+
+The full-line symbol is **not** globally nonnegative (H_L(0)<0 certified above). Nevertheless, its set of frequencies at which H_L may fall below a chosen positive target `g` can be enclosed by **finitely many rational intervals** without assuming anything about zeta zeros. This is substantially stronger than treating all of [-R,R] as dangerous.
+
+Choose an inner threshold a>0, an outer threshold R>a, a rational cell width h>0 and g>0, with R−a an integer multiple of h. On every exact rational cell [x,x+h]⊂[a,R] use the elementary inequalities, valid for **all real** ξ in that cell,
+
+\[
+\begin{aligned}
+m(\xi)&\ge m(x),\\
+2\int_0^L k(y)\cos(\xi y)dy&\ge -B_L/x,\\
+\cos(\xi\log p^r)&\le\cos((x+h/2)\log p^r)+\tfrac h2\log p^r.
+\end{aligned}
+\]
+
+Thus a computable certified lower enclosure is
+
+\[
+\ell_x=m(x)-c_\infty-2\sum_{p^r\le e^L}w_{p,r}\big[\cos((x+h/2)\log p^r)+\tfrac h2\log p^r\big]-B_L/x.
+\]
+
+If Arb proves ℓ_x≥g, **the entire continuum cell is good**; otherwise put it into a conservative unresolved cover. Put the entire [0,a] into that cover and reflect the union across zero. Call the resulting symmetric measurable set E. If the previously certified outer-tail bound \(\gamma_L(R)\ge g\), then **H_L(ξ)≥g for every real ξ outside E**, with no gridding gap. For any f in the infinite closed span of window Fourier modes |m|>N, N>RL/π, Cauchy-Schwarz gives the uniform pointwise estimate \(|\widehat f(\xi)|²≤8L\|f\|²/(\pi²N)\) on |ξ|≤R, and therefore
+
+\[
+\int_E|\widehat f(\xi)|²\,\frac{d\xi}{2\pi}
+\le \frac{4L\operatorname{meas}(E)}{\pi³N}\|f\|².
+\]
+
+Since \(H_L\ge-C_L^*\) globally, the **rigorous infinite-dimensional coercivity inequality** is
+
+\[
+\boxed{Q_L[f]\ge\left[g-\frac{4L\operatorname{meas}(E)}{\pi³N}(g+C_L^*)\right]\|f\|².}
+\]
+
+The source `discovery/semilocal_frequency_band_certificate.py` implements every step in **192-bit outward-rounded Arb** (rational endpoints and cell widths, digamma interval values, trig enclosures and analytically bounded cosine variation). Failed/indeterminate cells are conservatively counted into E; the method does **not** assume they are negative or claim pointwise sign from sampled midpoint values.
+
+**Exact certified results (cell width h=1/100, target g=1/2):**
+
+- **λ=5/2**: a=20, R=1024, **97,408 of 100,400 cells** are certified good; 2,992 unresolved, symmetric bad-set measure at most **99.84**. For **every** high-mode f with |m|>**800**, Arb gives \(Q_L[f]\ge 0.01642897384545021676\|f\|²\). Earlier all-band estimate required N=12,000; another earlier crude direct-kinetic estimate required ~1,052,008. This is a rigorously checked >1,000× reduction in the cutoff relative to that crude estimate.
+- **λ=2 (dyadic)**: a=10, R=256, **22,621 of 24,600 cells** are certified good; 1,979 unresolved, symmetric bad-set measure at most **59.58**. For **every** high-mode f with |m|>**300**, Arb gives \(Q_L[f]\ge0.05424503842240279532\|f\|²\).
+
+These are **genuine infinite-dimensional high-subspace certificates**, not a proof of positivity on the full support Hilbert space. In particular, the low Fourier block with modes |m|≤800 (respectively ≤300) and its cross coupling to the infinite positive complement remain unproved, and there is no all-support extension. They are rigorous, finite-dimensional *remaining-target reductions* at these two specific supports; RH is still open.
