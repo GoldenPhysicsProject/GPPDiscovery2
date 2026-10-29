@@ -132,6 +132,9 @@ def main():
                 print(f"m={m:+d},n={n:+d},Q={z}; pole={parts[0]}, arch={parts[1]}, prime={parts[2]}")
         M.append(row)
     from arb_multiwindow_certificates import certify_positive_definite
+    # Its module initializes 160-bit context on import. Restore requested
+    # precision before interval LDL and normalized Rayleigh arithmetic.
+    ctx.prec = int(os.environ.get('GPP_ARB_PREC_BITS', '160'))
     try:
         pivots=certify_positive_definite(M)
         if args.quiet:
