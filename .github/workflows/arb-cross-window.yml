@@ -1,0 +1,30 @@
+name: Arb cross-window finite certificates
+
+on:
+  push:
+    branches:
+      - codex/discovery-workbench
+    paths:
+      - discovery/arb_multiwindow_certificates.py
+      - discovery/normalized_window_operator.py
+      - .github/workflows/arb-cross-window.yml
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  rigorous-finite-controls:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Install Arb and numerical diagnostic dependencies
+        run: python -m pip install 'python-flint==0.9.0' 'numpy>=2,<3'
+      - name: Arb rigorous finite matrix checks
+        run: python discovery/arb_multiwindow_certificates.py
+      - name: Numerical controls with explicit uncertainty limits
+        run: python discovery/normalized_window_operator.py
