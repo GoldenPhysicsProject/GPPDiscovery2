@@ -100,6 +100,8 @@ def main():
                     help='Fail if interval LDL cannot certify this finite test matrix PD')
     ap.add_argument('--quiet',action='store_true',
                     help='Print pivot certificates without every matrix entry')
+    ap.add_argument('--require-counterexample',action='store_true',
+                    help='Fail unless this finite PD matrix violates both strong sufficient bounds')
     args=ap.parse_args()
     assert 0<=args.n<=32
     assert args.lambda_den>0
@@ -157,6 +159,10 @@ def main():
             print('CERTIFIED ||T||>1 using rational trial vector and Arb Rayleigh:',rayleigh)
         else:
             print('No ||T||>1 certificate from leading numeric trial vector:',rayleigh)
+        if args.require_counterexample:
+            assert bad_rows and rayleigh > 1, 'Expected both sufficient tests to fail'
+    elif args.require_counterexample:
+        raise AssertionError('Normalized certificate requires positive diagonal')
     print('Scope: exact semilocal matrix formula at finite support and N, not RH')
 
 
