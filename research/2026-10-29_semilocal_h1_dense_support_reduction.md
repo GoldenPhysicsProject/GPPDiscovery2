@@ -174,3 +174,22 @@ since `csch y=2Σ_(j≥0)e^{−(2j+1)y}`. Writing `S(ξ)=Re ψ(1+iξ)−ψ(1)=Σ
 `m(ξ)=2S(ξ)−S(ξ/2)`.
 
 An independent SciPy digamma check at ξ=1.3 agrees to 7e−16. Thus the celestial modular factor and the arithmetic Weil gamma supplier both use the odd-frequency ladder of the hyperbolic cosecant/Gamma family, albeit in **different transforms and with different physical roles**: P is the cut phase-space weight, m is a positive logarithmic-frequency quadratic-form symbol. This establishes a concrete special-function and thermal-ladder bridge, **not** an identification of scattering amplitudes with prime distributions, not a bulk-boundary map, and not a proof of RH.
+
+
+### Doubling from the half-shift Gamma family
+
+Define a normalized real analytic Gamma modulus family (for a>0)
+
+`P_a(ν)=Γ(a+iν)Γ(a−iν)/Γ(a)²`.
+
+The celestial weight is exactly `P_1(ν)=πν/sinh(πν)`. The arithmetic positive multiplier is its **half-shift dimension derivative**
+
+`m(ξ) = (1/2)[∂/∂a log P_a(ξ/2)]_(a=1/2)`.
+
+This is immediate from `∂_a logΓ(a+iν)=ψ(a+iν)` and the real-part identity. Meanwhile the Γ duplication formula at `z=1/2+iξ/2` gives
+
+`P_1(ξ) = P_1(ξ/2) P_(1/2)(ξ/2)`,
+
+`P_(1/2)(ν)=1/cosh(πν)`,
+
+or explicitly `P(ξ)=P(ξ/2) sech(πξ/2)`. This is an **exact scale-doubling factorization** relating the a=1/2 and a=1 unitary-axis Gamma modulus sectors. It mirrors the project's formal shift `Δ=2s` at the level of Gamma normalizers, but should not be described as a proved representation-theoretic equivalence, holographic identification or scattering/RH theorem without an actual intertwiner.
