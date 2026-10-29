@@ -51,5 +51,7 @@ jobs:
         run: python discovery/semilocal_symbol_tail_certificate.py --radius 512
       - name: Rigorous infinite-dimensional high-Fourier subspace coercivity
         run: python discovery/semilocal_symbol_tail_certificate.py --radius 1024 --fourier-tail-n 12000
+      - name: Dyadic lambda 2 infinite high-Fourier subspace Arb positivity
+        run: python discovery/semilocal_symbol_tail_certificate.py --lambda-num 2 --lambda-den 1 --radius 256 --fourier-tail-n 2000
       - name: Numerical controls with explicit uncertainty limits
         run: python discovery/normalized_window_operator.py
