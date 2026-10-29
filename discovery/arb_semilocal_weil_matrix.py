@@ -15,10 +15,12 @@ Results are finite-support matrix enclosures, not global Weil positivity.
 """
 
 import argparse
+import os
 import numpy as np
 from flint import arb, acb, ctx, fmpq
 
-ctx.prec = 160
+ctx.prec = int(os.environ.get('GPP_ARB_PREC_BITS', '160'))
+ARB_TOL = float(os.environ.get('GPP_ARB_TOL', '1e-25'))
 I = acb(0, 1)
 
 
@@ -74,7 +76,7 @@ def prime_powers(bound):
 
 def real_integral(f, L):
     z = acb.integral(lambda x, analytical: f(x), acb(0), acb(L),
-                     rel_tol=1e-25, abs_tol=1e-25,
+                     rel_tol=ARB_TOL, abs_tol=ARB_TOL,
                      eval_limit=100000)
     # Arb certifies complex integration. The physical integrand is real on
     # [0,L]; its real part is an enclosure of the desired real integral.
