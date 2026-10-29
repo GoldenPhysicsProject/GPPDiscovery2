@@ -166,3 +166,48 @@ The positive \(\mathcal E_L+\mathcal M_L\) is an explicit Archimedean Gaussian/s
 - Earlier team Arb matrix: \`GPPDiscovery2/discovery/arb_semilocal_weil_matrix.py\`.
 - Earlier prime–pole mean-field Ward observation in Astra's bridge notes and PR #11.
 - Current derivation: Codex, October 29; does not claim pole positivity or an all-support theorem.
+
+
+## 8. NEW explicit Fourier-tail coercivity estimate (all high modes, not just compactness)
+
+For fixed L>0 let \(U_m(x)=L^{-1/2}e^{2\pi imx/L}\) on [0,L], extended by zero outside. For integer N≥1, take any \(f=\sum_{|m|>N}a_mU_m\in L^2([0,L])\), meaning **all** Fourier coefficients of order ≤N vanish, not just a finite truncation. Set \(R=\pi\sqrt N/L\).
+
+For \(|\xi|\le R\) and \(|m|>N\),
+\[
+|\widehat U_m(\xi)|
+\le\frac{2}{\sqrt L|2\pi m/L-\xi|}
+\le\frac{2\sqrt L}{\pi|m|}.
+\]
+By Cauchy-Schwarz over m, Parseval in the periodic Fourier basis, and \(\sum_{m>N}m^{-2}\le1/N\),
+\[
+\int_{-R}^R |\widehat f(\xi)|^2\frac{d\xi}{2\pi}
+\le \frac{8}{\pi^2\sqrt N}\,\|f\|_2^2.
+\]
+The digamma kinetic multiplier \(h(\xi)\) is increasing in \(|\xi|\), since
+\[
+h(\xi)=2\sum_{j\ge0}
+\frac{\xi^2}{(2j+1)((2j+1)^2+\xi^2)}
+\]
+is a sum of increasing nonnegative terms. Consequently,
+\[
+\boxed{
+\mathcal E_L[f]\ge
+\left(1-\frac8{\pi^2\sqrt N}\right)
+h\!\left(\frac{\pi\sqrt N}{L}\right)\|f\|_2^2.
+}
+\]
+Using Section 5's explicit bounded negative perturbation gives the exact **one-sided full completed-form bound**
+\[
+\boxed{
+Q_L[f]\ge \left[
+\left(1-\frac8{\pi^2\sqrt N}\right)
+h\!\left(\frac{\pi\sqrt N}{L}\right)-B(L)
+\right]\|f\|_2^2,
+\qquad f\perp E_{L,N}.
+}
+\]
+No zeta-zero or RH hypothesis enters. For every **fixed** L, the displayed bracket eventually becomes positive as N→∞, because \(h(\xi)\sim\log|\xi|\).
+
+At \(L=2\log(5/2)\), the conservative perturbation bound evaluates to \(B(L)\approx8.7355632895\). A high-precision exploratory calculation finds the bracket first positive around \(N=1{,}052{,}008\). This is **not an Arb interval certification of that numerical threshold**, and this very loose cutoff is far larger than the 41-mode Arb finite matrix. The theorem nevertheless gives an explicit, finite high-frequency cutoff and a tractable pathway to a **fixed-support** all-N Schur test.
+
+Crucial: high-mode positivity and a positive finite low-mode principal block DO NOT imply positivity of the full mixed block. One still needs the exact low–high coupling / Schur complement or another global one-sided argument. As \(L\to\infty\), \(B(L)\) grows due to the prime and pole pieces, so this theorem alone gives **no support-uniform positivity**. It is a strong restriction on where a fixed-support negative mode could hide, not an RH proof.
