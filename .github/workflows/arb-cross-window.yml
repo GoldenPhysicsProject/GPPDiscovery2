@@ -54,9 +54,9 @@ jobs:
         run: python discovery/semilocal_symbol_tail_certificate.py --radius 1024 --fourier-tail-n 12000
       - name: Dyadic lambda 2 infinite high-Fourier subspace Arb positivity
         run: python discovery/semilocal_symbol_tail_certificate.py --lambda-num 2 --lambda-den 1 --radius 256 --fourier-tail-n 2000
-      - name: Rigorous band-cover infinite tail at lambda 5/2 N800
-        run: python discovery/semilocal_frequency_band_certificate.py --lambda-num 5 --lambda-den 2 --radius 1024 --inner 20 --step-den 100 --fourier-tail-n 800
-      - name: Rigorous band-cover infinite tail at dyadic lambda 2 N300
-        run: python discovery/semilocal_frequency_band_certificate.py --lambda-num 2 --lambda-den 1 --radius 256 --inner 10 --step-den 100 --fourier-tail-n 300
+      - name: Rigorous band-cover infinite tail at lambda 5/2 weighted N350
+        run: python discovery/semilocal_frequency_band_certificate.py --lambda-num 5 --lambda-den 2 --radius 1024 --inner 20 --step-den 100 --fourier-tail-n 350
+      - name: Rigorous band-cover infinite tail at dyadic lambda 2 weighted N110
+        run: python discovery/semilocal_frequency_band_certificate.py --lambda-num 2 --lambda-den 1 --radius 256 --inner 10 --step-den 100 --fourier-tail-n 110
       - name: Numerical controls with explicit uncertainty limits
         run: python discovery/normalized_window_operator.py
