@@ -9,6 +9,7 @@ on:
       - discovery/arb_semilocal_weil_matrix.py
       - discovery/arb_semilocal_regression.py
       - discovery/arb_one_sided_spectrum_sweep.py
+      - discovery/semilocal_symbol_tail_certificate.py
       - discovery/normalized_window_operator.py
       - .github/workflows/arb-cross-window.yml
   workflow_dispatch:
@@ -46,5 +47,9 @@ jobs:
         run: python discovery/arb_one_sided_spectrum_sweep.py --lambda-num 3 --lambda-den 2 --max-n 3 --require-positive
       - name: One-sided Arb brackets for longer support lambda 10
         run: python discovery/arb_one_sided_spectrum_sweep.py --lambda-num 10 --lambda-den 1 --max-n 3 --require-positive
+      - name: Rigorous exact-symbol positivity for every real |xi| >= 512
+        run: python discovery/semilocal_symbol_tail_certificate.py --radius 512
+      - name: Rigorous infinite-dimensional high-Fourier subspace coercivity
+        run: python discovery/semilocal_symbol_tail_certificate.py --radius 1024 --fourier-tail-n 12000
       - name: Numerical controls with explicit uncertainty limits
         run: python discovery/normalized_window_operator.py
