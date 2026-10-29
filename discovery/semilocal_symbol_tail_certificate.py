@@ -29,7 +29,8 @@ ctx.prec = 192
 
 
 def certify_tail(lambda_num: int, lambda_den: int, radius: int,
-                 fourier_tail_n: int | None = None):
+                 fourier_tail_n: int | None = None,
+                 check_negative_origin: bool = False):
     assert lambda_den > 0 and lambda_num > lambda_den and radius > 0
     lam = arb(lambda_num) / arb(lambda_den)
     L = 2 * lam.log()
@@ -47,6 +48,14 @@ def certify_tail(lambda_num: int, lambda_den: int, radius: int,
           f'oscillatory variation constant={variation}')
     print(f'CERTIFIED lower bound on h_L(|xi|>=R): {margin}')
     assert margin > 0, 'Cannot certify positive tail at this radius'
+    if check_negative_origin:
+        # Exact elementary integral I(L)=int_0^L r(y)dy.
+        t = 1 / lam
+        tilt = (2 / (1+t)).log() - (2 / (1+t*t)).log()/2 \
+            + arb.pi()/4 - t.atan()
+        origin = 8 * (L/2).sinh() - 2*tilt - contact - 2*weights
+        print(f'CERTIFIED exact symbol at zero h_L(0) = {origin}')
+        assert origin < 0, 'This support has no certified negative origin'
     print('Certificate scope: all REAL |xi|>=R for exact semilocal symbol; '
           'not all functions and not RH')
     if fourier_tail_n is not None:
@@ -74,9 +83,10 @@ def main():
     p.add_argument('--lambda-den', type=int, default=2)
     p.add_argument('--radius', type=int, default=512)
     p.add_argument('--fourier-tail-n', type=int, default=None)
+    p.add_argument('--check-negative-origin', action='store_true')
     args = p.parse_args()
     certify_tail(args.lambda_num, args.lambda_den, args.radius,
-                 args.fourier_tail_n)
+                 args.fourier_tail_n, args.check_negative_origin)
 
 
 if __name__ == '__main__':
