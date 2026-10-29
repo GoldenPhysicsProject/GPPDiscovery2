@@ -161,3 +161,16 @@ This provides a precise candidate for the previously missing *operator tail boun
 At λ=5/2, the zero mode f=U₀ yields (ordinary SciPy quadrature, **not** an interval certificate for this decomposition): `E_∞^full=1.171288928002072`, regular+contact `R_reg=0.329543566735458`, prime `P=1.461650201504385`. Therefore `E_∞^full+R_reg−P=0.03918229323314515`, agreeing to floating precision with the previously independently Arb-certified exact Q₀₀≈0.03918229323314478. This checks the full-tail sign and constants in the new decomposition.
 
 The crude all-signs-worst-case remainder bound at λ=5/2 is numerically `∫₀ᴸ|k|≈3.7107968575`, sum of prime-power weights `≈2.1907492782`, and `C_L≈14.9113321832`. Thus requiring m(ξ)>C_L based on this absolute bound would push to extremely high frequencies (roughly exp(C_L)≈3 million before constants), far beyond the tested 129 modes. **This bound is structural but not practically sharp.** Actual progress requires exploiting signs/cancellation in the regular and prime terms and a rigorous low/high cross estimate. Do not claim it already turns finite Arb positivity into a global certificate.
+
+
+## Exact but limited bridge to celestial modular spectral weight
+
+The attached manuscript `Modular_Thermality_of_the_Celestial_Spectral_Weight.tex` has the independently derived celestial phase-space factor `P(λ)=Γ(1+iλ)Γ(1−iλ)=πλ/csch(πλ)^{-1}`, i.e. `P(λ)=πλ/sinh(πλ)`, and the positive odd-ladder expansion `P(λ)=2πλ Σ_(j≥0)e^{−πλ(2j+1)}`. The new Archimedean supplier above obeys the **exact same odd-index decomposition mechanism**:
+
+`m(ξ)=2ξ² Σ_(j≥0) 1/[(2j+1)((2j+1)²+ξ²)]`
+
+since `csch y=2Σ_(j≥0)e^{−(2j+1)y}`. Writing `S(ξ)=Re ψ(1+iξ)−ψ(1)=Σ_(n≥1)ξ²/[n(n²+ξ²)]`, the digamma duplication formula gives the exact dyadic cancellation
+
+`m(ξ)=2S(ξ)−S(ξ/2)`.
+
+An independent SciPy digamma check at ξ=1.3 agrees to 7e−16. Thus the celestial modular factor and the arithmetic Weil gamma supplier both use the odd-frequency ladder of the hyperbolic cosecant/Gamma family, albeit in **different transforms and with different physical roles**: P is the cut phase-space weight, m is a positive logarithmic-frequency quadratic-form symbol. This establishes a concrete special-function and thermal-ladder bridge, **not** an identification of scattering amplitudes with prime distributions, not a bulk-boundary map, and not a proof of RH.
