@@ -74,13 +74,13 @@ def main():
     p.add_argument('--max-n',type=int,default=20)
     p.add_argument('--require-positive',action='store_true')
     args=p.parse_args()
-    assert args.lambda_den > 0 and 0<=args.max_n<=32
+    assert args.lambda_den > 0 and 0<=args.max_n<=64
     lam=arb(args.lambda_num)/args.lambda_den
     assert lam>1
     cutoff=(args.lambda_num**2)//(args.lambda_den**2)
     modes=list(range(-args.max_n,args.max_n+1))
     Q=[[entry(i,j,lam,cutoff)[0] for j in modes] for i in modes]
-    ns=sorted({0,1,2,3,5,8,12,16,args.max_n} & set(range(args.max_n+1)))
+    ns=sorted({0,1,2,3,5,8,12,16,20,25,32,48,args.max_n} & set(range(args.max_n+1)))
     print(f'lambda={args.lambda_num}/{args.lambda_den}, L=2log(lambda), full modes={len(modes)}')
     for n in ns:
         idx=list(range(args.max_n-n,args.max_n+n+1))
