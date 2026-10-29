@@ -61,3 +61,34 @@ A **cofinal sequence of supports suffices**: choose λ_k=2^k, k≥1. Every compa
 At λ=5/2, N64 (129 modes), all LDL pivots strictly positive, with `0.260089 < 1+λ_min(T) < 0.260094` certified by shifted LDL and rational Rayleigh witness. Dyadic λ=2, N32 (65 modes) gap (0.261656,0.261661); λ=4,N32 gap (0.239675,0.239680); λ=8,N32 gap (0.308723,0.308728); λ=16,N32 gap (0.330676,0.330681). Each checked matrix was certified positive definite. These are finite observations, not the all-N claim.
 
 Code: `discovery/arb_semilocal_weil_matrix.py`, `discovery/arb_one_sided_spectrum_sweep.py` on `codex/discovery-workbench`. Rigorous CI green through the earlier 129-mode sweep; extended workflow remains a separate gate.
+
+
+## Exact positive Archimedean square supplier
+
+The overlap correlation gives a second exact identity, for every 0≤y≤L:
+
+`q_f(0)−q_f(y)
+ = ∫₀^(L−y)|f(x+y)−f(x)|²dx
+   +∫₀^y|f(x)|²dx
+   +∫_(L−y)^L|f(x)|²dx`. (2)
+
+This follows by expanding the interior square, then adding the two endpoint strips. No spectral hypothesis or RH is involved. Therefore the Archimedean stiffness
+
+`E_∞(f)=∫₀^L [q_f(0)−q_f(y)]/[2sinh y]dy ≥ 0`. (3)
+
+The integral converges by (1), and it is a positive quadratic form. Split the **exact** completed Weil distribution in the v34 convention:
+
+`Ψ♯(q_f)
+ = E_∞(f) + ∫₀^L k(y) q_f(y)dy
+   + [atanh(e^(−L))−(log(4π)+γ)/2]q_f(0)
+   − Σ_(p^r≤e^L) (log p)/sqrt(p^r) q_f(rlog p)`,
+
+where
+
+`k(y)=e^(y/2)+e^(−y/2)+(1−e^(y/2))/(2sinh y)`,
+
+and k has a removable limit at y=0. This is a simple algebraic recombination of pole, exact Archimedean main integral and tail, and prime terms; it has NOT discarded the mandatory tail or made a sign assumption on the remainder.
+
+Equation (3) is a canonical **unconditionally nonnegative Archimedean supplier**. The rest contains a regular (bounded on fixed windows) continuous kernel, an L² contact coefficient, and finite signed prime-shift correlations. The actual RH-strength task is to show that this positive supplier plus the regular/contact remainder dominates the signed prime energy **for every** admissible f at all cofinal windows. Large positive eigenvalues of normalized cross-coupling are entirely compatible with this decomposition.
+
+Potential tail approach (not yet proved): (3) behaves like a logarithmic-frequency Dirichlet energy for high Fourier modes, while for each fixed λ the finite prime shift operator and the regular kernel are L²-bounded. Quantify a high-frequency coercivity lower bound with low/high Schur cross terms to reduce the all-N problem at each λ to finite rigorous low-mode certificates. A bound on individual high-mode diagonals is insufficient: low/high off-diagonal coupling must also be controlled.
