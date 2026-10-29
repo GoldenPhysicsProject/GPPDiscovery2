@@ -130,3 +130,27 @@ With the exact pole and gamma combination from the previous section, the **entir
 For **fixed λ**, the remaining regular convolution kernel, contact term and finite prime-shift correlations give L²-bounded quadratic forms on [0,L]. Thus one has a positive logarithmic-frequency principal form plus a bounded signed perturbation. This is a concrete analytic setup for a *one-sided high-frequency tail and low/high Schur-complement* strategy. Proving that the combined form is globally nonnegative is still the RH-strength problem, not established by the decomposition or finite Arb checks. In particular high-frequency coercivity alone does not control finite negative directions or offdiagonal low/high sewing.
 
 Technical caveat: for the zero-extended f, the full-line logarithmic form may be finite for compactly supported H¹([0,L]) functions with nonzero boundary values because the symbol grows only logarithmically, even though the zero extension need not belong to global H¹.
+
+
+## Fixed-support compact-resolvent and finite-negative-index reduction
+
+The previous multiplier yields a standard *closed-form* consequence that is stronger than numerical convergence, but weaker than Weil positivity.
+
+Let `H_L={f∈L²(ℝ): support(f)⊂[0,L]}`, a closed subspace. Define the positive form `E_L(f)=∫m(ξ)|\hat f(ξ)|²dξ` with form domain `D(E_L)=H_L∩D(m(D)^(1/2))` and Hilbert norm `(||f||₂²+E_L(f))^(1/2)`. Since m(ξ)≥0 and m(ξ)→∞ as |ξ|→∞, a form-bounded sequence has uniformly small high-frequency Fourier tails; fixed spatial support gives tightness. Fourier cutoff plus compact spatial support (Kolmogorov–Riesz) makes the form-domain embedding into H_L compact. The associated nonnegative self-adjoint operator A_L has **compact resolvent** and discrete eigenvalues tending to +∞ (counting multiplicity).
+
+The completed remainder `R_L=Ψ♯−E_L` is explicitly **L²-bounded** at fixed L because `|q_f(y)|≤2||f||₂²`. An elementary absolute bound is
+
+`|R_L(f)| ≤ C_L ||f||₂²`,
+
+`C_L=2∫₀^L|k(y)|dy+|log(4π)+γ|
+       +2Σ_(p^r≤e^L)(log p)p^(−r/2)`,
+
+where k is the continuous removable-at-zero function in the preceding section. This is intentionally crude but explicit and unconditional. Therefore the completed fixed-support form `A_L+R_L` is closed, lower semibounded, self-adjoint in its form realization, and has compact resolvent. In particular it has **only finitely many negative eigenvalues** (if any).
+
+More quantitatively, if `μ_j(A_L)` are its increasing eigenvalues, the min-max principle gives
+
+`number of negative eigenvalues of completed form ≤ #{j: μ_j(A_L) ≤ C_L}`.
+
+On the spectral complement `E_L(f)≥μ_(J+1)||f||₂²`; if μ_(J+1)>C_L, the full form is strictly positive there, *without* any assumption about RH. But positivity of the entire form additionally requires a **low/high Schur complement bound**, because bounded remainder cross terms can couple low and high sectors. Exact finite Arb certificates for the Fourier-Galerkin matrices cannot simply be substituted for certificates in the spectral basis of A_L without controlling this change of basis and cross couplings.
+
+This provides a precise candidate for the previously missing *operator tail bound*: use the unbounded positive digamma operator as the comparison operator, obtain an explicit high-frequency spectral threshold from C_L, then certify the finite low-energy Schur complement. This avoids demanding operator-norm convergence of an unbounded completed form. **No all-L uniformity, all-N positivity or RH theorem is claimed here.**
