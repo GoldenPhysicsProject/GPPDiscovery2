@@ -1,4 +1,5 @@
-import Mathlib
+import Mathlib.LinearAlgebra.Matrix.PosDef
+import Mathlib.Tactic.Linarith
 
 /-!
 Finite one-sided normalized quadratic form criterion, with an explicit
@@ -31,8 +32,7 @@ theorem normalized_psd_of_one_sided
   have h := hLower v
   have heq : star v ⬝ᵥ ((1 + T) *ᵥ v) =
       star v ⬝ᵥ v + star v ⬝ᵥ (T *ᵥ v) := by
-    simp [Matrix.dotProduct, Matrix.mulVec, Finset.mul_sum,
-      Finset.sum_add_distrib, mul_add]
+    simp only [Matrix.add_mulVec, Matrix.one_mulVec, Matrix.dotProduct_add]
   rw [heq]
   linarith
 
