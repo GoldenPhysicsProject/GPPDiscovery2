@@ -1,0 +1,33 @@
+name: Corrected Weil 41 Mode High Precision
+
+on:
+  push:
+    branches: [codex/discovery-workbench]
+    paths:
+      - 'discovery/arb_semilocal_weil_matrix.py'
+      - '.github/workflows/arb-weil-corrected-41.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  completed-weil-high-precision:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    env:
+      GPP_ARB_PREC_BITS: '512'
+      GPP_ARB_TOL: '1e-90'
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Install pinned Arb and numerical dependencies
+        run: python -m pip install 'python-flint==0.9.0' 'numpy>=2,<3'
+      - name: Check exact regularized diagonal against unregularized Weil formula
+        run: python discovery/arb_semilocal_regression.py
+      - name: Certified corrected completed Weil 41 mode LDL
+        run: python discovery/arb_semilocal_weil_matrix.py --n 20 --lambda-num 5 --lambda-den 2 --require-positive --quiet
+      - name: One-sided corrected 25 mode spectral sweep
+        run: python discovery/arb_one_sided_spectrum_sweep.py --lambda-num 5 --lambda-den 2 --max-n 12 --require-positive
