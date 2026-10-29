@@ -32,7 +32,7 @@ theorem normalized_psd_of_one_sided
   have h := hLower v
   have heq : star v ⬝ᵥ ((1 + T) *ᵥ v) =
       star v ⬝ᵥ v + star v ⬝ᵥ (T *ᵥ v) := by
-    simp only [Matrix.add_mulVec, Matrix.one_mulVec, Matrix.dotProduct_add]
+    simp only [Matrix.add_mulVec, Matrix.one_mulVec, dotProduct_add]
   rw [heq]
   linarith
 
