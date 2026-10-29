@@ -97,8 +97,10 @@ def main():
     ap.add_argument('--lambda-den',type=int,default=2)
     ap.add_argument('--require-positive',action='store_true',
                     help='Fail if interval LDL cannot certify this finite test matrix PD')
+    ap.add_argument('--quiet',action='store_true',
+                    help='Print pivot certificates without every matrix entry')
     args=ap.parse_args()
-    assert 0<=args.n<=3
+    assert 0<=args.n<=32
     assert args.lambda_den>0
     lam=arb(args.lambda_num)/args.lambda_den
     assert lam > 1
@@ -113,12 +115,17 @@ def main():
         for n in modes:
             z,parts=entry(m,n,lam,bound)
             row.append(z)
-            print(f"m={m:+d},n={n:+d},Q={z}; pole={parts[0]}, arch={parts[1]}, prime={parts[2]}")
+            if not args.quiet:
+                print(f"m={m:+d},n={n:+d},Q={z}; pole={parts[0]}, arch={parts[1]}, prime={parts[2]}")
         M.append(row)
     from arb_multiwindow_certificates import certify_positive_definite
     try:
         pivots=certify_positive_definite(M)
-        print('CERTIFIED matrix positive definite via Arb LDL pivots:', pivots)
+        if args.quiet:
+            print(f'CERTIFIED {len(pivots)} positive Arb LDL pivots; '
+                  f'central pivot = {pivots[args.n]}')
+        else:
+            print('CERTIFIED matrix positive definite via Arb LDL pivots:', pivots)
     except AssertionError as exc:
         print('LDL cannot certify positive definite:', exc)
         if args.require_positive:
