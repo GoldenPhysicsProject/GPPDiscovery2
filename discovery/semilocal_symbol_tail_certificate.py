@@ -28,7 +28,8 @@ from arb_semilocal_weil_matrix import prime_powers
 ctx.prec = 192
 
 
-def certify_tail(lambda_num: int, lambda_den: int, radius: int):
+def certify_tail(lambda_num: int, lambda_den: int, radius: int,
+                 fourier_tail_n: int | None = None):
     assert lambda_den > 0 and lambda_num > lambda_den and radius > 0
     lam = arb(lambda_num) / arb(lambda_den)
     L = 2 * lam.log()
@@ -48,6 +49,23 @@ def certify_tail(lambda_num: int, lambda_den: int, radius: int):
     assert margin > 0, 'Cannot certify positive tail at this radius'
     print('Certificate scope: all REAL |xi|>=R for exact semilocal symbol; '
           'not all functions and not RH')
+    if fourier_tail_n is not None:
+        assert fourier_tail_n > 0
+        # f in the closed span of U_m with |m|>N on [0,L]. Its low-frequency
+        # leakage is <= 8*L*R/(pi^3*N) by a Cauchy-Schwarz Fourier tail bound.
+        assert arb(fourier_tail_n) > arb(radius) * L / arb.pi()
+        leakage = 8 * L * radius / (arb.pi()**3 * fourier_tail_n)
+        # m(xi)>=0, k(y)>=0 and k(y)<=2*cosh(y/2), giving the GLOBAL
+        # pointwise symbol lower bound h_L(xi)>=-C_star.
+        worst_negative = 8 * (L / 2).sinh() + contact + 2 * weights
+        tail_coercivity = margin - (margin + worst_negative) * leakage
+        print(f'N={fourier_tail_n}; certified low-frequency leakage <= {leakage}')
+        print(f'global symbol lower bound -C_star = {-worst_negative}')
+        print(f'CERTIFIED Q_L(f)/||f||^2 >= {tail_coercivity} '
+              f'for every f with Fourier modes |m|>{fourier_tail_n}')
+        assert tail_coercivity > 0, 'Fourier high-subspace coercivity not certified'
+        print('High-Fourier-subspace certificate is conditional on the '
+              'stated exact Fourier-symbol identity, not whole-space positivity')
 
 
 def main():
@@ -55,8 +73,10 @@ def main():
     p.add_argument('--lambda-num', type=int, default=5)
     p.add_argument('--lambda-den', type=int, default=2)
     p.add_argument('--radius', type=int, default=512)
+    p.add_argument('--fourier-tail-n', type=int, default=None)
     args = p.parse_args()
-    certify_tail(args.lambda_num, args.lambda_den, args.radius)
+    certify_tail(args.lambda_num, args.lambda_den, args.radius,
+                 args.fourier_tail_n)
 
 
 if __name__ == '__main__':
