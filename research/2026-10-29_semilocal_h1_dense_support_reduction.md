@@ -92,3 +92,41 @@ and k has a removable limit at y=0. This is a simple algebraic recombination of 
 Equation (3) is a canonical **unconditionally nonnegative Archimedean supplier**. The rest contains a regular (bounded on fixed windows) continuous kernel, an L² contact coefficient, and finite signed prime-shift correlations. The actual RH-strength task is to show that this positive supplier plus the regular/contact remainder dominates the signed prime energy **for every** admissible f at all cofinal windows. Large positive eigenvalues of normalized cross-coupling are entirely compatible with this decomposition.
 
 Potential tail approach (not yet proved): (3) behaves like a logarithmic-frequency Dirichlet energy for high Fourier modes, while for each fixed λ the finite prime shift operator and the regular kernel are L²-bounded. Quantify a high-frequency coercivity lower bound with low/high Schur cross terms to reduce the all-N problem at each λ to finite rigorous low-mode certificates. A bound on individual high-mode diagonals is insufficient: low/high off-diagonal coupling must also be controlled.
+
+
+## Global Fourier multiplier of the positive Archimedean supplier
+
+Extend f by zero outside [0,L] to `\tilde f∈L²(ℝ)`. Because `q_f(y)=0` for y>L, the exact Archimedean tail absorbed in (3) gives
+
+`E_∞^full(f)=E_∞(f)+q_f(0)atanh(e^(−L))
+ = ∫₀^∞ [q_f(0)−q_f(y)]/[2sinh y]dy`,
+
+where for y≥0 the overlap identity is simply
+
+`q_f(0)−q_f(y) = ||\tilde f(·+y)−\tilde f||²_(L²(ℝ))`.
+
+Using the *unitary* Fourier transform and Tonelli (nonnegative integrand), we obtain the **exact diagonal spectral representation**
+
+`E_∞^full(f) = ∫_ℝ m(ξ) |\widehat{\tilde f}(ξ)|²dξ`,
+
+`m(ξ)=∫₀^∞ [1−cos(ξy)]/sinh(y)dy
+     =2 Σ_(j≥0) [ 1/(2j+1)−(2j+1)/((2j+1)²+ξ²) ]
+     =Re ψ(1/2+iξ/2)−ψ(1/2) ≥0`,
+
+with ψ the digamma function. The elementary proof is `1/sinh y=2Σ_(j≥0)e^(−(2j+1)y)`, integrate the Laplace transform termwise, and use the digamma partial fractions. At ξ=1, independent SciPy quadrature and complex digamma agree to ~8e−14, an auxiliary floating sanity check of the **analytically exact** identity.
+
+The symbol satisfies `m(0)=0` and `m(ξ)=log|ξ|+O(1)` as |ξ|→∞. Hence this positive part is naturally an **unbounded logarithmic-frequency quadratic form on L²**, with form domain
+
+`D(E)=\{f∈L²(ℝ): ∫m(ξ)|\hat f(ξ)|²dξ<∞\}`.
+
+Compactly supported H¹ functions are in D(E). In this sense insisting on operator-norm convergence of finite-rank Galerkin operators in the unbounded L² realization is not a suitable foundational target. The relevant topology is form convergence / the graph norm of `E_∞^full`.
+
+With the exact pole and gamma combination from the previous section, the **entire completed form** can be rewritten without any discarded tail:
+
+`Ψ♯(q_f)=E_∞^full(f)+∫₀^L k(y)q_f(y)dy
+         −[(log(4π)+γ)/2]q_f(0)
+         −Σ_(p^r≤e^L)(log p)/sqrt(p^r) q_f(rlog p)`.
+
+For **fixed λ**, the remaining regular convolution kernel, contact term and finite prime-shift correlations give L²-bounded quadratic forms on [0,L]. Thus one has a positive logarithmic-frequency principal form plus a bounded signed perturbation. This is a concrete analytic setup for a *one-sided high-frequency tail and low/high Schur-complement* strategy. Proving that the combined form is globally nonnegative is still the RH-strength problem, not established by the decomposition or finite Arb checks. In particular high-frequency coercivity alone does not control finite negative directions or offdiagonal low/high sewing.
+
+Technical caveat: for the zero-extended f, the full-line logarithmic form may be finite for compactly supported H¹([0,L]) functions with nonzero boundary values because the symbol grows only logarithmically, even though the zero extension need not belong to global H¹.
