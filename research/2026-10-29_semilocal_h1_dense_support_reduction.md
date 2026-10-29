@@ -1,3 +1,5 @@
+> **CORRECTION / ERRATUM (Oct 29, later audit):** The 41–129 mode and multi-support Arb *numerical* margins reported below were computed before fixing a diagonal Archimedean integrand error (extra exponential multiplying the cosine subtraction). Those margins and positivity certificates are **RETRACTED** for the correct matrix. See `discovery/arb_semilocal_weil_matrix.py` corrected commit `77501012`, `discovery/semilocal_log_kinetic_decomposition.md`, and the corrected 41-mode Arb certificate workflow `40967943004`. The analytic H¹, completed logarithmic symbol, Gamma identities and fixed-support compact-resolvent lemmas below use the exact symbolic form and are unaffected. Do not cite the historical 0.26 normalized margins. The **corrected** 41-mode certificate has only a certified margin >10⁻²⁴, and a general all-N bound remains open.
+
 # H¹ continuity and cofinal-support reduction for the exact semilocal Weil matrices
 
 2026-10-29 · Codex / GPPDiscovery2 · analytical workbench note, not an RH proof.
@@ -193,3 +195,54 @@ This is immediate from `∂_a logΓ(a+iν)=ψ(a+iν)` and the real-part identity
 `P_(1/2)(ν)=1/cosh(πν)`,
 
 or explicitly `P(ξ)=P(ξ/2) sech(πξ/2)`. This is an **exact scale-doubling factorization** relating the a=1/2 and a=1 unitary-axis Gamma modulus sectors. It mirrors the project's formal shift `Δ=2s` at the level of Gamma normalizers, but should not be described as a proved representation-theoretic equivalence, holographic identification or scattering/RH theorem without an actual intertwiner.
+
+
+## Rigorous symbol-tail and high-Fourier subspace certificate (corrected formula)
+
+The completed **corrected** semilocal quadratic form has a stronger exact full-line Fourier representation. For f supported in [0,L], with Fourier transform normalized by dξ/(2π),
+
+\[
+Q_L[f]=\int_{\mathbb R}H_L(\xi)|\widehat f(\xi)|^2\,\frac{d\xi}{2\pi},
+\quad H_L(\xi)=m(\xi)+2\int_0^L k(y)\cos(\xi y)\,dy-c_\infty-2\sum_{p^r\le e^L}w_{p,r}\cos(\xi r\log p).
+\]
+
+This follows *exactly* from Plancherel's identity \(q_f(y)=2\int_{\mathbb R}\cos(\xi y)|\widehat f(\xi)|^2d\xi/(2\pi)\), the full Archimedean subtraction tail and the definitions in the preceding sections. It is independent of any Galerkin quadrature implementation. Here \(c_\infty=\log(4\pi)+\gamma\), \(w_{p,r}=(\log p)p^{-r/2}\), and
+
+\[
+k(y)=2\cosh(y/2)-r(y),\quad r(y)=\frac{t^2}{(t+1)(t^2+1)},\quad t=e^{y/2}.
+\]
+
+For t≥1, let \(D=t^3+t^2+t+1\). The elementary polynomial identity \(D-3t^2=t(t-1)^2+1>0\) gives \(0<r(y)≤1/3\). Also \(1≤tD'(t)/D(t)≤3\), hence \(r'(y)=r(y)[1-tD'(t)/(2D(t))]\) satisfies \(|r'(y)|≤1/6\). Since \(2\cosh(y/2)\) is increasing, integration by parts yields, for ξ≠0,
+
+\[
+\left|2\int_0^L k(y)\cos(\xi y)\,dy\right|
+\le\frac{B_L}{|\xi|},\qquad B_L=8\cosh(L/2)-\frac{10}{3}+\frac L3.
+\]
+
+The odd-digamma series establishes that \(m(\xi)\) is increasing with |ξ|. Consequently, defining \(P_L=\sum_{p^r\le e^L}w_{p,r}\), for **every real** |ξ|≥R>0,
+
+\[
+H_L(\xi)\ge \gamma_L(R):=m(R)-c_\infty-2P_L-B_L/R.
+\]
+
+FLINT/Arb at 192-bit outward-rounded precision **certifies** for λ=5/2, L=2log(5/2), prime powers 2,3,4,5:
+
+- At **R=512**, \(\gamma_L(R)\in 0.0016094462909710492443639877578951592\pm10^{-55}\), strictly positive. Thus the corrected semilocal *symbol* has no negative values for any real |ξ|≥512. The certificate is not sampled frequency data: the monotonicity and integration-by-parts inequalities transfer the one interval evaluation to the entire unbounded tail.
+- At **R=1024**, \(\gamma_L(R)\in 0.70342656380156342732959110626409109\pm10^{-55}\).
+
+A stronger full **infinite-dimensional subspace** bound follows. Let \(U_m=L^{-1/2}e^{2\pi imx/L}\) and let \(f\in\overline{\mathrm{span}}\{U_m:|m|>N\}\subset L²(0,L)\) have finite logarithmic kinetic energy. If N>RL/π then, for |ξ|≤R,
+
+\[
+|\widehat U_m(\xi)|\le\frac{2\sqrt L}{\pi|m|},\qquad
+\int_{-R}^{R}|\widehat f(\xi)|²\,\frac{d\xi}{2\pi}\le \frac{8LR}{\pi^3 N}\|f\|².
+\]
+
+This uses Cauchy-Schwarz over infinitely many coefficients, Parseval and \(\sum_{m>N}m^{-2}\le1/N\). Globally, \(m≥0\), \(0≤k(y)≤2\cosh(y/2)\), so \(H_L(\xi)≥-C_L^*\) with the entirely explicit \(C_L^*=8\sinh(L/2)+c_\infty+2P_L\). Partitioning the **Fourier integral** at ±R, without discarding cross terms of the time-limited quadratic form, gives
+
+\[
+Q_L[f]\ge\left[\gamma_L(R)-\frac{8LR}{\pi^3N}\bigl(\gamma_L(R)+C_L^*\bigr)\right]\|f\|².
+\]
+
+At λ=5/2, R=1024, **N=12,000**, Arb certifies leakage ≤0.04034803314669005, \(C_L^*≈15.889738468201645\), and a strictly positive full-space high-Fourier coercivity coefficient **\(>0.03392499108179978\)**. This estimate holds for *every* (possibly infinite) linear combination of modes |m|>12000 in the form domain, not just a 24001-mode numerical test. Script `discovery/semilocal_symbol_tail_certificate.py` reproduces interval inequalities, including a failing assertion if the margin is not positive.
+
+This materially reduces the previous direct high-Fourier threshold estimate (~1,052,008 modes) to 12,000 at this specific λ. **It does not imply Q_L≥0 on arbitrary f.** The 24,001-mode low block is not certified, and its cross coupling with the positive high subspace requires a genuine Schur complement bound. Nor is this uniform in support λ. No RH claim follows.
