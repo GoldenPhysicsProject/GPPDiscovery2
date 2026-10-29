@@ -295,3 +295,36 @@ The source `discovery/semilocal_frequency_band_certificate.py` implements every 
 - **λ=2 (dyadic)**: a=10, R=256, **22,621 of 24,600 cells** are certified good; 1,979 unresolved, symmetric bad-set measure at most **59.58**. For **every** high-mode f with |m|>**300**, Arb gives \(Q_L[f]\ge0.05424503842240279532\|f\|²\).
 
 These are **genuine infinite-dimensional high-subspace certificates**, not a proof of positivity on the full support Hilbert space. In particular, the low Fourier block with modes |m|≤800 (respectively ≤300) and its cross coupling to the infinite positive complement remain unproved, and there is no all-support extension. They are rigorous, finite-dimensional *remaining-target reductions* at these two specific supports; RH is still open.
+
+
+### Stronger certified *weighted-deficit* covering theorem (supersedes N800/N300 tail thresholds)
+
+The binary good/bad interval cover above is conservative because it replaces the *actual possible deficit* on every unresolved cell by the global worst negative value \(C_L^*\). We now retain each cell's certified **upper** deficit from its Arb lower enclosure \(\ell_x\). Let \(g=1/2\) and choose the same cells; on each cell not proven good, the exact pointwise bound \((g-H_L(\xi))_+\le d_x:=\max(0,g-\ell_x)\) holds for every real ξ in the cell. Every \(d_x\) is rounded **upwards**, via Arb's `.upper()` endpoint operation, and cannot underestimate the deficit. On the inner band |ξ|≤a we continue to use the safe \(g+C_L^*\). Thus a finite computable integral upper bound is
+
+\[
+\boxed{\mathfrak D_L:=2a(g+C_L^*)+2\sum_{\text{uncertified cells }[x,x+h]}h\,d_x
+\ \ge\ \int_{\mathbb R}(g-H_L(\xi))_+\,d\xi.}
+\]
+
+Crucially, the largest possible bad frequency is now \(R_{bad}\), the right endpoint of the last uncertified cell (or a if none), **not** the outer R used merely to prove symbol positivity. For any f with only Fourier modes |m|>N and \(N>R_{bad} L/\pi\), the pointwise Fourier coefficient Cauchy-Schwarz estimate applies precisely on the support of \((g-H)_+\), so
+
+\[
+\boxed{Q_L[f]\ge\left(g-\frac{4L}{\pi^3N}\,\mathfrak D_L\right)\|f\|².}
+\]
+
+This weighted inequality is rigorous and improves the N threshold without requiring the gamma integrand itself to be pointwise nonnegative or discarding any cross terms. All unresolved intervals and rounding errors are charged conservatively.
+
+**GREEN 192-bit Arb-certified infinite-dimensional results**, workflow `arb-cross-window.yml` commit `454f756d816ec78203a62e40f9d1f052817413a8`, Actions **run 40971939701 SUCCESS**:
+
+- **λ=5/2, L=2log(5/2):** h=1/100, g=1/2, inner a=20, outer R=1024; 2,992 of 100,400 rational cells unresolved; \(R_{bad}≤589.61\), and Arb upper bound \(\mathfrak D_L≤701.748372668847552\). For **every** f in the *infinite* Fourier high-mode subspace |m|>**350** in the form domain, the completed quadratic form satisfies
+  \[
+  \boxed{Q_L[f]\ge0.02599051449087400500\,\|f\|_2^2.}
+  \]
+  This replaces the earlier rigorous N800 threshold and is >3000× smaller than the first explicit N≈1,052,008 cutoff.
+- **λ=2 (dyadic):** h=1/100, g=1/2, inner a=10, outer R=256; 1,979 of 24,600 rational cells unresolved; \(R_{bad}≤172.03\), \(\mathfrak D_L≤282.013341737189708\). For **every** f with |m|>**110**,
+  \[
+  \boxed{Q_L[f]\ge0.04149634758044221755\,\|f\|_2^2.}
+  \]
+  This replaces the earlier rigorous N300 threshold.
+
+The new code is `discovery/semilocal_frequency_band_certificate.py` at `0651ca49039fe17e0229ef8d7ade637917b2ab65`. Its positive-margin assertions and the corrected finite-matrix regression passed in CI `40971939701`. Hence any fixed-support nonpositive direction, if one exists, must have a nontrivial projection into the **701-dimensional** (respectively **221-dimensional**) finite low Fourier subspace. This is not a certificate that the low finite block is PSD, nor a Schur complement control; those remain the explicit remaining tasks. Nothing here extends simultaneously to every support length or proves RH.
