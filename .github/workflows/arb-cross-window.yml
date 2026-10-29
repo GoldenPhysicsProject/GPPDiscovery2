@@ -7,6 +7,7 @@ on:
     paths:
       - discovery/arb_multiwindow_certificates.py
       - discovery/arb_semilocal_weil_matrix.py
+      - discovery/arb_semilocal_regression.py
       - discovery/arb_one_sided_spectrum_sweep.py
       - discovery/normalized_window_operator.py
       - .github/workflows/arb-cross-window.yml
