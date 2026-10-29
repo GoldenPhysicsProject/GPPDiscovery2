@@ -5,6 +5,7 @@ on:
     branches: [codex/discovery-workbench]
     paths:
       - 'discovery/arb_semilocal_weil_matrix.py'
+      - 'discovery/arb_corrected_41_one_sided_margin.py'
       - '.github/workflows/arb-weil-corrected-41.yml'
   workflow_dispatch:
 
@@ -29,5 +30,7 @@ jobs:
         run: python discovery/arb_semilocal_regression.py
       - name: Certified corrected completed Weil 41 mode LDL
         run: python discovery/arb_semilocal_weil_matrix.py --n 20 --lambda-num 5 --lambda-den 2 --require-positive --quiet
+      - name: Explicit tiny one-sided corrected 41-mode spectral margin
+        run: python discovery/arb_corrected_41_one_sided_margin.py
       - name: One-sided corrected 25 mode spectral sweep
         run: python discovery/arb_one_sided_spectrum_sweep.py --lambda-num 5 --lambda-den 2 --max-n 12 --require-positive
