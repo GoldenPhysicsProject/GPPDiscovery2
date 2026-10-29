@@ -7,6 +7,7 @@ on:
     paths:
       - discovery/arb_multiwindow_certificates.py
       - discovery/arb_semilocal_weil_matrix.py
+      - discovery/arb_one_sided_spectrum_sweep.py
       - discovery/normalized_window_operator.py
       - .github/workflows/arb-cross-window.yml
   workflow_dispatch:
@@ -33,5 +34,7 @@ jobs:
         run: python discovery/arb_semilocal_weil_matrix.py --n 2 --lambda-num 3 --lambda-den 1 --require-positive
       - name: Completed Weil 41-mode interval LDL at lambda 5/2
         run: python discovery/arb_semilocal_weil_matrix.py --n 20 --lambda-num 5 --lambda-den 2 --require-positive --require-counterexample --quiet
+      - name: One-sided Arb spectral brackets through 41 modes
+        run: python discovery/arb_one_sided_spectrum_sweep.py --lambda-num 5 --lambda-den 2 --max-n 20 --require-positive
       - name: Numerical controls with explicit uncertainty limits
         run: python discovery/normalized_window_operator.py
