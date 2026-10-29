@@ -154,3 +154,10 @@ More quantitatively, if `μ_j(A_L)` are its increasing eigenvalues, the min-max 
 On the spectral complement `E_L(f)≥μ_(J+1)||f||₂²`; if μ_(J+1)>C_L, the full form is strictly positive there, *without* any assumption about RH. But positivity of the entire form additionally requires a **low/high Schur complement bound**, because bounded remainder cross terms can couple low and high sectors. Exact finite Arb certificates for the Fourier-Galerkin matrices cannot simply be substituted for certificates in the spectral basis of A_L without controlling this change of basis and cross couplings.
 
 This provides a precise candidate for the previously missing *operator tail bound*: use the unbounded positive digamma operator as the comparison operator, obtain an explicit high-frequency spectral threshold from C_L, then certify the finite low-energy Schur complement. This avoids demanding operator-norm convergence of an unbounded completed form. **No all-L uniformity, all-N positivity or RH theorem is claimed here.**
+
+
+## Independent numerical decomposition check and sharpness warning
+
+At λ=5/2, the zero mode f=U₀ yields (ordinary SciPy quadrature, **not** an interval certificate for this decomposition): `E_∞^full=1.171288928002072`, regular+contact `R_reg=0.329543566735458`, prime `P=1.461650201504385`. Therefore `E_∞^full+R_reg−P=0.03918229323314515`, agreeing to floating precision with the previously independently Arb-certified exact Q₀₀≈0.03918229323314478. This checks the full-tail sign and constants in the new decomposition.
+
+The crude all-signs-worst-case remainder bound at λ=5/2 is numerically `∫₀ᴸ|k|≈3.7107968575`, sum of prime-power weights `≈2.1907492782`, and `C_L≈14.9113321832`. Thus requiring m(ξ)>C_L based on this absolute bound would push to extremely high frequencies (roughly exp(C_L)≈3 million before constants), far beyond the tested 129 modes. **This bound is structural but not practically sharp.** Actual progress requires exploiting signs/cancellation in the regular and prime terms and a rigorous low/high cross estimate. Do not claim it already turns finite Arb positivity into a global certificate.
