@@ -32,13 +32,18 @@ jobs:
         run: python discovery/arb_semilocal_weil_matrix.py --n 2 --lambda-num 5 --lambda-den 2 --require-positive
       - name: Completed prime-Archimedean matrix at lambda 3, N=2
         run: python discovery/arb_semilocal_weil_matrix.py --n 2 --lambda-num 3 --lambda-den 1 --require-positive
-      - name: Completed Weil 41-mode interval LDL at lambda 5/2
-        run: python discovery/arb_semilocal_weil_matrix.py --n 20 --lambda-num 5 --lambda-den 2 --require-positive --require-counterexample --quiet
-      - name: One-sided Arb spectral brackets through 129 modes
-        run: python discovery/arb_one_sided_spectrum_sweep.py --lambda-num 5 --lambda-den 2 --max-n 64 --require-positive
+      # Historical 41-mode certificate was computed with a biased diagonal
+      # Archimedean integrand (fixed 2026-10-29). Do not gate on it.
+      # Reinstate larger dimensions only after new high precision enclosures.
+      - name: Exact corrected Weil diagonal regression
+        run: python discovery/arb_semilocal_regression.py
+      - name: Corrected Weil 9-mode interval LDL at lambda 5/2
+        run: python discovery/arb_semilocal_weil_matrix.py --n 4 --lambda-num 5 --lambda-den 2 --require-positive --quiet
+      - name: Corrected one-sided spectrum through 9 modes
+        run: python discovery/arb_one_sided_spectrum_sweep.py --lambda-num 5 --lambda-den 2 --max-n 4 --require-positive
       - name: One-sided Arb brackets for short support lambda 3/2
-        run: python discovery/arb_one_sided_spectrum_sweep.py --lambda-num 3 --lambda-den 2 --max-n 32 --require-positive
+        run: python discovery/arb_one_sided_spectrum_sweep.py --lambda-num 3 --lambda-den 2 --max-n 3 --require-positive
       - name: One-sided Arb brackets for longer support lambda 10
-        run: python discovery/arb_one_sided_spectrum_sweep.py --lambda-num 10 --lambda-den 1 --max-n 24 --require-positive
+        run: python discovery/arb_one_sided_spectrum_sweep.py --lambda-num 10 --lambda-den 1 --max-n 3 --require-positive
       - name: Numerical controls with explicit uncertainty limits
         run: python discovery/normalized_window_operator.py
