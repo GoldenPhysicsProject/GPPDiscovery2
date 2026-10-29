@@ -42,7 +42,15 @@ def arch_integrand(m, n, z, L):
         c = (w*z).cos()
         exprel = (z/2).hypgeom_1f1(1, 2)
         cosrel = -w*w*z/2*(w*z/2).sinc()**2
-        return (exprel*c/2 + ez*cosrel - ez*c/L) / sinhc
+        # q_mm(z) = 2*(1-z/L)*cos(w*z), q_mm(0) = 2.
+        # [exp(z/2)*(1-z/L)*cos(w*z)-1]/sinh(z)
+        # = [(exp(z/2)-1)*cos(w*z) + (cos(w*z)-1)
+        #    -exp(z/2)*(z/L)*cos(w*z)]/sinh(z).
+        # IMPORTANT: cosrel=(cos(w*z)-1)/z has coefficient ONE,
+        # not ez. Multiplying by ez adds the spurious signed term
+        # (ez-1)*(cos(w*z)-1)/sinh(z) and biases all m != 0
+        # diagonal Weil entries upward.
+        return (exprel*c/2 + cosrel - ez*c/L) / sinhc
     wm = 2*arb.pi()*m/L
     wn = 2*arb.pi()*n/L
     q_over_z = (wm*(wm*z).sinc()-wn*(wn*z).sinc()) / (arb.pi()*(n-m))
