@@ -15,7 +15,8 @@ Results are finite-support matrix enclosures, not global Weil positivity.
 """
 
 import argparse
-from flint import arb, acb, ctx
+import numpy as np
+from flint import arb, acb, ctx, fmpq
 
 ctx.prec = 160
 I = acb(0, 1)
@@ -130,6 +131,32 @@ def main():
         print('LDL cannot certify positive definite:', exc)
         if args.require_positive:
             raise
+    if all(M[i][i] > 0 for i in range(len(M))):
+        T = [[(M[i][j] / (M[i][i]*M[j][j]).sqrt() if i != j else arb(0))
+              for j in range(len(M))] for i in range(len(M))]
+        row_sums = [sum((abs(T[i][j]) for j in range(len(M))), arb(0))
+                    for i in range(len(M))]
+        bad_rows = [(modes[i], str(s)) for i,s in enumerate(row_sums) if s > 1]
+        good_rows = [(modes[i], str(s)) for i,s in enumerate(row_sums) if s <= 1]
+        print(f'Normalized Gershgorin certified rows <=1: {len(good_rows)}; '
+              f'certified rows >1: {len(bad_rows)}; '
+              f'undecided: {len(M)-len(good_rows)-len(bad_rows)}')
+        if bad_rows:
+            print('Example certified failing Gershgorin row:', bad_rows[0])
+        # Numerical eigensolver ONLY chooses a candidate vector. The actual
+        # >1 norm witness is checked on exact rational coefficients using
+        # outward Arb arithmetic, not by trusting the computed eigenvalue.
+        tmid = np.array([[float(z.mid()) for z in row] for row in T])
+        eigenvalues, eigenvectors = np.linalg.eigh(tmid)
+        v = [arb(fmpq(int(round(x*10**8)), 10**8))
+             for x in eigenvectors[:,-1]]
+        norm2 = sum((x*x for x in v), arb(0))
+        rayleigh = sum((v[i]*T[i][j]*v[j]
+                        for i in range(len(M)) for j in range(len(M))),arb(0))/norm2
+        if rayleigh > 1:
+            print('CERTIFIED ||T||>1 using rational trial vector and Arb Rayleigh:',rayleigh)
+        else:
+            print('No ||T||>1 certificate from leading numeric trial vector:',rayleigh)
     print('Scope: exact semilocal matrix formula at finite support and N, not RH')
 
 
