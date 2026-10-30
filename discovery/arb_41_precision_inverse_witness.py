@@ -6,6 +6,7 @@ upper Rayleigh bound is checked on exact rational components using outward
 The lower bound is a separate strict Arb LDL certificate of Q-eps I.
 """
 import os
+import re
 import mpmath as mp
 from flint import arb,fmpq,ctx
 from arb_semilocal_weil_matrix import entry
@@ -24,7 +25,14 @@ eps=arb(fmpq(1,10**23))
 certify_positive_definite([
     [Q[i][j] - (eps if i==j else arb(0)) for j in range(len(Q))]
     for i in range(len(Q))])
-A=mp.matrix([[mp.mpf(str(z.mid())) for z in row] for row in Q])
+def arb_mid_decimal(z):
+    # python-flint prints even an Arb midpoint as "[digits +/- display_radius]"
+    # at high precision. Extract its leading decimal approximation for trial
+    # vector discovery ONLY; final Rayleigh is always rigorous in Arb.
+    found=re.search(r'[-+]?\\d+(?:\\.\\d+)?(?:[eE][-+]?\\d+)?',str(z.mid()))
+    assert found, z
+    return mp.mpf(found.group(0))
+A=mp.matrix([[arb_mid_decimal(z) for z in row] for row in Q])
 Inv=A**-1
 v=mp.matrix([mp.mpf((-1)**i)/(i+1) for i in range(len(Q))])
 for step in range(20):
