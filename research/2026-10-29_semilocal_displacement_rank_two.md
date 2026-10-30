@@ -137,3 +137,45 @@ Equation (5) isolates where arithmetic influences the cross-coupling;
 its bound must still be proved in a form that pays for the exact prime
 phases. A future shifted-product fake control should be passed through
 the same pipeline to avoid accidental RH-by-general-kernel logic.
+
+## A genuine far-separated Schur estimate (not the adjacent-block estimate)
+
+The finite interval and removable endpoint in (5) imply a uniform
+finite constant
+
+    G_L = 3/2 + L sup_(0<=y<=L)|b(y)| + sum_(p^r<=lambda²) w_(p,r),
+
+for which `|g_m|<=G_L` for every integer m. To see this, the
+elementary sine-integral bound `|Si(x)|<=3` follows by splitting
+`int_0^x sin(t)/t dt` at t=1 and integrating by parts on [1,x].
+
+Fix **two distinct** cutoffs `0<=M<N`. From (2), for each `|m|<=M`,
+
+    sum_(|n|>N) |Q_mn|²
+      <= [2/(pi²(N-M))] (|g_m|+G_L)².                  (6)
+
+Indeed the denominator is `|n-m|`, and each one-sided tail of the
+reciprocal-square sum is <=`1/(N-M)`. Thus the cross operator from
+`|m|<=M` to `|n|>N` is *Hilbert–Schmidt* with explicit norm bound
+
+    ||B_(M,N)||² <= K_(M,N)²
+      = [2/(pi²(N-M))] sum_(|m|<=M)(|g_m|+G_L)².    (7)
+
+For a positive high quadratic block `C_N >= eta_N I`, the exact
+one-sided completion of the square yields
+
+    <h,C_N h>+2Re<f,B_(M,N)h>
+       >= - K_(M,N)²/eta_N * ||f||².               (8)
+
+The already certified high-mode theorem supplies `eta_N>0` at
+`lambda=5/2` whenever N>=350 (using the appropriate weighted-deficit
+formula). For **fixed** M, equations (7)–(8) make the Schur price of
+arbitrarily distant high modes tend to zero as N grows, without
+operator-norm convergence of the unbounded full form.
+
+**Critical limitation:** There is an unpriced *guard band* of modes
+`M<|n|<=N`, and (7) does not bound the directly adjacent split
+`|m|<=N` versus `|n|>N`. Moving the cutoff does not prove positivity
+of that growing intermediate block. Equations (6)–(8) are a precise
+quantitative version of Astra's dual-energy residual target, not a
+closure of the RH-strength condition.
