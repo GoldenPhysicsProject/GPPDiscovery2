@@ -25,6 +25,14 @@ eps=arb(fmpq(1,10**23))
 certify_positive_definite([
     [Q[i][j] - (eps if i==j else arb(0)) for j in range(len(Q))]
     for i in range(len(Q))])
+# Tight RATIONAL spectral bracket informed by a previous independent
+# exact-rational high-precision Rayleigh trial. The lower bound is certified
+# by strict interval LDL of Q - delta I, not assumed from a numerical eigenvalue.
+tight_lower=arb(fmpq(108226835,10**31))
+tight_upper=arb(fmpq(108226836,10**31))
+certify_positive_definite([
+    [Q[i][j] - (tight_lower if i==j else arb(0))
+     for j in range(len(Q))] for i in range(len(Q))])
 def arb_mid_decimal(z):
     # python-flint prints even an Arb midpoint as "[digits +/- display_radius]"
     # at high precision. Extract its leading decimal approximation for trial
@@ -46,8 +54,8 @@ den=sum((z*z for z in vr),arb(0))
 assert den>0
 out=sum((vr[i]*Q[i][j]*vr[j] for i in range(len(vr)) for j in range(len(vr))),arb(0))/den
 assert out > eps
-assert out < arb('1e-14')
-print(f'CERTIFIED corrected 41-mode λ_min(Q) > 1e-23')
-print(f'CERTIFIED λ_min(Q) <= exact-rational Rayleigh = {out}')
+assert out < tight_upper
+print('CERTIFIED corrected 41-mode smallest eigenvalue > 108226835 / 10^31')
+print(f'CERTIFIED corrected 41-mode smallest eigenvalue < 108226836 / 10^31, Rayleigh={out}')
 print('110-digit inverse-iteration trial value:',mp.nstr(numeric_ray,50))
 print('Scope: only λ=5/2,N=20 corrected finite matrix, not full Weil or RH')
