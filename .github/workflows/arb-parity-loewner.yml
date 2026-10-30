@@ -1,0 +1,29 @@
+name: Weil Parity Loewner Source Audit
+
+on:
+  push:
+    branches: [codex/discovery-workbench]
+    paths:
+      - 'discovery/arb_parity_loewner_decomposition.py'
+      - '.github/workflows/arb-parity-loewner.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  signed-diagonal:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    env:
+      GPP_ARB_PREC_BITS: '512'
+      GPP_ARB_TOL: '1e-85'
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Install pinned interval dependency
+        run: python -m pip install 'python-flint==0.9.0' 'numpy>=2,<3'
+      - name: Verify exact parity-Loewner formulas and signed diagonal
+        run: python discovery/arb_parity_loewner_decomposition.py
