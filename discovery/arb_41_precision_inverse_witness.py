@@ -55,6 +55,13 @@ assert den>0
 out=sum((vr[i]*Q[i][j]*vr[j] for i in range(len(vr)) for j in range(len(vr))),arb(0))/den
 assert out > eps
 assert out < tight_upper
+# Reflect the finite Fourier coefficient vector m <-> -m, an exact
+# decomposition under spatial mirror x -> L-x. These diagnostics are
+# outward-enclosed on the exact rational witness, not floating parity.
+parity=sum((vr[i]*vr[len(vr)-1-i] for i in range(len(vr))),arb(0))/den
+low10=sum((vr[i]*vr[i] for i,m in enumerate(modes) if abs(m)<=10),arb(0))/den
+print('CERTIFIED rational near-null mirror-parity expectation:',parity)
+print('CERTIFIED rational near-null mass in |m|<=10:',low10)
 print('CERTIFIED corrected 41-mode smallest eigenvalue > 108226835 / 10^31')
 print(f'CERTIFIED corrected 41-mode smallest eigenvalue < 108226836 / 10^31, Rayleigh={out}')
 print('110-digit inverse-iteration trial value:',mp.nstr(numeric_ray,50))
