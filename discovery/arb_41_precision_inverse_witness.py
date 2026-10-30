@@ -29,7 +29,7 @@ def arb_mid_decimal(z):
     # python-flint prints even an Arb midpoint as "[digits +/- display_radius]"
     # at high precision. Extract its leading decimal approximation for trial
     # vector discovery ONLY; final Rayleigh is always rigorous in Arb.
-    found=re.search(r'[-+]?\\d+(?:\\.\\d+)?(?:[eE][-+]?\\d+)?',str(z.mid()))
+    found=re.search(r'[-+]?\d+(?:\.\d+)?(?:[eE][-+]?\d+)?',str(z.mid()))
     assert found, z
     return mp.mpf(found.group(0))
 A=mp.matrix([[arb_mid_decimal(z) for z in row] for row in Q])
