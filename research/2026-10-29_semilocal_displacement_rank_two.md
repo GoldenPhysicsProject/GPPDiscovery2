@@ -88,6 +88,12 @@ follows above). It raises on any undecidable/negative LDL pivot.
   64 odd parity-block LDL pivots are all rigorously positive** at
   1024-bit Arb and 1e-180 integration tolerance. This is the first
   *corrected* 129-mode certification after the original diagonal error.
+- At `lambda=5/2`, `N=100` (201 modes), the **101 even and 100 odd**
+  parity-block LDL pivots are all rigorously positive at 1024 bits and
+  1e-180 integration tolerance. This larger experimental run used the
+  analytically derived structured reconstruction without an independent
+  offdiagonal entry sample (`--check none`); independence checks at 41,
+  81 and 129 modes and the exact formula (2) support the assembler.
 
 The Arb context is global. Importing an unrelated helper that sets
 `ctx.prec=160` *after* matrix construction silently drops precision
