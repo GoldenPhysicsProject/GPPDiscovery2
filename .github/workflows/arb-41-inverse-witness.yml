@@ -1,0 +1,30 @@
+name: Corrected Weil 41 High-Precision Min Eigenvalue
+
+on:
+  push:
+    branches: [codex/discovery-workbench]
+    paths:
+      - 'discovery/arb_41_precision_inverse_witness.py'
+      - '.github/workflows/arb-41-inverse-witness.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  actual-min:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    env:
+      GPP_ARB_PREC_BITS: '512'
+      GPP_ARB_TOL: '1e-90'
+      GPP_ABS_N: '20'
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Install pinned ball and high-precision packages
+        run: python -m pip install 'python-flint==0.9.0' 'mpmath==1.3.0'
+      - name: Certify small absolute eigenvalue via exact rational Rayleigh
+        run: python discovery/arb_41_precision_inverse_witness.py
