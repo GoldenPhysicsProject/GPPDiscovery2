@@ -8,6 +8,7 @@ on:
       - discovery/arb_multiwindow_certificates.py
       - discovery/arb_semilocal_weil_matrix.py
       - discovery/arb_semilocal_regression.py
+      - discovery/semilocal_displacement_rank_two.py
       - discovery/arb_one_sided_spectrum_sweep.py
       - discovery/semilocal_symbol_tail_certificate.py
       - discovery/semilocal_frequency_band_certificate.py
@@ -42,6 +43,10 @@ jobs:
         run: python discovery/arb_semilocal_regression.py
       - name: Corrected Weil 9-mode interval LDL at lambda 5/2
         run: python discovery/arb_semilocal_weil_matrix.py --n 4 --lambda-num 5 --lambda-den 2 --require-positive --quiet
+      - name: Full independent corrected 41-mode displacement-rank-two Arb audit
+        run: python discovery/semilocal_displacement_rank_two.py --n 20 --check full --parity-blocks --bits 512 --tol-digits 85
+      - name: Corrected 129-mode parity Arb LDL via rank-two assembly
+        run: python discovery/semilocal_displacement_rank_two.py --n 64 --check sample --parity-blocks --bits 1024 --tol-digits 180
       - name: Corrected one-sided spectrum through 9 modes
         run: python discovery/arb_one_sided_spectrum_sweep.py --lambda-num 5 --lambda-den 2 --max-n 4 --require-positive
       - name: One-sided Arb brackets for short support lambda 3/2
