@@ -148,6 +148,20 @@ finite constant
 for which `|g_m|<=G_L` for every integer m. To see this, the
 elementary sine-integral bound `|Si(x)|<=3` follows by splitting
 `int_0^x sin(t)/t dt` at t=1 and integrating by parts on [1,x].
+This constant is fully explicit without an uncomputed supremum: since
+`sinh y>=y`, `|exp(y/2)-1|<=y exp(L/2)/2` and
+`0<=sinh(y)/y-1<=y² cosh(L)/6`, the removable quotient obeys
+
+    |exp(y/2)/(2sinh y) - 1/(2y)|
+      <= exp(L/2)/4 + L cosh(L)/12.
+
+Consequently one can take the elementary (nonoptimized) value
+
+    G_L^explicit = 3/2 + L[2cosh(L/2)+exp(L/2)/4
+                         +L cosh(L)/12] + sum w_(p,r).          (5a)
+
+No RH/PNT estimate is used in (5a). Tighter values can be Arb-certified
+directly from the smooth `b` function.
 
 Fix **two distinct** cutoffs `0<=M<N`. From (2), for each `|m|<=M`,
 
