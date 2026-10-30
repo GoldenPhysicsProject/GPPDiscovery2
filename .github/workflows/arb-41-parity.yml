@@ -1,0 +1,29 @@
+name: Corrected Weil 41 Mirror Parity
+
+on:
+  push:
+    branches: [codex/discovery-workbench]
+    paths:
+      - 'discovery/arb_41_mirror_parity_spectrum.py'
+      - '.github/workflows/arb-41-parity.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  mirror-parity:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    env:
+      GPP_ARB_PREC_BITS: '512'
+      GPP_ARB_TOL: '1e-90'
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Install pinned dependencies
+        run: python -m pip install 'python-flint==0.9.0' 'numpy>=2,<3'
+      - name: Certify actual arithmetic mirror sectors
+        run: python discovery/arb_41_mirror_parity_spectrum.py
