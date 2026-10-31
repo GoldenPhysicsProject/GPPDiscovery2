@@ -111,3 +111,32 @@ Because the sharp modulus decays only as \(1/\log(1/\varepsilon)\), if \(\delta_
 The two shifted-species fake \(F_\theta(s)=\zeta(s-\theta)\zeta(s+\theta)\) has positive local prime sources with modified positive first-prime weights and the **same** log-order activation; this theorem alone is fake-blind. Neither local absorption nor the conditional sewing criterion proves RH. At arbitrarily large L all prime powers enter, and the signed E1 discrepancy plus mirror-even near-null corrections remain outstanding.
 
 This result gives a **sharp optimal-order obstruction** to direct perturbation induction at the first prime and an explicit one-number true completed-background condition for the next certificate. It does not merely extend another prime-free support decimal.
+
+
+## Exact operator norm and parity falsifier at activation (stronger than the two-sided E-form bound)
+
+On the **same** \(L=a+\varepsilon\) interval with \(0<2\varepsilon<a\), split the \(L^2\) space orthogonally into first strip \(H_A=L^2(0,\varepsilon)\), middle \(H_I=L^2(\varepsilon,a)\) and last strip \(H_B=L^2(a,a+\varepsilon)\). Identify \(H_B\) with \(H_A\) by translation by \(a\). The real-valued quadratic arithmetic source \(S_2[f]=w q_f(a)\) is represented EXACTLY by the bounded self-adjoint operator
+\[
+\boxed{
+K_{p=2}=w\begin{pmatrix}0&0&I\\0&0&0\\I&0&0\end{pmatrix}
+}
+\]
+with \(w=\log2/\sqrt2\). Its full \(L^2\) spectrum is \(\{-w,0,+w\}\), with \(\pm w\) each of infinite multiplicity, and
+\[
+\boxed{\|K_{p=2}\|_{L^2\to L^2}=w=\frac{\log2}{\sqrt2}\quad
+\text{for EVERY }\varepsilon>0\text{ in the stated regime}.}
+\]
+In particular, the activation is **NOT SMALL IN ORDINARY OPERATOR NORM** despite the proved optimal-order **form** norm \(\Theta(1/\log(1/\varepsilon))\to0\). This makes the topology of the required sewing estimate explicit.
+
+More strongly, projecting onto the global spatial mirror-even subspace does **not** give the prime source a definite sign. Let \(R:H_A\to H_A\) be strip reflection \(Rg(t)=g(\varepsilon-t)\). For a globally mirror-even boundary-supported test f with \(f_A=g,\ f_B(t)=g(\varepsilon-t)=Rg(t)\), one has
+\[
+S_2[f]=2w\Re\langle g,Rg\rangle,\qquad \|f\|^2=2\|g\|^2.
+\]
+Choose smooth real \(g\) of norm squared \(1/2\) which is either even or odd under \(R\); these exist with compact support inside (0,\varepsilon). Then
+\[
+\boxed{S_2[f]=+w\quad\text{or}\quad S_2[f]=-w,
+\quad\text{with } \Theta f=f,\ \|f\|=1.}
+\]
+Likewise the global mirror-odd sector also contains both source signs. Thus **neither mirror parity makes the activated prime kernel positive or negative**; a claim of automatic positive prime terms in the vulnerable mirror-even sector is false. The full corrected completed form must control the *signed* cross-boundary prime operator with the Archimedean energy and genuine pole/moment terms.
+
+These exact results are compatible with the slow logarithmic form-smallness theorem: the Hilbert \(L^2\) norm is unchanged at activation, whereas the two-strip witnesses necessarily have kinetic energy growing as \(\log(1/\varepsilon)\).
