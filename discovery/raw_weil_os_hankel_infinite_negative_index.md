@@ -73,3 +73,16 @@ This theorem does not settle whether the actual adelic additive/multiplicative P
 The attached script \`discovery/arb_raw_weil_os_negative_index.py\` outward-certifies the few strict scalar inequalities (ln2 interval, exp(2/5), w>4/9, and 2δ sup|A|<2/25) with FLINT/Arb. The all-dimensional sign proof is the analytic Schur norm inequality above; no finite eigenvalue computation is used as a substitute. Strictly speaking the constructed \(h\) need not respect a particular yet-undefined adelic Hardy-positive subalgebra; that restriction is exactly what a future valid OS candidate has to specify.
 
 **Open frontier:** the true, distributionally renormalized prime–Archimedean form needs a *nontrivial* arithmetic half-space structure, not the obvious \(C_c^\infty(0,\infty)\) with additive exchange reflection. This is a necessary exclusion of a false route, not the constructive missing identity.
+
+
+## 5. Independent audit of the BC-KMS prime-gradient representation
+
+The team's current exact construction takes \(B_{n,x}[f]=(f(x)-f(x+\log n))\mu_n\), assumes \(\mu_n^*\mu_n=1\) and \(\sigma_t(\mu_n)=n^{it}\mu_n\), and computes
+\[
+\omega(B_{n,x}^*\sigma_{i/2}(B_{n,x}))
+=n^{-1/2}|f(x)-f(x+\log n)|^2.
+\]
+
+This identity is correct, but note exactly which hypotheses are used: **any normalized state \(\omega\)** yields the same value. Neither the KMS \(\beta=1\) condition, a KMS correlation-function identity, nor the additive rational Poisson lattice is used in the calculation. The special weight arises solely from analytically continuing the stipulated time grade of an isometry. Consequently the same local square would be obtained in any suitable Toeplitz-isometry dynamical system with the same grades; it cannot serve by itself as a *selector of arithmetic zeta versus positive-weight fake products*. This does NOT invalidate the finite source identity or the legitimate BC KMS state; it identifies which physical ingredient is still missing from the claimed global mechanism.
+
+The naive OS no-go and this state-independence check together specify the next acceptance gate: provide an actual positive-time test-algebra map and nontrivial adelic covariance which, by a genuinely state-dependent or lattice-dependent construction, reproduces the **renormalized** KMS prime form, the entire real-place gamma contact \(\kappa_\infty\), and signed rank-two pole without a direct raw \(W(t+s)\) reflection or an RH-equivalent positivity assumption. On the isolated p2 strip its difference from raw Hankel reflection is forced to be *noncompact* or to restrict the test space nontrivially, because any compact smoothing of the raw kernel preserves the infinite negative index.
