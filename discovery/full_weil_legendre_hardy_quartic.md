@@ -99,7 +99,7 @@ These follow from Var(t²)=1/180, Cov(t²,t⁴)=1/840 and Var(t⁴)=1/3600. Exac
 
 \[
 \int_0^L W(t)|a e_0+g|^2dx
-\ge\mu_W|a|^2-2\sigma_W|a|\|g\|^2{}^{1/2}.
+\ge\mu_W|a|^2-2\sigma_W|a|\|g\|_2.
 \]
 
 This holds because the dropped ∫W|g|² is **nonnegative** and \(\|\Pi_{e0^\perp}(W e0)\|=\sigma_W\); no Fourier truncation.
