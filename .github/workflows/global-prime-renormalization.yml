@@ -1,0 +1,23 @@
+name: Global Prime Renormalization Identity and Satake Fake Control
+
+on:
+  push:
+    branches: [codex/discovery-workbench]
+    paths:
+      - 'discovery/global_prime_renormalization_control.py'
+      - '.github/workflows/global-prime-renormalization.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  control:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Exact finite algebra and prime shift renormalization with false-zeta control
+        run: python discovery/global_prime_renormalization_control.py
