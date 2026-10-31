@@ -12,7 +12,7 @@ in `[0,L]` with finite logarithmic gamma energy, the exact v34
 completed Weil form satisfies
 
     Q_L[f] >= B_40(L) ||f||² >= B_40(5/32) ||f||²
-           > (1/200) ||f||².
+           >= (1/200) ||f||².
 
 The form includes the exact pole, infinite Archimedean subtraction tail
 and regular gamma tilt. The finite prime-power term is exactly zero,
@@ -21,6 +21,8 @@ independently evaluated by outward Arb balls at 256-bit precision:
 
     B_40(5/32) = 0.00591896750052372600283741057341536... > 0.005.
 
+The scalar coefficient is strictly larger than 1/200, so the final
+quadratic-form inequality is strict for nonzero f (and equality at f=0).
 This is a full infinite-dimensional *form* inequality, not Galerkin
 positivity or extrapolation from 201 certified modes.
 
