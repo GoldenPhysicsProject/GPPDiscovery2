@@ -1,0 +1,25 @@
+name: Full Weil Quartic Legendre Schur 49-100
+
+on:
+  push:
+    branches: [codex/discovery-workbench]
+    paths:
+      - 'discovery/arb_full_weil_legendre_quartic_schur_49_100.py'
+      - '.github/workflows/full-weil-quartic-legendre-49-100.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  full-space-prime-free:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Install FLINT interval arithmetic
+        run: python -m pip install 'python-flint==0.9.0'
+      - name: Certify infinite high tails and finite exact parity Schur matrices
+        run: python discovery/arb_full_weil_legendre_quartic_schur_49_100.py
