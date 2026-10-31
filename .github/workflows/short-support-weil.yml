@@ -9,6 +9,7 @@ on:
       - 'discovery/prime_activation_hardy_certificate.py'
       - 'discovery/prime_arch_endpoint_schur.py'
       - 'discovery/prime_weighted_schur_arb.py'
+      - 'discovery/prime_four_atom_piecewise_arb.py'
       - '.github/workflows/short-support-weil.yml'
   workflow_dispatch:
 
@@ -35,3 +36,5 @@ jobs:
         run: python discovery/prime_arch_endpoint_schur.py
       - name: Continuum Arb interval certify weighted prime Schur through L=39/25
         run: python discovery/prime_weighted_schur_arb.py
+      - name: Certify rational ground-state transform through four primes and L=41/25
+        run: python discovery/prime_four_atom_piecewise_arb.py
