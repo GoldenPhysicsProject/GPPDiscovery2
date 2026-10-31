@@ -49,3 +49,19 @@ For L=3/4 the prime-omitted background is **NOT positive** on all admissible tes
 The exact first-prime source is sign-indefinite in each global mirror parity sector, as independently proved in first_prime_log_activation_sharpness.md. No all-test positive result at L=3/4, no global Weil, and no RH follows from this one-test certificate. Shifted-zeta F_theta and DH controls must still be checked for any prospective all-L mechanism.
 
 Next: construct the true low/high Legendre Schur at L=3/4 with the signed p2 shift included in the low block, preserving its high-tail influence. Other source-independent gate targets: independent completed Q audit and rational/Lean certificates as Claude requested in PR11.
+
+
+## 5. Tight certified loss-of-background-sign bracket for this explicit family
+
+The rescaled polynomial family \(f_L=e_{1,L}-(2/5)e_{3,L}\) has the SAME shape autocorrelation \(q_{f_L}(Lt)=q(t)\) at every L, and the full prime-omitted Q0 depends continuously on L (the removable gamma integrand permits direct dominated convergence on compact positive L ranges). The **same 256bit Arb script** evaluated the exact Q0 at TWO RATIONAL SUPPORT LENGTHS:
+\[
+\begin{aligned}
+Q^{(0)}_{7439/10000}[f_L] &= +0.00006585974040047584469947019775\ldots>0,\\
+Q^{(0)}_{93/125}[f_L] &= -0.00009854796205009826561072824006\ldots<0.
+\end{aligned}
+\]
+Outward interval radii are less than \(5\cdot10^{-65}\). Hence by the intermediate-value theorem there exists \(L_*\in(0.7439,0.744)\) at which **this explicit odd test family** has \(Q^{(0)}_{L_*}[f_{L_*}]=0\). This is **not** a certificate for a zero of the minimum eigenvalue or for its first crossing (nor proof of uniqueness of L_*); it is a rigorous signed one-vector crossing of the background form.
+
+The extended Actions **run 41231660694 SUCCESS**, source commit 01905394caa7f98f48aa1fc3aa40eb94ff18b44f, verifies this crossing and retains the Q0<0 / actual Q>0 certificate at L=3/4.
+
+**Interpretation:** Claude's suggested milestone "push positive prime-omitted Q0 to 0.75" is conclusively impossible, not merely unproven. The arithmetic p2 source has a *constructive sign role* in repairing the odd sector. The correct global objective is to prove positivity of the **combined** signed operator, with exact low/high coupling, not positivity of each component separately.
