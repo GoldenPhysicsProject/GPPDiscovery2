@@ -29,12 +29,14 @@ def overlap(a,b):
 
 
 def assert_complex_scalar_identity():
-    # Generic complex finite-dimensional polarization checked by exact Q
-    for u in (complex(1,0),complex(1,1),complex(0,1),complex(-2,3)):
-        for v in (complex(1,0),complex(1,1),complex(0,-1),complex(-2,3)):
-            d=abs(u-v)**2
-            m=abs(u)**2+abs(v)**2
-            src=-2*(u.conjugate()*v).real
+    # Generic Gaussian integers as exact coordinate pairs (Re, Im).
+    # Python complex abs() is floating and MUST NOT certify equality.
+    samples=((1,0),(1,1),(0,1),(-2,3),(0,-1))
+    for u in samples:
+        for v in samples:
+            d=(u[0]-v[0])**2+(u[1]-v[1])**2
+            m=u[0]**2+u[1]**2+v[0]**2+v[1]**2
+            src=-2*(u[0]*v[0]+u[1]*v[1])
             assert d-m==src
 
 
