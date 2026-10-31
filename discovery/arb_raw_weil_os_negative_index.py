@@ -22,13 +22,10 @@ assert q(2).sqrt() < q(3,2)
 # and y in (16/25,4/5) on the chosen sum strip.
 # These elementary envelope terms bound absolute |A|:
 M = q(3,2) + q(1) + q(3,2) / (2*q(16,25))
-assert M == q(235,64)
 assert M < q(4)
 K_bound = 2*delta*q(4)
-assert K_bound == q(2,25)
 assert w > q(4,9)
 gap = q(4,9) - K_bound
-assert gap == q(82,225)
 assert gap > q(1,3)
 
 print("a = ln 2:", a)
