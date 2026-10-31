@@ -78,7 +78,7 @@ E[f_\varepsilon]
 \frac{(1-|y-a|/\varepsilon)}{\sinh y}\,dy.}
 \]
 The middle integral is between 0 and 1, and the triangular cross subtraction is nonnegative. Therefore \(E[f_\varepsilon]\le H(\varepsilon)+1\), proving the lower bound. It also follows from dominated convergence and \(H(\varepsilon)=\log(2/\varepsilon)+O(\varepsilon^2)\) that
-\(E[f_\varepsilon]=\log(2/\varepsilon)+1+O(\varepsilon)\), yielding the sharp log order. In fact \(E\ge H(\varepsilon)\) by the general upper bound and q=1, and the two-sided witness interval is \([H,H+1]\).
+\(E[f_\varepsilon]=\log(2/\varepsilon)+1+O(\varepsilon)\), yielding the sharp log order. The explicit formula additionally yields \(E[f_\varepsilon]\ge H(\varepsilon)\) for the stated range: the positive local term is at least \(\varepsilon/\sinh\varepsilon\), while the cross triangle subtraction is at most \(\varepsilon/(2\sinh(a-\varepsilon))\), and \(2\sinh(a-\varepsilon)\ge\sinh\varepsilon\) when \(a\ge2\varepsilon\). This is a separate witness-specific observation, not a consequence of the general upper bound \(|q|\le 2E/H\).
 
 **Important domain:** the rectangular profile belongs to the completed log-energy form domain because its energy above is finite, and smooth compactly supported mollifications converge in \(L^2\) and in the form energy (e.g. convolution mollifiers with slight inward support shifts). Therefore the supremum has the same lower bound over the genuine smooth Weil test core by approximation.
 
