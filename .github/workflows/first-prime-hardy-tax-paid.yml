@@ -1,0 +1,25 @@
+name: First Prime Hardy Tax Paid 31 over 40
+
+on:
+  push:
+    branches: [codex/discovery-workbench]
+    paths:
+      - 'discovery/arb_first_prime_hardy_tax_paid_31_40.py'
+      - '.github/workflows/first-prime-hardy-tax-paid.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  all-function-prime-source:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Install outward Arb
+        run: python -m pip install 'python-flint==0.9.0'
+      - name: Certify no-double-spending Hardy tax at p2 activation
+        run: python discovery/arb_first_prime_hardy_tax_paid_31_40.py
