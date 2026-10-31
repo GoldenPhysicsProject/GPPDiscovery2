@@ -1,0 +1,23 @@
+name: Exact First-Prime OS Sewing Defect and Fake Control
+
+on:
+  push:
+    branches: [codex/discovery-workbench]
+    paths:
+      - 'discovery/first_prime_os_sewing_defect_exact.py'
+      - '.github/workflows/first-prime-os-sewing.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  exact-reflection-falsifier:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Exact-rational parity, prime boundary, minimal positivity completion, false-Satake checks
+        run: python discovery/first_prime_os_sewing_defect_exact.py
