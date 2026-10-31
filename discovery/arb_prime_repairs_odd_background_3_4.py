@@ -109,3 +109,40 @@ print('Q0 at L=0.744:',right)
 assert left>0 and right<0
 print('CERTIFIED: the rescaled mirror-odd Legendre test Q0 changes sign')
 print('between rational log support lengths 0.7439 and 0.744.')
+
+# EXACT secondary strip-reflection decomposition, not generic positivity.
+# The global mirror-odd test has f_B(s)=-f_A(epsilon-s).
+# Let local strip reflection Rg(s)=g(epsilon-s); then
+# q(log2)=-2(<g+,g+>-<g-,g->), g+/-=(g+/-Rg)/2.
+# Polynomial antiderivatives for M=||g||² and J=<g,Rg>.
+h=(L-a)/L
+def evaluate_coeffs(coeffs,h):
+    v=arb(0)
+    for ck in coeffs[::-1]:
+        v=v*h+ck
+    return v
+m_strip=evaluate_coeffs([
+    qrat(0),
+    qrat(103,25)-4*rt/5,
+    -qrat(486,25)+28*rt/5,
+    qrat(2004,25)-72*rt/5,
+    -qrat(1064,5)+16*rt,
+    qrat(7728,25)-32*rt/5,
+    -qrat(224),qrat(64)],h)
+j_strip=evaluate_coeffs([
+    qrat(0),
+    qrat(103,25)-4*rt/5,
+    -qrat(486,25)+28*rt/5,
+    qrat(1282,25)-56*rt/5,
+    -qrat(392,5)+8*rt,
+    qrat(1512,25)-8*rt/5,
+    -qrat(112,5),qrat(16,5)],h)
+g_even=(m_strip+j_strip)/2
+g_odd=(m_strip-j_strip)/2
+print('LOCAL R-even strip norm²=',g_even)
+print('LOCAL R-odd strip norm²=',g_odd)
+assert g_even>qrat(70,1000)
+assert qrat(0)<g_odd<qrat(2,1000)
+assert abs(q_at_a+2*(g_even-g_odd))<arb('1e-60')
+assert abs((-S2)-2*(a/arb(2).sqrt())*(g_even-g_odd))<arb('1e-60')
+print('CERTIFIED p2 repair is dominated by the local-strip-even subchannel')
