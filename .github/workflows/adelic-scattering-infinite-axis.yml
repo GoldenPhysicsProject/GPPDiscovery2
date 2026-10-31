@@ -1,0 +1,25 @@
+name: Eisenstein Scattering Infinite-Axis Falsifier
+
+on:
+  push:
+    branches: [codex/discovery-workbench]
+    paths:
+      - 'discovery/adelic_scattering_axis_fake_control.py'
+      - '.github/workflows/adelic-scattering-infinite-axis.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  normalized-scattering-diagnostic:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Install high-precision diagnostic
+        run: python -m pip install 'mpmath==1.3.0'
+      - name: Test exact scattering FE phase derivative and shifted-fake poles
+        run: python discovery/adelic_scattering_axis_fake_control.py
