@@ -1,0 +1,25 @@
+name: Full Weil Legendre Low Tail 9 over 20
+
+on:
+  push:
+    branches: [codex/discovery-workbench]
+    paths:
+      - 'discovery/arb_full_weil_legendre_schur_9_20.py'
+      - '.github/workflows/full-weil-legendre-schur-9-20.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  completed-weil-full-space:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Install outward FLINT Arb
+        run: python -m pip install 'python-flint==0.9.0'
+      - name: Check even and odd infinite-tail Schur determinants
+        run: python discovery/arb_full_weil_legendre_schur_9_20.py
