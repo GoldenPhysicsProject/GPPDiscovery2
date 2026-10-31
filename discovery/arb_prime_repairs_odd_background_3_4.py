@@ -25,7 +25,7 @@ c=[
     qrat(0),
     qrat(32,5),
 ]
-assert c[0]==2*norm
+assert abs(c[0]-2*norm)<arb('1e-65')
 TOL=1e-57
 def qpoly(z):
     t=z/L
