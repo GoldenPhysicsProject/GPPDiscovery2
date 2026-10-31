@@ -90,9 +90,24 @@ def exact_local_PSD_obstruction():
           'det for every tested q>1; algebra proves it for ALL q != 1')
 
 
+def exact_kms_grade_blindness():
+    # Naive Bost-Connes midpoint in distinct time grades is phase blind.
+    # r=p^(-1/2) lies in (0,1); using exact rational r samples here.
+    for r in (F(1,2), F(2,3), F(7,10)):
+        midpoint=lambda u,v: u*u+r*v*v
+        source=lambda u,v: -2*u*v
+        assert midpoint(F(1),F(1))==midpoint(F(1),F(-1))
+        assert source(F(1),F(1))==-2
+        assert source(F(1),F(-1))==2
+        d1=source(F(1),F(1))-midpoint(F(1),F(1))
+        d2=source(F(1),F(-1))-midpoint(F(1),F(-1))
+        assert d2-d1==4
+    print('Naive BC-KMS two-grade phase-blindness falsifier: PASS')
+
 if __name__=='__main__':
     assert_complex_scalar_identity()
     exact_reflection_channels()
     exact_local_PSD_obstruction()
+    exact_kms_grade_blindness()
     print('First-prime reflection/TFD acceptance tests PASS. '
           'No global Weil positivity claim; RH remains OPEN.')
