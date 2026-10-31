@@ -7,6 +7,7 @@ on:
       - 'discovery/arb_short_support_weil_certificate.py'
       - 'discovery/short_support_nilpotent_tower.py'
       - 'discovery/prime_activation_hardy_certificate.py'
+      - 'discovery/prime_arch_endpoint_schur.py'
       - '.github/workflows/short-support-weil.yml'
   workflow_dispatch:
 
@@ -29,3 +30,5 @@ jobs:
         run: python discovery/short_support_nilpotent_tower.py --max-layers 40 --certify-num 5 --certify-den 32 --min-margin-num 1 --min-margin-den 200
       - name: Certify first two prime atoms absorbed by Archimedean kinetic through L=57/50
         run: python discovery/prime_activation_hardy_certificate.py --num 57 --den 50
+      - name: Certify p=2,3,4 endpoint Schur prime domination through L=38/25
+        run: python discovery/prime_arch_endpoint_schur.py
