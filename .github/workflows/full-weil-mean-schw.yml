@@ -1,0 +1,25 @@
+name: Completed Weil Mean Even Schur 69-200
+
+on:
+  push:
+    branches: [codex/discovery-workbench]
+    paths:
+      - 'discovery/arb_full_weil_mean_schur_69_200.py'
+      - '.github/workflows/full-weil-mean-schw.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  infinite-dimensional-completed-form:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Install ball arithmetic
+        run: python -m pip install 'python-flint==0.9.0'
+      - name: Certify full all-function one-sided Schur inequality
+        run: python discovery/arb_full_weil_mean_schur_69_200.py
