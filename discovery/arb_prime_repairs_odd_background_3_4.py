@@ -75,3 +75,37 @@ assert S2 < -qrat(67,1000)
 assert Q > qrat(57,1000)
 print('CERTIFIED: Q0[f]<-0.009 but Q[f]>0.057 on the SAME test.')
 print('Scope: one explicit form-domain test, not an all-f sign or RH proof.')
+
+# Locate a rigorous sign change of Q0 along the SAME rescaled odd Legendre
+# family f_L=e1,L-(2/5)e3,L. The shape q(L*t) is independent of L.
+# Rational endpoints only; this certifies EXISTENCE of a zero by continuity,
+# not its uniqueness or a universal spectral crossing.
+def background_at(LL):
+    def shape(z):
+        t=z/LL
+        result=acb(0)
+        for v in c[::-1]:
+            result=result*t+v
+        return result
+    def regular_kinetic(z):
+        t=z/LL
+        s=acb(0)
+        for v in c[:0:-1]:
+            s=s*t+v
+        return -s/(2*LL*(I*z).sinc())
+    def integr(f):
+        return acb.integral(lambda z, analytical:f(z),
+                           acb(0),acb(LL),rel_tol=TOL,abs_tol=TOL,
+                           eval_limit=100000).real
+    EE=integr(regular_kinetic)-norm*(LL/2).tanh().log()
+    PP=integr(lambda z:shape(z)*((z/2).exp()+(-z/2).exp()))
+    AA=integr(lambda z:shape(z)*(z/2).hypgeom_1f1(1,2)/
+             (4*(I*z).sinc()))
+    return EE+PP-c_infty*norm-AA
+left=background_at(qrat(7439,10000))
+right=background_at(qrat(93,125))  # 93/125=0.744
+print('Q0 at L=0.7439:',left)
+print('Q0 at L=0.744:',right)
+assert left>0 and right<0
+print('CERTIFIED: the rescaled mirror-odd Legendre test Q0 changes sign')
+print('between rational log support lengths 0.7439 and 0.744.')
