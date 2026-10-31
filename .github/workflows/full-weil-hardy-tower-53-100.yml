@@ -1,0 +1,26 @@
+name: Completed Weil Hardy Tower 53-100
+
+on:
+  push:
+    branches: [codex/discovery-workbench]
+    paths:
+      - 'discovery/arb_full_weil_hardy_tower_53_100.py'
+      - '.github/workflows/full-weil-hardy-tower-53-100.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  prime-free-completed-form:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Install FLINT outward intervals
+        run: python -m pip install 'python-flint==0.9.0'
+      - name: Certify 20th-order Hardy-Legendre all-N Schur
+        run: python discovery/arb_full_weil_hardy_tower_53_100.py
