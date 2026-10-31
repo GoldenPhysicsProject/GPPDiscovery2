@@ -50,8 +50,8 @@ def exact_reflection_channels():
             source=D-M
             assert source==-2*overlap(g,h)
             assert source==-2*sigma*tau*sq_norm(g)
-            print(f'{sigma:>4} {tau:>4} {source/(2*sq_norm(g)):>7}'
-                  f' {D:>8} {M:>8}')
+            print(str(sigma), str(tau), str(source/(2*sq_norm(g))),
+                  str(D), str(M))
             assert source/(2*sq_norm(g))==-sigma*tau
 
 
