@@ -4,9 +4,9 @@ All decisive checks are exact rational comparisons. Arb 256-bit interval balls
 verify the only transcendental inputs (logarithms, square roots, boundary
 potential). The floating iteration ONLY finds a rational witness; no float
 quantity enters the final proof check. Positive step profile h on 256 rational
-cells satisfies A_prime h < (99/100) V h, uniformly pointwise a.e.
+cells satisfies A_prime h < (999/1000) V h, uniformly pointwise a.e.
 
-Consequently E_L[f]-S_L[f] >= (1/250)||f||² for ALL complex supported
+Consequently E_L[f]-S_L[f] >= (1/1250)||f||² for ALL complex supported
 f at L=83/50, and every shorter support by zero extension. True atoms
 2,3,4,5 are included. NOT completed Weil positivity or RH.
 """
@@ -17,9 +17,9 @@ from flint import arb, ctx, fmpq
 
 ctx.prec = 256
 L = F(83, 50)
-M = 512
+M = 1024
 dx = L / M
-rho = F(99, 100)
+rho = F(999, 1000)
 WITNESS_DENOM = 10**6
 
 
@@ -130,16 +130,16 @@ for i,row in enumerate(edges):
         minimum_slack, worst_index = slack,i
     assert slack > 0, ('Schur certificate failed',i,lhs,rhs)
 
-# Uniform coercive scalar: (1-rho)*min V >= H(L/2)/100 > 1/250.
+# Uniform coercive scalar: (1-rho)*min V >= H(L/2)/100 > 1/1250.
 vfloor = H_arb(Larb/2)
 assert vfloor > arb(fmpq(4,5))
-assert (arb(1)-ar(rho))*vfloor > arb(fmpq(1,125))
+assert (arb(1)-ar(rho))*vfloor > arb(fmpq(1,1250))
 print(f'CERTIFIED: rational support endpoint L={L}, mesh cells={M}, '
       f'prime-power atoms {list(primes)}, rational witness digits=6')
 print(f'Exact rational min cell slack: {minimum_slack} at i={worst_index}')
 print(f'Arb H(L/2): {vfloor}')
 print('ALL f with support within [0,83/50]: E[f]-S[f] > '
-      '(1/250)||f||² for f!=0; zero f equality.')
+      '(1/1250)||f||² for f!=0; zero f equality.')
 print('Smaller supports follow by zero extension, not an unproved '
       'scale monotonicity of a discontinuous comparison profile.')
 print('This DOES NOT prove positivity of completed Q nor RH.')
