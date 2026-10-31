@@ -140,3 +140,13 @@ Choose smooth real \(g\) of norm squared \(1/2\) which is either even or odd und
 Likewise the global mirror-odd sector also contains both source signs. Thus **neither mirror parity makes the activated prime kernel positive or negative**; a claim of automatic positive prime terms in the vulnerable mirror-even sector is false. The full corrected completed form must control the *signed* cross-boundary prime operator with the Archimedean energy and genuine pole/moment terms.
 
 These exact results are compatible with the slow logarithmic form-smallness theorem: the Hilbert \(L^2\) norm is unchanged at activation, whereas the two-strip witnesses necessarily have kinetic energy growing as \(\log(1/\varepsilon)\).
+
+
+## Explicit exponential width of a perturbative completed-form proof
+
+The conditional sufficient criterion can be solved *exactly*. Suppose on a whole short interval of support lengths \(L\in[a,a+\varepsilon_0]\) one actually proves a noncircular, **uniform** prime-omitted completed background lower gap \(Q^{(0)}_L\ge\delta_0\|f\|^2\) and an upper perturbation constant \(B_L\le B_0\), with \(\delta_0>0\). Put \(C=2w(1+B_0/\delta_0)\). Then \(H(\varepsilon)>C\) is equivalent to
+\[
+\boxed{\varepsilon<2\,\mathrm{artanh}(e^{-C}).}
+\]
+Thus the perturbative strategy yields a strictly positive prime-inclusive window of width at most of order \(\exp[-2wB_0/\delta_0]\), even assuming the missing background gap was established. At the limiting support \(L=a\), the explicit elementary bound is
+\(B_a=c_\infty+2\sinh(a/2)-a+2I(a)\approx3.491048717140516756\), \(w\approx0.490129071734273596\). For illustration only, if one had a uniform hypothetical gap \(\delta_0=0.01\) and \(B_0\approx3.5\), the crude sufficient activation window would be on the order of \(10^{-149}\) in logarithmic support. **This is NOT a statement about the actual true support range or proof of such a \(\delta_0\)**; it explains analytically why direct absolute-value source absorption is unsuitable for an RH-strength all-support proof. The true global source-to-Archimedean sewing must retain sign cancellation rather than paying the first prime against a minuscule uniform spectral gap.
