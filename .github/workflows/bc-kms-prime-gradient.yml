@@ -1,0 +1,23 @@
+name: BC KMS All-Prime Gradient and Contact Exact Acceptance
+
+on:
+  push:
+    branches: [codex/discovery-workbench]
+    paths:
+      - 'discovery/bc_kms_prime_gradient_exact.py'
+      - '.github/workflows/bc-kms-prime-gradient.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  exact-kms-prime-sewing:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Exact Gaussian-rational KMS midpoint edge and prime renormalization identity
+        run: python discovery/bc_kms_prime_gradient_exact.py
