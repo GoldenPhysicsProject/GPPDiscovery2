@@ -8,6 +8,7 @@ on:
       - 'discovery/short_support_nilpotent_tower.py'
       - 'discovery/prime_activation_hardy_certificate.py'
       - 'discovery/prime_arch_endpoint_schur.py'
+      - 'discovery/prime_weighted_schur_arb.py'
       - '.github/workflows/short-support-weil.yml'
   workflow_dispatch:
 
@@ -32,3 +33,5 @@ jobs:
         run: python discovery/prime_activation_hardy_certificate.py --num 57 --den 50
       - name: Certify p=2,3,4 endpoint Schur prime domination through L=38/25
         run: python discovery/prime_arch_endpoint_schur.py
+      - name: Continuum Arb interval certify weighted prime Schur through L=39/25
+        run: python discovery/prime_weighted_schur_arb.py
