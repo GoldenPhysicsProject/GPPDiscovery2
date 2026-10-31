@@ -1,0 +1,26 @@
+name: Prime-Omitted Completed Background Odd Falsifier
+
+on:
+  push:
+    branches: [codex/discovery-workbench]
+    paths:
+      - 'discovery/arb_prime_omitted_background_odd_obstruction.py'
+      - '.github/workflows/prime-omitted-odd-no-go.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  prime-omitted-background:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Install interval library
+        run: python -m pip install 'python-flint==0.9.0'
+      - name: Check exact completed gamma-pole odd negative witness
+        run: python discovery/arb_prime_omitted_background_odd_obstruction.py
