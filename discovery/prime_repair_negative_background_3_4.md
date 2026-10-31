@@ -65,3 +65,34 @@ Outward interval radii are less than \(5\cdot10^{-65}\). Hence by the intermedia
 The extended Actions **run 41231660694 SUCCESS**, source commit 01905394caa7f98f48aa1fc3aa40eb94ff18b44f, verifies this crossing and retains the Q0<0 / actual Q>0 certificate at L=3/4.
 
 **Interpretation:** Claude's suggested milestone "push positive prime-omitted Q0 to 0.75" is conclusively impossible, not merely unproven. The arithmetic p2 source has a *constructive sign role* in repairing the odd sector. The correct global objective is to prove positivity of the **combined** signed operator, with exact low/high coupling, not positivity of each component separately.
+
+
+## 6. Double-reflection diagonalization of the first-prime source
+
+Let a=log2, epsilon=L-a<a/2, and let Theta f(x)=f(L-x) be global log-time reflection. Define the endpoint strip g(x)=f(x), 0<x<epsilon; local strip reflection is Rg(x)=g(epsilon-x). For any f with definite global mirror parity Theta f=sigma f, sigma in {-1,+1}, the translated right strip satisfies f(x+a)=sigma Rg(x). Write g_plus=(g+Rg)/2 and g_minus=(g-Rg)/2; they are orthogonal. Then the TRUE signed first-prime term has the exact identity
+
+\[
+\boxed{S_2[f]=2w_2\sigma(\|g_+\|^2-\|g_-\|^2).}
+\]
+
+Thus the actual completed Weil p2 contribution is
+
+\[
+\boxed{-S_2[f]=-2w_2\sigma\|g_+\|^2+2w_2\sigma\|g_-\|^2.}
+\]
+
+The prime source acting on the two endpoint strips has four exact global/local parity eigenchannels labelled (sigma,tau), with source eigenvalues w2*sigma*tau and completed source eigenvalues -w2*sigma*tau. This diagonalizes the PRIME OPERATOR ONLY; the full Archimedean/pole background is NOT claimed to commute with the local strip reflection R.
+
+For the actual global mirror-ODD Legendre test at L=3/4, direct exact polynomial antiderivatives in h=epsilon/L and 256-bit Arb certify:
+
+\[
+\|g_+\|^2=0.07064417551932387229311931179638690\ldots,
+\quad
+\|g_-\|^2=0.00174740743583978728801044064824511\ldots.
+\]
+
+Interval radii are below 7e-77. Exact q_f(log2)=-2(||g_plus||²-||g_minus||²) is checked against INDEPENDENT degree-seven autocorrelation to 1e-60. The locally even boundary component supplies the repair, while locally odd opposes it; ratio of squared norms >40.
+
+Interpretation: preserve BOTH global parity and local endpoint-strip parity in the next p2 moment-aware Schur. The prime-source-dangerous sector is global-even/local-even, whereas our repaired background witness is global-odd/local-even. Do not claim local R is a symmetry of the whole completed Weil background.
+
+CI 41231830200 SUCCESS, source commit 7dc9977c2084a20584ffeca9b6e5d856674f05c1; previous sign-crossing CI 41231660694 also GREEN.
