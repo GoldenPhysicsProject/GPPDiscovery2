@@ -1,0 +1,26 @@
+name: Full Weil Hardy Gamma Tower 11 over 20
+
+on:
+  push:
+    branches: [codex/discovery-workbench]
+    paths:
+      - 'discovery/arb_full_weil_hardy_gamma_surplus_11_20.py'
+      - '.github/workflows/full-weil-hardy-gamma-11-20.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  entire-form-prime-free:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Install outward FLINT Arb
+        run: python -m pip install 'python-flint==0.9.0'
+      - name: Certify Hardy derivative tower with completed gamma surplus
+        run: python discovery/arb_full_weil_hardy_gamma_surplus_11_20.py
