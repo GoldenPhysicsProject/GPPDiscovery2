@@ -1,0 +1,22 @@
+name: Full Weil Mean Variance Arb Positivity 29-100
+on:
+  push:
+    branches: [codex/discovery-workbench]
+    paths:
+      - 'discovery/short_support_mean_variance_weil_arb.py'
+      - '.github/workflows/full-weil-mean-variance.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  full-form-arb-certificate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Install FLINT Arb arithmetic
+        run: python -m pip install 'python-flint==0.9.0'
+      - name: Certify completed prime-free Weil positive all functions to L=29/100
+        run: python discovery/short_support_mean_variance_weil_arb.py
