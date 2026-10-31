@@ -1,4 +1,4 @@
-"""256-bit Arb proof gate: completed prime-free Weil Q[f] >= 1e-4 ||f||²
+"""256-bit Arb proof gate: completed prime-free Weil Q[f] >= 1e-3 ||f||²
 for EVERY admissible complex f on any logarithmic support <= L=11/20.
 
 This tests exact gamma surplus J_gamma >= J0 + L/6 Var,\n20th-order Hardy curvature plus Legendre Jacobi
