@@ -1,0 +1,25 @@
+name: Full Weil Half Support Gamma Surplus Infinite Tail
+
+on:
+  push:
+    branches: [codex/discovery-workbench]
+    paths:
+      - 'discovery/full_weil_legendre_gamma_surplus_arb.py'
+      - '.github/workflows/full-weil-gamma-surplus.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  full-form-infinite-tail-certificate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Install Arb
+        run: python -m pip install 'python-flint==0.9.0'
+      - name: Rigorous half-support full-Weil infinite-tail Schur proof
+        run: python discovery/full_weil_legendre_gamma_surplus_arb.py
