@@ -132,6 +132,8 @@ Two numerically independent evaluations agree:
 
 The tiny residuals **do not** by themselves provide a certified complex-zero enclosure: derivative bounds, quadrature interval enclosures, or an argument-principle/Rouché certificate remain to be constructed. Local real-zero count changes and a conjugate pair's location were observed in numerical scans; no claim of global zero-count completeness is made.
 
+As an **independent, exact-structure false control**, also evaluate `F_delta(s)=xi(s-delta)xi(s+delta)` for `delta=1/4`. This obeys `F_delta(s)=F_delta(1-s)` and reality. At `s=1/2+it`, `F_delta(s)=|xi(3/4+it)|^2>=0`; at `t=gamma_1` it is numerically `1.20000928e-7`, strictly positive, while `F_delta(1/4+i gamma_1)` has numerical zero residual below `2e-21` (the zero is exact algebraically because `xi(1/2+i gamma_1)=0`). Thus the shifted-xi control explicitly fails critical-line confinement even with identical reflection/conjugation symmetry, independently of the more sensitive single-lattice-mode deformation.
+
 ## 4. What the experiment means for GPP
 
 1. **The smooth scaling phase is real information, but insufficient.** It predicts a broad zero-count geometry and approximate ordinates without evaluating zeta, but arithmetic fluctuations determine exact roots.
@@ -143,7 +145,7 @@ The observed collision/splitting is reminiscent of a symmetry-preserving spectra
 
 ## 5. Reproduction and next proof obligations
 
-Run `experiments/zero_meta_rule_theta_probe.py` with NumPy/SciPy. It computes the first five Hardy-Z zeros independently via Euler-transformed eta, gamma/Lambert rules, theta finite-mode roots, the first-zero analytic tail bounds, the alpha-controlled root counts, the double-root collision, and the off-line complex root with independent theta-vs-eta residual checks.
+Run `experiments/zero_meta_rule_theta_probe.py` with NumPy/SciPy. It computes the first five Hardy-Z zeros independently via Euler-transformed eta, gamma/Lambert rules, theta finite-mode roots, the first-zero analytic tail bounds, the alpha-controlled root counts, the double-root collision, the off-line complex root with independent theta-vs-eta residual checks, and the separate shifted-xi false control.
 
 The immediately testable mathematical next steps are:
 
