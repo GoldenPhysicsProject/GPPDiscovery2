@@ -61,6 +61,15 @@ def xi_from_eta(t: complex) -> complex:
             zeta_by_euler_eta(s))
 
 
+def xi_at_s(s: complex) -> complex:
+    return xi_from_eta(-1j * (s - 0.5))
+
+
+def shifted_xi_control(s: complex, delta: float = 0.25) -> complex:
+    """Even/real entire false control: xi(s-delta) * xi(s+delta)."""
+    return xi_at_s(s - delta) * xi_at_s(s + delta)
+
+
 def lattice_mode_complex(n: int, t: complex) -> complex:
     f = lambda u: np.exp(u / 4 - pi * n * n * np.exp(u)) * np.cos(t * u / 2)
     return quad(f, 0, 6, epsabs=2e-16, epsrel=3e-14,
@@ -168,6 +177,14 @@ def main():
           f"independent theta residual={residual_theta:.3e}")
     assert solution.success and residual_eta < 1e-12 and residual_theta < 1e-12
     assert 0 < s_complex.real < 1 and abs(s_complex.real - 0.5) > 0.2
+
+    print("\nIndependent shifted-xi entire control (delta=1/4):")
+    gamma_1 = truth[0]
+    center = shifted_xi_control(0.5 + 1j * gamma_1)
+    off_line = shifted_xi_control(0.25 + 1j * gamma_1)
+    print(f"on the line at gamma_1: {center!s} (nonnegative, nonzero)")
+    print(f"off the line at 1/4+i*gamma_1: {off_line!s} (zero residual)")
+    assert center.real > 0 and abs(center.imag) < 1e-14 and abs(off_line) < 1e-12
 
 
 if __name__ == "__main__":
