@@ -10,3 +10,4 @@ import DiscoveryLean.PrimeLocalGram
 import DiscoveryLean.ShadowEulerSchur
 import DiscoveryLean.PrincipalSeriesZeroCriterion
 import DiscoveryLean.OneSidedNormalized
+import DiscoveryLean.OctonionicFlagSM
