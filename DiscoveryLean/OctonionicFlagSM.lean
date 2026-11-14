@@ -55,7 +55,7 @@ def sixY (s : Finset (Fin 5)) : ℤ :=
 /-- The degree/color subspace is a genuine set of occupation states. -/
 def inSector (degree nColor : ℕ) : Finset (Finset (Fin 5)) :=
   evenFock.filter
-    (fun s => s.card = degree && colorOccupation s = nColor)
+    (fun s => s.card = degree ∧ colorOccupation s = nColor)
 
 /-- Positive-chirality Spin(10) Fock space has sixteen basis states. -/
 theorem even_fock_has_sixteen : evenFock.card = 16 := by
@@ -94,12 +94,12 @@ theorem six_sector_weights :
 
 /-- Cancellation of U(1)-gravitational anomaly from the actual weights. -/
 theorem one_family_linear_anomaly :
-    (∑ s ∈ evenFock, sixY s) = 0 := by
+    evenFock.sum sixY = 0 := by
   decide
 
 /-- Cancellation of cubic U(1) anomaly from the actual weights. -/
 theorem one_family_cubic_anomaly :
-    (∑ s ∈ evenFock, (sixY s) ^ 3) = 0 := by
+    evenFock.sum (fun s => (sixY s) ^ 3) = 0 := by
   decide
 
 /-- The conventional SU(5)-normalized hypercharge trace. -/
