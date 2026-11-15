@@ -91,3 +91,31 @@ depending on trace/orientation convention. This is the topological transgression
 The quaternionic Hopf bundle \(S^7\to S^4\), its principal \(Sp(1)=SU(2)\) structure, and the BPST connection are standard; see G. Naber, *Topology, Geometry and Gauge Fields*; J. Dittmann and O. Rudolph, *Journal of Geometry and Physics* 10 (1992/93), 93–...; and the mathematical discussion in *G₂-instantons on the 7-sphere* (J. London Math. Soc.). The present contribution is the explicit reconciliation with the Shilov \(U(2)\) result and the typed Grassmannian/physical-gauge distinction.
 
 Related internal note: \`research/boundary_color_instanton_obstruction_2026-11-14.md\`. Related verified pointwise algebra: GPPVerify \`GppVerify/NoGo/BoundaryU2PontryaginDensity.lean\`.
+
+
+## Corollary: all SU(3) bundle classes over S⁴, by extension of structure group
+
+The separate \(G_2/SU(3)=S^6\) **pure pullback** obstruction does not forbid an ambient Grassmannian route to color-bundle topology.
+
+Embed the standard block subgroup \(i:SU(2)\hookrightarrow SU(3)\), \(g\mapsto \operatorname{diag}(g,1)\). The fibration
+\[
+SU(2)\longrightarrow SU(3)\longrightarrow SU(3)/SU(2)\cong S^5
+\]
+has \(\pi_4(S^5)=\pi_3(S^5)=0\). Its long exact homotopy sequence therefore shows that
+\[
+i_*:\pi_3(SU(2))\xrightarrow{\;\sim\;}\pi_3(SU(3))
+\]
+is an isomorphism. A rank-two \(SU(2)\) complex bundle \(E\) over \(S^4\), extended to \(SU(3)\), becomes \(E\oplus \underline{\mathbb C}\), with
+\[
+c_2(E\oplus\underline{\mathbb C})=c_2(E).
+\]
+For the Hopf bundle above this has \(c_2=1\). For any \(k\in\mathbb Z\), choose a smooth degree-\(k\) map \(f_k:S^4\to S^4\simeq\mathbb HP^1\). Then
+\[
+E_{3,k}=(j\circ f_k)^*\mathcal S\oplus\underline{\mathbb C},\qquad
+\langle c_2(E_{3,k}),[S^4]\rangle=k.
+\]
+Since principal \(SU(3)\) bundles over \(S^4\) are classified by \(\pi_3(SU(3))\cong\mathbb Z\), **every \(SU(3)\) bundle class on \(S^4\)** has this form up to isomorphism.
+
+**Scope:** This is topology, not the construction of a physically dynamically chosen \(SU(3)\) Yang–Mills gauge field. The pulled-back canonical connection for a general \(f_k\) need not solve self-dual Yang–Mills equations, and the block inclusion does not derive color symmetry or general \(SU(3)\) connection fluctuations. It does show that the full Grassmannian has enough topological structure, after an explicitly stated \(SU(2)\subset SU(3)\) extension, to represent all *bundle classes* that the octonionic \(S^6\) pullback route cannot furnish. No QCD or YM mass-gap claim follows.
+
+The \(\pi_3\) isomorphism follows directly from the homotopy sequence of \(SU(2)\to SU(3)\to S^5\); see standard topology treatments of classical compact groups and Nakajima's instanton-classification lectures.
