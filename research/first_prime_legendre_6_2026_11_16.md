@@ -179,3 +179,24 @@ This is a correct finite-dimensional reduction with strictly positive high block
 Companion reproducibility script: \`experiments/abel_prime_common_map/check_first_prime_legendre6.py\`.
 
 **Status:** independent rational arithmetic PASS, analytic derivation deposited, but neither Turbo audited nor Lean compiled. Global RH positivity remains OPEN.
+
+
+## Post-audit strengthening and status (2026-11-16)
+
+The companion script \`experiments/abel_prime_common_map/check_first_prime_legendre6.py\` is now committed and its rational core was executed successfully. A stronger choice, \(R=25/2\), yields the exact rational subcertificate
+\[
+ a(R)>\frac{121}{20},\qquad
+ \delta_6(L,R)<\frac1{80},\qquad
+ M_-<\frac{59}{10},
+\]
+and therefore, for every nonzero f with the same six vanishing moments,
+\[
+ W(f)>
+ \left[\frac{121}{20}\frac{79}{80}-\frac{59}{10}\right]\|f\|_2^2
+ =\frac{119}{1600}\|f\|_2^2.
+\]
+The high-moment energy coercivity improves to \(W(f)\ge (119/9559)E(f)\), with inverse constant \(9559/119\approx80.33\). This is useful for a residual-certified six-dimensional Schur complement.
+
+**A stronger five-moment negative-index bound now supersedes this theorem's index count**:
+\`research/first_prime_legendre_5_2026_11_16.md\`.
+Do not treat this improved rational arithmetic as a Lean compilation or a proof of full positivity at the first prime.
