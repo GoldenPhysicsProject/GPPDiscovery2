@@ -138,3 +138,28 @@ Separately let S : L²(R_+,dr/r)→L²(R_+,dω/ω) by (Sf)(ω)=sqrt(2) f(ω²). 
 5. Audit against off-line regulator, common-mass, oblique-compression and F_theta tests before promoting claims. Do not infer ARP/RH from (F).
 
 **Conclusion.** A previously missing explicit common linear Abel–Cesàro realization exists for the positive prime-resolvent block. The signed complete Weil form is still the hard problem. The carrier construction provides a mathematically precise interface and a quantitative no-go for uniform finite-character approximation.
+
+
+## Theorem 4: explicit failure of raw L² Yang–Mills bounded powers
+
+The proposed YM contraction tactic asks whether powers of T_N=C_N* C_N stay bounded in a fixed Hilbert norm. On the **uncompleted full-line L² norm**, the answer is definitively NO, already for p=2.
+
+Fourier diagonalizes the raw L² adjoint composite as multiplication by the continuous nonnegative symbol
+
+  t_N(ξ) = sum_{p≤N prime} w_p /
+    [1−2 q_p cos((log p) ξ)+q_p²].
+
+Every summand is at most its ξ=0 value, and they attain their maxima simultaneously at ξ=0. Therefore, for N≥2,
+
+  ||T_N||_{L²→L²} = t_N(0)
+      = sum_{p≤N prime} w_p/(1−q_p)²
+      ≥ (log 2/2)/(1−2^(−1/2))²
+      = 4.039957828616928... > 1.                                (M)
+
+Since T_N is a positive Fourier multiplier, for every integer k≥1,
+
+  ||T_N^k||_{L²→L²} = t_N(0)^k → ∞.                          (N)
+
+In particular, no equivalent renorming of the SAME linear operator on full L² can render its powers uniformly bounded, because equivalent norms change operator norms only by a fixed multiplicative factor independent of k. This is a sharp obstruction to invoking bounded-power/ergodic YM machinery on the raw prime Gram operator. It is not an obstruction to constructing **a different B_N-adjoint composite on the width-dependent GNS completion**; that composite changes the operator and must be analyzed separately.
+
+This explicitly meets the plan's request for a precise obstruction rather than another equivalent criterion. At p=2, ||T_N^10|| is already at least 1.158×10^6 in the full L² metric, and increases with N.
