@@ -274,3 +274,68 @@ One can minimize this bound over \(R\). Unlike (18), it does not throw away half
 These integers illustrate the *size* of the bound, not certified negative indices. For \(L=0.72\), the earlier easy bound with \(a(R)>2M_L\) was approximately \(83{,}542\), so the optimization matters. The \(L=0.125\) case is already unconditionally positive in Verify; this new bound is not an improvement to that positivity theorem. For certification one must choose rational/directed-interval enclosures proving both \(a(R)>M_L\) and the strict right-hand inequality in (17), not trust the floated optimum.
 
 **Caution about \(m\):** The trace bound uses the *full* Fourier concentration operator \(S_R^*S_R\) with the real interval \(I_L\); truncating its eigenspace in a finite numerical basis without a certified tail is NOT sufficient. The identities (15)–(21) are analytic, with the numerical table only as a diagnostic.
+
+
+## 9. First-prime window: a completely explicit finite-index certificate
+
+The optimized estimate above can be replaced by a **rationally auditable** (if deliberately conservative) integer bound at \(L=18/25=0.72\). Since \(\log 2<L<\log3\), the only nonzero von Mangoldt term inside the window is \(n=2\). Thus
+\[
+ M_{18/25}=|C_\infty|+4\sinh(9/25)+\frac{2\log2}{\sqrt2}.
+\]
+
+**Majorize the bounded perturbation by \(81/10\).** The following coarse elementary inequalities are sufficient:
+\[
+ \gamma<2/3,\quad \log\pi<6/5,\quad\pi/2<8/5,\quad
+ 3\log2<21/10,\quad
+ 4\sinh(9/25)<3/2,\quad
+ 2\log2/\sqrt2<1.
+\]
+Their sum is \(121/15=8.0666\ldots<81/10\). The Euler-\(\gamma\) upper bound and stronger \(\log2,\pi\) bounds already occur in Verify. To establish \(\log\pi<6/5\), use \(\pi<16/5\) and
+\(e^{6/5}\ge\sum_{j=0}^4(6/5)^j/j!=3.2944>16/5\).
+For \(\sinh(9/25)<3/8\), the positive series gives, for \(0<x<1\),
+\[
+ \sinh x \le x+\frac{x^3}{6(1-x^2)};
+\quad
+ x=9/25:\quad x+\frac{x^3}{6(1-x^2)}
+ =\frac{2007}{5440}<\frac38.
+\]
+Finally \(\log2<7/10\) and \(\sqrt2>7/5\) imply \(2\log2/\sqrt2<1\).
+
+**Certify \(a(180)>87/10\) by a FINITE RATIONAL SUM.** From (7), at the integer \(R=180\),
+\[
+ a(180)=
+ \sum_{k=0}^\infty
+ \frac{16\cdot180^2}{(4k+1)((4k+1)^2+4\cdot180^2)}.
+\]
+Its first 400 terms, which are all exact rational numbers, satisfy
+\[
+\boxed{\quad
+ \sum_{k=0}^{399}
+ \frac{16\cdot180^2}{(4k+1)((4k+1)^2+4\cdot180^2)}
+ \ >\ \frac{87}{10}.\quad}\tag{22}
+\]
+This rational inequality was evaluated using Python's \`fractions.Fraction\` (exact arbitrary-precision integers), not a floating-point approximation. See \`experiments/abel_prime_common_map/check_first_prime_index_exact.py\`. In the formal proof, replace the external arithmetic receipt with a kernel-checked finite sum inequality.
+
+Choose \(m=650\). Since \(\pi>3\) and \(LR=648/5\),
+\[
+ 1-\frac{LR}{\pi(m+1)}
+ >
+ 1-\frac{648/5}{3\cdot651}
+ =\frac{1013}{1085}.
+\]
+Hence for every \(f\in V_{18/25}\cap E_{650}^\perp\),
+\[
+\begin{aligned}
+W(f)&\ge
+ \left[a(180)\left(1-\frac{LR}{\pi(651)}\right)-M_{18/25}\right]\|f\|_2^2\\
+&>
+ \left[\frac{87}{10}\frac{1013}{1085}-\frac{81}{10}\right]\|f\|_2^2
+ =\frac{123}{5425}\|f\|_2^2.
+\end{aligned}\tag{23}
+\]
+Thus, **assuming only the standard Fourier and trace lemmas proved in sections 1–5,**
+\[
+\boxed{\quad n_-(W|_{V_{18/25}})\le650.\quad}\tag{24}
+\]
+
+This is an actual explicit integer bound, not a numerical estimate of eigenvalues, and no positivity hypothesis was used. Its analytic prerequisites and the finite rational inequality still require Lean verification. The bound is very loose (floating-point optimization suggests 399 is possible) and does not establish that any negative direction exists. It isolates the first-prime window as a finite, bounded-size spectral certification target.
