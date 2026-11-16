@@ -200,3 +200,32 @@ Splitting the positive translation-energy integral into \(0<t<\epsilon\), \(\eps
 Thus the finite Legendre Ritz calculations are well-defined on the true energy completion, with arbitrarily close smooth approximants. Nevertheless **positivity of every tested Ritz matrix** cannot establish positivity on the completion, because the untested high modes and mixed terms remain uncontrolled.
 
 This completion lemma also provides a concrete, non-circular core for a future Lean construction of the Haar–Legendre Schur complement.
+
+
+## 9. An exact arithmetic sign law across the ENTIRE first-prime rung
+
+For every width \(\log2<L<\log3\), we have
+\[
+0<h=2(1-\log2/L)<1
+\]
+because \(\log3<2\log2=\log4\). Consequently \(h^2-6h+6\ge1\), and the first two normalized Legendre diagonal prime correlations have fixed opposite signs:
+\[
+\begin{aligned}
+A_{00}(\log2)&=h/2>0,\\
+A_{11}(\log2)&=-h(h^2-6h+6)/4<0.
+\end{aligned}
+\]
+Multiplying by the actual Weil weight \(-2v\), \(v=(\log2)/\sqrt2>0\), gives
+\[
+\boxed{
+ W^{\rm prime}_{00}=-v h<0,\qquad
+ W^{\rm prime}_{11}=\frac{v h}{2}(h^2-6h+6)>0.
+}\tag{18}
+\]
+Thus the unique newly visible prime necessarily pushes the *lowest even* Haar channel downward and the *lowest odd* Haar channel upward throughout the full prime-2-only width interval. No all-mode or all-test sign is inferred.
+
+The finite polynomial identities for n,m≤5 and the Weyl parity relation were checked exactly (symbolic polynomial integration, no floats) in
+\`experiments/abel_prime_common_map/verify_haar_prime_caps.py\`. The real-space Ritz diagnostic was committed to
+\`experiments/abel_prime_common_map/scan_haar_legendre_weil.py\`.
+
+These source-correct finite algebraic identities are appropriate early Lean targets for Claude and may help prioritize the very small even-sector positivity margin when constructing a rigorously residual-certified Schur complement.
