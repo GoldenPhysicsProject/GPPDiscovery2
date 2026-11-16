@@ -229,3 +229,63 @@ The finite polynomial identities for n,m≤5 and the Weyl parity relation were c
 \`experiments/abel_prime_common_map/scan_haar_legendre_weil.py\`.
 
 These source-correct finite algebraic identities are appropriate early Lean targets for Claude and may help prioritize the very small even-sector positivity margin when constructing a rigorously residual-certified Schur complement.
+
+
+## 10. EXACT polar-cap Pauli decomposition: compressed prime translation is square-zero
+
+The previous cap formula can be strengthened to an exact operator theorem valid for the *entire* first-prime rung \(\log2<L<\log3\). Put \(\ell=\log2\), \(I=[-L/2,L/2]\), and define the left and right edge intervals
+\[
+ I_-=[-L/2,L/2-\ell],\qquad
+ I_+=[\ell-L/2,L/2].
+\]
+Both have length \(d=L-\ell>0\), and they are disjoint because \(2\ell>L\). Let \(H_\pm=L^2(I_\pm)\) and \(H_{\rm mid}=L^2(I\setminus(I_-\cup I_+))\). These are orthogonal subspaces of \(L^2(I)\).
+
+Let \(S=P_I T_\ell P_I\), where \(T_\ell f(x)=f(x-\ell)\), and \(P_I\) is the compression by \(1_I\). Then \(S\) maps \(H_-\) UNITARILY onto \(H_+\), vanishes on \(H_+\oplus H_{\rm mid}\), and
+\[
+ \boxed{
+ S^2=0,\quad S^*S=P_-,\quad SS^*=P_+,\quad
+ (S+S^*)^2=P_-+P_+ .
+ }\tag{19}
+\]
+This is an honest \(L^2\) identity and does not invoke the positive Weil form or RH. Via the identification
+\[
+L^2(I)\cong L^2([0,d])\otimes\mathbb C^2
+ \ \oplus\ H_{\rm mid},
+\]
+the **selfadjoint prime operator** \(\mathcal P=-v(S+S^*)\) with \(v=(\log2)/\sqrt2>0\) becomes
+\[
+\boxed{\quad
+ \mathcal P\ \cong\ -v\,I_{L^2([0,d])}\otimes
+ \begin{pmatrix}0&1\\1&0\end{pmatrix}
+ \ \oplus\ 0_{\rm mid}.
+}\tag{20}
+\]
+Thus its exact spectrum is \(\{-v,0,+v\}\), its norm is exactly \(v\), and each of the \(\pm v\) eigenvalues has infinite multiplicity (since \(d>0\)). The positive and negative prime channels are explicitly the symmetric and antisymmetric combinations of the two cap wavefunctions. Their spectral projections are
+\[
+P_{\pm}^{\rm prime}
+=\tfrac12(P_-+P_+\pm(S+S^*)),
+\]
+with \(\mathcal P=-v P_+^{\rm prime}+vP_-^{\rm prime}\).
+
+**Interpretation:** the local prime crossing has a literal \(2\times2\) Pauli-\(\sigma_x\) structure on each point of the overlapping cap interval. It is not a spin-\(\frac12\) *SO(3) representation* and should not be advertised as a new fundamental spin degree of freedom. Rather, it is the exact two-channel sewing algebra of the arithmetic translation. It makes the signed nature of the prime term unavoidable: Haar projection onto the zonal sector does not turn \(\mathcal P\) into a positive operator.
+
+**Practical result:** use (19)–(20) to build a two-channel exact prime operator in the finite Schur/Galerkin machinery; no numerical quadrature or prime-series truncation is needed for this block. The large but positive archimedean translation energy and the two pole ranks must compensate the negative symmetric cap channel. The isolated prime block by itself is always indefinite on the first-prime rung.
+
+### Exact symbolic/finite tests
+
+A source-independent test harness can verify the nilpotence/partial-isometry identities on explicit two-cap trial wavefunctions and the Pauli factor, though the full \(L^2\) operator theorem is elementary. The exact Legendre cap polynomial source remains \`experiments/abel_prime_common_map/verify_haar_prime_caps.py\`; formalizing (19) requires only interval support and translations, making it an efficient Lean theorem for Claude.
+
+## 11. GPP Drive archive cross-reference and the exact logical boundary
+
+I located and read user-owned archival material in the GPP Drive folder **including its subfolders**:
+
+- **Daniel Toupin, *Plancherel and Peter–Weyl: The Two Spectral Faces of Haar Physics* (April 2026)**, in GPP / Everything: https://drive.google.com/file/d/1i0gau66Gastvci6me5PrF5mSqQxTdlKm/view. The abstract Haar dichotomy between noncompact dilation Plancherel and compact gauge Peter–Weyl is **prior work**, not a new conceptual claim of this note. The **new explicit step here** is the L-dependent isometry (2), the actual Weil matrix (13), and the exact first-prime cap/Pauli operator (19)–(20).
+- **Daniel Toupin, *Haar Positivity: From Weil to Wightman* (May 2026; patched version)**: https://drive.google.com/file/d/19diaTG8Zqnx4OBsmbWJZpUAYgJ3Qf1uN/view. Haar-convolution squares yield positive-type TEST KERNELS; the sign of their pairing with the independent arithmetic Weil distribution remains the missing Weil-positivity assertion.
+- **GPP archive study *Closing the Haar-Square Trace Identity Gap for the Riemann Hypothesis***: https://drive.google.com/file/d/1wpV3P29VZWbUZBeIS1iUTS3tDd7WJOWZ/view. It distinguishes distributional explicit formulas (Meyer), semi-local Hilbert descriptions (Burnol, Connes–Consani), and the unproved global Haar-square Hilbert trace identification; its independent literature assertions require source audit before promotion.
+- **Turbo’s archive note on Haar positivity**: https://drive.google.com/file/d/1dvv6IiMsV6qsmTkavPPJ6Fu2hs5xfqWR/view. Its finite-model \(\zeta/F_\theta\) contrast emphasizes that plain Haar-positive sums are too weak; the true arithmetic distribution must discriminate the deformation. The present Pauli algebra is *object-independent* and therefore cannot by itself be RH-specific.
+- **Turbo’s earlier Schur-compression kill test**: https://drive.google.com/file/d/13Cgiw9ieOETH1F6XrIxVqZjgS-0Re7te/view. A finite compression onto a near-kernel constant mode was blind to \(F_\theta\). Do not reproduce that defect when selecting the five/six low Legendre modes; retain the full residual and explicit deformation response.
+- **Turbo’s Wave-234 parity/Schur analysis**: https://drive.google.com/file/d/1OxCGm-qV7vdnovQEr0Y-9lR7xtQOEopZ/view. Independently encounters exact even/odd sewing decompositions and opposite-sign pole components, consistent with the full Weil parity blocks here; its bump-train sectors differ from this first-prime fixed-width Haar basis.
+
+**Safety check / one-line no-go.** If \(F=\Omega^\vee*\Omega\) is a positive-definite test function, an arbitrary distribution \(D\) need not satisfy \(D(F)\ge0\): on \(\mathbb R\), take \(D=-\delta_0\). Then \(D(F)=-\|\Omega\|_2^2<0\) for \(\Omega\neq0\). Therefore any proposed closure from “Haar square” to “Weil positive” has to demonstrate a property of the arithmetic distribution, not just the Haar test kernel. Similarly the numerical first-prime \(F_\theta\) control must be checked in the *identical* five/six-moment Schur construction.
+
+**Research focus after reading archive:** prioritize exact source-level prime Pauli sewing + the genuinely arithmetic gamma/pole compensation; do not claim Peter–Weyl or Haar positivity independently implies RH, and do not conflate compact SO(3) unitary irreps with the noncompact principal series.
