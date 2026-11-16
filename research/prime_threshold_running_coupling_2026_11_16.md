@@ -288,3 +288,32 @@ holds as a convergent positive integral **only** for
 \(\varepsilon>|2\Re\rho-1|\). Thus one cannot take \(\varepsilon\downarrow0\) through positive integrals if \(\Re\rho\neq1/2\). The rational meromorphic formula at smaller epsilon cannot be used to infer positivity; indeed for real nonzero \(\delta=2\Re\rho-1\) and \(0<\varepsilon<|\delta|\), it gives a **negative** value although the actual integral diverges. The Lean \`CesaroAbelState\` guardrail is CORRECT. The formal \`WeilIsGram\` challenge remains precisely the need to construct a common ε-dependent admissible family realizing the true arithmetic form without presupposing criticality.
 
 This is why the new **positive boundary-energy beta function** must not be conflated with a positive Abel limit of arbitrary off-line zeta characters. They are different regularization parameters, and neither bypasses the global Weil/trace identification gap.
+
+
+## 10. Exact local sum-of-squares sewing at each prime entry
+
+There is a stronger operator interpretation of the inequality \(g_n<1\). On the two caps of width \(d=L-\ell_n\), identify their wavefunctions \(a,b\in L^2([0,d])\) via the common translation coordinate. The actual prime contribution is \(-2v_n\operatorname{Re}\langle a,b\rangle\). The positive **exterior** real-place energy already contains at least
+\[
+\frac{K(d)}2(\|a\|^2+\|b\|^2).
+\]
+These two pieces obey the EXACT completed-square identity
+\[
+\boxed{
+\begin{aligned}
+\frac{K(d)}2(\|a\|^2+\|b\|^2)
+ -2v_n\operatorname{Re}\langle a,b\rangle
+={}&\left(\frac{K(d)}2-v_n\right)
+       (\|a\|^2+\|b\|^2)\\
+&+v_n\|a-b\|^2.
+\end{aligned}}\tag{17}
+\]
+Because \(g_n=2v_n/K(d)<1\) on the new prime's first rung, the right-hand side is **strictly positive** for any nonzero cap wavefunction. This is a genuine explicit two-channel (Pauli/Haar) positive-square sewing of a new prime jump with its gamma boundary barrier, with no RH premise.
+
+For the first prime n=2 and throughout \(\log2<L\le\log3\), the worst-case (latest) cap margin has
+\[
+\frac{K(\log(3/2))}2-\frac{\log2}{\sqrt2}
+  \approx1.3408>0,
+\]
+and becomes even larger as L↓log2. Similarly each prime-power entry has a positive margin at the end of its initial rung.
+
+**Crucial accounting rule:** the same positive archimedean boundary energy is present only ONCE in the full Weil quadratic. Formula (17) may be applied to ONE prime channel, or to multiple channels only with a proved disjoint/weighted allocation of that energy. Summing independent instances of (17) without such an allocation would count one positive resource repeatedly and is invalid. This highlights a concrete global research target: construct a positive partition or a correlated *operator-valued* allocation of gamma/Haar energy across all concurrently visible prime modes, respecting the exact shifted-resolvent mass defect. The all-prime allocation is unproved and must reject Fθ.
