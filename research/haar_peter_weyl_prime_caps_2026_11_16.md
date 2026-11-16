@@ -187,9 +187,11 @@ It is a representation-basis change, not an identification of the two groups, no
 
 The lifted basis \(e_n\) on I extended by zero to \(\mathbb R\) has jump discontinuities at the interval endpoints, so it is not itself a global smooth test. But its archimedean energy is finite: \(|\widehat e_n(\xi)|=O(|\xi|^{-1})\), while \(a(\xi)=O(\log(2+|\xi|))\), hence \(\int a|\widehat e_n|^2<\infty\).
 
-More strongly, these functions belong to the **energy completion** of compactly supported smooth tests. Let \(g_\epsilon=e_n\cdot\chi_{\rm boundary,\epsilon}\) denote the difference between the Legendre function and a smooth cutoff that equals one away from a layer of total thickness O(ε) near the boundary. Then \(\|g_\epsilon\|_2^2=O(\epsilon)\), \(\|g_\epsilon'\|_2^2=O(\epsilon^{-1})\). Splitting the positive translation-energy integral into \(0<t<\epsilon\), \(\epsilon<t<1\), and \(t>1\), using
-\(\|g_\epsilon-T_tg_\epsilon\|_2\le t\|g_\epsilon'\|_2\) for small t and
-\(\|g_\epsilon-T_tg_\epsilon\|_2\le2\|g_\epsilon\|_2\) otherwise, gives
+More strongly, these functions belong to the **energy completion** of compactly supported smooth tests. Let \(g_\epsilon=e_n\cdot\chi_{\rm boundary,\epsilon}\) denote the difference between the Legendre function and a smooth cutoff that equals one away from a layer of total thickness O(ε) near the boundary. Then \(\|g_\epsilon\|_2^2=O(\epsilon)\) and \(\|g_\epsilon\|_\infty=O(1)\). **It is important NOT to use an \(H^1\) derivative estimate here:** \(g_\epsilon\) retains the original endpoint jumps. Instead, the boundary-layer cutoff functions have uniformly bounded total variation \(\operatorname{TV}(g_\epsilon)=O(1)\). The standard BV translation estimate \(\|g_\epsilon-T_tg_\epsilon\|_1\le |t|\operatorname{TV}(g_\epsilon)\), combined with \(\|g_\epsilon-T_tg_\epsilon\|_\infty\le2\|g_\epsilon\|_\infty\), gives
+\(\|g_\epsilon-T_tg_\epsilon\|_2^2\le C|t|\).
+For \(t\ge\epsilon\) use the separate bound
+\(\|g_\epsilon-T_tg_\epsilon\|_2^2\le4\|g_\epsilon\|_2^2=O(\epsilon)\).
+Splitting the positive translation-energy integral into \(0<t<\epsilon\), \(\epsilon<t<1\), and \(t>1\), and using \(w(t)=O(1/t)\) near zero and \(w(t)=O(e^{-t/2})\) at infinity, gives
 \[
 \boxed{\quad
  E(g_\epsilon)=O\bigl(\epsilon[1+\log(1/\epsilon)]\bigr)\longrightarrow0.
