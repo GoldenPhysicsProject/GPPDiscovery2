@@ -81,6 +81,9 @@ def run():
 
     c2 = (math.log(2)/2) / (1+1/math.sqrt(2))**2
     assert c2 > 0
+    t2 = (math.log(2)/2) / (1-1/math.sqrt(2))**2
+    assert t2 > 4
+    assert t2**10 > 1e6
     print("Status: PASS (floating-point sanity checks, not proof)")
     print("Rational-frequency 4x4 Gram min Cholesky pivot:", f"{pivot:.12g}")
     print("ε | cross-prime inner product | joint Abel norm² (target=4)")
@@ -90,6 +93,8 @@ def run():
     print("p=2 signed defect min/max:",
           defect_multiplier(2, math.pi), defect_multiplier(2, 0))
     print("Uniform finite-rank norm-defect floor c_2:", f"{c2:.12g}")
+    print("Raw-L2 YM bounded-power obstruction t_2(0):", f"{t2:.12g}")
+    print("Raw-L2 YM power norm at k=10:", f"{t2**10:.12g}")
 
 
 if __name__ == "__main__":
