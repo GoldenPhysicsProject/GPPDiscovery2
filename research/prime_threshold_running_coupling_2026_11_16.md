@@ -254,3 +254,37 @@ The attractive hypothesis is that the pole, gamma, and prime channels define a *
 \`experiments/abel_prime_common_map/check_prime_threshold_running_coupling.py\` records independent floating-point checks of K, its derivative, beta function and the universal rung upper bounds. Floats do not certify the analytic inequalities.
 
 **Bottom line:** we have one exact general rule for *every* new prime-power threshold, with a negative quadratic running beta function and asymptotic weakness. The required all-width accumulation/cancellation remains unproved. 
+
+
+## 8. Essential negative control: the same local beta law survives Fθ
+
+The running coupling is a *local support/geometric bound*, not yet a \(\zeta\)-specific property. Test the off-line-zero deformation
+\[
+F_\theta(s)=\xi(s-\theta)\xi(s+\theta),\quad0<\theta<1/2,
+\]
+from the GPP/Turbo comparison experiments. Its prime-power weights are multiplied relative to the single-\(\zeta\) weights by \(2\cosh(\theta\log n)\) in the product's explicit formula (carefully account for doubled archimedean and pole channels when building the full deformed form). Accordingly the **same** boundary method yields, for the isolated deformed prime-side term,
+\[
+ g_{n,\theta}(d)
+ =2\cosh(\theta\log n)\,g_n(d).
+\]
+At the end of a prime rung and with n=p prime,
+\[
+g_{p,\theta}\asymp p^{\theta-1/2}
+\quad(p\to\infty)
+\]
+(up to the fixed scalar and log ratio). This also tends to ZERO when \(\theta<1/2\), even though \(F_\theta\) has shifted/off-critical zeros. **Thus local threshold asymptotic freedom cannot, by itself, prove RH.** The missing global invariant must use the precise one-channel Euler product, signed prime/gamma/pole interference or a spectral trace identity that rejects \(F_\theta\). This is an explicit falsification criterion for any claimed induction proof.
+
+## 9. Separate Abel–Cesàro convergence-strip guardrail from the GPP source
+
+I additionally reopened Daniel Toupin's original \`rh_cesaro_v2.tex\` and GPPVerify's live \`flint/workbench\` files \`CesaroAbelState.lean\` and \`CesaroWeilGram.lean\`. The Lean branch already explicitly identifies the relevant domain boundary: the positive Abel integral for a character exponent \(\alpha\) requires \(|\Re\alpha|<\varepsilon\), and a positive Gram of character exponents requires \(|\Re\alpha_i|<\varepsilon/2\). Outside that strip the rational expression is MEROMORPHIC CONTINUATION, not a positive integral; \`WeilIsGram\` and \`HPsi\` are correctly marked OPEN.
+
+An important source-level issue in \`rh_cesaro_v2.tex\`, proof of Theorem \`W-pos-cesaro\`: it sets \(\varepsilon_0>2\max|\Re\rho-\tfrac12|\) and then incorrectly asserts integrability for **all** \(0<\varepsilon<\varepsilon_0\). The inequality is backwards. For a noncritical \(\rho\), \(\chi_\rho(t)=t^{\rho-1/2}\), and
+\[
+\frac{\varepsilon}{2}\int_{\mathbb R}e^{-\varepsilon|u|}
+|\chi_\rho(e^u)|^2du
+=\frac{\varepsilon^2}{\varepsilon^2-(2\Re\rho-1)^2}
+\]
+holds as a convergent positive integral **only** for
+\(\varepsilon>|2\Re\rho-1|\). Thus one cannot take \(\varepsilon\downarrow0\) through positive integrals if \(\Re\rho\neq1/2\). The rational meromorphic formula at smaller epsilon cannot be used to infer positivity; indeed for real nonzero \(\delta=2\Re\rho-1\) and \(0<\varepsilon<|\delta|\), it gives a **negative** value although the actual integral diverges. The Lean \`CesaroAbelState\` guardrail is CORRECT. The formal \`WeilIsGram\` challenge remains precisely the need to construct a common ε-dependent admissible family realizing the true arithmetic form without presupposing criticality.
+
+This is why the new **positive boundary-energy beta function** must not be conflated with a positive Abel limit of arbitrary off-line zeta characters. They are different regularization parameters, and neither bypasses the global Weil/trace identification gap.
