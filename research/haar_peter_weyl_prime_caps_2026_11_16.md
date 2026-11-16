@@ -153,3 +153,48 @@ Local reproducibility script: \`experiments/abel_prime_common_map/scan_haar_lege
 - **Not established:** Full first-prime positivity \(W(f)\ge0\), all-width ARP/RH, \(s=\Delta\) as a dynamical arithmetic spectral identification, or Haar positivity of the signed prime subtraction.
 
 **Turbo and Claude next:** formalize the Haar-unitary mapping and the exact prime cap polynomial coefficients (especially (11)-(12)) as finite arithmetic/algebra; build the canonical low 3×3 even and 2×2 odd blocks; bound the true mixed energy/prime/pole couplings and full infinite residual. Prioritize the *even* Schur block, where the observed spectral margin is ~0.00085. Do not twirl the Weil operator, since it is not SO3-equivariant.
+
+
+## 8. The direct meeting of the two Haar-Plancherel theorems
+
+There is a precise *unitary overlap* between the compact rotational Haar basis and the noncompact multiplicative Haar/Fourier basis; no appeal to a speculative self-duality is needed. From (3) and (5), applying ordinary Fourier Plancherel to the Legendre orthonormality gives
+\[
+\boxed{\quad
+ \int_{-\infty}^{\infty}j_n(z)j_m(z)\,dz
+   =\frac{\pi}{2n+1}\,\delta_{nm},\quad n,m\ge0.
+ \quad}\tag{15}
+\]
+Because each spherical Bessel function is real for real z, there is no conjugation ambiguity. The nontrivial phase \((-i)^n\) in the Fourier transform cancels on the diagonal and multiplies an already-zero off-diagonal inner product. Thus (15) follows from the two actual Haar normalizations, not by assuming RH.
+
+An exact normalized bridge matrix for the positive real-place channel is
+\[
+\boxed{\quad
+ E_{nm}=\frac{\sqrt{(2n+1)(2m+1)}}{\pi}\,
+  i^n(-i)^m\int_{-\infty}^{\infty}
+  a(2z/L)\,j_n(z)j_m(z)\,dz.\quad}\tag{16}
+\]
+Its quadratic form is nonnegative because \(a\ge0\), even though it has off-diagonal entries. The **signed** Weil matrix is still \(E_{nm}+C_\infty\delta_{nm}+2C_nC_m-2S_nS_m-2v C_{nm}\).
+
+This provides a mathematically exact Haar-to-Haar overlap transform:
+\[
+\boxed{\;\text{multiplicative Mellin/Plancherel}\ \longleftrightarrow\
+   \text{compact spherical Peter–Weyl}\;}
+\]
+ON THE FIXED SUPPORT INTERVAL, by the L-dependent unitary \(U_L\).
+It is a representation-basis change, not an identification of the two groups, not the functional equation by itself, and not proof of a physical spectral correspondence \(s=\Delta\).
+
+### Why the piecewise-polynomial Legendre trial functions are legitimate
+
+The lifted basis \(e_n\) on I extended by zero to \(\mathbb R\) has jump discontinuities at the interval endpoints, so it is not itself a global smooth test. But its archimedean energy is finite: \(|\widehat e_n(\xi)|=O(|\xi|^{-1})\), while \(a(\xi)=O(\log(2+|\xi|))\), hence \(\int a|\widehat e_n|^2<\infty\).
+
+More strongly, these functions belong to the **energy completion** of compactly supported smooth tests. Let \(g_\epsilon=e_n\cdot\chi_{\rm boundary,\epsilon}\) denote the difference between the Legendre function and a smooth cutoff that equals one away from a layer of total thickness O(ε) near the boundary. Then \(\|g_\epsilon\|_2^2=O(\epsilon)\), \(\|g_\epsilon'\|_2^2=O(\epsilon^{-1})\). Splitting the positive translation-energy integral into \(0<t<\epsilon\), \(\epsilon<t<1\), and \(t>1\), using
+\(\|g_\epsilon-T_tg_\epsilon\|_2\le t\|g_\epsilon'\|_2\) for small t and
+\(\|g_\epsilon-T_tg_\epsilon\|_2\le2\|g_\epsilon\|_2\) otherwise, gives
+\[
+\boxed{\quad
+ E(g_\epsilon)=O\bigl(\epsilon[1+\log(1/\epsilon)]\bigr)\longrightarrow0.
+\quad}\tag{17}
+\]
+Thus the finite Legendre Ritz calculations are well-defined on the true energy completion, with arbitrarily close smooth approximants. Nevertheless **positivity of every tested Ritz matrix** cannot establish positivity on the completion, because the untested high modes and mixed terms remain uncontrolled.
+
+This completion lemma also provides a concrete, non-circular core for a future Lean construction of the Haar–Legendre Schur complement.
