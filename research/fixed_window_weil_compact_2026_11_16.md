@@ -244,3 +244,33 @@ Stage D: compactness of the finite-interval to finite-band Fourier restriction (
 Stage E: trace-class \(S_R^*S_R\), (15)–(18), and parity (19). Keep the exact width \(L\), actual \(\Lambda(n)\) support and prime powers, and the correct signs throughout. Verify against \`F_theta\` deformation, oblique compression and off-line Abel regulator controls.
 
 This note is an **analytic derivation**, not a Lean-verified theorem or a proof of RH. For the previous Abel carrier map, see \`research/abel_prime_common_map_2026_11_16.md\` in the same PR.
+
+
+### Sharper, optimized index bound (important for usable certification)
+
+The condition \(a(R)>2M_L\) is merely a convenient sufficient choice. Solving the **actual** positivity condition (17), for any \(R>0\) with \(a(R)>M_L\), gives
+\[
+ m+1>\frac{LR}{\pi}\frac{a(R)}{a(R)-M_L}. \tag{20}
+\]
+Consequently the sharper, fully explicit theorem is
+\[
+\boxed{\quad
+ n_-(W|_{V_L})\le
+ m_L(R):=\left\lceil\frac{LR\,a(R)}
+ {\pi(a(R)-M_L)}\right\rceil
+ \quad \text{for every }R>0\text{ with }a(R)>M_L.\quad} \tag{21}
+\]
+One can minimize this bound over \(R\). Unlike (18), it does not throw away half the available high-frequency energy.
+
+**Uncertified floating-point scale check (mpmath digamma, not interval arithmetic):**
+
+| Width \(L\) | \(M_L\) upper bound | Approximate optimizing \(R\) | Bound \(m_L(R)\) |
+|---:|---:|---:|---:|
+| 0.125 | 5.6223462 | 19.20 | 6 |
+| 0.72 (first prime 2) | 7.8237477 | 178.85 | 399 |
+| 1.0 (prime 2 only) | 8.4368228 | 332.22 | 1094 |
+| 2.0 | 15.9254566 | 618584 | 7,037,062 |
+
+These integers illustrate the *size* of the bound, not certified negative indices. For \(L=0.72\), the earlier easy bound with \(a(R)>2M_L\) was approximately \(83{,}542\), so the optimization matters. The \(L=0.125\) case is already unconditionally positive in Verify; this new bound is not an improvement to that positivity theorem. For certification one must choose rational/directed-interval enclosures proving both \(a(R)>M_L\) and the strict right-hand inequality in (17), not trust the floated optimum.
+
+**Caution about \(m\):** The trace bound uses the *full* Fourier concentration operator \(S_R^*S_R\) with the real interval \(I_L\); truncating its eigenspace in a finite numerical basis without a certified tail is NOT sufficient. The identities (15)–(21) are analytic, with the numerical table only as a diagnostic.
