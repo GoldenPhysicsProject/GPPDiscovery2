@@ -266,3 +266,61 @@ I implemented and ran:
 The most promising search is no longer assigning each local prime a separate slice of gamma energy (which double-spends the same resource). Instead work with the exact 2-state recurrence (20) and seek an inequality coupling \((H_n,D_n)\) that propagates through every negative slope jump. Any candidate must (i) be verified for arbitrarily large n by a symbolic argument, not finite sieve; (ii) exploit the actual von Mangoldt/Euler-product structure; (iii) fail for the shifted \(F_\theta\) control with off-line zeros; and (iv) not assume a zero-distribution estimate equivalent to RH.
 
 The operator identity (6) is a separate complementary route for non-flat test functions and may support a genuinely different constructive positive-energy proof if the scalar recurrence cannot be closed.
+
+
+## 7. Rigorous counterexample: local prime-entry asymptotic freedom does NOT imply global reserve positivity
+
+This counterexample directly tests the hypothesis that every newly entering arithmetic term having relative coupling \(g_n<1\) suffices to preserve global positivity.
+
+Replace the actual sparse von Mangoldt weights by the artificial sequence
+\[
+\widetilde v_n=\frac{\log n}{\sqrt n}\qquad\text{for EVERY integer }n\ge2.
+\]
+For each n entering its first support rung, the exact same gamma exterior-energy estimate gives
+\[
+\widetilde g_n(d)=\frac{2\log n}{\sqrt n K(d)}
+<\frac{2}{\sqrt n};
+\]
+it is \(<1\) for n≥4 and also for n=2,3 by the explicit first-rung estimates in \`prime_threshold_running_coupling_2026_11_16.md\`. At each threshold, \(\widetilde g_n(d)\to0\). The local beta function is again negative quadratic.
+
+Nevertheless its global smoothed reserve
+\[
+\widetilde H(L)
+=4(e^{L/2}+e^{-L/2}-2)
+-\sum_{2\le n\le e^L}\frac{\log n}{\sqrt n}(L-\log n)
+\]
+is **strictly negative at \(L=\log200\)**. Here is an elementary rational certificate that avoids numerical transcendental evaluation.
+
+Use \(\log2>69/100\). For integers \(2\le k\le50\), define
+\(j_k=\lfloor\log_2k\rfloor\),
+\(h_k=\lfloor\log_2\lfloor200/k\rfloor\rfloor\),
+and \(m_k=\lceil\sqrt k\rceil\). Then
+\[
+\frac{\log k}{\sqrt k}\log\frac{200}{k}
+\ge\left(\frac{69}{100}\right)^2
+\frac{j_kh_k}{m_k}.
+\]
+The EXACT rational sum satisfies
+\[
+\boxed{
+\sum_{k=2}^{50}\left(\frac{69}{100}\right)^2
+ \frac{j_kh_k}{m_k}
+>4\left(\frac{283}{20}+\frac1{14}-2\right).
+}\tag{25}
+\]
+Since \(14<\sqrt{200}<283/20\), we have
+\[
+4(\sqrt{200}+200^{-1/2}-2)
+<4(283/20+1/14-2).
+\]
+All remaining k>50 contribute NONNEGATIVELY to the sum. Hence
+\[
+\boxed{\qquad\widetilde H(\log200)<0,\qquad
+\text{although every first-rung coupling }\widetilde g_n<1.\qquad}\tag{26}
+\]
+The exact \`fractions.Fraction\` receipt is
+\`experiments/abel_prime_common_map/verify_weak_coupling_no_go.py\`, and was independently EXECUTED; the rational margin is approximately 1.0277. The elementary input \(\log2>69/100\) is a standard strict log inequality and should be provided as a separate Lean lemma; no zeta or zero assumptions enter.
+
+**Consequence:** any purported infinite-rung proof based ONLY on individual \(g_n<1\), negative local beta functions, or the Dirichlet/SOS channel estimate of each entrant is mathematically invalid. The missing ingredient has to use a true feature of the actual \(\Lambda(n)\), e.g. Euler-product multiplicativity, genuine prime-power sparsity with a sufficiently sharp correlated counting estimate, or a number-theoretic reflection mechanism. The finite arithmetic \((H_n,D_n)\) recurrence is an exact proof TARGET, not a closed induction.
+
+This falsifier is not the shifted \(F_\theta\) control; it isolates and rejects the *Euler-product-blind local coupling mechanism*. The genuine \(F_\theta\) control from Suzuki's generalized screw-function theorem remains a separate essential check for any claimed RH-strength global invariant.
