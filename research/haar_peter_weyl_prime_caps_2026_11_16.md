@@ -289,3 +289,40 @@ I located and read user-owned archival material in the GPP Drive folder **includ
 **Safety check / one-line no-go.** If \(F=\Omega^\vee*\Omega\) is a positive-definite test function, an arbitrary distribution \(D\) need not satisfy \(D(F)\ge0\): on \(\mathbb R\), take \(D=-\delta_0\). Then \(D(F)=-\|\Omega\|_2^2<0\) for \(\Omega\neq0\). Therefore any proposed closure from “Haar square” to “Weil positive” has to demonstrate a property of the arithmetic distribution, not just the Haar test kernel. Similarly the numerical first-prime \(F_\theta\) control must be checked in the *identical* five/six-moment Schur construction.
 
 **Research focus after reading archive:** prioritize exact source-level prime Pauli sewing + the genuinely arithmetic gamma/pole compensation; do not claim Peter–Weyl or Haar positivity independently implies RH, and do not conflate compact SO(3) unitary irreps with the noncompact principal series.
+
+
+## 12. Finite Haar / Klein four symmetry of the first-prime cap sector
+
+The exact partial-isometry theorem (19) admits an additional simultaneous harmonic decomposition that separates **prime sign** from **global even/odd parity**.
+
+Write \(d=L-\ell\), \(u\in[0,d]\), and identify
+\[
+f_-(u)=f(-L/2+u),\qquad
+f_+(u)=f(-L/2+\ell+u).
+\]
+Then \(H_-\oplus H_+\cong L^2([0,d])\otimes\mathbb C^2\), with the cap-exchange involution \(X=S+S^*=\sigma_x\), and the internal cap reflection \(Jg(u)=g(d-u)\). They commute. The GLOBAL reflection \(Rf(x)=f(-x)\) restricts to
+\[
+\boxed{\qquad R|_{\rm caps}=J\otimes X,\qquad
+X^2=J^2=I,\qquad [X,J]=0.\qquad}\tag{21}
+\]
+As long as \(d>0\), each \(J\)-parity subspace in \(L^2([0,d])\) is infinite dimensional. The two commuting involutions generate a \(\mathbb Z_2\times\mathbb Z_2\) unitary representation (as abstract operators on the cap space) and its normalized finite Haar/projector decomposition is
+\[
+\boxed{\quad
+\Pi_{c,j}=\frac14(I+cX)(I+jJ),\qquad c,j\in\{\pm1\}.
+\quad}\tag{22}
+\]
+Each projector is orthogonal, and the four ranges sum to the cap space.
+
+On \(\operatorname{ran}\Pi_{c,j}\), the actual first-prime operator \(\mathcal P=-vX\) acts by scalar \(-vc\), whereas GLOBAL reflection acts by scalar \(r=cj\). Therefore **both signs \(c=\pm1\) occur for EACH physical parity \(r=\pm1\)** by selecting \(j=rc\):
+\[
+\boxed{
+\mathcal P|_{r\text{-parity cap}} \text{ has eigenvalues }+v\text{ and }-v
+\quad(r=+1,-1).
+}\tag{23}
+\]
+
+This is the exact explanation behind two complementary observations: (i) the first TWO LOWEST Legendre channels have opposite prime diagonal signs (§9), but (ii) the full prime operator is **not** positive on all odd functions, nor negative on all even functions. Restricting to low Legendre modes makes a nontrivial smoothness/frequency selection; parity alone does not select the prime sign.
+
+**Do not overextend the group:** \(X\) and \(J\) commute with each other and with the prime operator, but the entire Weil form \(W=\mathcal E +\text{pole}+\mathcal P\) is not invariant under internal cap reflection \(J\), nor under \(X\) generally. Only GLOBAL reflection \(R\) is a symmetry of the full Weil form. Hence the four Klein sectors do NOT block-diagonalize W; dropping mixed couplings would repeat the archived Schur compression blindness. A rigorous five/six-moment Schur certificate must retain them.
+
+The projector formula (22) requires no infinite-series or special-function technology. It can be formalized as a generic operator-algebra lemma for commuting selfadjoint involutions, potentially useful upstream in mathlib when stated without the number-theoretic names.
