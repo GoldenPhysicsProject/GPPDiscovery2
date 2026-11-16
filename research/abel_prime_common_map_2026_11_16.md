@@ -187,3 +187,65 @@ Consequently, for every N≥2 and L≥0,
   θ(N)+κ_L < θ(N) < t_N(0).                                (P)
 
 Thus the available separate **lower bound on B_N** and **upper bound on ||C_N||²** can never by themselves imply B_N(f)≥||C_N f||², regardless of cutoff choice. The desired positivity requires a **correlated** inequality retaining the shape of the same test f across real-place, pole, and prime channels. This is a no-go for a proof technique, not a counterexample to OB-6.
+
+
+## Theorem 6: unconditional bounded completion and asymptotically norm-one bound
+
+This is the constructive next step following the two-space identity and PR #615, without asserting the open inequality OB6At.
+
+Fix support width L≥0 and the real test space V_L of smooth compactly supported functions vanishing for |x|>L/2. On V_L polarize the genuine **quadratic** form B_N by
+
+  b_N(f,g)= [B_N(f+g)−B_N(f−g)]/4.
+
+The polarization is symmetric and bilinear because autocorrelation is quadratic and the pole/archimedean terms are linear in autocorrelation, while θ(N)||f||² is quadratic. Equivalently use the cross-correlation kernel to define b_N directly. A Lean formalization must establish the quadratic/parallelogram identities explicitly, rather than infer bilinearity from positivity.
+
+For every fixed L, Verify's #615 supplies N₀ so that for N≥N₀,
+
+  m_{N,L} := θ(N)+κ_L > 0,
+
+by choosing N beyond the threshold of strict inequality. Its coercivity theorem then gives
+
+  b_N(f,f)=B_N(f) ≥ m_{N,L} ||f||².
+
+Therefore b_N is a positive definite real inner product on V_L, its completion H_{B,N,L} exists, and the injection V_L→L² is continuous with norm ≤1/sqrt(m_{N,L}). This is a legitimate completion; the metric depends on N and L and is NOT silently identified with the ordinary L² metric or the varying ε Abel metrics.
+
+The raw prime map C_N extends uniquely to a bounded linear map
+
+  Cbar_{N,L}: H_{B,N,L} → ⊕_{p≤N prime} L²(R),
+
+because the sharp full-line estimate in Theorem 4 implies
+
+  ||C_N f||² ≤ t_N(0) ||f||²
+            ≤ [t_N(0)/m_{N,L}] B_N(f),
+
+so
+
+  ||Cbar_{N,L}|| ≤ sqrt[t_N(0)/(θ(N)+κ_L)].                 (Q)
+
+The adjoint in the B_N metric is now well-defined. The positive bounded B_N-adjoint composite Cbar† Cbar exists, with norm ≤t_N(0)/(θ(N)+κ_L). **This is a different operator** from raw C_N* C_N on full L² (Theorem 4).
+
+Moreover the bound tends to one for every FIXED L as N→∞, without PNT. Indeed,
+
+  t_N(0)−θ(N)
+     = Σ_{p≤N prime} [2 p^(−1/2)/(1−p^(−1/2))] log p
+     = o(θ(N)),                                               (R)
+
+since the positive bracketed weights tend to zero with p and θ(N)→∞ by elementary infinitude of primes. To check (R), for any δ>0 choose P such that 2p^(−1/2)/(1−p^(−1/2))≤δ for p>P; the finite initial sum divided by θ(N) vanishes, and the tail divided by θ(N) is at most δ.
+
+Since κ_L is fixed, (Q) proves
+
+  limsup_{N→∞} ||Cbar_{N,L}|| ≤ 1.                          (S)
+
+In fact the norms converge to one. For each fixed nonzero f∈V_L, Verify's N-independent regrouping identity supplies
+
+  ||C_N f||² / B_N(f) = 1 − W(f)/B_N(f),                    (T)
+  W(f)=weilForm(autocorr f), independent of N,
+
+and B_N(f)=θ(N)||f||² + poleTerm(autocorr f)+archimedeanTerm(autocorr f)
+→+∞. Hence the ratio in (T) tends to one for every fixed nonzero f, even if W(f) were negative. Taking the supremum over f in the operator norm yields liminf ≥1, so together with (S),
+
+  lim_{N→∞} ||Cbar_{N,L}|| = 1.                           (U)
+
+**Guardrail:** (U) is unconditional and therefore cannot prove OB6At/RH. Contractivity at any admissible cutoff would require ||Cbar_{N,L}||≤1 EXACTLY, not merely asymptotically. The fixed additive difference W(f)=B_N(f)−||C_N f||² is the decisive signed datum. The N→∞ comparison washes this difference out relative to θ(N)||f||². This pinpoints why a large-cutoff or asymptotically-unitary YM argument alone cannot close the positivity gap.
+
+**Next formalization target:** (i) prove BN quadratic/polarization on V_L; (ii) choose N with strict m_{N,L}>0 using #615; (iii) complete V_L in b_N and extend C_N with bound (Q); (iv) distinguish B_N-adjoint from full-L² adjoint; (v) prove (R) using weight tending to zero and theta_unbounded; (vi) prove (T) and (U). No hidden OB6At assumption.
