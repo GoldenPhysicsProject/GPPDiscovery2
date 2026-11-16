@@ -163,3 +163,27 @@ Since T_N is a positive Fourier multiplier, for every integer k≥1,
 In particular, no equivalent renorming of the SAME linear operator on full L² can render its powers uniformly bounded, because equivalent norms change operator norms only by a fixed multiplicative factor independent of k. This is a sharp obstruction to invoking bounded-power/ergodic YM machinery on the raw prime Gram operator. It is not an obstruction to constructing **a different B_N-adjoint composite on the width-dependent GNS completion**; that composite changes the operator and must be analyzed separately.
 
 This explicitly meets the plan's request for a precise obstruction rather than another equivalent criterion. At p=2, ||T_N^10|| is already at least 1.158×10^6 in the full L² metric, and increases with N.
+
+
+## Theorem 5: the crude lower/upper norm-sandwich strategy cannot prove OB-6
+
+Verify PR #615 supplies the lower estimate on width-L tests
+
+  B_N(f) ≥ [θ(N)+κ_L] ||f||²,
+  θ(N)=sum_{p≤N prime} log p,       κ_L<0.
+
+Meanwhile the sharp full-L² operator bound in Theorem 4 gives
+
+  ||C_N f||² ≤ t_N(0) ||f||²,
+
+where
+
+  t_N(0) − θ(N)
+    = sum_{p≤N prime} log p · [ (1+q_p)/(1−q_p) − 1 ]
+    = sum_{p≤N prime} [2q_p log p/(1−q_p)] > 0.            (O)
+
+Consequently, for every N≥2 and L≥0,
+
+  θ(N)+κ_L < θ(N) < t_N(0).                                (P)
+
+Thus the available separate **lower bound on B_N** and **upper bound on ||C_N||²** can never by themselves imply B_N(f)≥||C_N f||², regardless of cutoff choice. The desired positivity requires a **correlated** inequality retaining the shape of the same test f across real-place, pole, and prime channels. This is a no-go for a proof technique, not a counterexample to OB-6.
