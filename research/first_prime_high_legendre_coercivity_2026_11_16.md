@@ -65,31 +65,96 @@ The analytic use of Fourier Plancherel and Legendre completeness remains an audi
 
 These are lower bounds for the entire infinite-dimensional space orthogonal to the first m Legendre modes. Increasing m produces increasing possible lower bounds, and the elementary formula a(R) grows logarithmically: indeed, when \(2k+\tfrac12\le R\), the kth summand of a(R) is at least \(1/(2k+\tfrac12)\). Combining with (2) proves \(W|_{\Pi_{\ge m}H}\) has a coercivity floor tending to infinity as \(m\to\infty\). This gives a quantitative compact-resolvent / discrete-spectrum mechanism for the fixed-width selfadjoint form, stronger than merely 'identity plus compact' in the energy norm.
 
-## 3. Concrete full-residual Schur certificate
+## 3. Correct finite-section residual certificate (two-stage coupling must NOT be discarded)
 
-Let \(H_m\) be the L²-orthogonal complement of e_0,...,e_{m-1}; the true form satisfies \(W(h)\ge\gamma_m\|h\|_2^2\) there, with \(\gamma_{50}=9/5\), \(\gamma_{70}=11/5\), \(\gamma_{100}=5/2\). Let \(g_1,\dots,g_d\) be finite, explicit trial vectors in the operator domain (finite Legendre combinations are acceptable: their zero-extensions have Fourier decay \(O(1/r)\), and \(a(r)=O(\log(2+|r|))\), so \(a(r)\widehat g_i(r)\in L²\)).
+**Important algebraic correction to the earlier handoff.** A lower bound on the *raw high Legendre tail* \(W|_{\Pi_{\ge N}}\ge\gamma_N I\) does **not** imply that the tail remains above \(\gamma_N\) *after eliminating the intermediate modes* \(e_5,\dots,e_{N-1}\). The latter operation produces a negative correction \(G D^{-1}G^*\). It would be WRONG to insert \(\gamma_N^{-1}\) in the earlier low-dimensional Schur residual estimate without also controlling this correction. The m=3 negative-index proof and all high-tail coercivity statements (sections 1–2) are unaffected.
 
-If \(g_i\) are approximate solutions eliminating the **intermediate** modes e_d,...,e_{m-1}, write the full residuals against the high tail as
+There is a **simpler correct alternative**: form the FULL \(N\times N\) low-frequency Galerkin matrix *first* and subtract a certified all-mode residual.
+
+Let \(P_N\) project in \(L^2(I)\) onto \(e_0,\ldots,e_{N-1}\), and \(Q_N=I-P_N\). Write \(\mathscr A\) for the positive selfadjoint operator associated with the real-place form \(E\); on full-log-line Fourier transforms \((\mathscr A f)^\wedge(\xi)=a(\xi)\widehat f(\xi)\), compressed to \(I\). Let \(T=\mathscr A+K_L\) be the selfadjoint operator associated with the ACTUAL Weil form. The finite Legendre functions are in \(\mathrm{Dom}(T)\): their zero-extensions have \(|\widehat e_n(\xi)|=O(1/|\xi|)\) and \(a(\xi)=O(\log(2+|\xi|))\), so \(\mathscr A e_n\in L^2\).
+
+Set
 \[
- r_i=\Pi_{\ge m}(Tg_i)\in H_m,\qquad T=A_{\rm arch}+K_L,\quad
- W(g_i,h)=\langle Tg_i,h\rangle_{L²}.
+ M_N=(W(e_i,e_j))_{0\le i,j<N},\quad
+ \mathcal R_N=Q_N T P_N:\mathbb R^N\to Q_N L^2(I),\quad
+ \Gamma_N=\mathcal R_N^*\mathcal R_N.
 \]
-Here T is the unbounded selfadjoint form operator, and for finite Legendre combinations \(g_i\) it has the L² action described by the Fourier multiplier \(a(\xi)\) plus bounded K_L. The **exact** sufficient certificate is
+For every \(f=p+h\) with \(p=P_N f\) and \(h=Q_N f\) in the form domain, and \(W(h)\ge\gamma_N\|h\|_2^2\),
 \[
-\boxed{
-  \lambda_{\min}\left(\big(W(g_i,g_j)\big)_{i,j\le d}\right)
-  >\gamma_m^{-1}\,\big\|\big(\langle r_i,r_j\rangle\big)_{i,j\le d}\big\|_{\mathrm{op}}
-}\tag{4}
+\begin{aligned}
+W(f)&=\langle p,M_Np\rangle
+       +2\operatorname{Re}\langle\mathcal R_Np,h\rangle+W(h)\\
+&\ge \langle p,(M_N-\gamma_N^{-1}\Gamma_N)p\rangle .
+\end{aligned}
 \]
-**provided** the g_i also solve the finite Galerkin elimination in the intermediate modes, so that the remaining positive high block and their cross terms are the only uneliminated couplings. More invariantly, the full finite \(d\)-dimensional corrected Schur matrix must dominate \(\gamma_m^{-1}R^*R\). A numerical Ritz principal matrix alone does not prove (4); the residuals must be norm-bounded in the complete \(H_m\).
+Thus the genuine sufficient condition is
+\[
+\boxed{\quad M_N-\gamma_N^{-1}\Gamma_N\succeq0
+\quad\Longrightarrow\quad W(f)\ge0\ \text{for EVERY f supported in I}.\quad}\tag{4}
+\]
 
-A more practical decomposition chooses \(d=5\) and solves the positive finite Galerkin block on n=5,...,m-1. The m=5 spectral layer-cake result supplies positive coercivity \(27/100\) to the WHOLE intermediate-plus-tail block; the present m=100 result strengthens the **remaining tail** to \(5/2\). The resulting two-stage Schur decomposition preserves all mixed terms and provides a much smaller error penalty.
+**Exactly how to evaluate the complete, infinite residual:** Because the e_n are in the operator domain and \(\{e_n\}\) is an orthonormal basis,
+\[
+\boxed{\quad
+(\Gamma_N)_{ij}
+=\langle T e_i,T e_j\rangle_{L^2(I)}
+ -\sum_{k=0}^{N-1}W(e_k,e_i)W(e_k,e_j).
+\quad}\tag{5}
+\]
+This is an exact finite-matrix identity, NOT a residual defined as "whatever is left." The only infinite-dimensional ingredient is a finite number of ordinary \(L^2\) **source-operator norm integrals** \(\langle T e_i,T e_j\rangle\), which can be estimated with validated quadrature, closed kernel estimates, or verified interval arithmetic. It is crucial to obtain an **upper matrix enclosure** for Γ_N from these integrals. A finite sum over tested tail Legendre modes provides a **lower** matrix enclosure and cannot certify positivity.
 
-### Independent numerical diagnostic, not part of proof
+The real-space action to integrate is explicitly
+\[
+\begin{aligned}
+(Tf)(x)=
+&\int_0^\infty\frac{e^{-t/2}}{1-e^{-2t}}
+ (2f(x)-f(x-t)-f(x+t))\,dt\\
+&+C_\infty f(x)
++2C_f\cosh(x/2)-2S_f\sinh(x/2)\\
+&-\frac{\log2}{\sqrt2}[f(x-\log2)+f(x+\log2)],
+\qquad x\in I, \tag{6}
+\end{aligned}
+\]
+with f extended by zero outside I. The apparent endpoint divergences are only logarithmic for piecewise-polynomial e_n and hence their squares are integrable. The same source-form normalization as in GPPVerify is used.
 
-I reconstructed the full real-space Weil matrix using Gauss–Legendre quadrature for the actual translation energy, exact archimedean tail, n=2 compressed prime overlap and exact pole integrals, at 12,20,30,50,70 Legendre modes. At n=70 the first finite Ritz eigenvalue is ~0.0008496503, positive, and the even/odd split is stable. However, the full first-prime positive Schur complement is not yet certified and the minimum is small enough that interval and residual error management are essential.
+Once the corrected \(N\times N\) matrix in (4) is certified, its *finite* Schur complement into the first 3 or first 5 Haar/Legendre modes is legitimate. This order of operations preserves the intermediate-to-tail coupling. It avoids the false shortcut of using γ_N for an already Schur-compressed tail.
 
-I also tested the 5-mode Schur correction against a 140-mode numerical Galerkin matrix: after eliminating modes n=5,...,99, the residual from modes n=100,...,139 has norm ~0.02135. This is a **lower bound on the unknown full residual norm**, not an upper bound; it CANNOT be used as a certificate. The sharper high-mode coercivity m=100 improves the approximate penalty to about 0.00018 for this *truncated residual*, versus ~0.00169 under the old 0.27 high-block bound. The finite corrected Schur margin is ~0.00085, so an independently proven complete-tail residual bound may now be viable. Do not claim success until the infinite tail has been rigorously bounded.
+### Equivalent two-stage formulation and its needed extra estimate
+
+Write the full operator in low P, intermediate F and tail H blocks:
+\[
+\mathcal T=
+\begin{pmatrix}
+A&B^*&C^*\\B&D&G^*\\C&G&H
+\end{pmatrix}.
+\]
+If D is positive, eliminating F produces
+\[
+S=A-B^*D^{-1}B,\qquad
+R=C-GD^{-1}B,\qquad
+H_{\rm eff}=H-GD^{-1}G^*.
+\]
+Even if \(H\ge\gamma_N I\), it only follows that
+\[
+H_{\rm eff}\ge
+\Big(\gamma_N-\|G D^{-1}G^*\|\Big)I.
+\]
+Therefore the desired small Schur test is
+\[
+\boxed{\quad
+S-\gamma_{\rm eff}^{-1}R^*R\succeq0,\qquad
+\gamma_{\rm eff}:=\gamma_N-\|G D^{-1}G^*\|>0.
+\quad}\tag{7}
+\]
+Both \(R^*R\) and \(G^*G\) are complete tail Gram matrices, expressible by (5) with the appropriate finite linear combinations. An independent operator norm bound for \(G D^{-1}G^*\) is mandatory.
+
+### Numerical feasibility, NOT a certificate
+
+Independent real-space quadrature to 160 Legendre modes suggests:
+- at N=100, the finite high-tail Ritz lower bound is ~3.86 and its intermediate-mode Schur correction \(G D^{-1}G^*\) has finite-rank operator norm ~0.17, so the tested effective tail remains strongly positive;
+- the finite residual from test modes n=100,...,159 is small compared with the ~0.00085 first Ritz margin.
+
+However these are **finite-window-to-finite-window numerical checks**. Neither the *complete* \(\Gamma_N\) nor the *complete* \(G D^{-1}G^*\) has been upper-bounded. I also tried directly integrating \(\|Tg\|^2\) for Galerkin trial vectors, but straightforward Gauss–Legendre quadrature proved unstable because of endpoint logarithms; at present its computed Gram even developed spurious negative eigenvalues. That method cannot be promoted without endpoint-adapted quadrature and rigorous error bounds. No certificate of first-prime positivity has been obtained.
 
 ## 4. Lean and Turbo audit targets
 
