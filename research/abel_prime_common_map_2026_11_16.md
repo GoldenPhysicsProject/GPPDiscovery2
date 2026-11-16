@@ -193,7 +193,7 @@ Thus the available separate **lower bound on B_N** and **upper bound on ||C_N||�
 
 This is the constructive next step following the two-space identity and PR #615, without asserting the open inequality OB6At.
 
-Fix support width L≥0 and the real test space V_L of smooth compactly supported functions vanishing for |x|>L/2. On V_L polarize the genuine **quadratic** form B_N by
+Fix support width L>0 and the real test space V_L of smooth compactly supported functions vanishing for |x|>L/2. On V_L polarize the genuine **quadratic** form B_N by
 
   b_N(f,g)= [B_N(f+g)−B_N(f−g)]/4.
 
@@ -246,6 +246,6 @@ and B_N(f)=θ(N)||f||² + poleTerm(autocorr f)+archimedeanTerm(autocorr f)
 
   lim_{N→∞} ||Cbar_{N,L}|| = 1.                           (U)
 
-**Guardrail:** (U) is unconditional and therefore cannot prove OB6At/RH. Contractivity at any admissible cutoff would require ||Cbar_{N,L}||≤1 EXACTLY, not merely asymptotically. The fixed additive difference W(f)=B_N(f)−||C_N f||² is the decisive signed datum. The N→∞ comparison washes this difference out relative to θ(N)||f||². This pinpoints why a large-cutoff or asymptotically-unitary YM argument alone cannot close the positivity gap.
+**Guardrail:** (U) is unconditional and therefore cannot prove OB6At/RH. Contractivity at any admissible cutoff would require ||Cbar_{N,L}||≤1 EXACTLY, not merely asymptotically. The fixed additive difference W(f)=B_N(f)−||C_N f||² is the decisive signed datum. The N→∞ comparison washes this difference out relative to θ(N)||f||². For L=0 the smooth support space is zero, so the asserted limit of operator norms to one is not applicable. This pinpoints why a large-cutoff or asymptotically-unitary YM argument alone cannot close the positivity gap.
 
 **Next formalization target:** (i) prove BN quadratic/polarization on V_L; (ii) choose N with strict m_{N,L}>0 using #615; (iii) complete V_L in b_N and extend C_N with bound (Q); (iv) distinguish B_N-adjoint from full-L² adjoint; (v) prove (R) using weight tending to zero and theta_unbounded; (vi) prove (T) and (U). No hidden OB6At assumption.
