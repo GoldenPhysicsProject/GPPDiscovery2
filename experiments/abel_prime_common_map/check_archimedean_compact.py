@@ -94,14 +94,19 @@ def threshold_R(L):
 
 
 def main():
-    for L in ("0.125", "0.72", "1.0"):
-        L = mp.mpf(L)
+    for L_text, optimized_R in [("0.125", 20), ("0.72", 180), ("1.0", 333)]:
+        L = mp.mpf(L_text)
         k = tail_exact(L)
         numerical = 2*mp.quad(weight, [L, mp.inf])
         assert abs(k-numerical) < mp.mpf("1e-30")
-        M, R, rank = threshold_R(L)
-        assert multiplier_digamma(R)>2*M
-        margin = multiplier_digamma(R)*(1-L*R/(mp.pi*(rank+1)))-M
+        M, _, _ = threshold_R(L)
+        R = mp.mpf(optimized_R)
+        a = multiplier_digamma(R)
+        assert a > M
+        # Sharper sufficient bound, not the crude a(R) > 2*M condition.
+        d = L*R*a/(mp.pi*(a-M))
+        rank = int(mp.ceil(d))
+        margin = a*(1-L*R/(mp.pi*(rank+1)))-M
         assert margin > 0
         print("L=", L, "k(L)=",mp.nstr(k,13),
               "M_L=",mp.nstr(M,12),
