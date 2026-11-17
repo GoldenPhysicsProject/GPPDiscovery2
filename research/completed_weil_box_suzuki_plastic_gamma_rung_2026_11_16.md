@@ -155,3 +155,77 @@ Lean units: (1) interval indicator autocorrelation and translation energy; (2) g
 ## 6. Exact open obligation
 
 The completed positivity required for RH is now a countable event-by-event SOURCE inequality B_j≥sup(A_jt-F(t)). The prime-event finite data contain real arithmetic information, but no all-event estimate is proved. Neither PNT reference cancellation, gamma-rung removal, convexity, plastic constant nor finite numerics closes this. Preserve the shifted F_theta off-line falsifier.
+
+
+## 7. STRONGER SPECTRAL COROLLARY: exact 1/4 -> 5/4 digamma shift and fixed negative band
+
+Let D=-i d/dx on the full real line and put
+\[
+m_{\rm ref}(\lambda)=\Re\psi(5/4+i\lambda/2)-\log\pi,
+\]
+where psi here is DIGAMMA, not Chebyshev psi. The original gamma+constant multiplier is
+\[
+m_{\rm arch}(\lambda)
+  =\Re\psi(1/4+i\lambda/2)-\log\pi.
+\]
+The positive Yukawa covariance Y in section 2 has Fourier multiplier
+\[
+\widehat{e^{-|\cdot|/2}}(\lambda)
+  =\frac1{\lambda^2+1/4}
+  =\Re\frac{1}{1/4+i\lambda/2}.
+\]
+Digamma recurrence psi(z+1)=psi(z)+1/z now gives the **exact all-frequency identity**
+\[
+ \boxed{m_{\rm arch}(\lambda)+\frac1{\lambda^2+1/4}
+       =m_{\rm ref}(\lambda).}\tag{R1}
+\]
+Therefore the exact source completed Weil form is
+\[
+ \boxed{
+ W(f)=\frac1{2\pi}\int_{\mathbb R}m_{\rm ref}(\lambda)
+                      |\hat f(\lambda)|^2 d\lambda
+   -2\int_0^\infty A_f(t)[\mu(dt)-e^{t/2}dt].
+ }\tag{R2}
+\]
+This is the same first-gamma-rung cancellation (D) in spectral language, and is an **exact source-dependent separation of archimedean geometry from the signed Chebyshev discrepancy**.
+
+More explicitly, define a_k=2k+1/2. The reference multiplier has an elementary positive-gamma representation
+\[
+ \boxed{m_{\rm ref}(\lambda)
+     =C_\infty+4+
+         2\sum_{k=1}^\infty
+          \frac{\lambda^2}{a_k(a_k^2+\lambda^2)}.}\tag{R3}
+\]
+Every summand is strictly increasing in |\lambda|>0; their sum diverges as |\lambda|->infty. Since m_ref(0)=Cinf+4=-1.372183419225...<0, **there exists exactly ONE positive frequency lambda_* where m_ref=0.** The 60-digit root is
+\[
+\boxed{\lambda_*=6.1258715695008534784643951123522789194247560\ldots.}\tag{R4}
+\]
+Thus m_ref is negative exactly on |\lambda|<lambda_* and positive exactly on |\lambda|>lambda_*. A sign computation at finite precision gives the value; the uniqueness theorem is exact, from (R3).
+
+### A genuinely improved finite-index theorem for the REFERENCE PART ALONE
+
+Fix any R>lambda_* and let m_R=m_ref(R)>0 and m_0=m_ref(0)<0. For f supported on an interval of length L with its first N moments zero, the Fourier low-band concentration estimate from the earlier all-width note gives
+\[
+ \alpha_N(L,R)=\frac{LR}{\pi}
+     \left(\frac{(RL/2)^N}{N!}\right)^2.
+\]
+Then
+\[
+ \boxed{\langle f,m_{\rm ref}(D)f\rangle
+  \ge[m_R-(m_R+|m_0|)\alpha_N(L,R)]\|f\|^2.}\tag{R5}
+\]
+Choose N such that alpha_N<=m_R/[2(m_R+|m_0|)]. Such N grows **only O(L+log L)** for any fixed R>lambda_*: Stirling's inequality N!>=(N/e)^N implies alpha_N<=(LR/pi)4^(-N) whenever N>=e R L. The REFERENCE operator's negative index on each support interval is therefore O(L), and its fixed-band geometry is completely controlled without a doubly-exponential eigenvalue penalty.
+
+**DO NOT misstate this as an O(L) index bound for the full Weil form.** The residual signed prime error in (R2) has an exponentially growing worst-case norm bound with L. Its true arithmetic cancellations, which might remove that cost, are precisely the open RH-strength part. The earlier full-Weil all-width finite-index theorem remains valid but has an enormous conservative N(L).
+
+### How this answers the F_theta discrimination question
+
+For shifted nonnegative prime weights \(\Lambda(n)\cosh(\theta\log n)/\sqrt n\), the old superadditivity survived by monotone weighting. The NEW signed discrepancy with respect to the **fixed zeta pole reference** does not:
+\[
+ (\cosh\theta t)\mu-e^{t/2}dt
+ =(\cosh\theta t)(\mu-e^{t/2}dt)
+  +(\cosh\theta t-1)e^{t/2}dt.
+\]
+The second summand is a positive deterministic exponential drift for theta>0, absent at theta=0. Thus this source pairing is NOT generically invariant under the off-critical deformation. However a genuine completed shifted F_theta model also shifts its gamma and pole data, so this observation alone is NOT a completed F_theta positivity falsifier. One must compare ALL local factors, not freeze the zeta gamma/pole silently.
+
+The exact new target is a norm/form bound on the signed **Chebyshev remainder** in (R2) relative to the fixed-band reference operator, taking full shifted gamma/pole controls into account. Only such an arithmetic-specific inequality could turn this reconstruction into RH.
