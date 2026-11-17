@@ -72,9 +72,11 @@ B_{\rm graph}(18/25)
 
 This is EXACTLY the quantity M_minus in the kernel-checked GPPVerify file GppVerify/RiemannHypothesis/FirstPrimeNegativeBound.lean, whose theorem M_minus_lt proves M_minus<147/25. Thus (4) extends that IN-TREE benchmark to every prime threshold, without making its RH-strength bound automatic.
 
-The unconditional elementary proxy B_graph <= |Cinf|+V_L(L)+V_L(L/2)+2sinh(L/2)-L improves the earlier |Cinf|+2V(L)+2Le^{L/2}.
+**UPGRADED THEOREM (2026-11-16):** The companion note research/weighted_chebyshev_global_superadditivity_sharp_prime_mass_2026_11_16.md proves, UNCONDITIONALLY and for ALL real x,y>=1, V(xy)>=V(x)+V(y). It uses two published non-RH Chebyshev bounds and 40,401 finite inequalities certified by exact integer arithmetic. Hence the above general coarse upper bound upgrades to the EXACT identity
 
-Numerical probes at L=.72,1.2,1.6,2,3.5,5,8,10,12,15 found M_L=V_L(L); 4 million integer pairs 2<=n,m<=2000 also passed the proposed weighted-Chebyshev superadditivity V(log(nm))>=V(log n)+V(log m). **THIS IS AN UNPROVED CONJECTURE OUTSIDE THE FINITE PROBES**, not used in (1)-(4), and not shown to reject off-critical controls. A proof would give M_L=V_L(L), but it would not alone prove RH.
+\[\boxed{M_L=V_L(L)\qquad\text{for every support width }L>0.}\]
+
+For the boundary convention ell_n=L, this is an essential-supremum identity: perturb the two distance arguments downward, use superadditivity at sum L-2eps, then take an a.e. argument; the reverse inequality holds on a positive-measure neighborhood of an endpoint. The all-width sharp mass budget is therefore B_graph(L)=|Cinf|+V_L(L)+2sinh(L/2)-L, WITHOUT any unproved step. This improves the old |Cinf|+2V(L)+2Le^{L/2} estimate and exactly recovers the first-prime Lean M_minus constant. The global Chebyshev theorem is NOT RH-discriminatory; positive shifted F_theta weights appear to share analogous superadditivity.
 
 ## 3. Improved unconditional all-width high-moment coercivity
 
@@ -155,7 +157,7 @@ Proof: minimize over the high-sector h for each fixed moment vector mu. Since 0<
 
 ## 5. Shifted controls, scripts, Lean upstream, and honest scope
 
-Generic nonnegative fake prime coefficients also admit a graph SOS and moment Schur construction. Therefore **the decomposition, its all-width finite index, and the universal Carleman ladder are NOT RH-discriminatory.** A valid full-width proof of (7) must exploit true von Mangoldt structure in the finite entries and fail the shifted off-line F_theta control. The suspected superadditivity of V is not known to provide that discrimination.
+Generic nonnegative fake prime coefficients also admit a graph SOS and moment Schur construction. Therefore **the decomposition, its all-width finite index, and the universal Carleman ladder are NOT RH-discriminatory.** A valid full-width proof of (7) must exploit true von Mangoldt structure in the finite entries and fail the shifted off-line F_theta control. The now-PROVED superadditivity of V sharpens the mass estimate but does not provide RH discrimination; positive shifted weights appear to share the inequality.
 
 Reproducible scripts:
 - experiments/abel_prime_common_map/probe_prime_graph_mass.py: sampled finite-step graph mass maxima, old/new B comparison, and 4-million-pair FLOATING-POINT superadditivity probe only.
