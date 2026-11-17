@@ -84,3 +84,12 @@ Numerical audit script 'experiments/abel_prime_common_map/verify_prime_os_critic
 Lean targets: generic nonnegative weighted Gram PSD; generic pointwise PSD closure; zero-diagonal PSD row lemma; convergence/critical-wall lemma; completed-zeta log-derivative relation. The source's ArchimedeanFloor constant is already formalized, but **this bridge identity is not claimed Lean-proved**.
 
 Do not promote any of this to ARP/RH. This is a precisely identified, unconditional obstruction to a tempting shortcut.
+
+
+## 3b. Stronger no-go: completing the logarithmic derivative alone still fails
+
+A tempting repair is to replace the bare prime h(s)=-zeta'/zeta(s) with the COMPLETED log derivative h_xi(s)=-xi'(s)/xi(s), so that the gamma and pole pieces enter. Define K_xi(t,u)=h_xi(1/2+t+u).
+
+By xi(s)=xi(1-s), K_xi(0,0)=0 exactly. Since xi is nonconstant, h_xi is not identically zero in any neighborhood of 1/2; therefore K_xi(0,t)!=0 for arbitrarily small t>0. But ANY PSD kernel with K(0,0)=0 must have K(0,t)=0 for every t (2x2 determinant / Cauchy-Schwarz). Consequently **K_xi is not reflection positive**. Direct evaluation at t=.01 gives K_xi(0,.01)=-0.000462099787963... and the associated 2x2 determinant is approximately -2.1353621403564e-7.
+
+This is a precise obstruction to the **naive completed logarithmic-derivative Hankel kernel**, not the true Weil quadratic form. Replacing zeta by xi under a logarithmic derivative is still not a way to construct the required completed arithmetic OS/GNS space. The actual Weil form tests convolution squares of the explicit-formula distribution, not the sum-of-positive-times logarithmic derivative.
