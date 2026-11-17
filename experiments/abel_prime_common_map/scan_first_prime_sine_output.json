@@ -1,0 +1,13 @@
+{
+  "scope": "Floating Galerkin only: no interval certificate",
+  "L": 0.72,
+  "prime_term": "n=2",
+  "frequency_cutoff": 10000,
+  "quadrature_intervals": [[0,10,160],[10,50,250],[50,200,300],[200,500,400],[500,2000,1000],[2000,10000,2000]],
+  "rows": [
+    {"n":30,"lambda_min":0.0009617615290825918,"next_eigenvalue":0.05339021240144068,"even_parity_min":0.0009617615290825926,"odd_parity_min":0.05339021240144249,"off_parity_abs_max":1.0125609187044905e-14},
+    {"n":50,"lambda_min":0.0009125582589568464,"next_eigenvalue":0.052068757152281854,"even_parity_min":0.0009125582589568407,"odd_parity_min":0.052068757152283214,"off_parity_abs_max":1.989298906598091e-14},
+    {"n":80,"lambda_min":0.0008946751608694475,"next_eigenvalue":0.05066443765234041,"even_parity_min":0.000894675160869444,"odd_parity_min":0.05066443765233817,"off_parity_abs_max":2.2516656481471327e-14},
+    {"n":120,"lambda_min":0.000879537426966991,"next_eigenvalue":0.050053187274567534,"even_parity_min":0.0008795374269669975,"odd_parity_min":0.05005318727456684,"off_parity_abs_max":6.391297526270647e-14}
+  ]
+}
