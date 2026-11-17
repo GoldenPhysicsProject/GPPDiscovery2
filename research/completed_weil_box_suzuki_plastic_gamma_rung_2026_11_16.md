@@ -229,3 +229,33 @@ For shifted nonnegative prime weights \(\Lambda(n)\cosh(\theta\log n)/\sqrt n\),
 The second summand is a positive deterministic exponential drift for theta>0, absent at theta=0. Thus this source pairing is NOT generically invariant under the off-critical deformation. However a genuine completed shifted F_theta model also shifts its gamma and pole data, so this observation alone is NOT a completed F_theta positivity falsifier. One must compare ALL local factors, not freeze the zeta gamma/pole silently.
 
 The exact new target is a norm/form bound on the signed **Chebyshev remainder** in (R2) relative to the fixed-band reference operator, taking full shifted gamma/pole controls into account. Only such an arithmetic-specific inequality could turn this reconstruction into RH.
+
+
+## 8. EXACT CAUSAL LAPLACE TRANSFER OF THE SIGNED PRIME DISCREPANCY
+
+The signed measure nu=mu-e^{t/2}dt is more than an informal remainder. In the half-plane Re z>1/2 its Laplace transform is absolutely meaningful and satisfies
+\[
+ \boxed{
+ \mathcal L\nu(z)
+   =\int_{0}^{\infty}e^{-zt}\nu(dt)
+   =-\frac{\zeta'}{\zeta}\left(z+\tfrac12\right)
+        -\frac1{z-\tfrac12}.}\tag{T1}
+\]
+The subtraction cancels exactly the simple zeta pole at z=1/2, leaving the finite value
+\[
+ \boxed{\mathcal L\nu(1/2)=-\gamma,}\tag{T2}
+\]
+where the value is the CONTINUATION LIMIT, not a claim of absolute convergence at the boundary.
+
+The right side of (T1) has an unambiguous meromorphic continuation. Its right-half-plane poles lie at z=rho-1/2 for nontrivial zeros rho with Re rho>1/2; their residues are -multiplicities. No other pole can cancel those residues. The completed functional equation reflects any off-critical nontrivial zero to another with Re rho>1/2. Therefore
+\[
+ \boxed{
+ \mathrm{RH}\iff\mathcal L\nu(z)\text{ extends holomorphically throughout Re z>0}.}\tag{T3}
+\]
+This is the usual zero-free-half-plane criterion rewritten as a **causal prime-error transfer function**. It is an EXACT analytic restatement, not a positive Hilbert-space realization nor proof. Poles with Re z>0 would correspond formally to exponentially growing response modes; on RH the only nontrivial spectral singularities lie on the imaginary boundary. A holomorphic half-plane transfer function need not be positive real or a reflection-positive covariance, so this should NOT be conflated with Osterwalder–Schrader or Weil positivity.
+
+For theta>0, the shifted-prime weights can be represented as cosh(theta t) mu. The fixed-zeta-reference discrepancy then decomposes algebraically as cosh(theta t) nu + (cosh(theta t)-1)e^{t/2}dt, which has a new smooth exponential drift. But a full shifted completed F_theta test must shift the archimedean and pole factors as well; freezing them is NOT a valid completed-model comparison.
+
+Numerical regression: experiments/abel_prime_common_map/verify_weil_reference_digamma_transfer.py checks the exact recurrence (R1) to ~60 digits, the reference root to 50 digits, and the limit of the pole-subtracted transform at z=1/2 against -gamma. This is not a zero-location computation.
+
+**Final separation of obligations:** The universal spectral reference has fixed O(1) negative-frequency bandwidth and O(L) negative index on length-L support. All RH sensitivity resides in the signed arithmetic remainder nu and its actual completed action on autocorrelations. Proving its sign relative to the reference, or positivity of every Suzuki prime-event minimum, remains unsolved.
