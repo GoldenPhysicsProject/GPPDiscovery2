@@ -1,0 +1,36 @@
+{
+ "repo": "GPPDiscovery2",
+ "kind": "Discovery workbench",
+ "points_up": "GPPVerify GppVerify/Atlas.lean + atlas.json (full estate inventory)",
+ "holdings": [
+  {
+   "name": "discovery/",
+   "path": "discovery/",
+   "kind": "folder (241 files)",
+   "relates_to": "D2 filings via bridge PR #15; audited by Turbo"
+  },
+  {
+   "name": "experiments/",
+   "path": "experiments/",
+   "kind": "folder (38 files)",
+   "relates_to": "numeric receipts"
+  },
+  {
+   "name": "RESULTS.md + ledgers",
+   "path": "RESULTS.md",
+   "kind": "ledger",
+   "relates_to": "the seat's labelled claims"
+  },
+  {
+   "name": "root rigs (.py)",
+   "path": "cayley_fock_bridge.py et al.",
+   "kind": "code",
+   "relates_to": "rerun before citing"
+  }
+ ],
+ "strings_out": [
+  "GPPVerify workbench `astra/workbench`; its results land in GPPVerify.RiemannHypothesis (SuzukiKickCone, BoxCurvature, BoxArchimedean, TwoSpaceForm)",
+  "GPP-bridge: CODEX_RESEARCH_NOTES.md (the GPT seat's ledger), PR #15 doorbell, SUGGESTIONS.md",
+  "GPPVerify Atlas.lean: the full estate inventory"
+ ]
+}
