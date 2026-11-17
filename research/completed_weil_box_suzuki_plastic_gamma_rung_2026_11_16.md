@@ -259,3 +259,13 @@ For theta>0, the shifted-prime weights can be represented as cosh(theta t) mu. T
 Numerical regression: experiments/abel_prime_common_map/verify_weil_reference_digamma_transfer.py checks the exact recurrence (R1) to ~60 digits, the reference root to 50 digits, and the limit of the pole-subtracted transform at z=1/2 against -gamma. This is not a zero-location computation.
 
 **Final separation of obligations:** The universal spectral reference has fixed O(1) negative-frequency bandwidth and O(L) negative index on length-L support. All RH sensitivity resides in the signed arithmetic remainder nu and its actual completed action on autocorrelations. Proving its sign relative to the reference, or positivity of every Suzuki prime-event minimum, remains unsolved.
+
+
+## 9. COMPLETED FINITE CONTINUUM CERTIFICATE: first interval plus 665,134 exact prime-event barriers
+
+The companion note research/suzuki_exact_integer_event_parabola_2026_11_16.md and executables
+- experiments/abel_prime_common_map/certify_suzuki_initial_interval.py
+- experiments/abel_prime_common_map/certify_suzuki_event_parabola.py
+give a fully outward-rational proof of **strict** positivity of the full completed Suzuki potential for *every* real \(0<t\le\log(10^7)\). The initial prime-free interval is certified with the single exact q=3/2 checkpoint; the prime-free event gaps are certified by \(2F''(\log q)\Psi(\log q)-\min(\Psi'(\log q^+),0)^2>0\), using strict integer comparisons at every 665,134 prime-power q≤10^7. This has been independently rerun in the current research session, including all event arithmetic and the initial interval.
+
+THIS IS A FINITE-RANGE NECESSARY CHECK ON THE PUBLISHED SUZUKI RH CRITERION, not a proof of its positivity for arbitrarily large t, not positivity on all Weil test functions, and not more extensive than Mittermeier's 2026 checkpoints extending to 10^10. No Lean compilation was attempted. Do not conflate the 2023 completed Psi with the separate 2025 gamma-free eventual-sign criterion.
