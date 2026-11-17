@@ -313,3 +313,84 @@ The **critical pole coefficient** for this truncated model is \(-1/\langle c,H_+
 **A concrete alternative Phase1 proving-ground target:** at \(L=18/25\), certify (i) the infinite pole-removed even operator \(H_+\) has exactly one negative eigenvalue, with a nonzero spectral gap around zero; (ii) \( \langle c,H_+^{-1}c\rangle\le-\frac12\) by a certified resolvent-vector and full residual norm bound; (iii) the odd operator \(H_-\) is strictly positive with \(2\langle s,H_-^{-1}s\rangle\le1\). Then **full** width-.72 Weil positivity follows without the six-moment Schur matrix. Compare the cost with the existing six-moment residual-certified route; whichever certifies first wins the proving ground. Across **all** widths, the source index and the scalar threshold are not proved and remain independent obligations. The fully completed \(F_{1/4}\) control must be run through exactly this parity-resolvent mechanism before any promotion to an all-width claim.
 
 **Strict limitation:** even an all-width proof that the pole-removed operator has at most one negative direction is only a necessary part of the even task; the sharp scalar compensator condition still decides whether the source Weil form is nonnegative. This is a *different decomposition of the same wall*, not a shortcut proving RH.
+
+
+## 12. Source correction: \(L=.72\) IS ALREADY PROVED in Lean; the useful frontier is \(L=1.15\)
+
+**Important bibliographic and campaign correction.** The direct theorem
+\[
+\boxed{\texttt{GppWindowBL036.weilForm\_autocorr\_nonneg\_l036\_unconditional}}
+\]
+already exists on **GPPVerify/main**, file \`GppVerify/RiemannHypothesis/WindowBL036.lean\`, blob \`9ffe8edcb9af2a27c6f5b19273699863e9b89d7a\`. It proves \(W_\zeta(f)\ge0\) for **all real smooth tests supported on \([-9/25,9/25]\)**, precisely full width \(L=18/25=.72\), using an independently kernel-checked 100-piece digamma minorant. Its source explicitly states no custom axioms/sorries. This predates the present research: our 6-moment and sine-Galerkin pilots at width .72 should be classified as **alternative geometric decompositions and reproduction tests**, NOT attempts at the first full proof at that width. No separate positivity certificate at .72 is owed.
+
+The legitimate continuation is **width \(L=1.15\)**, where the prime powers \(2\) and \(3\) both enter. The new source-only program \`experiments/ob6_spectral_cutoff/galerkin_parity_two_primes.py\` evaluates each actual prime power \(p^k<e^L\) and includes a controlled *remove-prime-3* experiment. At 48 Dirichlet sine modes (24 in each parity), it finds:
+
+| Width \(L\) | unhealed even negative eig | next unhealed even positive eig | even scalar \(F_L(0)\) | full even Ritz bottom | full odd Ritz bottom |
+|---:|---:|---:|---:|---:|---:|
+| 0.72 | −1.33296384 | +0.52577364 | −8.15649e−4 | +9.15095e−4 | +5.21888e−2 |
+| 1.05 | −2.06879340 | +0.00400343 | −2.36830e−7 | +3.03937e−7 | +5.44377e−5 |
+| 1.15 | −2.27247979 | +0.00031562 | −8.37179e−9 | +1.10410e−8 | +3.71337e−6 |
+
+Here \(F_L(0)=1+2\langle c,H_+(L)^{-1}c\rangle\) is the exact Krein scalar *evaluated in the finite Galerkin space*. None of these 48-mode positivity readings are rigorous for the infinite operator; the \(L=.72\) sign has a **separate existing Lean proof**. The widening shows how both the even scalar margin and the odd pole margin collapse.
+
+### 12.1 Exact Krein secular equation for the soft eigenvalue
+
+For each fixed width where \(H_+\) has one negative eigenvalue and a gap around zero, define the meromorphic scalar
+\[
+\mathfrak F_L(z)=1+2\langle c,(H_+(L)-z)^{-1}c\rangle.
+\]
+The rank-one resolvent formula gives the **exact spectral equation**
+\[
+\boxed{z\in\rho(H_+)\text{ is an eigenvalue of }W_+
+\iff \mathfrak F_L(z)=0.}
+\]
+In each real resolvent gap, 
+\[
+\boxed{\mathfrak F_L'(z)=2\|(H_+-z)^{-1}c\|^2>0.}
+\]
+If \(F_L(0)<0\) and the soft healed eigenvalue \(\lambda_+\) lies before the next pole of \(H_+\), the mean-value theorem yields
+\[
+\boxed{\lambda_+=
+-\mathfrak F_L(0)/\mathfrak F_L'(\xi),\quad0<\xi<\lambda_+.}
+\]
+So \( -F_L(0)/[2\|H_+^{-1}c\|^2]\) is a **first-order spectral prediction** from the unhealed, gapped resolvent. It precisely connects the scalar pole-compensation margin to the positive soft mode; this is not a new positivity theorem, but it identifies the single mode responsible for the near-collapse.
+
+**Numerical comparison (48-mode finite source):**
+
+| \(L\) | \(\mathfrak F_L'(0)\) | first-order \(\lambda_{\rm pred}\) | directly diagonalized \(\lambda_{\min}(W_+)\) |
+|---:|---:|---:|---:|
+| 0.72 | 0.89170505 | 9.14708e−4 | 9.15095e−4 |
+| 1.05 | 0.77918894 | 3.03945e−7 | 3.03937e−7 |
+| 1.15 | 0.75823362 | 1.10412e−8 | 1.10410e−8 |
+
+This shows the **unhealed Krein scalar**, not a matrix-size artefact, controls the soft even Galerkin eigenvalue across three widths. The errors at widths 1.05 and 1.15 are extremely small because the mode itself is tiny compared with its unhealed spectral gap. This remains a *numerical* observation, not a theorem comparing widths.
+
+### 12.2 Prime 3 is essential to the odd-sector cancellation
+
+At \(L=1.15\), removing **only the \(n=3\) off-diagonal prime source** while retaining the same archimedean, pole, and scalar prime-mass terms gives, at 48 sine modes:
+
+| Variant | lowest odd Weil Ritz eigenvalue | lowest even Weil Ritz eigenvalue |
+|---|---:|---:|
+| True primes \(2,3\) | \(+3.71337\times10^{-6}\) | \(+1.10410\times10^{-8}\) |
+| Prime \(3\) omitted | \(-0.0284045\) | \(+2.31278\times10^{-8}\) |
+
+Thus the prime \(3\) term supplies a **positive refund to an odd, oscillating direction** even though its coupling coefficient \(\Lambda(3)/\sqrt3\) is positive and it enters the Weil form with an overall minus sign. The missing-prime-3 odd sector becomes negative. This is a direct, source-only arithmetic selectivity test: no estimate replacing the actual prime set by a generic positive mass bound can retain this refund.
+
+A cheap candidate **explicit negative test** for the prime-3-omitted signed form is
+\[
+f(x)=\sum_{j=1}^8 a_j\sqrt{2/L}\sin(2j\pi(x+L/2)/L),\quad
+(a_1,\ldots,a_8)=(1,1.071,0.624,0.107,0.206,0.120,0.073,0.118).
+\]
+The source-only normalized Rayleigh quotients are **−0.00303599** when \(3\) is removed and **+0.03340466** when it is included. Coefficients have three exact decimal places (rational input), but the transcendental source integrals were evaluated in ordinary floating point; independent outward Arb/rational certification is needed before labelling these signs *CERTIFIED*. This is an excellent small falsifier for a candidate proof that ignores multiplicative prime composition.
+
+### 12.3 The actual next proving ground
+
+The *existing* width-.72 Lean theorem is not to be rebuilt. Carry the **rank-one Krein pole identity** and **secular scalar running function \(\mathfrak F_L\)** to \(L=1.15\). Work separately:
+
+1. Certify that the infinite-dimensional pole-removed \(H_+(1.15)\) has exactly one negative mode and a positive spectral gap on its complement (the 48-mode next positive eigenvalue \(\sim3.16\times10^{-4}\) is a sighting, not a lower bound).
+2. Certify the scalar \(1+2\langle c,H_+^{-1}c\rangle\le0\) with an error **much smaller than \(8\times10^{-9}\)**; ordinary floating precision or a crude \(\|H^{-1}\|\) bound is unlikely to suffice.
+3. Certify \(H_-(1.15)>0\) and \(2\langle s,H_-^{-1}s\rangle\le1\); its 48-mode pole loading \(\sim0.99983996\) is also close to saturation.
+4. Independently certify the explicit 8-term odd negative test after prime-3 removal to anchor the arithmetic-specific source refusal.
+5. Test the *completed shifted* \(F_{1/4}\) against any general lemma before banking it. The all-width lift remains open even if width 1.15 is certified.
+
+This is a legitimate potential improvement in **conditioning** (invert the unhealed gapped operator, not the nearly singular healed operator), but the tiny scalar margins mean it remains technically challenging. The existing general Legendre-moment Schur route and the new scalar secular route should be compared on their actual full infinite-residual certification costs.
