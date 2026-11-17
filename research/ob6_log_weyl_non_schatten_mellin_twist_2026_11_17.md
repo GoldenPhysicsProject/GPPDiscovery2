@@ -180,3 +180,57 @@ This Mellin twist identifies the source shift \(s\mapsto s\pm\theta\) with a bal
 - Prior \`experiments/ob6_cutoff_flow/check_cutoff_orientation.py\`, \`check_completed_two_space_fake.py\`: cutoff-flow algebra and independent 55-digit shifted two-resolvent test.
 
 **Audit requests to Turbo/Flint:** (1) check the sharp log Weyl *lower* via time-band HS trace, (2) the Jensen *upper* via Dirichlet sine subspaces, (3) the \(c_N/\mu_n\) singular-value sandwich and the no-Schatten conclusion, (4) signs and factors in the gamma contact/Mellin twist, (5) the finite-rank Taylor estimate and 2×2 Woodbury formula, (6) the edited-rights public experiment receipt. Please do not route any sign statement to Verify as proved: the contractivity enclosure still has to be shown for all widths, and the completed \(F_\theta\) must fail exactly at its decisive inequality.
+
+
+## 8. An actual first-prime width pilot from the complete source, not zero data
+
+The companion \`experiments/ob6_spectral_cutoff/galerkin_two_pole_source.py\` independently assembles the **entire** width-\(L=0.72\) form in the Dirichlet sine basis from the closed gamma kinetic, rank-two pole, and the only supported von Mangoldt event \(n=2\). Use \(N=11\), \(\vartheta(N)=\sum_{p\le11}\log p\) and \(v_2=\log2/\sqrt2\). In the normalized sine basis \(\phi_j(x)=\sqrt{2/L}\sin(j\pi(x+L/2)/L)\), exact elementary overlap integration yields, for \(t\in[0,L]\),
+\[
+S_{nn}(t)=(1-t/L)\cos(k_nt)+\frac{\sin(k_nt)}{k_nL},
+\quad k_n=n\pi/L,
+\]
+\[
+S_{nm}(t)=
+\begin{cases}
+0,&n+m\ \text{odd},\\
+\frac{2[k_n\sin(k_mt)-k_m\sin(k_nt)]}{L(k_n^2-k_m^2)},&n+m\ \text{even},\,n\ne m.
+\end{cases}
+\]
+The gamma matrix is obtained by directly integrating
+\[
+E_{nm}=2\int_0^L w(t)[\delta_{nm}-S_{nm}(t)]dt+
+2\delta_{nm}\bigl[\operatorname{atanh}(e^{-L/2})+\arctan(e^{-L/2})\bigr].
+\]
+Together with \(U=(\langle\phi_n,\cosh(x/2)\rangle,\langle\phi_n,\sinh(x/2)\rangle)\), assemble
+\(G=E+(\vartheta(11)+C_\infty)I\),
+\(B=G+U\,\mathrm{diag}(2,-2)U^*\),
+\(V=\vartheta(11)I+2v_2S(\log2)\).
+The exact identities \(W=B-V=E+C_\infty I+UJU^*-2v_2S(\log2)\) and Woodbury \(B^{-1}\) are verified numerically inside the code; representative sine overlap entries were also independently checked against direct spatial quadrature.
+
+**Floating-point diagnostics (NOT outward-certified):**
+
+| sine modes \(M\) | largest generalized eigenvalue of \(Vx=\lambda Bx\) | smallest Euclidean eigenvalue of \(W_M\) |
+|---:|---:|---:|
+| 4 | 0.99985340606846 | 0.0011355532 |
+| 8 | 0.99986798160470 | 0.0010226303 |
+| 12 | 0.99986825231423 | 0.0010205335 |
+| 20 | 0.99987108384306 | 0.00099860066 |
+| 32 | 0.99987676260939 | 0.00095461446 |
+| 48 | 0.99988186476824 | 0.00091509492 |
+| 64 | 0.99988349872877 | 0.00090243806 |
+| 100 | 0.99988584951998 | 0.00088422902 |
+
+At \(M=100\), split into six low and 94 high sine modes; the **finite** high block bottom is about 1.36284, and the full finite Schur complement's smallest eigenvalue about 0.0008842962. This is encouraging for the *single-width proving ground*, but it is **not an inequality on the infinite high complement**. These Ritz tests lower-bound the true \(\lambda_{\max}(K)\); being below one does not certify continuum contractivity. The sharp all-width obstruction remains untouched.
+
+**The actual next calculation:** use the *existing* six-moment theorem at width 0.72 (Discovery2 \`first_prime_legendre_6_2026_11_16.md\`: rational full high-block energy coercivity \(119/9559\)) to obtain an independently bounded full residual \(R=B-DZ\) for a finite Galerkin approximation of the six-dimensional Schur block. The signed pole can be removed from the positive gamma inverse with the \(2\times2\) Woodbury formula above; the remaining source error needs an **honest** infinite-complement energy-dual bound, not a further growing Ritz matrix. The novel Fourier-Taylor error from §4 is mathematically valid but too expensive as the *only* tail estimate. Preserve the fully completed \(F_{1/4}\) shifted control as the exact falsifier.
+
+## 9. Conditional strict spectral gap on each finite window (not a proof)
+
+Under **RH as an assumption**, the Weil explicit formula becomes a sum of nonnegative squares of Fourier/Mellin samples at all critical ordinates. If \(W_\zeta(f)=0\) for a supported nonzero test, every such Fourier sample vanishes. The transform of a compactly supported \(L^2\) function is an entire function of exponential type \(L/2\), whose zero-counting function is \(O_L(T)\) unless it vanishes identically. The actual zeta zero count grows \(N_\zeta(T)\asymp T\log T\). Thus under RH, \(W_\zeta(f)=0\) forces \(f=0\), including the B-form closure by continuity and finite-sum lower bounds.
+
+Since \(K_{L,N}\) is compact, the top eigenvalue is attained. Under RH it cannot equal one, so
+\[
+\mathrm{RH}\ \Longrightarrow\ \|T_{L,N}\|<1
+\quad\text{for every coercive fixed }(L,N).
+\]
+Conversely, strict contractivity for a cofinal sequence of widths implies OB6 and hence RH by the in-tree theorem. This gives a **conditional strict-gap reformulation**, consistent with the proven collapse of any *uniform-in-width* margin. The RH assumption is load-bearing in the argument, and no method for proving these gaps unconditionally is supplied here. Audit the extension of the critical-line spectral squares to the B-form closure before formalizing this corollary.
