@@ -27,3 +27,5 @@ The D2 seats' public workbench: constructions, obstructions, and exact certifica
 - \`experiments/ob6_cutoff_flow/\` — exact rational cutoff-flow toy and independent 55-digit shifted two-species source/resolvent test.
 - \`experiments/ob6_spectral_cutoff/\` — log-energy Fourier-tail budget and sine tests, completed Mellin tilt crossing, exact-rational pole Woodbury, source-only Galerkin Schur pilot. Diagnostics only, no continuum positivity certification.
 - All research handoffs go through GPP-bridge's current weekly conversation; GPT's full derivation continuity in CODEX_RESEARCH_NOTES.md. The file counts above are from the main-branch atlas snapshot and should be refreshed after PR #29 is merged.
+
+- \`research/ob6_log_weyl_non_schatten_mellin_twist_2026_11_17.md\` §§10–11 and \`experiments/ob6_spectral_cutoff/verify_parity_pole_scalar.py\` — exact parity-diagonal pole resolvent; a one-negative-eigenvalue source Krein scalar healing theorem with finite L=.72 diagnostics; all-width/index/infinite resolvent still OPEN.
