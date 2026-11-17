@@ -72,3 +72,26 @@ This is a precise separation: universal local/scale positivity is proved, while 
 Numerical audit: experiments/abel_prime_common_map/verify_prime_os_RG_fixed_point.py, 75-digit mpmath. Checks O(epsilon) and O(epsilon²) convergence at decreasing epsilon, a positive Cauchy-kernel quadratic as a positive exp-integral, and shifted model behaviour separately.
 
 Lean targets: log-derivative simple-pole asymptotics; positive discrete-prime probability distribution; generic Laplace/Hankel Gram positivity; positive Cauchy kernel Gram via exponential integral; compact-uniform kernel limit; explicit countercontrol showing fixed-point universality. None proves ARP/OB6/RH.
+
+
+## 5. Explicit arithmetic OS-positive Euclidean Gaussian field
+
+For sigma>1, set a_n=Lambda(n)n^(-sigma) and m_n=log(n). The stationary covariance on the full real line
+
+    C_sigma(tau)=Σ_{n>=2} a_n exp(-m_n*|tau|)=h(sigma+|tau|)
+
+converges uniformly because sum a_n=h(sigma)<infty. It is positive definite since each exponential exp(-m|tau|) has nonnegative Fourier density 2m/(m²+omega²). Hence C_sigma is the covariance of an ordinary centered stationary Gaussian process, constructible explicitly as a weighted sum of independent stationary Ornstein-Uhlenbeck modes with decay rates **logarithms of prime powers**. Under reflection of time, positive-time covariance is exactly
+
+    C_sigma(t+u)=K_sigma(t,u),
+
+which is a positive sum-of-squares Gram, so the corresponding Gaussian Euclidean theory is OS/reflection positive (standard Gaussian second-quantization principle).
+
+THIS IS AN INDEPENDENTLY CONSTRUCTED POSITIVE ARITHMETIC FIELD. Its spectrum is prime-power log scales, not the zeros of xi; it is neither the completed Weil form nor a proved conformal celestial theory. This is a non-circular model of what is available from the Euler product and Plancherel/OS machinery alone.
+
+The positive RG rescaling of the full covariance is
+
+    C_eps(tau)=C_(1+eps)(eps*tau)/h(1+eps)
+            -> C_*(tau)=1/(1+|tau|)
+             = Integral_0^infty exp(-x)*exp(-x*|tau|) dx.
+
+The limit is a continuous stationary positive-definite and OS-positive Gaussian covariance. Its large-distance tail C_*(tau)~1/|tau| is *conformal-looking* with a formal d=1 two-point scaling exponent 2Delta=1, but the exact kernel is not globally conformal and this observation proves nothing about zeros or RH. It also holds for rightmost-pole shifted countercontrols after recentering, so the universality is NOT an RH discriminator.
