@@ -234,3 +234,82 @@ Since \(K_{L,N}\) is compact, the top eigenvalue is attained. Under RH it cannot
 \quad\text{for every coercive fixed }(L,N).
 \]
 Conversely, strict contractivity for a cofinal sequence of widths implies OB6 and hence RH by the in-tree theorem. This gives a **conditional strict-gap reformulation**, consistent with the proven collapse of any *uniform-in-width* margin. The RH assumption is load-bearing in the argument, and no method for proving these gaps unconditionally is supplied here. Audit the extension of the critical-line spectral squares to the B-form closure before formalizing this corollary.
+
+
+## 10. A better exact inverse: parity splits the signed 2×2 Woodbury matrix into TWO SCALARS
+
+This improves §5. The centered interval I is invariant under \(Rf(x)=f(-x)\). The zero-extended kinetic \(a(D)|_I\) and \(G_{L,N}\) commute with R. The pole vectors \(c(x)=\cosh(x/2)\) and \(s(x)=\sinh(x/2)\) satisfy \(Rc=c,\ Rs=-s\). Hence \(G^{-1}\) also commutes with R, and
+\[
+\boxed{\langle c,G^{-1}s\rangle=0.}
+\]
+Thus the Woodbury \(2\times2\) correction matrix is **DIAGONAL**:
+\[
+J^{-1}+U^*G^{-1}U
+=\operatorname{diag}\bigl(\tfrac12+\alpha,-\tfrac12+\beta\bigr),\quad
+\alpha=\langle c,G^{-1}c\rangle,\quad \beta=\langle s,G^{-1}s\rangle.
+\]
+If \(G>0\), then
+\[
+B=G+2cc^*-2ss^*>0
+\ \Longleftrightarrow\ 
+\boxed{2\beta<1}
+\]
+because the even block \(G_++2cc^*\) is automatically positive, and the odd block \(G_--2ss^*\) obeys the sharp rank-one criterion. In this regime
+\[
+\boxed{
+B^{-1}=G^{-1}
+-\frac{2}{1+2\alpha}(G^{-1}c)(G^{-1}c)^*
++\frac{2}{1-2\beta}(G^{-1}s)(G^{-1}s)^*.}
+\]
+So the finite inverse-moment matrix in §5 requires only **two scalar resolvent numbers**, not a general \(2\times2\) inverse. The even pole decreases the inverse; the odd pole increases it. This is an exact separation of the two bound-state channels; it gives no positive sign for \(B-C^*C\) on its own.
+
+At \(L=.72,N=11\), 24-mode source Galerkin yielded \(\alpha\approx0.11040413247320424\), \(\beta\approx0.000936345930310688\), mixed entry \(<10^{-18}\), and hence \(1-2\beta\approx0.99812730814\). Direct parity-Woodbury inverse agreed with the complete 24-mode inverse to \(8.4\times10^{-17}\). These are **floating numerical illustrations** of the exact parity theorem, not a continuum certificate.
+
+## 11. The first-prime *healed bound state*: a scalar Krein criterion for the even Weil sector
+
+Let the actual **pole-removed** source operator on \(H=L^2(I)\) be
+\[
+H_L=a(D)|_I+C_\infty I
+-2\sum_{\log n<L}\frac{\Lambda(n)}{\sqrt n}\,
+\tfrac12(T_{\log n}+T_{-\log n})\big|_I,
+\]
+with the convention \(\langle f,H_Lf\rangle=E(f)+C_\infty\|f\|^2-
+2\sum v_n A_f(\log n)\); here \(T_t+T_{-t}\) is the symmetric compression, and each coefficient is chosen so that its quadratic is \(2v_n A_f(t)\). It commutes with reflection. Denote its even and odd restrictions by \(H_+\), \(H_-\), with the same \(c,s\) as §10. The **full** source Weil operator is
+\[
+\boxed{W_+=H_+ +2cc^*,\qquad W_-=H_--2ss^*.}
+\]
+
+**Abstract rank-one healing theorem.** Let \(H_+\) be selfadjoint, invertible, bounded below, with compact resolvent, **exactly one negative eigenvalue** \(-a\), \(a>0\), and strictly positive remaining spectrum bounded below by \(b>0\). Let \(c\) be any nonzero vector. Then
+\[
+\boxed{H_++2cc^*\succeq0
+\quad\Longleftrightarrow\quad
+1+2\langle c,H_+^{-1}c\rangle\le0.}
+\]
+Proof: split \(H_+=-a\,ee^*+H_{\rm pos}\), \(c=\gamma e+d\), \(d\perp e\). The positive lower block is \(H_{\rm pos}+2dd^*>0\). Schur complement of that block is \(-a+2|\gamma|^2/(1+2\langle d,H_{\rm pos}^{-1}d\rangle)\). This is nonnegative iff \(2|\gamma|^2\ge a[1+2\langle d,H_{\rm pos}^{-1}d\rangle]\), which is precisely \(1+2[-|\gamma|^2/a+\langle d,H_{\rm pos}^{-1}d\rangle]\le0\). This proof does not pay the smallest **healed** Weil eigenvalue; it inverts the **unhealed** operator whose negative mode is separated from zero. It generalizes immediately to any positive rank-one coefficient \(t\).
+
+Similarly, if the pole-removed odd operator is strictly positive, then
+\[
+\boxed{H_--2ss^*\succeq0
+\quad\Longleftrightarrow\quad
+2\langle s,H_-^{-1}s\rangle\le1.}
+\]
+
+**Finite source diagnostics; NOT infinite-dimensional certification.** The source-only 48-mode sine Galerkin at \(L=.72,N=11\) has the following values:
+
+| sector | unhealed \(H\) spectrum near bottom | healed full \(W\) bottom |
+|---|---|---|
+| even | \(-1.33296384,\ +0.52577364,\ +1.10506433,\dots\) | \(+0.0009150949\) |
+| odd | \(+0.06482933,\ +0.91117579,\dots\) | \(+0.0521888367\) |
+
+At 48 even modes (24 parity-even sine vectors), the scalar is
+\[
+\langle c,H_+^{-1}c\rangle\approx-0.5004078247260165,\quad
+1+2\langle c,H_+^{-1}c\rangle\approx-0.000815649452033.
+\]
+The **critical pole coefficient** for this truncated model is \(-1/\langle c,H_+^{-1}c\rangle\approx1.99837003058\); the true coefficient is \(2\). In contrast, the pole-removed even source is **strongly indefinite** with one negative eigenvalue near \(-1.333\). The rank-one positive pole heals that isolated negative bound state and leaves a thin positive residual. The odd no-pole block is already positive, and its negative pole reduces but does not erase the finite gap. This strongly suggests the small first-prime obstruction is a **single even bound-state compensation**, not a failure of the gamma high-frequency tail.
+
+**Independent check:** \`experiments/ob6_spectral_cutoff/verify_parity_pole_scalar.py\` uses exact SymPy rational matrices to check the abstract inertia/scalar equivalence, then the source-only 48-mode Galerkin to check parity blocks, spectral indices, \(q=\langle c,H_+^{-1}c\rangle\), and the odd criterion. These numbers must not be used as proof of the continuum spectral index or infinite resolvent scalar.
+
+**A concrete alternative Phase1 proving-ground target:** at \(L=18/25\), certify (i) the infinite pole-removed even operator \(H_+\) has exactly one negative eigenvalue, with a nonzero spectral gap around zero; (ii) \( \langle c,H_+^{-1}c\rangle\le-\frac12\) by a certified resolvent-vector and full residual norm bound; (iii) the odd operator \(H_-\) is strictly positive with \(2\langle s,H_-^{-1}s\rangle\le1\). Then **full** width-.72 Weil positivity follows without the six-moment Schur matrix. Compare the cost with the existing six-moment residual-certified route; whichever certifies first wins the proving ground. Across **all** widths, the source index and the scalar threshold are not proved and remain independent obligations. The fully completed \(F_{1/4}\) control must be run through exactly this parity-resolvent mechanism before any promotion to an all-width claim.
+
+**Strict limitation:** even an all-width proof that the pole-removed operator has at most one negative direction is only a necessary part of the even task; the sharp scalar compensator condition still decides whether the source Weil form is nonnegative. This is a *different decomposition of the same wall*, not a shortcut proving RH.
