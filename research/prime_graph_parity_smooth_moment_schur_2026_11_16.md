@@ -76,7 +76,7 @@ This is EXACTLY the quantity M_minus in the kernel-checked GPPVerify file GppVer
 
 \[\boxed{M_L=V_L(L)\qquad\text{for every support width }L>0.}\]
 
-For the boundary convention ell_n=L, this is an essential-supremum identity: perturb the two distance arguments downward, use superadditivity at sum L-2eps, then take an a.e. argument; the reverse inequality holds on a positive-measure neighborhood of an endpoint. The all-width sharp mass budget is therefore B_graph(L)=|Cinf|+V_L(L)+2sinh(L/2)-L, WITHOUT any unproved step. This improves the old |Cinf|+2V(L)+2Le^{L/2} estimate and exactly recovers the first-prime Lean M_minus constant. The global Chebyshev theorem is NOT RH-discriminatory; positive shifted F_theta weights appear to share analogous superadditivity.
+For the boundary convention ell_n=L, this is an essential-supremum identity: perturb the two distance arguments downward, use superadditivity at sum L-2eps, then take an a.e. argument; the reverse inequality holds on a positive-measure neighborhood of an endpoint. The all-width sharp mass budget is therefore B_graph(L)=|Cinf|+V_L(L)+2sinh(L/2)-L, WITHOUT any unproved step. This improves the old |Cinf|+2V(L)+2Le^{L/2} estimate and exactly recovers the first-prime Lean M_minus constant. The global Chebyshev theorem is NOT RH-discriminatory; positive shifted F_theta weights are now PROVED to share superadditivity for ALL theta>=0 by the monotone-reweighting closure theorem in research/monotone_reweighting_f_theta_falsifier_central_deficit_2026_11_16.md.
 
 ## 3. Improved unconditional all-width high-moment coercivity
 
@@ -111,7 +111,7 @@ Fix L,R,N as in (5). Choose eta>=0 smooth and compactly supported inside I, posi
 \int_I x^i\phi_j(x)dx=\delta_{ij}.
 \]
 
-Every smooth f decomposes uniquely as f=u+h, u=sum_{j<N}mu_j phi_j, mu_j=∫x^j f, and h has first N moments zero. BOTH pieces remain in the form domain. This is important: raw polynomials truncated sharply to I have endpoint discontinuities and are NOT generally in the logarithmic Weil form domain.
+Every smooth f decomposes uniquely as f=u+h, u=sum_{j<N}mu_j phi_j, mu_j=∫x^j f, and h has first N moments zero. BOTH pieces remain in the form domain. CORRECTION (2026-11-16): Earlier this sentence incorrectly excluded raw polynomial indicators from the logarithmic Weil form domain. In fact a(D)=O(log(2+|lambda|)), while polynomial indicators have Fourier decay O(1/|lambda|), so they belong EVEN to the L² operator domain. Smooth cardinal functions above remain valid, but the canonical orthonormal Legendre basis is simpler and eliminates moment Gram inverses. See research/legendre_schur_domain_correction_variance_2026_11_16.md for the corrected F−delta^-1(H−F²) finite test.
 
 Define the localized symmetric Weil operator on compactly supported smooth φ:
 
@@ -157,7 +157,7 @@ Proof: minimize over the high-sector h for each fixed moment vector mu. Since 0<
 
 ## 5. Shifted controls, scripts, Lean upstream, and honest scope
 
-Generic nonnegative fake prime coefficients also admit a graph SOS and moment Schur construction. Therefore **the decomposition, its all-width finite index, and the universal Carleman ladder are NOT RH-discriminatory.** A valid full-width proof of (7) must exploit true von Mangoldt structure in the finite entries and fail the shifted off-line F_theta control. The now-PROVED superadditivity of V sharpens the mass estimate but does not provide RH discrimination; positive shifted weights appear to share the inequality.
+Generic nonnegative fake prime coefficients also admit a graph SOS and moment Schur construction. Therefore **the decomposition, its all-width finite index, and the universal Carleman ladder are NOT RH-discriminatory.** A valid full-width proof of (7) must exploit true von Mangoldt structure in the finite entries and fail the shifted off-line F_theta control. The now-PROVED superadditivity of V sharpens the mass estimate but does not provide RH discrimination; positive shifted weights PROVABLY share the inequality for every theta>=0.
 
 Reproducible scripts:
 - experiments/abel_prime_common_map/probe_prime_graph_mass.py: sampled finite-step graph mass maxima, old/new B comparison, and 4-million-pair FLOATING-POINT superadditivity probe only.
