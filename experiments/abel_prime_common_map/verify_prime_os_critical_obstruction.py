@@ -48,3 +48,16 @@ print("Khalf =",[[mp.nstr(Khalf[i,j],15) for j in range(2)] for i in range(2)])
 print("neutral-constant 2x2 determinant =",mp.nstr(mp.det(neutral),25))
 print("pole-only-subtracted half density =",mp.nstr(h(mp.mpf('.5'))+2,25))
 print("No RH, OS-completion or Weil full positivity claim.")
+
+
+# The canonical COMPLETED logarithmic derivative is also not an OS kernel:
+# the functional equation gives its origin diagonal = 0, but an off-diagonal
+# entry is nonzero, contradicting positive semidefiniteness.
+xi=lambda s: mp.mpf('.5')*s*(s-1)*mp.power(mp.pi,-s/2)*mp.gamma(s/2)*mp.zeta(s)
+hxi=lambda s: -mp.diff(xi,s)/xi(s)
+assert abs(hxi(mp.mpf('.5')))<mp.mpf('1e-50')
+hxi01=hxi(mp.mpf('.5')+eps)
+assert abs(hxi01)>mp.mpf('1e-7')
+assert -hxi01*hxi01 < 0
+print("completed xi log-derivative off-diagonal =",mp.nstr(hxi01,25))
+print("completed xi 2x2 determinant =",mp.nstr(-hxi01*hxi01,25))
