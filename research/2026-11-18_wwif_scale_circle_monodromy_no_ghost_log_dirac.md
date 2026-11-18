@@ -51,3 +51,14 @@ This generalizes the earlier isolated Krein block into **circle holonomy**: oppo
 Find from Tate/Poisson, the genuine prime Euler log derivative and the completed real/pole terms a global arithmetic connection or relative trace whose monodromy realizes every ξ-zero, including hypothetical off-line pairs, and prove a conserved positive metric from independently constructed boundary correlations. The shifted complete F_theta must violate the arithmetic hypothesis at a pinpointed step. Only then does the no-ghost monodromy lemma force δ=0 and RH.
 
 JS independent numerical inversion of A: n=1, λ=22.563681698501348 (residual 4e−16); n=10 λ=54.312014448351945; n=100 λ=238.36665536251616; n=1000 λ=1421.1115236089381; n=100000 λ=74921.81145539443 (residual 1e−11). All other identities are exact algebra/calculus.
+
+
+## 7. Further exact theorem: every zero ordinate lies within O(1) of the constructed log-Dirac carrier
+
+Order all positive ordinates of nontrivial ξ-zeros, including multiplicity, as γ_1≤γ_2≤…, irrespective of whether RH holds. From RvM, N_ζ(T)=A(T)+O(log(T+2)); at an ordinate the multiplicity of its jump is O(log(T+2)), since N(T+1)−N(T−1)=O(log T). Therefore A(γ_n)=n+O(log γ_n). Meanwhile A(lambda_n)=n, with A'(T)=log(T/(2π))/(2π). Both γ_n and lambda_n are asymptotic to 2πn/log n; the mean-value theorem then gives
+
+    γ_n−lambda_n = O(1) as n→∞ (UNCONDITIONAL).
+
+This is a quantitative new-to-this-project kinematic observation, derivable from classical Riemann–von Mangoldt and not independent evidence for RH. The difference is not known to converge to zero and we do not claim it does. It says the entire **ordinate multiset** is a bounded spectral displacement of the zero-independent log-Dirac carrier.
+
+A sharp falsifier to an inadequate Hilbert–Pólya claim follows: if one *inserts the actual ordinates as input*, the diagonal operator D_γ e_{±n}=±γ_n e_{±n} is selfadjoint and differs from D_log by a bounded diagonal operator, regardless of whether any zero is off the critical line. Its selfadjointness alone thus proves no RH! The genuinely missing claim is an independently defined arithmetic characteristic determinant/Weil trace whose FULL COMPLEX zeros equal {1/2+i eigenvalues}, and which forbids additional off-line resonances. Merely matching ordinates or the T log T counting law is insufficient.
