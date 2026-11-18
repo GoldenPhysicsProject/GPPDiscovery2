@@ -30,3 +30,10 @@ W(g_L)≤C_m² L^(1−2m) Σ_γ m_γ |γ|^(−2m)→0.
 Specify the ambient weighted Connes/Hardy/Burnol boundary completion and domain of actual signed completed W. Compute the closure R_F=closure(range E_F) in THAT topology; check nontriviality and numerical convergence. Quantify principal angles of tiny Galerkin modes relative to projected R_F across L,N; check how negative *indices* survive in the quotient, rather than a raw L² gap. Run each of ζ, shifted Fθ, EPS, DH with its OWN full explicit formula and pole/gamma factors. Obtain a genuine zero-independent all-prime global no-ghost energy identity before arguing physical spectral completeness. The quaternionic Hopf quotient is positive for **every** F and cannot by itself distinguish zeta from fakes. The arithmetic no-ghost/RH theorem remains OPEN.
 
 Source exact numerics: local companion verify_hopf_no_gap_2026_11_18.py executed PASS. No user manuscripts edited.
+
+
+## 5. Further exact obstruction: radical quotient preserves ghosts
+
+Let W be a Hermitian form and R=rad W={r : W(r,y)=0 for all y}. The quotient form on V/R is well defined; negative vectors map to negative classes because W(x,x)<0 implies x∉R. Conversely negative classes have negative representatives. Thus taking a quotient by the **true radical** preserves the positive/negative inertia, removing only null directions. In finite dimension this is exactly Sylvester inertia with the radical split off.
+
+Therefore testing whether an Fθ/EPS/DH negative mode survives quotienting by its OWN E_F radical has a **tautologically affirmative** answer. It is not a useful new discriminator. Numerically projecting away an approximate E_F span can change signs only because of truncation/domain errors or because the projected span is not the true radical. The real RH target remains a zero-independent arithmetic energy/sum-of-squares proof of Wζ>=0 and faithful spectral completeness, not 'removing ghosts' by quotienting a null subspace. This correction supersedes item 4 of the revised Round14E test above.
