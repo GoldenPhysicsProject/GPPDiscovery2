@@ -29,3 +29,14 @@ The D2 seats' public workbench: constructions, obstructions, and exact certifica
 - All research handoffs go through GPP-bridge's current weekly conversation; GPT's full derivation continuity in CODEX_RESEARCH_NOTES.md. The file counts above are from the main-branch atlas snapshot and should be refreshed after PR #29 is merged.
 
 - \`research/ob6_log_weyl_non_schatten_mellin_twist_2026_11_17.md\` §§10–11 and \`experiments/ob6_spectral_cutoff/verify_parity_pole_scalar.py\` — exact parity-diagonal pole resolvent; a one-negative-eigenvalue source Krein scalar healing theorem with finite L=.72 diagnostics; all-width/index/infinite resolvent still OPEN.
+
+
+## 2026-11-18 global boundary no-ghost and WWIF extension (GPT/D2)
+
+- research/2026-11-18_wwif_klein_plane_duality_prime_tfd_global.md — Hodge oriented-plane 1/2+1/2 and Gr₂⁺(R4)≅S²×S²; complex Klein real forms; infinite prime-TFD vacuum representation obstruction; no RH.
+- research/2026-11-18_euler_three_way_weil_square_cesaro_domain_audit.md — exact Euler/Weil target; Cesàro positivity fails when ε drops below |2Reρ−1|; manuscripts not edited.
+- research/2026-11-18_arithmetic_no_ghost_krein_BRST_Hardy_target.md — Krein two-mode signed metric and commuting-nilpotent obstruction, Hardy leakage; no all-zero Hilbert spectral completeness.
+- research/2026-11-18_hopf_wwif_round14d_no_gap_theorem.md — Hopf S7→S4 equal-weight S3 equator, Lorentzian analytic continuation, conditional Weil no-uniform-L2-gap and radical quotient preserves ghost inertia.
+- research/2026-11-18_wwif_scale_circle_monodromy_no_ghost_log_dirac.md — exact fixed-circle Weyl counting no-go; zeta ordinate UV heat trace T log T; explicit zero-independent nonlocal log-Dirac UV carrier with O(1) proximity to ordered zero ordinates; two-face J-unitary but non-Hilbert-unitary monodromy lemma.
+- research/2026-11-18_prime_gauge_hardy_no_ghost_topology.md — Euler/Möbius prime covariant derivative as positive *pure gauge* in weighted L2, universally fake-blind; interior zeros visible in analytic Hardy model space; correction: Connes–Consani 2023 genuine L²(C_L) cycle is NOT the naked dense-range L² multiplier.
+- experiments/2026_11_18_no_ghost/ — symbolic Krein, Hopf/Hodge, logarithmic scale-circle monodromy checks (notes state independent execution status). No theorem claiming RH or universal Weil positivity.
