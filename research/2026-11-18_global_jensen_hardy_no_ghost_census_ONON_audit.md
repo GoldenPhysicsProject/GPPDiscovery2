@@ -85,3 +85,10 @@ This is an audit, not a rejection of the boundary-first research program. It nam
 5. Cross-check the actual completed Weil quadratic form separately; the Hardy/BSY scalar defect is a global *equivalent* no-ghost measure, not literally Weil form W.
 
 Source attribution: Balazard–Saias–Yor (1999) arithmetic critical-line log integral; Burnol/Nyman–Beurling (model-space defect); Cayley/Jensen/Pick kernels classical; independent proof synthesis and toy check by D2. Symmetric two-zero toy check: choose a=0.6+0.2i, F(w)=(1−w/a)(1−w/conj a) with F(0)=1; numerical angular mean G(1)=−log|a|²=0.916290731874155 and Hardy leakage 1−|a|⁴=0.84, machine residual ≈2.3e−16. **No RH or full Weil positivity claimed.**
+
+
+## 6. Representation-theoretic caution: Plancherel support is not the entire unitary dual
+
+The ordinary spherical Plancherel decomposition uses principal-series representations, but SL(2,C) also has complementary-series unitary representations. The book's inference "Re Δ ≠ 1 ⇒ negative norm in every unitary representation" is too broad. A zero Plancherel weight in the regular L² representation means *that representation is not a regular Plancherel summand*, not that it defines a negative-norm or zero-norm vector in every other Hilbert representation. A proof using the celestial principal series therefore additionally needs a faithful spectrum map that does not discard off-line analytic zeros as resonances. This is independent of the correct principal-series Mellin kinematics.
+
+Example source: classification of SL(2,C) unitary dual, including principal, complementary and trivial representations (see standard representation theory and https://www.math.u-bordeaux.fr/~eprovenzi/include/tesidott.pdf Theorem 2.9.2). This matters to ONON "Ghost Theorem" §15720 as well as "Unitarity and No-Ghost" §9873.
