@@ -1,0 +1,14 @@
+# Fourth-power sampling for the windowed prime-sum bound
+
+Write D=A-S with the Round 23 normalization. The positive-part representation S(L)=sum_n Lambda(n)/sqrt(n) (L-log n)_+ makes S convex. For L>0 the archimedean term satisfies
+```
+A''(L) = exp(L/2) + exp(-L/2) - exp(-L/2)/(1-exp(-2L))
+       <= exp(L/2).
+```
+This follows by differentiating the absolutely locally uniformly convergent exponential series for the tail away from zero. On [a,b] in the positive half-line let chord denote affine endpoint interpolation. Convexity gives S <= chord(S). The elementary chord remainder bound applied to A gives chord(A)-A <= exp(b/2)(b-a)^2/8. Consequently D >= chord(D)-exp(b/2)(b-a)^2/8, including at every prime-power kink. Continuity extends this inequality to a=0.
+
+Take a=4 log k, b=4 log(k+1), k>=1. The penalty is 2(k+1)^2 log(1+1/k)^2 <= 8 and tends to 2. Thus D on the whole cell is at least the smaller endpoint value minus 8. For each arbitrarily large integer K suppose D(4 log k)>=-B for every integer k from K through ceil(K^(3/2)), with the same B for all K in that sequence. The cells then cover [4 log K,6 log K] and D>=-B-8 throughout. Heart's conditional F13W at epsilon=0 excludes zeros to the right of the half-line, and reflection gives RH. The discrete arithmetic bound is open. This sampling statement uses the zeta completion and its curvature explicitly.
+
+A candidate mechanism is an integral evaluation matrix with genuinely dependent prime congruences: distinct rows impose the required local valuations while their joint archimedean cost grows more slowly per imposed copy than for independent repetitions. Test any proposed matrix against the rounded prime exponents at X=k^4 and an independently derived height estimate there. A single constant must work simultaneously over each block. Finite blocks are diagnostics only.
+
+An elementary falsifier is the matrix of Hasse derivatives evaluated at distinct integer nodes x_i: row (i,r), column j has entry binom(j,r) x_i^(j-r), or zero for j<r, with r=0,...,m-1 and columns starting at j=0. The confluent Vandermonde formula gives det = product_{i<j}(x_j-x_i)^(m^2) in increasing node order. One proof uses the monic polynomial basis consisting of product_{h<i}(x-x_h)^m times (x-x_i)^r in degree order. The evaluation matrix becomes block triangular and the diagonal entries for block i are product_{h<i}(x_i-x_h)^m. Thus every p-adic valuation AND the archimedean log-size are multiplied by exactly m^2. The relative allocation among primes is fixed. This family supplies no improvement over its simple-node version by increasing m alone. Bareiss elimination for nodes 0,1,3 at m=1,2,3,4 gives 6, 1296, 10077696, 2821109907456. This rules out this multiplicity mechanism only.
