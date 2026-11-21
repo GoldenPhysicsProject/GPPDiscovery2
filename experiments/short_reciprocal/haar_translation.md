@@ -1,0 +1,7 @@
+# An equal-norm control for the prime-torus Möbius floor
+
+For X=exp L, let P(z)=sum_{n<=X} mu(n)(L-log n) z^{v(n)}/sqrt(n), where v(n) lists the prime exponents and Haar measure on the finite prime torus is normalized. The uncentered floor is P(1). Translation by z_p=-1 for every p gives Q. Because mu is supported on squarefree integers, Q has coefficients |mu(n)|(L-log n)/sqrt(n). Translation leaves every Haar norm unchanged, including after adding the same affine centering term to both polynomials. At the base point these polynomials can behave quite differently.
+
+Indeed Q(1) = (4/zeta(2))sqrt(X) + O((1+log X)^3). The elementary squarefree count A(t)=t/zeta(2)+O(sqrt(t)) follows by summing mu(d) floor(t/d^2). Partial summation against t^(-1/2) log(X/t) gives the displayed estimate: the main integral is 4 sqrt(X)-2 log X-4 and the accumulated error is O((1+log X)^2), which even improves the stated error. Affine centering leaves the leading term intact. This control is a torus translate, not an L-function control with the original inverse identity. That is precisely the property a point-sensitive argument can use. For example at n=p the sum of |mu(d)| over divisors equals 2, whereas the sum of mu(d) is zero.
+
+Thus any upper bound for the centered base-point value using only translation-invariant norm data must allow square-root growth on this control. GAP-32 for the actual signed floor is open. A norm of an auxiliary arithmetic expression tying the polynomial to a fixed divisor-sum operator is outside this obstruction.
