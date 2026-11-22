@@ -18,6 +18,8 @@ squarefree smooth indices). For y=(log X)^A with fixed A>0,
    log ||D_y^{-1}|| / log X -> max(0,1/2-1/A).
 Here the norm is the unrestricted operator norm on L2[0,L].
 
+For a real quadratic character, Lee Crossley uses the factors I-chi(p)p^(-1/2) S_log(p) to remove primes up to (log d)^2 from a Gaussian sum, where d is the field discriminant. See equation (3b) in https://doi.org/10.5281/zenodo.24418495.
+
 Upper proof: for s>max(0,1/2-1/A), V <= X^s product_{p<=y}
 (1-p^(-1/2-s))^(-1). The log product is O_s(1+sum_{n=2}^y
 n^(-1/2-s))=o(log X), by elementary integral comparison (taking the
