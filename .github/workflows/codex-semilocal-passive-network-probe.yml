@@ -1,0 +1,33 @@
+name: codex-semilocal-passive-network-probe
+
+on:
+  push:
+    branches:
+      - codex/semilocal-passive-network-probe
+    paths:
+      - 'scripts/semilocal_passive_network_probe.py'
+      - '.github/workflows/codex-semilocal-passive-network-probe.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  probe:
+    runs-on: ubuntu-latest
+    timeout-minutes: 120
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: codex/semilocal-passive-network-probe
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - run: pip install -r requirements.txt
+      - run: python scripts/semilocal_passive_network_probe.py --dps 50
+      - run: |
+          git config user.name "gpp-bot"
+          git config user.email "dtoupin@goldenphysics.org"
+          git add results/semilocal_passive_network_probe.json results/semilocal_passive_network_probe.md
+          git commit -m "Record semilocal passive-network probe results" || echo "no change"
+          git push origin HEAD:codex/semilocal-passive-network-probe
