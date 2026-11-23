@@ -1,0 +1,13 @@
+# The modular cusp, primitive states and the energy criterion
+
+On PSL(2,Z)\\H the spherical Eisenstein series has constant term y^s + phi(s)y^(1-s), in the normalization with incoming coefficient one. The standard intertwining coefficient is phi(s)=Lambda(2s-1)/Lambda(2s), Lambda(w)=pi^(-w/2)Gamma(w/2)zeta(w). Lambda here has poles at 0,1. Its functional equation gives phi(s)phi(1-s)=1 and reality gives unit modulus on the continuous-spectrum axis Re s=1/2 at regular points. These are standard facts about the modular surface.
+
+Each nontrivial zeta zero rho gives a scattering pole at s=rho/2 of the same multiplicity: the completed numerator at rho-1 equals Lambda(2-rho), nonzero by absolute Euler convergence. Thus a pole s=1/2-kappa+i t within 0<Re s<1/2 corresponds to beta=1-2 kappa. For 0<kappa<1/4, the GPP causal energy lower bound forces Q(log X) >>_rho X^(1-4 kappa) eventually. The unitarity axis and the proposed common resonance location Re s=1/4 serve different roles. This is automorphic scattering on a one-cusp hyperbolic surface, with real one-dimensional conformal boundary; the celestial S^2 in four spacetime dimensions belongs to a different representation.
+
+The same arithmetic has a thermal observable. Put H(t)=sum_{n>=1} phi_E(n) exp(-nt), where phi_E counts reduced residues (Euler totient, phi_E(1)=1). Repeated covers satisfy exactly
+  sum_{k>=1} H(kt)=sum_{n>=1} n exp(-nt)=1/(4 sinh(t/2)^2).
+This follows by sum_{d|n} phi_E(d)=n. Mobius inversion gives H(t)=sum_{k>=1} mu(k)/(4 sinh(kt/2)^2), absolutely convergent for every t>0. Equivalently its Mellin transform on Re w>2 is Gamma(w) zeta(w-1)/zeta(w). The ratio of zetas is precisely the finite-prime part of phi(w/2). The parameter t is inverse temperature for the model with energy levels n and degeneracies phi_E(n); no particular CFT is asserted to have that spectrum.
+
+If, for every epsilon>0, H(t)=t^(-2)/zeta(2)+O_epsilon(t^(-1/2-epsilon)) as t tends to zero, Mellin continuation excludes every zero with Re rho>1/2. Indeed subtract the indicated main term on (0,1), continue the Mellin integral by absolute convergence on Re w>1/2, adding 1/(zeta(2)(w-2)). A hypothetical zero there in the critical strip gives a genuine pole of Gamma(w)zeta(w-1)/zeta(w); the numerator cannot vanish there by reflection. This is a sufficient arithmetic estimate, with an all-small-t quantifier. No such independent estimate has been derived here. Removing the leading term and controlling the residual is the proof obligation in this formulation.
+
+Numerical sanity check (mpmath 50 decimal digits): |phi(1/2+i t)|=1 to displayed precision for t=1,2,7. For s0=zetazero(1)/2, h phi(s0+h) at h=1e-4,1e-6,1e-8 tends numerically toward -0.387109+0.339017i. Known zero used as test input only.
