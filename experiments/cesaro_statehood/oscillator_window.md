@@ -16,6 +16,8 @@ Use Mellin convention f̂(s)=∫f(t)t^(s−1)dt. Write P(s)=(2^s+2^(−s)−2)(2
 
     B̂(s)=−P(s)Γ(s)ζ(s+1),      K̂(s)=ζ(s)B̂(s).
 
+The five-scale multiplier factors as $P(s)=Q(s)Q(-s)/2$, where $Q(s)=(1-2^{-s})(2^{1-s}-1)$ is the dyadic multiplier in Crossley’s proof of Theorem 3.2. Both calculations use its nonvanishing in the open critical strip. [The Crossley Criteria, §3](https://doi.org/10.5281/zenodo.24466908).
+
 The second identity cancels precisely the reciprocal that Statehood is trying to control. To probe it choose the odd packet K₁(t)=log(t/(2π))K(t), the derivative of (t/(2π))^a K(t) at a=0. It changes sign under the same modular inversion. Its signed amplitude J(t)=Σ μ(n)K₁(nt) has the exact prime-side formula
 
     J(t)=log(t/(2π))B(t)−Σ_{m≥2}Λ(m) B(mt).
